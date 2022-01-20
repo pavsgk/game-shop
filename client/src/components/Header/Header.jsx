@@ -9,6 +9,7 @@ function Header() {
         <Link to="/filter">Filter</Link>
         <Link to="/cart">Cart</Link>
         <Link to="/details">Details</Link>
+        <Link to="/checkout">Checkout</Link>
       </header>
       <div className={styles.HeaderDummy} />
     </>
