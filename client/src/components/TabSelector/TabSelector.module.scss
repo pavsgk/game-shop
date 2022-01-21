@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 button {
   cursor: pointer;
   border: none;
@@ -7,9 +9,9 @@ button {
   font-size: 18px;
   background-color: transparent;
   font-variant: small-caps;
-  color: #6d6d69;
+  color: $details;
 }
 
 .btnActive {
-  color: #ffffff;
+  color: $text;
 }

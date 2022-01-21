@@ -1,7 +1,8 @@
+@import '../../styles/variables.scss';
+
 .CheckoutPage {
   width: 100%;
   padding-top: 65px;
-  background-color: #1e1e1e;
   display: flex;
   justify-content: space-around;
   flex-direction: row;
@@ -11,9 +12,9 @@
 
 .Tabs {
   padding: 10px;
-  border: 1px solid #8f8f89;
+  border: 1px solid $details;
 }
 
 h2 {
-  color: aliceblue;
+  color: $text;
 }
