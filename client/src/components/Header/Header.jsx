@@ -12,7 +12,11 @@ function Header() {
         <div className={styles.menu}>
           <MenuImg className={styles.menuImg} />
         </div>
-        <Link exact className={styles.navLink} activeClassName={styles.active} to="/">
+        <Link
+          exact
+          // className={styles.navLink}
+          activeClassName={styles.active}
+          to="/">
           <Logo className={styles.logo} />
         </Link>
         <nav className={styles.nav}>
