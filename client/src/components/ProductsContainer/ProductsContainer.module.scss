@@ -1,0 +1,9 @@
+@import "../../styles/variables.scss";
+@media (min-width: $mobile) {
+    .productsContainer {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 50px 0;
+        justify-items: center;
+    }
+}
