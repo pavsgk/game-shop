@@ -12,51 +12,35 @@ function Header() {
         <div className={styles.menu}>
           <MenuImg className={styles.menuImg} />
         </div>
-        <Link
-          exact
-          // className={styles.navLink}
-          activeClassName={styles.active}
-          to="/">
+        <Link exact to="/">
           <Logo className={styles.logo} />
         </Link>
         <nav className={styles.nav}>
           <ul className={styles.navList}>
             <li className={styles.navItem}>
-              <NavLink exact className={styles.navLink} activeClassName={styles.active} to="/">
+              <NavLink exact className={styles.navLink} to="/">
                 Home
               </NavLink>
             </li>
             <li className={styles.navItem}>
-              <NavLink
-                exact
-                className={styles.navLink}
-                activeClassName={styles.active}
-                to="/filter">
+              <NavLink exact className={styles.navLink} to="/filter">
                 Filter
               </NavLink>
             </li>
             <li className={styles.navItem}>
-              <NavLink
-                exact
-                className={styles.navLink}
-                activeClassName={styles.active}
-                to="/details">
+              <NavLink exact className={styles.navLink} to="/details">
                 Details
               </NavLink>
             </li>
             <li className={styles.navItem}>
-              <NavLink
-                exact
-                className={styles.navLink}
-                activeClassName={styles.active}
-                to="/favourite">
+              <NavLink exact className={styles.navLink} to="/favourite">
                 Favourites
               </NavLink>
             </li>
           </ul>
         </nav>
         <div className={styles.additionalNav}>
-          <Link exact activeClassName={styles.active} to="/cart">
+          <Link exact to="/cart">
             <CartImg className={styles.cartImg} />
           </Link>
           <div className={styles.navLine}></div>
