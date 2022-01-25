@@ -7,23 +7,25 @@ function TabSelector(props) {
   if (tabs.lenght < 1) return null;
 
   return (
-    <div>
-      {tabs.map((tab, index) => {
-        if (index === active)
+    <>
+      <div className={styles.selector}>
+        {tabs.map((tab, index) => {
+          if (index === active)
+            return (
+              <button className={styles.btnActive} key={tab} onClick={() => setActive(index)}>
+                {tab}
+              </button>
+            );
           return (
-            <button className={styles.btnActive} key={tab} onClick={() => setActive(index)}>
+            <button key={tab} onClick={() => setActive(index)}>
               {tab}
             </button>
           );
-        return (
-          <button className={styles.btn} key={tab} onClick={() => setActive(index)}>
-            {tab}
-          </button>
-        );
-      })}
+        })}
+      </div>
 
       {children[active]}
-    </div>
+    </>
   );
 }
 

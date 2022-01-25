@@ -1,8 +1,8 @@
 @import '../../styles/variables.scss';
 
-.CheckoutPage {
+.checkoutPage {
   width: 100%;
-  padding-top: 65px;
+  padding: 65px 5px;
   display: flex;
   justify-content: space-around;
   flex-direction: row;
@@ -10,8 +10,8 @@
   align-items: center;
 }
 
-.Tabs {
-  padding: 10px;
+.tabs {
+  padding: 12px 18px;
   border: 1px solid $details;
 }
 

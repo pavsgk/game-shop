@@ -1,5 +1,11 @@
 @import '../../styles/variables.scss';
 
+.selector {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
 button {
   cursor: pointer;
   border: none;

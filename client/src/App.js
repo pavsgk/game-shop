@@ -10,7 +10,7 @@ import MainPage from './pages/MainPage/MainPage';
 
 function App() {
   return (
-    <div className={styles.App}>
+    <div className={styles.app}>
       <MuiTheme>
         <Header />
         <Routes>
