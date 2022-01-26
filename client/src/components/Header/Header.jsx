@@ -28,13 +28,13 @@ function Header() {
               </NavLink>
             </li>
             <li className={styles.navItem}>
-              <NavLink exact className={styles.navLink} to="/details">
-                Details
+              <NavLink exact className={styles.navLink} to="/favourite">
+                Favourites
               </NavLink>
             </li>
             <li className={styles.navItem}>
-              <NavLink exact className={styles.navLink} to="/favourite">
-                Favourites
+              <NavLink exact className={styles.navLink} to="/checkout">
+                Checkout
               </NavLink>
             </li>
           </ul>

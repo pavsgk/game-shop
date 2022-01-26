@@ -1,6 +1,8 @@
 import TabSelector from '../../components/TabSelector/TabSelector';
 import styles from './CheckoutPage.module.scss';
 import ShippingForm from '../../components/ShippingForm/ShippingForm';
+import Delivery from '../../components/Delivery/Delivery';
+import Payment from '../../components/Payment/Payment';
 
 function CheckoutPage() {
   return (
@@ -8,12 +10,8 @@ function CheckoutPage() {
       <section className={styles.tabs}>
         <TabSelector tabs={['shipping information', 'delivery method', 'payment information']}>
           <ShippingForm />
-          <div>
-            <h2>tab2 content</h2>
-          </div>
-          <div>
-            <h2>tab3 content</h2>
-          </div>
+          <Delivery />
+          <Payment />
         </TabSelector>
       </section>
     </div>

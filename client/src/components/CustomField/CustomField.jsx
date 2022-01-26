@@ -2,8 +2,8 @@ import {useField} from 'formik';
 import styles from './CustomField.module.scss';
 
 function CustomField(props) {
-  const [field, meta, helpers] = useField(props);
-  const {name, label, type} = props;
+  const [field, meta] = useField(props);
+  const {label, type} = props;
   const isError = meta.error && meta.touched;
 
   return (

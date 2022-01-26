@@ -1,12 +1,12 @@
-import {Formik, Form, Field} from 'formik';
+import {Formik, Form} from 'formik';
 import CustomField from '../CustomField/CustomField';
 import styles from './ShippingForm.module.scss';
 import * as yup from 'yup';
-import {useState} from 'react';
+// import {useState} from 'react';
 import Button from '../Button/Button';
 
 function ShippingForm() {
-  const [isValid, setIsValid] = useState(false);
+  // const [isValid, setIsValid] = useState(false);
 
   const initalValues = {
     firstName: '',

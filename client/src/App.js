@@ -22,6 +22,7 @@ function App() {
           <Route path="details" element={<DetailsPage />} />
           <Route path="favourite" element={<FavouritePage />} />
           <Route path="cart" element={<CartPage />} />
+          <Route path="checkout" element={<CheckoutPage />} />
         </Routes>
       </MuiTheme>
     </div>
