@@ -1,9 +1,54 @@
 @import '../../styles/variables.scss';
 
-.field {
-  color: $base-yellow;
+.customField {
+  display: flex;
+  flex-direction: column;
 }
 
-.error {
-  color: red;
+.customField > input {
+  padding-left: 10px;
+  color: $text;
+  background-color: transparent;
+  border: 1px solid $base-yellow;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 34px;
+
+  text-transform: capitalize;
+
+  &:hover {
+    border: 1px solid $details;
+  }
+
+  &:focus-visible,
+  &:focus {
+    border: 1px solid $text;
+    border-radius: 0px;
+    outline: none;
+  }
+
+  &::placeholder {
+    color: $details;
+  }
+}
+
+.customField > span {
+  text-align: left;
+  color: $sale;
+}
+
+.label {
+  padding-left: 10px;
+  color: $details;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+.errLabel {
+  @extend .label;
+  color: $sale;
+}
+
+.err {
+  border-color: $sale !important;
 }

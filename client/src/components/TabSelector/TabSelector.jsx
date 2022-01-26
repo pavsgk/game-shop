@@ -17,7 +17,7 @@ function TabSelector(props) {
               </button>
             );
           return (
-            <button key={tab} onClick={() => setActive(index)}>
+            <button className={styles.btn} key={tab} onClick={() => setActive(index)}>
               {tab}
             </button>
           );

@@ -6,7 +6,7 @@
   justify-content: space-between;
 }
 
-button {
+.btn {
   cursor: pointer;
   border: none;
   font-family: Roboto;
@@ -19,5 +19,6 @@ button {
 }
 
 .btnActive {
+  @extend .btn;
   color: $text;
 }
