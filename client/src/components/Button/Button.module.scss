@@ -1,0 +1,13 @@
+@import '../../styles/variables.scss';
+
+.btn {
+  padding: 15px 50px;
+  background-color: transparent;
+  border: 1px solid $base-yellow;
+  color: $base-yellow;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  text-transform: uppercase;
+}

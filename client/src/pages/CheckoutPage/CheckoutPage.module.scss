@@ -1,0 +1,20 @@
+@import '../../styles/variables.scss';
+
+.checkoutPage {
+  width: 100%;
+  padding: 65px 5px;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.tabs {
+  padding: 12px 18px;
+  border: 1px solid $details;
+}
+
+h2 {
+  color: $text;
+}
