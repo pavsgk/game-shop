@@ -1,0 +1,116 @@
+@import '../../styles/variables.scss';
+
+.mainWrapper {
+  margin: 30px 0;
+  padding-bottom: 30px;
+  border-bottom: 1px solid $details;
+}
+
+.infoWrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.infoWrapperBlock {
+  display: flex;
+  justify-content: flex-start;
+  max-width: 75%;
+}
+
+.mainInfoWrapperImg {
+  width: 100%;
+}
+
+.infoWrapperBlockImg {
+  max-width: 40%;
+  & > * {
+    width: 100%;
+    border: 1px solid #ffffff;
+  }
+}
+
+.infoWrapperBlockTitle {
+  margin-left: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.infoWrapperBlockTitleText {
+  font-size: 15px;
+  line-height: 23px;
+  color: $text;
+}
+
+.infoWrapperBlockTitleCode {
+  color: $details;
+  align-self: flex-end;
+  font-size: 10px;
+}
+
+.infoWrapperDeleteSVG {
+  fill: white;
+}
+
+.priceWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.priceWrapperQuantity {
+  display: flex;
+  flex-direction: column;
+}
+
+.priceWrapperQuantityValue {
+  font-size: 10px;
+  color: $text;
+  margin-bottom: 8px;
+}
+
+.priceWrapperQuantityBlock {
+  display: flex;
+  align-items: center;
+}
+
+.priceWrapperQuantityBlockMinus {
+  border: 1px solid $text;
+}
+
+.priceWrapperQuantityBlockMinusItem {
+  fill: $text;
+}
+
+.priceWrapperQuantityBlockValue {
+  color: $text;
+  margin: 0 9px;
+  font-size: 20px;
+}
+
+.priceWrapperQuantityBlockPlus {
+  border: 1px solid $text;
+}
+
+.priceWrapperQuantityBlockPlusItem {
+  fill: $text;
+}
+
+.priceWrapperValue {
+  font-size: 20px;
+  color: $base-yellow;
+}
+
+@media (min-width: $tablet) {
+  .priceWrapper {
+    margin-left: 60%;
+  }
+
+  .priceWrapperValue {
+    font-size: 30px;
+  }
+
+  .infoWrapperBlockImg {
+    max-width: 20%;
+  }
+}
