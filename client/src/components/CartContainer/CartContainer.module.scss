@@ -1,0 +1,70 @@
+@import '../../styles/variables.scss';
+@import '../../styles/reset';
+
+.mainWrapper {
+  padding: 0 30px;
+}
+
+.cartTitleWrapper {
+  display: flex;
+  justify-content: space-between;
+  color: $text;
+  border-bottom: 1px solid $details;
+  padding-bottom: 5px;
+}
+
+.cartTitleWrapperName {
+  font-size: 15px;
+  line-height: 23px;
+}
+
+.cartTitleWrapperLink {
+  font-size: 10px;
+  border: 1px solid $base-yellow;
+  background: none;
+  color: $base-yellow;
+  padding: 5px;
+}
+
+.totalPriceWrapper {
+  display: flex;
+  justify-content: space-between;
+  font-size: 24px;
+  color: $base-yellow;
+}
+
+.totalPriceWrapperText {
+  text-transform: uppercase;
+}
+
+.buttonWrapper {
+  display: flex;
+  justify-content: end;
+
+  margin: 30px 0 60px 0;
+}
+
+.buttonWrapperItem {
+  text-transform: uppercase;
+  border: 1px solid $base-yellow;
+  background: none;
+  color: $base-yellow;
+  font-size: 20px;
+  padding: 10px 30px;
+}
+
+@media (min-width: $tablet) {
+  .mainWrapper {
+    padding: 0 90px;
+  }
+
+  .buttonWrapper {
+    margin-top: 80px;
+  }
+}
+
+@media (min-width: $tablet-max) {
+  .mainWrapper {
+    padding: 0 120px;
+  }
+}
