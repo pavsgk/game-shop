@@ -1,6 +1,6 @@
 import instance from './instance';
 
-async function getAllFilters() {
+export async function getAllFilters() {
   try {
     const response = await instance.get('filters');
     return response.data;
@@ -10,7 +10,7 @@ async function getAllFilters() {
   }
 }
 
-async function getFiltersByType(type) {
+export async function getFiltersByType(type) {
   if (!type || typeof type !== 'string') return null;
 
   try {
@@ -21,5 +21,3 @@ async function getFiltersByType(type) {
     return null;
   }
 }
-
-export {getAllFilters, getFiltersByType};

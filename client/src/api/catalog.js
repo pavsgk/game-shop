@@ -1,6 +1,6 @@
 import instance from './instance.js';
 
-async function getCatalog() {
+export async function getCatalog() {
   try {
     const response = await instance.get('catalog');
     return response.data;
@@ -10,7 +10,7 @@ async function getCatalog() {
   }
 }
 
-async function getCategoryById(id) {
+export async function getCategoryById(id) {
   if (!id || typeof id !== 'string') return null;
 
   try {
@@ -21,5 +21,3 @@ async function getCategoryById(id) {
     return null;
   }
 }
-
-export {getCatalog, getCategoryById};
