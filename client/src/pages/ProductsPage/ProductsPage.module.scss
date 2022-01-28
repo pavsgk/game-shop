@@ -1,0 +1,15 @@
+@import '../../styles/variables.scss';
+@media (min-width: $mobile) {
+  .productsPage {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (min-width: $desktop) {
+  .productsPage {
+    display: flex;
+    justify-content: center;
+    margin: 50px 0 130px 0;
+  }
+}
