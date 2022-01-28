@@ -1,6 +1,6 @@
 import instance from './instance.js';
 
-async function getAllProducts() {
+export async function getAllProducts() {
   try {
     const response = await instance.get('products');
     return response.data;
@@ -9,5 +9,3 @@ async function getAllProducts() {
     return null;
   }
 }
-
-export {getAllProducts};

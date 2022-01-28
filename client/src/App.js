@@ -9,6 +9,7 @@ import FilterPage from './pages/FilterPage/FilterPage';
 import MainPage from './pages/MainPage/MainPage';
 import FavouritePage from './pages/FavouritePage/FavouritePage';
 import ProductsPage from './pages/ProductsPage/ProductsPage';
+import TestPage from './api/test';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="favourite" element={<FavouritePage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
+          <Route path="test" element={<TestPage />} />
         </Routes>
       </MuiTheme>
     </div>
