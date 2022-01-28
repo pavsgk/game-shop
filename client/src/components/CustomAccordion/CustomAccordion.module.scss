@@ -1,17 +1,27 @@
-@import "../../styles/variables.scss";
+@import '../../styles/variables.scss';
 @media (min-width: $mobile) {
-    .accordion:not(:last-of-type)::after {
-        content: '';
-        display: block;
-        width: 100%;
-        height: 1px;
-        background-color: #8F8F89;
-    }
-    
-    .checkboxesWrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-        margin-left: 5vw !important;
-    }
+  .accordion:not(:last-of-type)::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: #8f8f89;
+  }
+
+  .checkboxesWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-left: 5vw !important;
+  }
+}
+
+@media (min-width: $tablet) {
+  .checkboxesWrapper {
+    margin-left: 2vw !important;
+  }
+
+  .accordion {
+    box-shadow: none !important;
+  }
 }

@@ -1,10 +1,26 @@
-@import "../../styles/variables.scss";
+@import '../../styles/variables.scss';
 @media (min-width: $mobile) {
-    .filter {
-        position: fixed;
-        background: $background;
-        height: 100%;
-        width: 60vw;
-        display: none;
-    }
+  .filter {
+    position: fixed;
+    background: $background;
+    height: 100%;
+    left: 0;
+    width: 60vw;
+    display: block;
+  }
+}
+
+@media (min-width: $tablet) {
+  .filter {
+    width: 40vw;
+  }
+}
+
+@media (min-width: 992px) {
+  .filter {
+    position: static;
+    width: 246px;
+    min-width: 246px;
+    display: block;
+  }
 }
