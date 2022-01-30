@@ -1,7 +1,7 @@
 @import '../../styles/variables.scss';
 @media (min-width: $mobile) {
   .cardContainer {
-    width: fit-content;
+    width: 250px;
   }
 
   .iconWrapper {
@@ -16,6 +16,8 @@
     line-height: 20px;
     text-transform: uppercase;
     color: $text;
+    margin-top: 14px;
+    margin-bottom: 8px;
   }
 
   .price {
