@@ -4,7 +4,7 @@ import {logout, newLogin, init} from '../store/reducers/userReducer.js';
 import {getCatalog} from './catalog.js';
 import {getAllFilters, getFiltersTree, getFiltersByType} from './filters.js';
 import {parseProductsKeys} from './parsers.js';
-import {getProduct} from './products.js';
+import {getFilteredProducts, getProduct} from './products.js';
 
 function TestPage() {
   const user = useSelector((state) => state.user);
@@ -12,7 +12,9 @@ function TestPage() {
 
   console.log(user);
 
-  const test = async () => {};
+  const test = async () => {
+    console.log(await getFilteredProducts('publisher=EA Games'));
+  };
 
   test();
 
