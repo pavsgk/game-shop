@@ -1,4 +1,5 @@
 import React from 'react';
+import CheckoutPage from '../CheckoutPage/CheckoutPage';
 
 function MainPage() {
   return (

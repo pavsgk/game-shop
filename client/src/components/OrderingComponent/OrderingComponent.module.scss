@@ -5,20 +5,8 @@
   justify-content: space-between;
   align-items: center;
   width: 90%;
-  margin: 5px;
   background: $background;
   border: $base-yellow solid 2px;
-}
-
-.component:active {
-  background: $active-btn;
-  border: $active-btn solid 2px;
-  .text {
-    color: $background;
-  }
-  .price {
-    color: $background;
-  }
 }
 
 .info {
@@ -55,7 +43,6 @@
 @media (min-width: $tablet) {
   .component {
     width: 85%;
-    margin: 8px;
   }
 
   .info {
@@ -82,7 +69,6 @@
 @media (min-width: $tablet-max) {
   .component {
     width: 450px;
-    margin: 12px;
   }
 
   .info {
@@ -111,7 +97,6 @@
 @media (min-width: $desktop) {
   .component {
     width: 475px;
-    margin: 15px;
   }
 
   .price {
