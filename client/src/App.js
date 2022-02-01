@@ -10,8 +10,16 @@ import MainPage from './pages/MainPage/MainPage';
 import FavouritePage from './pages/FavouritePage/FavouritePage';
 import ProductsPage from './pages/ProductsPage/ProductsPage';
 import TestPage from './api/test';
+import {useDispatch} from 'react-redux';
+import {useEffect} from 'react';
+import {init} from './store/reducers/userReducer';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(init());
+  }, [dispatch]);
+
   return (
     <div className={styles.app}>
       <MuiTheme>
