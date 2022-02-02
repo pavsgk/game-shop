@@ -12,35 +12,35 @@ function Header() {
         <div className={styles.menu}>
           <MenuImg className={styles.menuImg} />
         </div>
-        <Link exact to="/">
+        <Link exact="true" to="/">
           <Logo className={styles.logo} />
         </Link>
         <nav className={styles.nav}>
           <ul className={styles.navList}>
             <li className={styles.navItem}>
-              <NavLink exact className={styles.navLink} to="/">
+              <NavLink exact="true" className={styles.navLink} to="/">
                 Home
               </NavLink>
             </li>
             <li className={styles.navItem}>
-              <NavLink exact className={styles.navLink} to="/filter">
+              <NavLink exact="true" className={styles.navLink} to="/filter">
                 Filter
               </NavLink>
             </li>
             <li className={styles.navItem}>
-              <NavLink exact className={styles.navLink} to="/favourite">
+              <NavLink exact="true" className={styles.navLink} to="/favourite">
                 Favourites
               </NavLink>
             </li>
             <li className={styles.navItem}>
-              <NavLink exact className={styles.navLink} to="/checkout">
+              <NavLink exact="true" className={styles.navLink} to="/checkout">
                 Checkout
               </NavLink>
             </li>
           </ul>
         </nav>
         <div className={styles.additionalNav}>
-          <Link exact to="/cart">
+          <Link exact="true" to="/cart">
             <CartImg className={styles.cartImg} />
           </Link>
           <div className={styles.navLine}></div>
