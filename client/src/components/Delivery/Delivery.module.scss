@@ -7,7 +7,7 @@
 }
 
 .btnNext {
-  margin-top: 65px;
+  margin-top: 30px;
 }
 
 .delivery > input[type='radio'] {
@@ -17,13 +17,12 @@
   width: 0;
 }
 .delivery > label {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  min-width: 95%;
   cursor: pointer;
   color: $base-yellow;
   margin: 5px 10px;
-  border-radius: 3px;
 }
 
 .delivery > input[type='radio']:checked + label {
@@ -34,5 +33,11 @@
 
   div > p {
     color: $background;
+  }
+}
+
+@media (min-width: $tablet-max) {
+  .btnNext {
+    margin-top: 65px;
   }
 }

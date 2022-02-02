@@ -40,7 +40,8 @@
   padding-left: 10px;
   width: 100%;
   color: $base-yellow;
-  font-size: 12px;
+  //font-size: 12px;
+  font-size: 10px;
   font-weight: 300;
   text-align: left;
 }
@@ -54,4 +55,10 @@
 
 .err {
   border-color: $sale !important;
+}
+
+@media (min-width: $tablet) {
+  .label {
+    font-size: 12px;
+  }
 }

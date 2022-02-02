@@ -12,8 +12,9 @@
 }
 
 .submit {
-  margin-top: 65px;
+  @extend .btnNext;
 }
+
 //------------------TABLET
 
 @media (min-width: $tablet) {
@@ -27,6 +28,10 @@
 @media (min-width: $tablet-max) {
   .payment * {
     height: 62px;
+  }
+
+  .submit {
+    margin-top: 65px;
   }
 }
 

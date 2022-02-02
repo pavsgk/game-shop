@@ -11,11 +11,28 @@
 }
 
 .tabs {
-  width: 50%;
-  padding: 12px 35px 30px 35px;
+  width: 100%;
+  margin-left: 30px;
+  margin-right: 30px;
+  padding: 12px 10px 15px;
   border: 1px solid $details;
 }
 
 h2 {
   color: $text;
+}
+
+@media (min-width: $tablet) {
+  .tabs {
+    padding: 12px 30px 20px;
+  }
+}
+
+@media (min-width: $tablet-max) {
+  .tabs {
+    width: 50%;
+    margin-left: 30px;
+    margin-right: 30px;
+    padding: 12px 35px 30px 35px;
+  }
 }
