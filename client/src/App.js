@@ -27,7 +27,6 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="catalog" element={<ProductsPage />} />
-          <Route path="filter" element={<FilterPage />} />
           <Route path="details" element={<DetailsPage />} />
           <Route path="favourite" element={<FavouritePage />} />
           <Route path="cart" element={<CartPage />} />
