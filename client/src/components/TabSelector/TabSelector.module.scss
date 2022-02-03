@@ -3,10 +3,8 @@
 .selector {
   display: flex;
   gap: 50px;
-  //gap: 20px;
   justify-content: space-between;
   margin-bottom: 15px;
-  //margin-bottom: 30px;
 }
 
 .btn {
@@ -16,7 +14,6 @@
   font-style: normal;
   font-weight: 300;
   font-size: 12px;
-  //font-size: 18px;
   background-color: transparent;
   font-variant: small-caps;
   color: $details;
@@ -31,11 +28,15 @@
   .selector {
   }
   .btn {
+    font-size: 16px;
   }
 }
 @media (min-width: $tablet-max) {
   .selector {
-    gap: 20px;
     margin-bottom: 30px;
+  }
+
+  .btn {
+    font-size: 18px;
   }
 }

@@ -2,16 +2,20 @@
 
 .checkoutPage {
   width: 100%;
-  padding: 20px 5px;
+  padding: 5px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: flex-start;
   flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
+}
+
+.summary {
 }
 
 .tabs {
   width: 100%;
+  min-width: 300px;
   margin-left: 30px;
   margin-right: 30px;
   padding: 12px 10px 15px;
@@ -23,8 +27,13 @@ h2 {
 }
 
 @media (min-width: $tablet) {
+  .checkoutPage {
+    padding: 20px 5px;
+  }
+
   .tabs {
     padding: 12px 30px 20px;
+    margin-bottom: 20px;
   }
 }
 
@@ -34,5 +43,12 @@ h2 {
     margin-left: 30px;
     margin-right: 30px;
     padding: 12px 35px 30px 35px;
+    order: 1;
+  }
+  .summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    order: 2;
   }
 }

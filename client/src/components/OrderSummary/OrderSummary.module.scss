@@ -1,0 +1,77 @@
+@import '../../styles/variables.scss';
+
+.wrapper {
+  max-width: 440px;
+  min-width: 300px;
+  padding: 15px;
+  margin: 15px;
+  border: 2px solid $base-yellow;
+}
+
+.wrapper > p {
+  margin-bottom: 15px;
+}
+
+.title {
+  color: $text;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.details {
+  @extend .title;
+  padding: 5px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.total {
+  @extend .details;
+  color: $base-yellow;
+  margin: 15px 0;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: $tablet) {
+  .wrapper {
+    padding: 30px;
+  }
+
+  .wrapper > p {
+    margin-bottom: 25px;
+  }
+  .title {
+    font-size: 18px;
+  }
+  .details {
+    padding: 10px 0;
+  }
+
+  .total {
+    margin: 25px 0;
+  }
+}
+
+@media (min-width: $tablet-max) {
+  .wrapper {
+    margin: 0 15px 15px;
+  }
+
+  .wrapper > p {
+    margin-bottom: 30px;
+    min-width: 440px;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .total {
+    margin: 35px 0;
+  }
+}
