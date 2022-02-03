@@ -2,7 +2,7 @@ import {Form, Formik} from 'formik';
 import CustomField from '../CustomField/CustomField';
 import * as yup from 'yup';
 import styles from './SignUp.module.scss';
-import AltAuthorization from '../../../../../../AltAuthorization/AltAuthorization';
+import AltAuthorization from "../AltAuthorization/AltAuthorization"
 
 const SignUp = () => {
   const initialValues = {

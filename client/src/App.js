@@ -13,6 +13,7 @@ import TestPage from './api/test';
 import {useDispatch} from 'react-redux';
 import {useEffect} from 'react';
 import {init} from './store/reducers/userReducer';
+import SignModalContainer from "./components/Modal/SignModalContainer";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ function App() {
           <Route path="checkout" element={<CheckoutPage />} />
           <Route path="test" element={<TestPage />} />
         </Routes>
+        <SignModalContainer/>
       </MuiTheme>
     </div>
   );
