@@ -1,7 +1,7 @@
 import styles from './Header.module.scss';
 import {NavLink, Link} from 'react-router-dom';
 import React from 'react';
-import {ReactComponent as CartImg} from './img/frame.svg';
+import {ReactComponent as CartImg} from './img/Frame.svg';
 import {ReactComponent as Logo} from './img/star-wars.svg';
 import {ReactComponent as MenuImg} from './img/burgermenu.svg';
 
@@ -45,6 +45,9 @@ function Header() {
           </ul>
         </nav>
         <div className={styles.additionalNav}>
+          <Link exact="true" className={styles.navLink} to="/admin">
+            ~
+          </Link>
           <Link exact="true" to="/cart">
             <CartImg className={styles.cartImg} />
           </Link>
