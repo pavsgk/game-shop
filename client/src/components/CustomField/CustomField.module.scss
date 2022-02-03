@@ -1,0 +1,63 @@
+@import '../../styles/variables.scss';
+
+.customField {
+  display: flex;
+  flex-direction: column;
+
+  &:hover .label {
+    color: $details;
+  }
+
+  &:hover input {
+    border: 1px solid $details;
+  }
+}
+
+.customField > input {
+  padding: 2px 10px;
+  color: $text;
+  background-color: transparent;
+  border: 1px solid $base-yellow;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 34px;
+
+  text-transform: capitalize;
+
+  &:focus-visible,
+  &:focus {
+    border: 1px solid $text;
+    border-radius: 0px;
+    outline: none;
+  }
+
+  &::placeholder {
+    color: $details;
+  }
+}
+
+.label {
+  padding-left: 10px;
+  width: 100%;
+  color: $base-yellow;
+  font-size: 10px;
+  font-weight: 300;
+  text-align: left;
+}
+
+.errLabel {
+  @extend .label;
+  color: $sale !important;
+  align-self: flex-end;
+  padding-right: 10px;
+}
+
+.err {
+  border-color: $sale !important;
+}
+
+@media (min-width: $tablet) {
+  .label {
+    font-size: 12px;
+  }
+}

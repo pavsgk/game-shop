@@ -1,10 +1,10 @@
-import {Button} from '@mui/material';
+import CartContainer from '../../components/CartContainer/CartContainer';
 
 function CartPage() {
   return (
-    <div>
-      <h1>Cart Page</h1>
-    </div>
+    <>
+      <CartContainer />
+    </>
   );
 }
 

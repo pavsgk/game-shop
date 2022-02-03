@@ -1,0 +1,51 @@
+@import '../../styles/variables.scss';
+
+.itemSummary {
+  margin: 15px;
+}
+
+.titleBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 440px;
+}
+
+.elem {
+  height: 1px;
+  max-width: 440px;
+  background: $details;
+  margin: 10px 0 15px 0;
+}
+
+.title {
+  color: $text;
+  font-weight: normal;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.edit {
+  @extend .title;
+  font-size: 12px;
+}
+
+@media (min-width: $tablet) {
+  .title {
+    font-size: 20px;
+  }
+
+  .edit {
+    font-size: 14px;
+  }
+
+  .elem {
+    margin: 15px 0 25px 0;
+  }
+}
+
+@media (min-width: $tablet-max) {
+  .itemSummary {
+    margin-top: 50px;
+  }
+}

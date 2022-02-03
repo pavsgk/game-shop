@@ -1,0 +1,42 @@
+@import '../../styles/variables.scss';
+
+.selector {
+  display: flex;
+  gap: 50px;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.btn {
+  cursor: pointer;
+  border: none;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 12px;
+  background-color: transparent;
+  font-variant: small-caps;
+  color: $details;
+}
+
+.btnActive {
+  @extend .btn;
+  color: $text;
+}
+
+@media (min-width: $tablet) {
+  .selector {
+  }
+  .btn {
+    font-size: 16px;
+  }
+}
+@media (min-width: $tablet-max) {
+  .selector {
+    margin-bottom: 30px;
+  }
+
+  .btn {
+    font-size: 18px;
+  }
+}
