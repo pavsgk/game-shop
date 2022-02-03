@@ -1,15 +1,18 @@
 @import '../../styles/variables.scss';
+@import '../../components/Delivery/Delivery.module.scss';
 
 //------------------MOBILE
 
 .payment {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @extend .delivery;
 }
 
 .payment * {
   height: 45px;
+}
+
+.submit {
+  @extend .btnNext;
 }
 
 //------------------TABLET
@@ -25,6 +28,10 @@
 @media (min-width: $tablet-max) {
   .payment * {
     height: 62px;
+  }
+
+  .submit {
+    margin-top: 65px;
   }
 }
 

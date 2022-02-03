@@ -43,7 +43,7 @@ function Header() {
           <Link exact="true" to="/cart">
             <CartImg className={styles.cartImg} />
           </Link>
-          <div className={styles.navLine}></div>
+          <div className={styles.navLine}> </div>
           <p className={styles.logIn}>LOG IN</p>
           <p className={styles.logOut}>LOG OUT</p>
         </div>
