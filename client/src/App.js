@@ -13,6 +13,7 @@ import TestPage from './api/test';
 import {useDispatch} from 'react-redux';
 import {useEffect} from 'react';
 import {init} from './store/reducers/userReducer';
+import {AdminPage} from './pages/AdminPage/AdminPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="admin" element={<AdminPage />} />
           <Route path="catalog" element={<ProductsPage />} />
           <Route path="filter" element={<FilterPage />} />
           <Route path="details" element={<DetailsPage />} />
