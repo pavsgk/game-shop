@@ -1,7 +1,7 @@
 import styles from './OrderingComponent.module.scss';
 import React from 'react';
 
-const OrderingComponent = (props) => {
+function OrderingComponent(props) {
   const {text, details, price} = props;
 
   return (
@@ -13,6 +13,6 @@ const OrderingComponent = (props) => {
       <p className={styles.price}>{price}</p>
     </div>
   );
-};
+}
 
 export default OrderingComponent;

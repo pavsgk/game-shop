@@ -1,0 +1,99 @@
+@import '../../styles/variables.scss';
+
+.product {
+  max-width: 440px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.block {
+  display: flex;
+  align-items: flex-start;
+  max-width: 75%;
+}
+
+.blockCode {
+  display: flex;
+  align-items: flex-start;
+}
+
+.name {
+  color: $text;
+  font-weight: 300;
+  font-size: 12px;
+  line-height: 14px;
+  padding-bottom: 5px;
+}
+
+.imgBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 95px;
+  width: 90px;
+  padding: 5px;
+  border: 1px solid $text;
+  //position: relative;
+}
+
+.img {
+  //position: absolute;
+  //top: 50%;
+  //left: 50%;
+  //transform: translate(-50%, -50%);
+  max-height: 95px;
+  max-width: 90px;
+  object-fit: cover;
+  overflow: hidden;
+}
+
+.details {
+  padding-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.code {
+  color: $details;
+  font-weight: 300;
+  font-size: 10px;
+  line-height: 12px;
+  margin-left: 50px;
+}
+
+.quantity {
+  @extend .name;
+  font-size: 10px;
+  line-height: 12px;
+}
+
+.quantity > span {
+  padding-left: 3px;
+}
+
+.price {
+  color: $base-yellow;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+@media (min-width: $tablet) {
+  .details {
+    padding-left: 25px;
+  }
+
+  .code {
+    margin-left: 100px;
+  }
+
+  .name {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+  }
+  .price {
+    font-size: 18px;
+  }
+}

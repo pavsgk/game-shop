@@ -1,5 +1,43 @@
+@import '../../styles/variables.scss';
+
 .delivery {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.btnNext {
+  margin-top: 30px;
+}
+
+.delivery > input[type='radio'] {
+  margin: 10px;
+  visibility: hidden;
+  height: 0;
+  width: 0;
+}
+.delivery > label {
+  display: flex;
+  justify-content: center;
+  min-width: 95%;
+  cursor: pointer;
+  color: $base-yellow;
+  margin: 5px 10px;
+}
+
+.delivery > input[type='radio']:checked + label {
+  div {
+    background: $active-btn;
+    border: 1px solid $active-btn;
+  }
+
+  div > p {
+    color: $background;
+  }
+}
+
+@media (min-width: $tablet-max) {
+  .btnNext {
+    margin-top: 65px;
+  }
 }

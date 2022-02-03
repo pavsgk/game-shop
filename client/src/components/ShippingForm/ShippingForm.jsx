@@ -59,13 +59,29 @@ function ShippingForm() {
       validationSchema={yupValidationSchema}>
       {(props) => {
         return (
-          <Form className={styles.form}>
-            <CustomField name="firstName" label="First Name" type="text" />
-            <CustomField name="lastName" label="Last Name" type="text" />
-            <CustomField name="country" label="Country" type="text" />
-            <CustomField name="zipCode" label="Zip code" type="text" />
-            <CustomField name="address" label="Address" type="text" />
-            <CustomField name="phone" label="Phone" type="text" />
+          <Form className={styles.formBox}>
+            <div className={styles.form}>
+              <CustomField name="firstName" label="First Name" type="text" />
+              <CustomField name="lastName" label="Last Name" type="text" />
+              <CustomField name="country" label="Country" type="text" />
+              <CustomField name="zipCode" label="Zip code" type="text" />
+              <div className={styles.address}>
+                <CustomField name="address" label="Address" type="text" />
+              </div>
+              <CustomField name="phone" label="Phone" type="text" />
+
+              <div className={styles.checkbox}>
+                <input id="one" type="checkbox" />
+                <label htmlFor="one">
+                  <span></span>
+                  Save Information to my profile
+                  <ins>
+                    <i>Save Information to my profile</i>
+                  </ins>
+                </label>
+              </div>
+            </div>
+
             <div className={styles.btnNext}>
               <Button type="submit">Next</Button>
             </div>
