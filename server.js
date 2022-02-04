@@ -30,6 +30,10 @@ const app = express();
 
 app.use(cors());
 
+// Heroku
+app.use(express.static(path.resolve(__dirname, "./client/build")));
+process.env.NODE_ENV = 'production';
+
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
