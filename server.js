@@ -30,9 +30,7 @@ const app = express();
 
 app.use(cors());
 
-// Heroku
-app.use(express.static(path.resolve(__dirname, "./client/build")));
-process.env.NODE_ENV = 'production';
+// process.env.NODE_ENV = 'production';
 
 // Body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -72,7 +70,6 @@ app.use('/api/comments', comments);
 app.use('/api/shipping-methods', shippingMethods);
 app.use('/api/payment-methods', paymentMethods);
 app.use('/api/partners', partners);
-app.use('/', mainRoute);
 
 // Server static assets if in production
 if (process.env.NODE_ENV === 'production') {
@@ -82,6 +79,8 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
+} else {
+  app.use('/', mainRoute);
 }
 
 const port = process.env.PORT || 5000;
