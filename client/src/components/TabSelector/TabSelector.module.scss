@@ -1,42 +1,53 @@
 @import '../../styles/variables.scss';
 
-.selector {
+.selectorCheckout {
   display: flex;
-  gap: 50px;
+  gap: 20px;
   justify-content: space-between;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
-.btn {
+.selectorSign {
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 27%;
+  position: relative;
+  & :first-child:after {
+    left: 50%;
+    position: absolute;
+    content: '';
+    height: 20px;
+    width: 1px;
+    background-color: $base-yellow;
+  }
+}
+
+.btnCheckout {
   cursor: pointer;
   border: none;
   font-family: Roboto;
   font-style: normal;
   font-weight: 300;
-  font-size: 12px;
+  font-size: 18px;
   background-color: transparent;
   font-variant: small-caps;
   color: $details;
 }
 
-.btnActive {
-  @extend .btn;
+.btnSign {
+  @extend .btnCheckout;
+  text-transform: uppercase;
+}
+
+.btnCheckoutActive {
+  @extend .btnCheckout;
   color: $text;
 }
 
-@media (min-width: $tablet) {
-  .selector {
-  }
-  .btn {
-    font-size: 16px;
-  }
+.btnSignActive {
+  @extend .btnSign;
+  color: $base-yellow;
 }
-@media (min-width: $tablet-max) {
-  .selector {
-    margin-bottom: 30px;
-  }
 
-  .btn {
-    font-size: 18px;
-  }
-}
+
