@@ -26,7 +26,7 @@ function OrderSummary(props) {
         </p>
       </div>
       <div className={styles.btn}>
-        <Button type="submit">checkout</Button>
+        <Button type="submit">edit</Button>
       </div>
     </div>
   );

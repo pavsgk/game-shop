@@ -73,7 +73,7 @@ function ShippingForm() {
               <div className={styles.checkbox}>
                 <input id="one" type="checkbox" />
                 <label htmlFor="one">
-                  <span></span>
+                  <span> </span>
                   Save Information to my profile
                   <ins>
                     <i>Save Information to my profile</i>

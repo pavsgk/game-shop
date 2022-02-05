@@ -3,6 +3,7 @@
 .customField {
   display: flex;
   flex-direction: column;
+  min-width: 50%;
 
   &:hover .label {
     color: $details;
