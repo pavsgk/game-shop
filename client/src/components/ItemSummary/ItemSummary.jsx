@@ -5,10 +5,7 @@ import React from 'react';
 function ItemSummary() {
   return (
     <div className={styles.itemSummary}>
-      <div className={styles.titleBox}>
-        <p className={styles.title}>Item Summary</p>
-        <span className={styles.edit}>Edit</span>
-      </div>
+      <p className={styles.title}>Item Summary</p>
       <div className={styles.elem}> </div>
 
       <ItemSummaryComponent
@@ -18,7 +15,7 @@ function ItemSummary() {
         }
         price={380}
         quantity={2}
-        code={'W-47209'}
+        code={'W-47200000'}
       />
 
       <ItemSummaryComponent
@@ -28,7 +25,7 @@ function ItemSummary() {
         }
         price={888}
         quantity={1}
-        code={'www0002'}
+        code={'www0002-00000000-00000000000'}
       />
     </div>
   );
