@@ -2,22 +2,28 @@ import {useState} from 'react';
 import styles from './TabSelector.module.scss';
 
 function TabSelector(props) {
-  const {tabs, children} = props;
+  const {tabs, children, isSignForm} = props;
   const [active, setActive] = useState(0);
   if (tabs.lenght < 1) return null;
 
   return (
     <>
-      <div className={styles.selector}>
+      <div className={isSignForm ? styles.selectorSign : styles.selectorCheckout}>
         {tabs.map((tab, index) => {
           if (index === active)
             return (
-              <button className={styles.btnActive} key={tab} onClick={() => setActive(index)}>
+              <button
+                className={isSignForm ? styles.btnSignActive : styles.btnCheckoutActive}
+                key={tab}
+                onClick={() => setActive(index)}>
                 {tab}
               </button>
             );
           return (
-            <button className={styles.btn} key={tab} onClick={() => setActive(index)}>
+            <button
+              className={isSignForm ? styles.btnSign : styles.btnCheckout}
+              key={tab}
+              onClick={() => setActive(index)}>
               {tab}
             </button>
           );

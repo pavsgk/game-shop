@@ -4,8 +4,16 @@ import React from 'react';
 import {ReactComponent as CartImg} from './img/Frame.svg';
 import {ReactComponent as Logo} from './img/star-wars.svg';
 import {ReactComponent as MenuImg} from './img/burgermenu.svg';
+import {useDispatch} from 'react-redux';
+import {openSignModal} from "../../store/reducers/signInUpReducer";
 
 function Header() {
+
+  const dispatch = useDispatch();
+  const openModal = () => {
+    dispatch(openSignModal())
+  }
+
   return (
     <>
       <header className={styles.header}>
@@ -52,7 +60,7 @@ function Header() {
             <CartImg className={styles.cartImg} />
           </Link>
           <div className={styles.navLine}> </div>
-          <p className={styles.logIn}>LOG IN</p>
+          <p onClick={openModal} className={styles.logIn}>LOG IN</p>
           <p className={styles.logOut}>LOG OUT</p>
         </div>
       </header>
