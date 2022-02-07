@@ -9,7 +9,7 @@ import OrderSummary from '../../components/OrderSummary/OrderSummary';
 function CheckoutPage() {
   return (
     <div className={styles.checkoutPage}>
-      <div section className={styles.summary}>
+      <div className={styles.summary}>
         <ItemSummary />
         <OrderSummary subtotal={77.94} shipping={11.95} total={89.94} />
       </div>

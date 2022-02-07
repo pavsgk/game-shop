@@ -1,14 +1,28 @@
-import {Formik, Form} from 'formik';
+import {Formik, Form, useFormikContext, FormikContext} from 'formik';
 import CustomField from '../CustomField/CustomField';
 import styles from './ShippingForm.module.scss';
 import * as yup from 'yup';
 // import {useState} from 'react';
 import Button from '../Button/Button';
+import {useEffect} from 'react';
+import {useRef} from 'react';
 
 function ShippingForm() {
-  // const [isValid, setIsValid] = useState(false);
+  const formikRef = useRef(null);
+  const formikCtx = useFormikContext();
 
-  const initalValues = {
+  useEffect(() => {
+    const validationTimer = setInterval(() => {
+      console.log(formikRef?.current?.values);
+    }, 5000);
+
+    return () => {
+      clearInterval(validationTimer);
+      console.log(formikRef?.current?.values);
+    };
+  }, []);
+
+  const initialValues = {
     firstName: '',
     lastName: '',
     country: '',
@@ -49,47 +63,66 @@ function ShippingForm() {
   });
 
   const handleSubmit = (val, actions) => {
-    console.log('submit');
+    console.log(val);
   };
 
   return (
     <Formik
-      initialValues={initalValues}
+      innerRef={formikRef}
+      enableReinitialize={true}
+      initialValues={initialValues}
       onSubmit={handleSubmit}
       validationSchema={yupValidationSchema}>
-      {(props) => {
-        return (
-          <Form className={styles.formBox}>
-            <div className={styles.form}>
-              <CustomField name="firstName" label="First Name" type="text" />
-              <CustomField name="lastName" label="Last Name" type="text" />
-              <CustomField name="country" label="Country" type="text" />
-              <CustomField name="zipCode" label="Zip code" type="text" />
-              <div className={styles.address}>
-                <CustomField name="address" label="Address" type="text" />
-              </div>
-              <CustomField name="phone" label="Phone" type="text" />
+      <Form className={styles.formBox}>
+        <div className={styles.form}>
+          <CustomField name="firstName" label="First Name" type="text" />
+          <CustomField name="lastName" label="Last Name" type="text" />
+          <CustomField name="country" label="Country" type="text" />
+          <CustomField name="zipCode" label="Zip code" type="text" />
+          <div className={styles.address}>
+            <CustomField name="address" label="Address" type="text" />
+          </div>
+          <CustomField name="phone" label="Phone" type="text" />
 
-              <div className={styles.checkbox}>
-                <input id="one" type="checkbox" />
-                <label htmlFor="one">
-                  <span> </span>
-                  Save Information to my profile
-                  <ins>
-                    <i>Save Information to my profile</i>
-                  </ins>
-                </label>
-              </div>
-            </div>
+          <div className={styles.checkbox}>
+            <input id="one" type="checkbox" />
+            <label htmlFor="one">
+              <span> </span>
+              Save Information to my profile
+              <ins>
+                <i>Save Information to my profile</i>
+              </ins>
+            </label>
+          </div>
+        </div>
 
-            <div className={styles.btnNext}>
-              <Button type="submit">Next</Button>
-            </div>
-          </Form>
-        );
-      }}
+        <div className={styles.btnNext}>
+          <Button type="submit">Next</Button>
+        </div>
+      </Form>
     </Formik>
   );
 }
+
+// function ShippingFormArea(props) {
+//   const {values, setFieldValue, isValid} = useFormikContext();
+//   const fmCtx = useFormikContext();
+
+//   useEffect(() => {
+//     const savedValues = JSON.parse(localStorage.getItem('shipping'));
+//     if (savedValues !== null && typeof savedValues === 'object') {
+//       for (const [key, val] of Object.entries(savedValues)) {
+//         if (key in values) setFieldValue(key, val);
+//       }
+//     }
+
+//     return () => {
+//       console.log(values, isValid);
+//       // if (isValid) localStorage.setItem('shipping', JSON.stringify(values));
+//     };
+//   }, []);
+
+//   return <></>;
+// }
 
 export default ShippingForm;
