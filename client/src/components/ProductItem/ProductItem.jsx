@@ -1,8 +1,15 @@
 import styles from './ProductItem.module.scss';
 import CustomAccordion from '../CustomAccordion/CustomAccordion';
+import {addItemToTheCart} from '../../store/reducers/cartReducer';
+import {useDispatch} from 'react-redux';
 
 const ProductItem = (props) => {
   const {title, currentPrice, description, itemNo, genre, publishe, imageUrls, age} = props.item;
+  const dispatch = useDispatch();
+
+  const addToCart = () => {
+    dispatch(addItemToTheCart(props.item));
+  };
 
   return (
     <div className={styles.mainWrapper}>
@@ -29,7 +36,9 @@ const ProductItem = (props) => {
         </div>
         <div className={styles.content_Price}>
           <div className={styles.content_Price_Item}>{currentPrice}</div>
-          <button className={styles.content_Price_Button}>add to cart</button>
+          <button onClick={addToCart} className={styles.content_Price_Button}>
+            add to cart
+          </button>
         </div>
         <div className={styles.content_Wrapper}>
           <CustomAccordion
