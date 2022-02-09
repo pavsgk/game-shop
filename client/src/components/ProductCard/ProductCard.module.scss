@@ -19,7 +19,11 @@
     margin-top: 14px;
     margin-bottom: 8px;
   }
-
+  .priceWrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
   .price {
     font-weight: 900;
     font-size: 20px;
@@ -27,6 +31,15 @@
     text-align: center;
     text-transform: uppercase;
     color: $base-yellow;
+  }
+
+  .addButton {
+    border: 1px solid $base-yellow;
+    padding: 5px 10px;
+    outline: none;
+    background: none;
+    color: $base-yellow;
+    text-transform: uppercase;
   }
 }
 

@@ -22,6 +22,9 @@ function ProductsContainer() {
       }
     })();
   }, []);
+  useEffect(() => {
+    console.log(products);
+  }, [products]);
 
   return (
     <div className={styles.productsContainer}>
