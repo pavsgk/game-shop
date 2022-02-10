@@ -1,25 +1,81 @@
-import {Formik, Form, useFormikContext, FormikContext} from 'formik';
+import {Formik, Form, useFormikContext} from 'formik';
 import CustomField from '../CustomField/CustomField';
 import styles from './ShippingForm.module.scss';
 import * as yup from 'yup';
-// import {useState} from 'react';
 import Button from '../Button/Button';
 import {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
+import {updateFields} from '../../store/reducers/checkoutReducer';
+import store from '../../store/store';
 import {useRef} from 'react';
+import {values} from 'lodash';
 
-function ShippingForm() {
-  const formikRef = useRef(null);
-  const formikCtx = useFormikContext();
+const yupValidationSchema = yup.object().shape({
+  firstName: yup
+    .string()
+    .required('Enter name')
+    .min(2, 'min. 2 characters required')
+    .matches(/[A-Za-z/s]/),
+  lastName: yup
+    .string()
+    .required('Enter last name')
+    .min(2, 'min. 2 characters required')
+    .matches(/[A-Za-z/s]/),
+  country: yup
+    .string()
+    .required('Enter country')
+    .min(2, 'min. 2 characters required')
+    .matches(/[A-Za-z/s]/),
+  zipCode: yup
+    .string()
+    .required('Enter zip code')
+    .min(5, 'min. 5 characters required')
+    .matches(/^\d{5}(?:[-\s]\d{4})?$/),
+  address: yup
+    .string()
+    .required('Enter adress')
+    .min(5, 'min. 5 characters required')
+    .matches(/^[a-zA-Z0-9\s,'-]*$/),
+  phone: yup.string().required('Enter phone').min(7, 'min. 7 characters required').matches(/\d/g),
+  syncProfile: yup.boolean(),
+});
+
+function AutoSaver() {
+  const {values, touched} = useFormikContext();
+  const ctx = useFormikContext();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const validationTimer = setInterval(() => {
-      console.log(formikRef?.current?.values);
-    }, 5000);
+    if (Object.keys(touched).length === 0) return;
+    let isValid = false;
+    try {
+      yupValidationSchema.validateSync(values);
+      isValid = true;
+    } catch {}
 
-    return () => {
-      clearInterval(validationTimer);
-      console.log(formikRef?.current?.values);
-    };
+    dispatch(
+      updateFields({
+        ...values,
+        isValid,
+      }),
+    );
+  }, [values]);
+
+  return null;
+}
+
+function ShippingForm() {
+  const formikRef = useRef();
+
+  useEffect(() => {
+    const {
+      checkout: {checkoutFields},
+    } = store.getState();
+    if (formikRef) {
+      for (const [key, val] of Object.entries(checkoutFields)) {
+        formikRef.current.setFieldValue(key, val);
+      }
+    }
   }, []);
 
   const initialValues = {
@@ -32,36 +88,6 @@ function ShippingForm() {
     syncProfile: false,
   };
 
-  const yupValidationSchema = yup.object().shape({
-    firstName: yup
-      .string()
-      .required('Enter name')
-      .min(2, 'min. 2 characters required')
-      .matches(/[A-Za-z/s]/),
-    lastName: yup
-      .string()
-      .required('Enter last name')
-      .min(2, 'min. 2 characters required')
-      .matches(/[A-Za-z/s]/),
-    country: yup
-      .string()
-      .required('Enter country')
-      .min(2, 'min. 2 characters required')
-      .matches(/[A-Za-z/s]/),
-    zipCode: yup
-      .string()
-      .required('Enter zip code')
-      .min(5, 'min. 5 characters required')
-      .matches(/^\d{5}(?:[-\s]\d{4})?$/),
-    address: yup
-      .string()
-      .required('Enter adress')
-      .min(5, 'min. 5 characters required')
-      .matches(/^[a-zA-Z0-9\s,'-]*$/),
-    phone: yup.string().required('Enter phone').min(7, 'min. 7 characters required').matches(/\d/g),
-    syncProfile: yup.boolean(),
-  });
-
   const handleSubmit = (val, actions) => {
     console.log(val);
   };
@@ -69,7 +95,6 @@ function ShippingForm() {
   return (
     <Formik
       innerRef={formikRef}
-      enableReinitialize={true}
       initialValues={initialValues}
       onSubmit={handleSubmit}
       validationSchema={yupValidationSchema}>
@@ -99,30 +124,10 @@ function ShippingForm() {
         <div className={styles.btnNext}>
           <Button type="submit">Next</Button>
         </div>
+        <AutoSaver />
       </Form>
     </Formik>
   );
 }
-
-// function ShippingFormArea(props) {
-//   const {values, setFieldValue, isValid} = useFormikContext();
-//   const fmCtx = useFormikContext();
-
-//   useEffect(() => {
-//     const savedValues = JSON.parse(localStorage.getItem('shipping'));
-//     if (savedValues !== null && typeof savedValues === 'object') {
-//       for (const [key, val] of Object.entries(savedValues)) {
-//         if (key in values) setFieldValue(key, val);
-//       }
-//     }
-
-//     return () => {
-//       console.log(values, isValid);
-//       // if (isValid) localStorage.setItem('shipping', JSON.stringify(values));
-//     };
-//   }, []);
-
-//   return <></>;
-// }
 
 export default ShippingForm;
