@@ -1,12 +1,13 @@
 import React from 'react';
 import styles from './MainPage.module.scss';
 import MainSlider from '../../components/MainSlider/MainSlider';
+import Genres from '../../components/Genres/Genres';
 
 function MainPage() {
   return (
     <div className={styles.main}>
-      <h1>Main Page</h1>
       <MainSlider />
+      <Genres />
     </div>
   );
 }

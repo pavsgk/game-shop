@@ -1,32 +1,60 @@
-import SimpleImageSlider from 'react-simple-image-slider';
+import styles from './MainSlider.module.scss';
+import {Carousel} from 'react-carousel-minimal';
 
-const images = [
+const data = [
   {
-    url: 'https://upload.wikimedia.org/wikipedia/ru/thumb/3/3e/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B0_Star_Wars_Jedi_Fallen_Order.jpg/800px-%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B0_Star_Wars_Jedi_Fallen_Order.jpg',
-  },
-  {url: 'https://content1.rozetka.com.ua/goods/images/big/96862109.jpg'},
-  {
-    url: 'https://data3.origin.com/asset/content/dam/originx/web/app/games/it-takes-two/it-takes-two/Screenshots/Copy%20of%20Copy%20of%20ITT_Screenshot_1920x1080_GI_shot03.jpg/6da492ab-4c72-4150-bd6a-3fd3ce9a2610/original.jpg',
+    image: 'https://www.mobiflip.de/wp-content/uploads/2020/11/star-wars-jedi-fallen-order.jpg',
+    caption: 'STAR WARS Jedi: Fallen Order',
   },
   {
-    url: 'https://image.api.playstation.com/cdn/EP0006/CUSA08004_00/FREE_CONTENT1D5PUy4Dszrm1qtiDwqF/PREVIEW_SCREENSHOT6_530713.jpg',
+    image:
+      'https://img03.rl0.ru/afisha/e1500x600i/daily.afisha.ru/uploads/images/3/29/329e6a53757441f9b698ba928b4bd8ce.jpg',
+    caption: 'The Witcher 3: Wild Hunt',
   },
   {
-    url: 'https://img.championat.com/c/1350x759/news/big/c/f/insajder-podelilsya-podrobnostyami-prodolzheniya-star-wars-jedi-fallen-order_16417156602069706272.jpg',
+    image: 'https://gamemag.ru/images/cache/Reviews/Reviews2254/b8a188909e-2_1390x600.jpg',
+    caption: 'Forza Horizon 5',
+  },
+  {
+    image: 'https://vgtimes.ru/uploads/games_previews/60906/assassins-creed-valhalla_vgdb.jpg',
+    caption: "Assassin's Creed Valhalla",
+  },
+  {
+    image:
+      'https://redrumers.files.wordpress.com/2016/08/no-mans-sky-large-hero-02-ps4-eu-16jun15.jpg?w=1400',
+    caption: "No Man's Sky",
   },
 ];
 
+const captionStyle = {
+  fontSize: '1.2em',
+  fontWeight: '400',
+  backgroundColor: '#8f8f89a3',
+};
+
 function MainSlider() {
   return (
-    <div>
-      <SimpleImageSlider
-        width={1200}
-        height={400}
-        images={images}
-        showBullets={true}
-        showNavs={true}
+    <>
+      <Carousel
+        data={data}
+        time={3500}
+        width="100%"
+        height="400px"
+        captionStyle={captionStyle}
+        captionPosition="bottom"
+        automatic={true}
+        dots={true}
+        pauseIconColor="white"
+        pauseIconSize="40px"
+        slideBackgroundColor="darkgrey"
+        slideImageFit="cover"
+        style={{
+          textAlign: 'center',
+          width: '100%',
+          maxHeight: '500px',
+        }}
       />
-    </div>
+    </>
   );
 }
 
