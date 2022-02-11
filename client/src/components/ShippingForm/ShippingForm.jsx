@@ -5,10 +5,9 @@ import * as yup from 'yup';
 import Button from '../Button/Button';
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
-import {updateFields} from '../../store/reducers/checkoutReducer';
+import {switchTab, updateFields} from '../../store/reducers/checkoutReducer';
 import store from '../../store/store';
 import {useRef} from 'react';
-import {values} from 'lodash';
 
 const yupValidationSchema = yup.object().shape({
   firstName: yup
@@ -66,6 +65,7 @@ function AutoSaver() {
 
 function ShippingForm() {
   const formikRef = useRef();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const {
@@ -88,8 +88,8 @@ function ShippingForm() {
     syncProfile: false,
   };
 
-  const handleSubmit = (val, actions) => {
-    console.log(val);
+  const handleSubmit = () => {
+    dispatch(switchTab(1));
   };
 
   return (
@@ -109,7 +109,7 @@ function ShippingForm() {
           </div>
           <CustomField name="phone" label="Phone" type="text" />
 
-          <div className={styles.checkbox}>
+          {/* <div className={styles.checkbox}>
             <input id="one" type="checkbox" />
             <label htmlFor="one">
               <span> </span>
@@ -118,7 +118,7 @@ function ShippingForm() {
                 <i>Save Information to my profile</i>
               </ins>
             </label>
-          </div>
+          </div> */}
         </div>
 
         <div className={styles.btnNext}>
