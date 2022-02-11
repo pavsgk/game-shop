@@ -1,7 +1,4 @@
 @import '../../styles/variables.scss';
-//@import '../../styles/reset.scss';
-
-//------------------MOBILE
 
 .header {
   display: flex;
@@ -23,7 +20,7 @@
   flex-direction: column;
   align-items: flex-start;
   list-style-type: none;
-  background: #ffffff54;
+  background: #8f8f89e6;
 }
 
 .menu {
@@ -50,16 +47,7 @@
 .navItem {
   padding: 7px;
   width: 100%;
-  border-radius: 4px;
   border-bottom: $text solid 1px;
-}
-
-.navItem:hover {
-  background: #ffffff54;
-}
-
-.navItem:active {
-  background: $active-btn;
 }
 
 .navItem:last-child {
@@ -97,8 +85,7 @@
 }
 
 .logIn:active {
-  color: $background;
-  background: $active-btn;
+  color: $text;
 }
 
 .logOut {
@@ -163,6 +150,12 @@
     flex-direction: row;
     align-items: flex-start;
     background: none;
+  }
+
+  .navItem:hover {
+    text-align: center;
+    transform: scale(1.2);
+    text-shadow: 0 0 15px $active-btn;
   }
 
   .logo {

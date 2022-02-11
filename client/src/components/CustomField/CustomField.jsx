@@ -1,4 +1,4 @@
-import {useField} from 'formik';
+import {Field, useField} from 'formik';
 import styles from './CustomField.module.scss';
 
 function CustomField(props) {
@@ -9,11 +9,11 @@ function CustomField(props) {
   return (
     <div className={styles.customField}>
       <span className={styles.label}>{field.value ? label : '\u00A0'}</span>
-      <input
+      <Field
         {...field}
-        className={isError && styles.err}
+        className={isError ? styles.err : undefined}
         placeholder={label}
-        onChange={(event) => field.onChange(event)}
+        // onChange={(event) => field.onChange(event)}
         label={label}
         type={type}
       />

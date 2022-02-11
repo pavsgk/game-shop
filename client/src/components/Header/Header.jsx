@@ -1,11 +1,18 @@
 import styles from './Header.module.scss';
-import {NavLink, Link} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import React from 'react';
 import {ReactComponent as CartImg} from './img/Frame.svg';
 import {ReactComponent as Logo} from './img/star-wars.svg';
 import {ReactComponent as MenuImg} from './img/burgermenu.svg';
+import {useDispatch} from 'react-redux';
+import {openSignModal} from '../../store/reducers/signInUpReducer';
 
 function Header() {
+  const dispatch = useDispatch();
+  const openModal = () => {
+    dispatch(openSignModal());
+  };
+
   return (
     <>
       <header className={styles.header}>
@@ -18,29 +25,29 @@ function Header() {
         <nav className={styles.nav}>
           <ul className={styles.navList}>
             <li className={styles.navItem}>
-              <NavLink exact="true" className={styles.navLink} to="/">
+              <Link exact="true" className={styles.navLink} to="/">
                 Home
-              </NavLink>
+              </Link>
             </li>
             <li className={styles.navItem}>
-              <NavLink exact="true" className={styles.navLink} to="/catalog">
+              <Link exact="true" className={styles.navLink} to="/catalog">
                 catalog
-              </NavLink>
+              </Link>
             </li>
             <li className={styles.navItem}>
-              <NavLink exact="true" className={styles.navLink} to="/details">
+              <Link exact="true" className={styles.navLink} to="/details">
                 details
-              </NavLink>
+              </Link>
             </li>
             <li className={styles.navItem}>
-              <NavLink exact="true" className={styles.navLink} to="/wishlist">
+              <Link exact="true" className={styles.navLink} to="/wishlist">
                 wishlist
-              </NavLink>
+              </Link>
             </li>
             <li className={styles.navItem}>
-              <NavLink exact="true" className={styles.navLink} to="/checkout">
+              <Link exact="true" className={styles.navLink} to="/checkout">
                 Checkout
-              </NavLink>
+              </Link>
             </li>
           </ul>
         </nav>
@@ -52,7 +59,9 @@ function Header() {
             <CartImg className={styles.cartImg} />
           </Link>
           <div className={styles.navLine}> </div>
-          <p className={styles.logIn}>LOG IN</p>
+          <p onClick={openModal} className={styles.logIn}>
+            LOG IN
+          </p>
           <p className={styles.logOut}>LOG OUT</p>
         </div>
       </header>

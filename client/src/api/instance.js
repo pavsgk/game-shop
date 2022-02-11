@@ -13,8 +13,11 @@ const instance = axios.create({
 //   baseURL: remoteBaseUrl,
 // });
 
-// fetch(localBaseUrl)
-//   .then(({status}) => (status === 200 ? (instance.defaults.baseURL = localBaseUrl) : null))
-//   .catch((err) => console.log('localhost unreachable, switching to Heroku'));
+fetch(process.env.REACT_APP_API_URL)
+  .then(({status}) => {
+    if (status === 200) instance.defaults.baseURL = process.env.REACT_APP_API_URL;
+    else throw new Error('localhost unreachable');
+  })
+  .catch((err) => (instance.defaults.baseURL = 'https://game-shop-fe30.herokuapp.com/api/'));
 
 export default instance;

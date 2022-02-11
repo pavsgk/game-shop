@@ -4,13 +4,6 @@
   margin: 15px;
 }
 
-.titleBox {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 440px;
-}
-
 .elem {
   height: 1px;
   max-width: 440px;
@@ -25,18 +18,9 @@
   margin-top: 20px;
 }
 
-.edit {
-  @extend .title;
-  font-size: 12px;
-}
-
 @media (min-width: $tablet) {
   .title {
     font-size: 20px;
-  }
-
-  .edit {
-    font-size: 14px;
   }
 
   .elem {
