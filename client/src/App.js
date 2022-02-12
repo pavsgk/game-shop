@@ -15,6 +15,7 @@ import {useEffect} from 'react';
 import {init} from './store/reducers/userReducer';
 import {AdminPage} from './pages/AdminPage/AdminPage';
 import SignModalContainer from './components/SignModalContainer/SignModalContainer';
+import ImagesModal from './components/ImagesModal/ImagesModal';
 
 function App() {
   const dispatch = useDispatch();
@@ -36,7 +37,8 @@ function App() {
           <Route path="checkout" element={<CheckoutPage />} />
           <Route path="test" element={<TestPage />} />
         </Routes>
-        <SignModalContainer/>
+        <SignModalContainer />
+        <ImagesModal />
       </MuiTheme>
     </div>
   );
