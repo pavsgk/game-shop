@@ -3,6 +3,7 @@ import {saveToLS, getFromLS} from '../../utils/localStorage';
 
 const initialState = {
   cartItems: getFromLS('cart') || [],
+  cartSum: 0,
 };
 
 const cartSlice = createSlice({
@@ -44,9 +45,14 @@ const cartSlice = createSlice({
       state.cartItems[index].count += 1;
       saveToLS('cart', state.cartItems);
     },
+    countCartSum(state) {
+      let sum = 0;
+      state.cartItems.forEach((element) => (sum += element.currentPrice * element.count));
+      state.cartSum = sum;
+    },
   },
 });
 
-export const {addItemToTheCart, removeItemFromTheCart, makeMoreItem, makeLessItem} =
+export const {addItemToTheCart, removeItemFromTheCart, makeMoreItem, makeLessItem, countCartSum} =
   cartSlice.actions;
 export default cartSlice.reducer;
