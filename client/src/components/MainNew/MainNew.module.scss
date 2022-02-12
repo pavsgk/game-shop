@@ -1,0 +1,58 @@
+@import '../../styles/variables.scss';
+
+.wrapper {
+  margin-bottom: 20px;
+}
+
+.title {
+  color: $text;
+  font-weight: 400;
+  font-size: 36px;
+  text-transform: uppercase;
+  margin: 20px;
+  align-self: flex-start;
+  padding-left: 15%;
+}
+
+.img {
+  width: 120px;
+  margin: 20px;
+}
+
+.svg {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.card {
+  position: relative;
+}
+
+@media (min-width: $tablet) {
+  .wrapper {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
+    align-items: center;
+  }
+  .img {
+    width: 150px;
+  }
+}
+
+@media (min-width: $tablet-max) {
+  .wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .img {
+    width: 200px;
+  }
+}
+
+@media (min-width: $desktop) {
+  .wrapper {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
