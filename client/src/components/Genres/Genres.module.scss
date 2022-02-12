@@ -3,6 +3,17 @@
 .wrapper {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 20px;
+}
+
+.title {
+  color: $text;
+  font-weight: 400;
+  font-size: 36px;
+  text-transform: uppercase;
+  margin: 20px;
+  align-self: flex-start;
+  padding-left: 15%;
 }
 
 .genre {

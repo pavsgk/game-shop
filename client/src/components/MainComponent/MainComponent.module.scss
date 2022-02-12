@@ -1,0 +1,47 @@
+@import '../../styles/variables.scss';
+
+.wrapper {
+  width: 250px;
+  height: 320px;
+  position: relative;
+  margin: 5px;
+}
+
+.svg {
+  position: absolute;
+  top: -5px;
+  right: -20px;
+  min-width: 120px;
+  height: 85px;
+}
+
+.img {
+  width: 250px;
+  height: 320px;
+  object-fit: cover;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  background: #8f8f89a3;
+  padding: 5px;
+}
+
+.name {
+  font-size: 18px;
+  color: $text;
+  padding-right: 10px;
+}
+
+.price {
+  @extend .name;
+  color: $base-yellow;
+  font-weight: 500;
+  margin-top: 5px;
+}
