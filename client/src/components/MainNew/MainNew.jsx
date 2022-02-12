@@ -9,7 +9,7 @@ function MainNew() {
       <div className={styles.wrapper}>
         <div>
           <MainComponent
-            name={'Forza Horizon 5'}
+            name={'Horizon 5'}
             price={15}
             img={
               'https://upload.wikimedia.org/wikipedia/ru/3/3e/%D0%9E%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B0_Star_Wars_Jedi_Fallen_Order.jpg'
