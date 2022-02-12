@@ -7,18 +7,12 @@ import {
   switchImagesModalState,
   addContentForImagesModal,
 } from '../../store/reducers/imagesModalReducer';
-import {Carousel} from 'react-carousel-minimal';
+import ProductItemSlider from '../ProductItemSlider/ProductItemSlider';
 
 const ProductItem = (props) => {
   const {title, currentPrice, description, itemNo, genre, publishe, imageUrls, age} = props.item;
   const dispatch = useDispatch();
   const sliderRef = useRef(null);
-
-  const data = imageUrls.map((item) => {
-    return {
-      image: item,
-    };
-  });
 
   useEffect(() => {
     const openModalImages = () => {
@@ -60,21 +54,7 @@ const ProductItem = (props) => {
         <span className={styles.mobileProductTitle_Code}>{itemNo}</span>
       </div>
       <div ref={sliderRef} className={styles.productIMGWrapper}>
-        <Carousel
-          data={data}
-          time={4000}
-          width="850px"
-          radius="10px"
-          automatic={true}
-          dots={true}
-          pauseIconColor="white"
-          pauseIconSize="40px"
-          slideBackgroundColor="#1e1e1e"
-          slideImageFit="contain"
-          thumbnails={true}
-          thumbnailWidth="100px"
-          showNavBtn={true}
-        />
+        <ProductItemSlider imageUrls={imageUrls} />
       </div>
       <div className={styles.content}>
         <div className={styles.content_Title}>
