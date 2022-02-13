@@ -1,0 +1,77 @@
+@import '../../styles/variables.scss';
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 20px;
+}
+
+.title {
+  color: $text;
+  font-weight: 400;
+  font-size: 36px;
+  text-transform: uppercase;
+  margin: 20px;
+  align-self: flex-start;
+  padding-left: 15%;
+}
+
+.genre {
+  display: flex;
+  width: 150px;
+  height: 70px;
+  align-items: center;
+  border: 1px solid $details;
+  margin: 10px;
+  border-radius: 4px;
+}
+
+.genre:hover {
+  text-align: center;
+  transform: scale(1.2);
+  text-shadow: 0 0 15px $active-btn;
+}
+
+.genre:active {
+  background: $details;
+}
+
+.genre > p {
+  padding: 10px;
+  white-space: nowrap;
+  color: $text;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.img {
+  min-width: 30%;
+  min-height: 100%;
+  max-width: 30px;
+  max-height: 30px;
+  margin-left: 10px;
+}
+
+@media (min-width: $tablet) {
+  .wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .genre {
+    width: 170px;
+    height: 80px;
+  }
+
+  .img {
+    min-width: 35%;
+    max-width: 40px;
+    max-height: 40px;
+    margin-left: 20px;
+  }
+}
+
+@media (min-width: $tablet-max) {
+  .wrapper {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}

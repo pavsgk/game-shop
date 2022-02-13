@@ -1,0 +1,53 @@
+@import '../../styles/variables.scss';
+
+.separation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: $details;
+  margin-top: 20px;
+  &::before {
+    content: '';
+    border: 1px solid $details;
+    width: calc(50% - 12px);
+  }
+  &::after {
+    content: '';
+    border: 1px solid $details;
+    width: calc(50% - 12px);
+  }
+}
+
+.altAuthorization {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.facebookWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $details;
+  padding: 7px 0;
+  width: 48%;
+
+  & .facebookSvg {
+    width: 10px;
+    height: 18px;
+  }
+  & p {
+    margin-left: 10px;
+    color: $details;
+  }
+}
+
+.googleWrapper {
+  @extend .facebookWrapper;
+
+  & .googleSvg {
+    fill: white;
+    width: 14px;
+    height: 24px;
+  }
+}

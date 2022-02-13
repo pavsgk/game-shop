@@ -14,37 +14,54 @@
 }
 
 .cartTitleWrapperName {
-  font-size: 15px;
+  font-size: 20px;
   line-height: 23px;
 }
 
 .cartTitleWrapperLink {
-  font-size: 10px;
-  border: 1px solid $base-yellow;
+  font-size: 13px;
+  border: none;
   background: none;
   color: $base-yellow;
-  padding: 5px;
+  cursor: pointer;
+}
+
+.contentWrapper {
+  margin-top: 30px;
+}
+
+.contentItems {
+  display: flex;
+  flex-direction: column;
 }
 
 .totalPriceWrapper {
+}
+
+.totalPriceWrapperItem {
   display: flex;
   justify-content: space-between;
-  font-size: 24px;
+  font-size: 26px;
   color: $base-yellow;
 }
 
-.totalPriceWrapperText {
-  text-transform: uppercase;
+.totalPriceWrapperItemText {
 }
 
-.buttonWrapper {
+.totalPriceWrapperItemPrice {
+  display: flex;
+  & span {
+    margin-right: 5px;
+  }
+}
+
+.totalPriceWrapperButton {
   display: flex;
   justify-content: end;
-
   margin: 30px 0 60px 0;
 }
 
-.buttonWrapperItem {
+.totalPriceWrapperButtonItem {
   text-transform: uppercase;
   border: 1px solid $base-yellow;
   background: none;
@@ -58,8 +75,25 @@
     padding: 0 90px;
   }
 
-  .buttonWrapper {
-    margin-top: 80px;
+  .contentWrapper {
+    display: flex;
+    justify-content: end;
+  }
+
+  .totalPriceWrapper {
+    margin-left: 45px;
+    display: flex;
+    flex-direction: column;
+    height: 30%;
+    padding: 25px;
+    border: 1px solid $details;
+  }
+  .totalPriceWrapperItemText {
+    margin-right: 10px;
+  }
+  .totalPriceWrapperButton {
+    margin: 20px 0 0 0;
+    justify-content: center;
   }
 }
 

@@ -1,54 +1,47 @@
 @import '../../styles/variables.scss';
 
 .mainWrapper {
-  margin: 30px 0;
+  margin-bottom: 30px;
   padding-bottom: 30px;
   border-bottom: 1px solid $details;
-}
-
-.infoWrapper {
   display: flex;
   justify-content: space-between;
 }
 
-.infoWrapperBlock {
+.imgWrapper {
   display: flex;
-  justify-content: flex-start;
-  max-width: 75%;
-}
-
-.mainInfoWrapperImg {
-  width: 100%;
-}
-
-.infoWrapperBlockImg {
-  max-width: 40%;
+  max-width: 15%;
   & > * {
     width: 100%;
     border: 1px solid #ffffff;
   }
 }
 
-.infoWrapperBlockTitle {
+.infoWrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+}
+
+.infoWrapperTitle {
   margin-left: 20px;
   display: flex;
   flex-direction: column;
 }
 
-.infoWrapperBlockTitleText {
+.infoWrapperTitleText {
   font-size: 15px;
   line-height: 23px;
   color: $text;
 }
 
-.infoWrapperBlockTitleCode {
+.infoWrapperTitleCode {
   color: $details;
   align-self: flex-end;
   font-size: 10px;
-}
-
-.infoWrapperDeleteSVG {
-  fill: white;
+  margin: 5px 0 10px 0;
 }
 
 .priceWrapper {
@@ -58,59 +51,95 @@
   align-items: center;
 }
 
-.priceWrapperQuantity {
+.infoWrapperQuantity {
   display: flex;
+  justify-content: end;
   flex-direction: column;
+  margin-left: 20px;
 }
 
-.priceWrapperQuantityValue {
+.infoWrapperQuantityValue {
   font-size: 10px;
   color: $text;
   margin-bottom: 8px;
 }
 
-.priceWrapperQuantityBlock {
+.infoWrapperQuantityBlock {
   display: flex;
   align-items: center;
 }
 
-.priceWrapperQuantityBlockMinus {
+.infoWrapperQuantityBlockMinus {
   border: 1px solid $text;
+  display: flex;
 }
 
-.priceWrapperQuantityBlockMinusItem {
+.infoWrapperQuantityBlockMinusItem {
   fill: $text;
 }
 
-.priceWrapperQuantityBlockValue {
+.infoWrapperQuantityBlockValue {
   color: $text;
   margin: 0 9px;
   font-size: 20px;
 }
 
-.priceWrapperQuantityBlockPlus {
+.infoWrapperQuantityBlockPlus {
+  display: flex;
   border: 1px solid $text;
 }
 
-.priceWrapperQuantityBlockPlusItem {
+.infoWrapperQuantityBlockPlusItem {
   fill: $text;
 }
 
-.priceWrapperValue {
+.priceDeleteWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: 20px;
+}
+
+.deleteWrapper {
+  display: flex;
+  justify-content: end;
+}
+
+.deleteWrapperItem {
+  fill: white;
+}
+
+.priceValue {
+  display: flex;
   font-size: 20px;
   color: $base-yellow;
+  & span {
+    margin-right: 5px;
+  }
 }
 
 @media (min-width: $tablet) {
-  .priceWrapper {
-    margin-left: 60%;
+  .imgWrapper {
+    max-width: 25%;
+  }
+  .infoWrapperTitleText {
+    font-size: 20px;
+  }
+  .infoWrapperTitleCode {
+    font-size: 14px;
   }
 
-  .priceWrapperValue {
-    font-size: 30px;
+  .priceValue {
+    font-size: 24px;
+  }
+}
+
+@media (min-width: $tablet-max) {
+  .mainWrapper {
+    max-width: 90%;
   }
 
-  .infoWrapperBlockImg {
-    max-width: 20%;
+  .imgWrapper {
+    max-width: 15%;
   }
 }

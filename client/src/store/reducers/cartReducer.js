@@ -1,7 +1,9 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, current} from '@reduxjs/toolkit';
+import {saveToLS, getFromLS} from '../../utils/localStorage';
 
 const initialState = {
-  cartItems: [],
+  cartItems: getFromLS('cart') || [],
+  cartSum: 0,
 };
 
 const cartSlice = createSlice({
@@ -9,40 +11,48 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addItemToTheCart(state, action) {
-      const cartItems = [...state.cartItems];
-      const index = cartItems.findIndex((elem) => elem.id === action.payload.id);
+      console.log(action.payload);
+      const index = state.cartItems.findIndex((elem) => elem.itemNo === action.payload.itemNo);
       if (index === -1) {
         const newItem = {...action.payload, count: 1};
         state.cartItems.push(newItem);
+        console.log(state.cartItems, 'state.cartItems.push(newItem)');
+        saveToLS('cart', state.cartItems);
         return;
       }
-      cartItems[index].count += 1;
+      state.cartItems[index].count += 1;
+      saveToLS('cart', state.cartItems);
     },
     removeItemFromTheCart(state, action) {
-      const cartItems = [...state.cartItems];
-      const index = cartItems.findIndex((elem) => elem.id === action.payload);
-
+      const index = state.cartItems.findIndex((elem) => elem.itemNo === action.payload);
       if (index === -1) {
         return;
       }
-      cartItems.splice(index, 1);
+      state.cartItems.splice(index, 1);
+      saveToLS('cart', state.cartItems);
     },
     makeLessItem(state, action) {
-      const cartItems = [...state.cartItems];
-      const index = cartItems.findIndex((elem) => elem.id === action.payload);
+      const index = state.cartItems.findIndex((elem) => elem.itemNo === action.payload);
 
-      if (cartItems[index].count === 1) {
+      if (state.cartItems[index].count === 1) {
         return;
       }
-      cartItems[index].count -= 1;
+      state.cartItems[index].count -= 1;
+      saveToLS('cart', state.cartItems);
     },
     makeMoreItem(state, action) {
-      const newCartItems = [...state.cartItems];
-      const index = newCartItems.findIndex((elem) => elem.id === action.payload);
-      newCartItems[index].count += 1;
+      const index = state.cartItems.findIndex((elem) => elem.itemNo === action.payload);
+      state.cartItems[index].count += 1;
+      saveToLS('cart', state.cartItems);
+    },
+    countCartSum(state) {
+      let sum = 0;
+      state.cartItems.forEach((element) => (sum += element.currentPrice * element.count));
+      state.cartSum = sum;
     },
   },
 });
 
-export const {addItemToTheCart} = cartSlice.actions;
+export const {addItemToTheCart, removeItemFromTheCart, makeMoreItem, makeLessItem, countCartSum} =
+  cartSlice.actions;
 export default cartSlice.reducer;

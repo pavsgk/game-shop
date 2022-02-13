@@ -1,0 +1,32 @@
+@import '../../styles/variables.scss';
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 7px;
+}
+
+.remindPassword {
+  color: $details;
+  font-size: 11px;
+  border-bottom: 1px solid $details;
+}
+
+.submitButton {
+  margin-top: 14px;
+  border: 1px solid $base-yellow;
+  background-color: transparent;
+  color: $base-yellow;
+  padding: 11px;
+  text-transform: uppercase;
+
+  &:hover {
+    color: $details;
+    border: 1px solid $details;
+  }
+}

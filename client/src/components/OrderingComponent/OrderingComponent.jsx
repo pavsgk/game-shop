@@ -2,15 +2,15 @@ import styles from './OrderingComponent.module.scss';
 import React from 'react';
 
 function OrderingComponent(props) {
-  const {text, details, price} = props;
+  const {name, description, costValue} = props;
 
   return (
     <div className={styles.component}>
       <div className={styles.info}>
-        <p className={styles.text}>{text}</p>
-        <p className={styles.details}>{details}</p>
+        <p className={styles.text}>{name}</p>
+        <p className={styles.details}>{description}</p>
       </div>
-      <p className={styles.price}>{price}</p>
+      {costValue && <p className={styles.price}>{costValue} ₴</p>}
     </div>
   );
 }

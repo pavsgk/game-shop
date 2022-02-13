@@ -1,8 +1,23 @@
 import axios from 'axios';
 
+const useUrl = process.env.REACT_APP_API_URL || 'https://game-shop-fe30.herokuapp.com/api/';
+
 const instance = axios.create({
-  baseURL: 'http://localhost:5000/api/',
-  timeout: 3000,
+  baseURL: useUrl,
 });
+
+// const localBaseUrl = 'http://localhost:5000/api/';
+// const remoteBaseUrl = 'https://game-shop-fe30.herokuapp.com/api/';
+
+// const instance = axios.create({
+//   baseURL: remoteBaseUrl,
+// });
+
+fetch(process.env.REACT_APP_API_URL)
+  .then(({status}) => {
+    if (status === 200) instance.defaults.baseURL = process.env.REACT_APP_API_URL;
+    else throw new Error('localhost unreachable');
+  })
+  .catch((err) => (instance.defaults.baseURL = 'https://game-shop-fe30.herokuapp.com/api/'));
 
 export default instance;
