@@ -1,18 +1,22 @@
 import {useState, useEffect} from 'react';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import styles from './ProductsContainer.module.scss';
-import instance from '../../api/instance';
+import {getFilteredProducts, getAllProducts} from '../../api/products';
 import ProductsPlaceholder from '../ProductsPlaceholder/ProductsPlaceholder';
+import {useLocation} from 'react-router-dom';
 
 function ProductsContainer() {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  let location = useLocation();
 
   useEffect(() => {
     (async () => {
       try {
-        const {data} = await instance.get('products');
+        const data = location.search
+          ? await getFilteredProducts(location.search.slice(1, -1))
+          : await getAllProducts();
         setProducts(data);
         setIsLoading(false);
       } catch (e) {
@@ -21,7 +25,7 @@ function ProductsContainer() {
         setIsError(true);
       }
     })();
-  }, []);
+  }, [location.search]);
 
   return (
     <div className={styles.productsContainer}>

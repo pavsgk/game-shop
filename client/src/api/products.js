@@ -32,5 +32,5 @@ export async function getFilteredProducts(querystring) {
   if (query[query.length - 1] === '&') query = query.slice(0, -1);
 
   const {data} = await instance.get(`products/filter?${query}`);
-  return data;
+  return data.products;
 }
