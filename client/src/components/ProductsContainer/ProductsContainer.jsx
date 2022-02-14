@@ -20,7 +20,7 @@ function ProductsContainer() {
         setProducts(data);
         setIsLoading(false);
       } catch (e) {
-        console.warning(e);
+        console.warn(e);
         setIsLoading(false);
         setIsError(true);
       }
