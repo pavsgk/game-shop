@@ -15,12 +15,16 @@
 }
 
 .navList {
-  //display: flex;
-  display: none;
+  display: flex;
   flex-direction: column;
   align-items: flex-start;
   list-style-type: none;
   background: #8f8f89e6;
+  z-index: 1;
+}
+
+.none {
+  display: none;
 }
 
 .menu {
@@ -30,6 +34,7 @@
   padding: 10px;
   margin-right: 30px;
   position: relative;
+  cursor: pointer;
 }
 
 .navLine {
@@ -45,7 +50,6 @@
 }
 
 .navItem {
-  padding: 7px;
   width: 100%;
   border-bottom: $text solid 1px;
 }
@@ -55,8 +59,14 @@
 }
 
 .navLink {
-  @extend .logIn;
+  color: $base-yellow;
+  text-transform: uppercase;
+  padding: 10px 50px 10px 15px;
+  margin: 2px;
+  font-size: 18px;
+  display: block;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .logo {
@@ -81,7 +91,6 @@
   padding-left: 5px;
   padding-right: 5px;
   margin: 2px;
-  border-radius: 4px;
 }
 
 .logIn:active {
@@ -150,6 +159,10 @@
     flex-direction: row;
     align-items: flex-start;
     background: none;
+  }
+
+  .none {
+    display: flex;
   }
 
   .navItem:hover {
