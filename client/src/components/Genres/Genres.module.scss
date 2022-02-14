@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .title {
@@ -30,6 +31,8 @@
   text-align: center;
   transform: scale(1.2);
   text-shadow: 0 0 15px $active-btn;
+  border: 0px;
+  box-shadow: 0px 0px 5px 1px $active-btn;
 }
 
 .genre:active {

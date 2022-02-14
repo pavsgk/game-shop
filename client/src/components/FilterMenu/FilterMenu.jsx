@@ -103,7 +103,9 @@ function FilterMenu() {
                 </>
               }
             />
-            <button type="submit">Apply filters</button>
+            <button className={styles.addButton} type="submit">
+              Apply filters
+            </button>
           </Form>
         )}
       </Formik>
