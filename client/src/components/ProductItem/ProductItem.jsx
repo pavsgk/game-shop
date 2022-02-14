@@ -1,11 +1,47 @@
 import styles from './ProductItem.module.scss';
 import CustomAccordion from '../CustomAccordion/CustomAccordion';
 import {addItemToTheCart} from '../../store/reducers/cartReducer';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {useEffect, useRef} from 'react';
+import {
+  switchImagesModalState,
+  addContentForImagesModal,
+} from '../../store/reducers/imagesModalReducer';
+import ProductItemSlider from '../ProductItemSlider/ProductItemSlider';
 
 const ProductItem = (props) => {
   const {title, currentPrice, description, itemNo, genre, publishe, imageUrls, age} = props.item;
   const dispatch = useDispatch();
+  const sliderRef = useRef(null);
+
+  useEffect(() => {
+    const openModalImages = () => {
+      dispatch(addContentForImagesModal(imageUrls));
+      dispatch(switchImagesModalState());
+    };
+
+    const slider = sliderRef.current;
+
+    slider.querySelector('#thumbnail-div').style.justifyContent = 'space-evenly';
+    slider.querySelector('#thumbnail-div').style.marginTop = '40px';
+    slider.querySelectorAll('.thumbnail').forEach((item) => (item.style.height = `70px`));
+
+    slider.addEventListener('click', (event) => {
+      if (event.target.tagName === 'IMG') {
+        openModalImages();
+      }
+    });
+
+    return () => {
+      if (slider) {
+        slider.removeEventListener('click', (event) => {
+          if (event.target.tagName === 'IMG') {
+            openModalImages();
+          }
+        });
+      }
+    };
+  }, []);
 
   const addToCart = () => {
     dispatch(addItemToTheCart(props.item));
@@ -17,17 +53,8 @@ const ProductItem = (props) => {
         <h2 className={styles.mobileProductTitle_Text}>{title}</h2>
         <span className={styles.mobileProductTitle_Code}>{itemNo}</span>
       </div>
-      <div className={styles.productIMGWrapper}>
-        <div className={styles.productIMGWrapper_Main}>
-          <img src={imageUrls[0]} alt="some product pic" />
-        </div>
-        <div className={styles.productIMGWrapper_Secondary}>
-          {imageUrls.map((url) => (
-            <div key={url} className={styles.productIMGWrapper_Secondary_item}>
-              <img src={url} alt="" />
-            </div>
-          ))}
-        </div>
+      <div ref={sliderRef} className={styles.productIMGWrapper}>
+        <ProductItemSlider imageUrls={imageUrls} />
       </div>
       <div className={styles.content}>
         <div className={styles.content_Title}>

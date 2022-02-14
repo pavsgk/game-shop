@@ -1,6 +1,6 @@
 import styles from './Header.module.scss';
 import {Link} from 'react-router-dom';
-import React from 'react';
+import React, {useState} from 'react';
 import {ReactComponent as CartImg} from './img/Frame.svg';
 import {ReactComponent as Logo} from './img/star-wars.svg';
 import {ReactComponent as MenuImg} from './img/burgermenu.svg';
@@ -13,17 +13,21 @@ function Header() {
     dispatch(openSignModal());
   };
 
+  const [menuActive, setMenuActive] = useState(false);
+
   return (
     <>
       <header className={styles.header}>
         <div className={styles.menu}>
-          <MenuImg className={styles.menuImg} />
+          <MenuImg className={styles.menuImg} onClick={() => setMenuActive(!menuActive)} />
         </div>
         <Link exact="true" to="/">
           <Logo className={styles.logo} />
         </Link>
         <nav className={styles.nav}>
-          <ul className={styles.navList}>
+          <ul
+            className={menuActive ? styles.navList : styles.none}
+            onClick={() => setMenuActive(false)}>
             <li className={styles.navItem}>
               <Link exact="true" className={styles.navLink} to="/">
                 Home

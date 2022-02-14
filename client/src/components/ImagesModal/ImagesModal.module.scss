@@ -1,0 +1,44 @@
+@import '../../styles/variables.scss';
+
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: white;
+  opacity: 0.2;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.content {
+  width: 90vw;
+  background-color: black;
+  margin: 0 auto;
+  z-index: 2;
+  padding: 10px 15px 35px 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.closeButton {
+  align-self: flex-end;
+  text-transform: uppercase;
+  color: $base-yellow;
+  fill: white;
+  width: 24px;
+  height: 24px;
+}

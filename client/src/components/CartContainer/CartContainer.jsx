@@ -1,17 +1,16 @@
 import CartItem from '../CartItem/CartItem';
 import styles from './CartContainer.module.scss';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {useEffect, useState} from 'react';
+import {countCartSum} from '../../store/reducers/cartReducer';
 
 const CartContainer = () => {
   const cart = useSelector((state) => state.cart.cartItems);
-  const [cartAmount, setCartAmount] = useState(0);
+  const sum = useSelector((state) => state.cart.cartSum);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    let sum = 0;
-    console.log(cart);
-    cart.forEach((element) => (sum += element.currentPrice * element.count));
-    setCartAmount(sum);
+    dispatch(countCartSum());
   }, [cart]);
 
   return (
@@ -29,7 +28,7 @@ const CartContainer = () => {
             <p className={styles.totalPriceWrapperItemText}>Total:</p>
             <div className={styles.totalPriceWrapperItemPrice}>
               <span>&#8372;</span>
-              {cartAmount}
+              {sum}
             </div>
           </div>
           <div className={styles.totalPriceWrapperButton}>

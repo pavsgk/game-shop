@@ -23,25 +23,8 @@
   }
 }
 
-.productIMGWrapper_Main {
-  max-width: 100%;
-  & > * {
-    width: 100%;
-    border: 1px solid #ffffff;
-  }
-}
-
-.productIMGWrapper_Secondary {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  &_item {
-    max-width: 32%;
-    & > * {
-      border: 1px solid #ffffff;
-      width: 100%;
-    }
-  }
+.productIMGWrapper {
+  justify-content: center;
 }
 
 .content {
