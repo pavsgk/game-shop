@@ -8,6 +8,17 @@
     width: 60vw;
     display: block;
   }
+
+  .addButton {
+    border: 1px solid $base-yellow;
+    padding: 5px 10px;
+    outline: none;
+    background: none;
+    color: $base-yellow;
+    text-transform: uppercase;
+    margin-top: 16px;
+    margin-left: 16px;
+  }
 }
 
 @media (min-width: $tablet) {
@@ -16,7 +27,16 @@
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: $tablet-max) {
+  .addButton {
+    cursor: pointer;
+    &:hover {
+      border: 1px solid $text;
+      color: $text;
+      background: $base-yellow;
+    }
+  }
+
   .filter {
     position: static;
     width: 246px;

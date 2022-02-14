@@ -1,13 +1,12 @@
 @import '../../styles/variables.scss';
 @media (min-width: $mobile) {
   .cardContainer {
-    width: 250px;
+    width: 220px;
   }
 
   .iconWrapper {
-    border: 1px solid #ffffff;
-    padding: 15px;
     width: fit-content;
+    height: 250px;
   }
 
   .productDecription {
@@ -49,11 +48,24 @@
   }
 }
 
-@media (min-width: 992px) {
+@media (min-width: $tablet-max) {
   .iconWrapper {
     cursor: pointer;
     &:hover {
-      border: 1px solid $base-yellow;
+      box-shadow: 0px 0px 10px 1px $active-btn;
     }
+  }
+
+  .addButton {
+    cursor: pointer;
+    &:hover {
+      border: 1px solid $text;
+      color: $text;
+      background: $base-yellow;
+    }
+  }
+
+  .productDecription:hover {
+    text-decoration: underline;
   }
 }

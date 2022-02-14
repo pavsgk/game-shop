@@ -16,4 +16,13 @@
     border: $active-btn solid 1px;
     color: $background;
   }
+
+  &:hover {
+    &:hover {
+      border: 1px solid $text;
+      color: $text;
+      background: $base-yellow;
+      cursor: pointer;
+    }
+  }
 }

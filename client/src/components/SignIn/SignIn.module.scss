@@ -26,7 +26,9 @@
   text-transform: uppercase;
 
   &:hover {
-    color: $details;
-    border: 1px solid $details;
+    border: 1px solid $text;
+    color: $text;
+    background: $base-yellow;
+    cursor: pointer;
   }
 }
