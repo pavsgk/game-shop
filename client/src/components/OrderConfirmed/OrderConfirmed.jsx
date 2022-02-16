@@ -1,11 +1,11 @@
-import styles from './PaymentSuccessful.module.scss';
-import paymentIcon from './payment.png';
+import styles from './OrderConfirmed.module.scss';
+import successIcon from './success.png';
 import {Link} from 'react-router-dom';
 
 function PaymentSuccess() {
   return (
-    <div className={styles.PaymentSuccessful}>
-      <img src={paymentIcon} alt="payment successful" />
+    <div className={styles.OrderConfirmed}>
+      <img src={successIcon} alt="Order confirmed" />
       <h2>
         Thank you!
         <br />
