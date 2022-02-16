@@ -1,32 +1,31 @@
 import styles from './ItemSummary.module.scss';
-import ItemSummaryComponent from '../ItemSummaryComponent/ItemSummaryComponent';
+import ItemSummarySku from '../ItemSummarySku/ItemSummarySku';
 import React from 'react';
+import {useSelector} from 'react-redux';
 
 function ItemSummary() {
+  const {cartItems} = useSelector((store) => store.cart);
+  console.log(cartItems);
+
   return (
     <div className={styles.itemSummary}>
       <p className={styles.title}>Item Summary</p>
-      <div className={styles.elem}> </div>
+      <div className={styles.elem}></div>
 
-      <ItemSummaryComponent
-        name={'Star Wars Limited Edition Watch by Citizen'}
-        img={
-          'https://img.championat.com/c/1350x759/news/big/c/f/insajder-podelilsya-podrobnostyami-prodolzheniya-star-wars-jedi-fallen-order_16417156602069706272.jpg'
-        }
-        price={380}
-        quantity={2}
-        code={'W-47200000'}
-      />
-
-      <ItemSummaryComponent
-        name={'testtttt ttttttttt tttt'}
-        img={
-          'https://img.championat.com/s/735x490/news/big/y/o/star-wars-jedi-fallen-order-2-predstavyat-uzhe-v-aprele-mae_16415397982102541861.jpg'
-        }
-        price={888}
-        quantity={1}
-        code={'www0002-00000000-00000000000'}
-      />
+      {cartItems.length === 0 ? (
+        <p className={styles.empty}>Cart is empty</p>
+      ) : (
+        cartItems.map(({title, count, imageUrls, currentPrice, itemNo}) => (
+          <ItemSummarySku
+            key={itemNo}
+            title={title}
+            img={imageUrls[0]}
+            price={currentPrice}
+            quantity={count}
+            code={itemNo}
+          />
+        ))
+      )}
     </div>
   );
 }

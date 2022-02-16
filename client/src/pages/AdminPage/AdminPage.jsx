@@ -6,7 +6,7 @@ export function AdminPage() {
   return (
     <div className={styles.page}>
       <QuickLogin className={styles.container} />
-      <CartInspector className={styles.container} />
+      {/* <CartInspector className={styles.container} /> */}
     </div>
   );
 }

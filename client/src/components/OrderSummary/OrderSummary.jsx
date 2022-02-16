@@ -8,6 +8,7 @@ function OrderSummary(props) {
   const [{cartItems}, {shippingPrice}] = useSelector((store) => [store.cart, store.checkout]);
 
   const subtotal = cartItems.reduce((prev, next) => prev + next.count * next.currentPrice, 0);
+  const total = subtotal ? subtotal + shippingPrice : 0;
 
   // return null
 
@@ -23,13 +24,13 @@ function OrderSummary(props) {
       <div className={styles.details}>
         <p>Shipping</p>
         <p>
-          <span>{shippingPrice} ₴</span>
+          <span>{total ? shippingPrice : 0} ₴</span>
         </p>
       </div>
       <div className={styles.total}>
         <p>Total</p>
         <p>
-          $<span>{subtotal + shippingPrice} ₴</span>
+          <span>{total} ₴</span>
         </p>
       </div>
       <div className={styles.flexCenter}>
