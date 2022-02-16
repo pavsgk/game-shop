@@ -16,6 +16,7 @@ import {init} from './store/reducers/userReducer';
 import {AdminPage} from './pages/AdminPage/AdminPage';
 import SignModalContainer from './components/SignModalContainer/SignModalContainer';
 import ImagesModal from './components/ImagesModal/ImagesModal';
+import OrderConfirmed from './components/OrderConfirmed/OrderConfirmed';
 
 function App() {
   const dispatch = useDispatch();
@@ -35,6 +36,7 @@ function App() {
           <Route path="favourite" element={<FavouritePage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
+          <Route path="orderConfirmed" element={<OrderConfirmed />} />
           <Route path="test" element={<TestPage />} />
         </Routes>
         <SignModalContainer />
