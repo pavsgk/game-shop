@@ -7,7 +7,11 @@ export default function NotFoundPage() {
 
   const handleClick = (e) => {
     e.preventDefault();
-    navigate(-1);
+    if (window.history <= 1) {
+      navigate('/');
+    } else {
+      navigate(-1);
+    }
   };
 
   return (
