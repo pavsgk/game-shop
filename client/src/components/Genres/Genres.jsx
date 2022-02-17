@@ -1,16 +1,20 @@
 import styles from './Genres.module.scss';
 import React, {useEffect, useState} from 'react';
 import {getAllFilters} from '../../api/filters';
+import {Link} from 'react-router-dom';
 
-function GenresComponent(props) {
+function GenreComponent(props) {
   const {genre} = props;
   const genreImg = './genres_img/' + genre + '.svg';
+  const srcGenre = '/catalog/filters?genre=' + genre + '/';
   return (
     <>
-      <div className={styles.genre}>
-        <img className={styles.img} src={genreImg} alt={genre} />
-        <p>{genre}</p>
-      </div>
+      <Link exact="true" to={srcGenre}>
+        <div className={styles.genre}>
+          <img className={styles.img} src={genreImg} alt={genre} />
+          <p>{genre}</p>
+        </div>
+      </Link>
     </>
   );
 }
@@ -32,7 +36,7 @@ function Genres() {
       <div className={styles.wrapper}>
         {genres.length > 0
           ? genres.map((el) => {
-              return <GenresComponent genre={el.name} />;
+              return <GenreComponent genre={el.name} />;
             })
           : null}
       </div>
