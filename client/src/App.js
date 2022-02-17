@@ -38,7 +38,7 @@ function App() {
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
           <Route path="orderConfirmed" element={<OrderConfirmed />} />
-          <Route path="test" element={<NotFoundPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <SignModalContainer />
         <ImagesModal />
