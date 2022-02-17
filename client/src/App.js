@@ -17,6 +17,7 @@ import {AdminPage} from './pages/AdminPage/AdminPage';
 import SignModalContainer from './components/SignModalContainer/SignModalContainer';
 import ImagesModal from './components/ImagesModal/ImagesModal';
 import OrderConfirmed from './components/OrderConfirmed/OrderConfirmed';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -37,7 +38,7 @@ function App() {
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
           <Route path="orderConfirmed" element={<OrderConfirmed />} />
-          <Route path="test" element={<TestPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <SignModalContainer />
         <ImagesModal />
