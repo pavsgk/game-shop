@@ -5,7 +5,6 @@ import MuiTheme from './components/MuiTheme/MuiTheme';
 import CartPage from './pages/CartPage/CartPage';
 import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
 import DetailsPage from './pages/DetailsPage/DetailsPage';
-import FilterPage from './pages/FilterPage/FilterPage';
 import MainPage from './pages/MainPage/MainPage';
 import FavouritePage from './pages/FavouritePage/FavouritePage';
 import ProductsPage from './pages/ProductsPage/ProductsPage';
@@ -16,11 +15,13 @@ import {init} from './store/reducers/userReducer';
 import {AdminPage} from './pages/AdminPage/AdminPage';
 import SignModalContainer from './components/SignModalContainer/SignModalContainer';
 import ImagesModal from './components/ImagesModal/ImagesModal';
+import {getWishlist} from './store/reducers/wishlistReducer';
 
 function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(init());
+    dispatch(getWishlist());
   }, [dispatch]);
 
   return (
@@ -32,7 +33,7 @@ function App() {
           <Route path="admin" element={<AdminPage />} />
           <Route path="catalog/*" element={<ProductsPage />} />
           <Route path="details" element={<DetailsPage />} />
-          <Route path="favourite" element={<FavouritePage />} />
+          <Route path="wishlist" element={<FavouritePage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
           <Route path="test" element={<TestPage />} />
