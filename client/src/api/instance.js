@@ -13,11 +13,13 @@ const instance = axios.create({
 //   baseURL: remoteBaseUrl,
 // });
 
-fetch(process.env.REACT_APP_API_URL)
-  .then(({status}) => {
-    if (status === 200) instance.defaults.baseURL = process.env.REACT_APP_API_URL;
-    else throw new Error('localhost unreachable');
-  })
-  .catch((err) => (instance.defaults.baseURL = 'https://game-shop-fe30.herokuapp.com/api/'));
+(async () => {
+  try {
+    await fetch(process.env.REACT_APP_API_URL)
+      .then(({status}) => status === 200 ? instance.defaults.baseURL = process.env.REACT_APP_API_URL : null); 
+  } catch {
+    instance.defaults.baseURL = 'https://game-shop-fe30.herokuapp.com/api/';
+  }
+})()
 
 export default instance;

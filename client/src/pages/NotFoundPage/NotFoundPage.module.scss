@@ -1,12 +1,12 @@
 @import '../../styles/variables.scss';
 
-.PaymentSuccessful {
+.notFoundPage {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  padding: 50px 0px;
-  gap: 75px;
+  padding: calc(100vh / 15) 0px;
+  gap: calc(100vh / 15);
 
   h2 {
     color: $base-yellow;
@@ -19,6 +19,27 @@
 
   h3 {
     color: $base-yellow;
+  }
+
+  a {
     text-decoration: underline;
+  }
+}
+
+.telescope {
+  height: calc(100vh / 3);
+  max-width: 50vh;
+  animation: fall 1s 500ms forwards 1;
+  path {
+    fill: $base-yellow;
+  }
+}
+
+@keyframes fall {
+  from {
+    transform: rotateZ(0);
+  }
+  to {
+    transform: rotateZ(-180deg);
   }
 }

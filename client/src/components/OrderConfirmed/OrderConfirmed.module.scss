@@ -1,0 +1,24 @@
+@import '../../styles/variables.scss';
+
+.OrderConfirmed {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 50px 0px;
+  gap: 75px;
+
+  h2 {
+    color: $base-yellow;
+    font-size: 30px;
+    line-height: 43px;
+    text-align: center;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    color: $base-yellow;
+    text-decoration: underline;
+  }
+}

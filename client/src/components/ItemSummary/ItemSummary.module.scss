@@ -18,6 +18,12 @@
   margin-top: 20px;
 }
 
+.empty {
+  color: $text;
+  font-size: 18px;
+  font-weight: 400;
+}
+
 @media (min-width: $tablet) {
   .title {
     font-size: 20px;

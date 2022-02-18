@@ -39,11 +39,6 @@ function Header() {
               </Link>
             </li>
             <li className={styles.navItem}>
-              <Link exact="true" className={styles.navLink} to="/details">
-                details
-              </Link>
-            </li>
-            <li className={styles.navItem}>
               <Link exact="true" className={styles.navLink} to="/wishlist">
                 wishlist
               </Link>

@@ -1,4 +1,4 @@
-import SlideShow from 'react-image-show';
+import SlideShow from 'react-image-show-fork-new';
 
 const ModalSlider = ({modalContent}) => {
   return (

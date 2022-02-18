@@ -10,6 +10,27 @@
   line-height: 19px;
   text-align: center;
   text-transform: uppercase;
+  position: relative;
+
+  &:disabled {
+    border: 1px dotted $sale;
+    color: $sale;
+
+    &:hover {
+      background-color: $details;
+
+      &[data-dis-tip]:not([data-dis-tip=''])::after {
+        position: absolute;
+        content: attr(data-dis-tip);
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%);
+        background-color: $background;
+        outline: 1px solid $sale;
+        color: $text;
+      }
+    }
+  }
 
   &:active {
     background: $active-btn;
@@ -18,11 +39,9 @@
   }
 
   &:hover {
-    &:hover {
-      border: 1px solid $text;
-      color: $text;
-      background: $base-yellow;
-      cursor: pointer;
-    }
+    border: 1px solid $text;
+    color: $text;
+    background: $base-yellow;
+    cursor: pointer;
   }
 }

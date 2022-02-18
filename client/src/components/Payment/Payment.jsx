@@ -2,8 +2,7 @@ import styles from './Payment.module.scss';
 import OrderingComponent from '../OrderingComponent/OrderingComponent';
 import Button from '../Button/Button';
 import React from 'react';
-import {useDispatch} from 'react-redux';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {updatePaymentMethod} from '../../store/reducers/checkoutReducer';
 import {useNavigate} from 'react-router-dom';
 
@@ -17,7 +16,11 @@ const methods = [
 ];
 
 function Payment() {
-  const {paymentMethod} = useSelector((store) => store.checkout);
+  const [paymentMethod, cartItems] = useSelector((store) => [
+    store.checkout.paymentMethod,
+    store.cart.cartItems,
+  ]);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -38,7 +41,12 @@ function Payment() {
         </React.Fragment>
       ))}
       <div className={styles.submit}>
-        <Button onClick={() => navigate('/')}>submit order</Button>
+        <Button
+          disabled={!cartItems.length}
+          onClick={() => navigate('/orderConfirmed')}
+          data-dis-tip={!cartItems.length ? 'Cart is empty' : undefined}>
+          submit order
+        </Button>
       </div>
     </div>
   );

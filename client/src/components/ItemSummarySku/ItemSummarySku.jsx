@@ -1,18 +1,18 @@
-import styles from './ItemSummaryComponent.module.scss';
+import styles from './ItemSummarySku.module.scss';
 import React from 'react';
 
-function ItemSummaryComponent(props) {
-  const {name, img, price, quantity, code} = props;
+function ItemSummarySku(props) {
+  const {title, img, price, quantity, code} = props;
 
   return (
     <>
       <div className={styles.product}>
         <div className={styles.block}>
           <div className={styles.imgBox}>
-            <img className={styles.img} src={img} alt={name} />
+            <img className={styles.img} src={img} alt={title} />
           </div>
           <div className={styles.details}>
-            <p className={styles.name}>{name}</p>
+            <p className={styles.title}>{title}</p>
             <div className={styles.blockCode}>
               <p className={styles.quantity}>
                 Quantity:<span>{quantity}</span>
@@ -22,11 +22,13 @@ function ItemSummaryComponent(props) {
           </div>
         </div>
         <p className={styles.price}>
-          $<span className={styles.price}>{price}</span>
+          <span className={styles.price}>
+            {quantity > 1 ? `${price} x ${quantity} = ${price * quantity}` : price} ₴
+          </span>
         </p>
       </div>
     </>
   );
 }
 
-export default ItemSummaryComponent;
+export default ItemSummarySku;

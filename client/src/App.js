@@ -16,6 +16,8 @@ import {AdminPage} from './pages/AdminPage/AdminPage';
 import SignModalContainer from './components/SignModalContainer/SignModalContainer';
 import ImagesModal from './components/ImagesModal/ImagesModal';
 import {getWishlist} from './store/reducers/wishlistReducer';
+import OrderConfirmed from './components/OrderConfirmed/OrderConfirmed';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -36,7 +38,8 @@ function App() {
           <Route path="wishlist" element={<FavouritePage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
-          <Route path="test" element={<TestPage />} />
+          <Route path="orderConfirmed" element={<OrderConfirmed />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <SignModalContainer />
         <ImagesModal />
