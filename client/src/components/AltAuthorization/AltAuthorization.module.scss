@@ -9,11 +9,13 @@
   &::before {
     content: '';
     border: 1px solid $details;
+    background-color: $details;
     width: calc(50% - 12px);
   }
   &::after {
     content: '';
     border: 1px solid $details;
+    background-color: $details;
     width: calc(50% - 12px);
   }
 }
@@ -25,6 +27,7 @@
 }
 
 .facebookWrapper {
+  border-radius: 20px;
   cursor: pointer;
   display: flex;
   justify-content: center;
