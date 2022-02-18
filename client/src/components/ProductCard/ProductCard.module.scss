@@ -2,6 +2,19 @@
 @media (min-width: $mobile) {
   .cardContainer {
     width: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+  }
+
+  .bookmark {
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    &:hover {
+      transform: scale(1.2#f7d131);
+    }
   }
 
   .iconWrapper {
