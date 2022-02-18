@@ -20,7 +20,6 @@
   left: 0;
   background: white;
   opacity: 0.2;
-  cursor: pointer;
   z-index: 1;
 }
 
@@ -29,15 +28,20 @@
   background-color: black;
   margin: 0 auto;
   z-index: 2;
-  padding: 10px 15px;
+  padding: 10px 30px;
   display: flex;
   flex-direction: column;
+  border-radius: 20px;
 }
 
 .closeButton {
-  fill: white;
-  transform: rotate(45deg);
   align-self: flex-end;
+  text-transform: uppercase;
+  color: $base-yellow;
+  fill: white;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 }
 
 @media (min-width: $tablet) {

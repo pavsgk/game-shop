@@ -11,7 +11,7 @@
   margin: 20px 0;
   display: flex;
   justify-content: space-between;
-  padding: 0 27%;
+  padding: 0 15%;
   position: relative;
   & :first-child:after {
     left: 50%;
@@ -28,8 +28,8 @@
   border: none;
   font-family: Roboto;
   font-style: normal;
-  font-weight: 300;
-  font-size: 18px;
+  font-weight: 400;
+  font-size: 16px;
   background-color: transparent;
   font-variant: small-caps;
   color: $details;
@@ -50,4 +50,8 @@
   color: $base-yellow;
 }
 
-
+@media (min-width: $tablet) {
+  .selectorSign {
+    padding: 0 25%;
+  }
+}

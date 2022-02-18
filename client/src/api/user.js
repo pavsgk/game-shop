@@ -12,6 +12,12 @@ export async function getToken(loginOrEmail, password) {
   return data.token;
 }
 
+export async function registration(values) {
+  if (!values) throw new Error('arg. "values" cannot be empty');
+
+  return await instance.post('/customers', values);
+}
+
 export async function getUserData() {
   const {data} = await instance.get('/customers/customer');
   return {
