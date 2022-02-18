@@ -27,7 +27,7 @@ export const removeWishedProduct = createAsyncThunk(
   },
 );
 
-const SignModalSlice = createSlice({
+const wishlistlSlice = createSlice({
   name: 'wishlist',
   initialState,
   extraReducers: {
@@ -43,4 +43,4 @@ const SignModalSlice = createSlice({
   },
 });
 
-export default SignModalSlice.reducer;
+export default wishlistlSlice.reducer;
