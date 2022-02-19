@@ -32,13 +32,13 @@
   padding: 10px 15px 35px 15px;
   display: flex;
   flex-direction: column;
+  border-radius: 20px;
 }
 
 .closeButton {
   align-self: flex-end;
   text-transform: uppercase;
-  color: $base-yellow;
-  fill: white;
+  fill: $base-yellow;
   width: 24px;
   height: 24px;
 }

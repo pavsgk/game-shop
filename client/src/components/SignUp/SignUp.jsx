@@ -21,8 +21,6 @@ const SignUp = ({setActive}) => {
   };
 
   const handleSubmit = (values, actions) => {
-    console.log(actions);
-
     registration(values)
       .then((res) => {
         if (res.status === 200) {
