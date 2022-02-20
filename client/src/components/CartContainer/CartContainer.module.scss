@@ -98,6 +98,22 @@
   }
 }
 
+.emptyMainWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.emptySvgWrapper {
+}
+.emptySvgWrapperItem {
+  fill: $base-yellow;
+  width: 200px;
+}
+.emptyTitle {
+  color: $base-yellow;
+  margin-left: 15px;
+}
+
 @media (min-width: $tablet-max) {
   .mainWrapper {
     padding: 0 120px;

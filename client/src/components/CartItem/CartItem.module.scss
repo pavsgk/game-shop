@@ -74,8 +74,17 @@
   display: flex;
 }
 
+.infoWrapperQuantityBlockMinusNotWork {
+  border: 1px solid grey;
+  display: flex;
+}
+
 .infoWrapperQuantityBlockMinusItem {
   fill: $text;
+}
+
+.infoWrapperQuantityBlockMinusItemNotWork {
+  fill: grey;
 }
 
 .infoWrapperQuantityBlockValue {
