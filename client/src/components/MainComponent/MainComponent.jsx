@@ -1,22 +1,25 @@
 import styles from './MainComponent.module.scss';
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {ReactComponent as New} from './img/new.svg';
 
 function MainComponent(props) {
-  const {name, img, price} = props;
+  const {name, img, price, item} = props;
   return (
     <>
-      <div className={styles.wrapper}>
-        <New className={styles.svg} />
-        <img className={styles.img} src={img} alt={name} />
-        <div className={styles.info}>
-          <p className={styles.name}>{name}</p>
-          <p className={styles.price}>
-            <span>$</span>
-            {price}
-          </p>
+      <Link to={`/details?${item}`}>
+        <div className={styles.wrapper}>
+          <New className={styles.svg} />
+          <img className={styles.img} src={img} alt={name} />
+          <div className={styles.info}>
+            <p className={styles.name}>{name}</p>
+            <p className={styles.price}>
+              {price}
+              <span> ₴</span>
+            </p>
+          </div>
         </div>
-      </div>
+      </Link>
     </>
   );
 }

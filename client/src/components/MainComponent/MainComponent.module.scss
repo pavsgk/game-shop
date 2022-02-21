@@ -6,7 +6,7 @@
   position: relative;
   margin: 5px;
   &:hover {
-    box-shadow: 0px 0px 10px 1px $active-btn;
+    box-shadow: 0 0 10px 1px $active-btn;
     cursor: pointer;
   }
 }
@@ -31,20 +31,23 @@
   align-items: flex-end;
   width: 100%;
   position: absolute;
-  bottom: 10px;
+  bottom: 5px;
   left: 0;
   background: #8f8f89a3;
   padding: 5px;
 }
 
 .name {
-  font-size: 18px;
+  font-size: 16px;
   color: $text;
-  padding-right: 10px;
+  padding-right: 5px;
+  align-self: flex-end;
+  text-overflow: ellipsis;
 }
 
 .price {
   @extend .name;
+  font-size: 18px;
   color: $base-yellow;
   font-weight: 500;
   margin-top: 5px;
