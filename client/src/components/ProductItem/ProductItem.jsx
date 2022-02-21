@@ -1,6 +1,5 @@
 import styles from './ProductItem.module.scss';
 import CustomAccordion from '../CustomAccordion/CustomAccordion';
-import {addItemToTheCart} from '../../store/reducers/cartReducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useRef} from 'react';
 import {
@@ -8,10 +7,13 @@ import {
   addContentForImagesModal,
 } from '../../store/reducers/imagesModalReducer';
 import ProductItemSlider from '../ProductItemSlider/ProductItemSlider';
+import {addProductToTheCart, addItemToTheCartForNotLog} from '../../store/reducers/cartReducer';
 
 const ProductItem = (props) => {
-  const {title, currentPrice, description, itemNo, genre, publishe, imageUrls, age} = props.item;
+  const {title, currentPrice, description, itemNo, genre, publishe, imageUrls, age, _id} =
+    props.item;
   const dispatch = useDispatch();
+  const isAuthorized = useSelector((state) => state.user.isAuthorized);
   const sliderRef = useRef(null);
 
   useEffect(() => {
@@ -44,7 +46,11 @@ const ProductItem = (props) => {
   }, []);
 
   const addToCart = () => {
-    dispatch(addItemToTheCart(props.item));
+    if (isAuthorized) {
+      dispatch(addProductToTheCart(_id));
+      return;
+    }
+    dispatch(addItemToTheCartForNotLog(props.item));
   };
 
   return (

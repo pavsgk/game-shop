@@ -2,16 +2,36 @@ import CartItem from '../CartItem/CartItem';
 import styles from './CartContainer.module.scss';
 import {useSelector, useDispatch} from 'react-redux';
 import {useEffect, useState} from 'react';
-import {countCartSum} from '../../store/reducers/cartReducer';
+import {countCartSum, getCartFromServer} from '../../store/reducers/cartReducer';
+import {ReactComponent as CartPic} from '../../assets/svg/cart.svg';
 
 const CartContainer = () => {
-  const cart = useSelector((state) => state.cart.cartItems);
+  const cart = useSelector((state) => state.cart.products);
   const sum = useSelector((state) => state.cart.cartSum);
+  const isAuthorized = useSelector((state) => state.user.isAuthorized);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(countCartSum());
   }, [cart]);
+
+  useEffect(() => {
+    if (isAuthorized) {
+      getCartFromServer();
+    }
+  }, []);
+
+  if (cart.length < 1) {
+    return (
+      <div className={styles.emptyMainWrapper}>
+        <div className={styles.emptySvgWrapper}>
+          <CartPic className={styles.emptySvgWrapperItem} />
+        </div>
+        <h1 className={styles.emptyTitle}>Your cart is empty</h1>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.mainWrapper}>
@@ -21,7 +41,7 @@ const CartContainer = () => {
       </div>
       <div className={styles.contentWrapper}>
         <div className={styles.contentItems}>
-          {cart.length > 0 && cart.map((item) => <CartItem key={item.itemNo} {...item} />)}
+          {cart.length > 0 && cart.map((item) => <CartItem key={item.product.itemNo} {...item} />)}
         </div>
         <div className={styles.totalPriceWrapper}>
           <div className={styles.totalPriceWrapperItem}>
