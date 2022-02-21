@@ -11,7 +11,7 @@ function CheckoutPage() {
     <div className={styles.checkoutPage}>
       <div className={styles.summary}>
         <ItemSummary />
-        <OrderSummary subtotal={77.94} shipping={11.95} total={89.94} />
+        <OrderSummary />
       </div>
       <section className={styles.tabs}>
         <CheckoutSelector tabs={['shipping information', 'delivery method', 'payment information']}>
