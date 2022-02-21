@@ -21,6 +21,7 @@ function MainNew() {
           ? newProd.map((el) => {
               return (
                 <MainComponent
+                  key={el.itemNo}
                   name={el.title}
                   price={el.currentPrice}
                   img={el.imageUrls.slice(0, 1)}
