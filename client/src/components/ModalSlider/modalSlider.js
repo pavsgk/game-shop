@@ -19,38 +19,6 @@ const ModalSlider = ({modalContent}) => {
     setCurrent(current === 0 ? length - 1 : current - 1);
   };
 
-  // const switchImages = (event) => {
-  //   if (event.key === 'ArrowLeft') {
-  //       console.log(current, "current Before");
-  //       prevSlide();
-  //       console.log("workLeft");
-  //       console.log(current, "current After");
-  //
-  //   } else if (event.key === 'ArrowRight' ) {
-  //       console.log(current, "current Before");
-  //       nextSlide();
-  //       console.log("workRight");
-  //       console.log(current, "current After");
-  //   }
-  // }
-  //
-  // useEffect( () => {
-  //     document.addEventListener('keydown', (event) => {
-  //       switchImages(event);
-  //   })
-  //
-  //   return () => {
-  //     document.removeEventListener('keydown', (event) => {
-  //       switchImages(event);
-  //     })
-  //       console.log("took it of")
-  //   }
-  // }, [])
-  //
-  //   useEffect( () => {
-  //       console.log(current, "global current")
-  //   }, [current])
-
   if (!Array.isArray(sliderImages) || sliderImages.length <= 0) {
     return null;
   }
