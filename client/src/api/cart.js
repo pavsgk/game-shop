@@ -5,8 +5,9 @@ export async function createRequestOnTheServer(products) {
   return await instance.post('cart', products);
 }
 
-export async function requestThePresenceOfTheCartOnTheServer(products) {
-  return await instance.get('cart');
+export async function requestThePresenceOfTheCartOnTheServer() {
+  const {data} = await instance.get('cart');
+  return data;
 }
 
 export async function requestAddProductToTheCart(_id) {

@@ -3,8 +3,10 @@ import OrderingComponent from '../OrderingComponent/OrderingComponent';
 import Button from '../Button/Button';
 import React from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {updatePaymentMethod} from '../../store/reducers/checkoutReducer';
+import {updatePaymentInfo} from '../../store/reducers/checkoutReducer';
 import {useNavigate} from 'react-router-dom';
+import store from '../../store/store';
+import {placeOrder} from '../../api/order';
 
 const methods = [
   {
@@ -16,21 +18,61 @@ const methods = [
 ];
 
 function Payment() {
-  const [paymentMethod, cartItems] = useSelector((store) => [
-    store.checkout.paymentMethod,
-    store.cart.cartItems,
+  const [paymentInfo, products] = useSelector((store) => [
+    store.checkout.paymentInfo,
+    store.cart.products,
   ]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const handleSubmit = async () => {
+    const {user, cart, checkout} = store.getState();
+    const {country, city, address, postal} = checkout.checkoutFields;
+    const {
+      shippingPrice,
+      shippingMethod,
+      paymentInfo,
+      checkoutFields: {mobile},
+    } = checkout;
+    const email = user.userData.email || checkout.checkoutFields.email;
+
+    const orderBody = {
+      products: cart.products,
+      deliveryAddress: {
+        country,
+        city,
+        address,
+        postal,
+      },
+      shipping: {
+        shippingPrice,
+        shippingMethod,
+      },
+      paymentInfo,
+      email,
+      mobile,
+      letterSubject: 'Thank you for order! You are welcome!',
+      letterHtml: '<h1>Your order is placed!</h1><p>Manager will contact you soon</p>',
+    };
+    if (user.isAuthorized) orderBody.customerId = user.userData.customerId;
+
+    console.log(orderBody);
+    try {
+      console.log(await placeOrder(orderBody));
+      navigate('orderConfirmed');
+    } catch {
+      navigate('error');
+    }
+  };
 
   return (
     <div className={styles.payment}>
       {methods.map(({name}) => (
         <React.Fragment key={name}>
           <input
-            onChange={() => dispatch(updatePaymentMethod(name))}
-            checked={name === paymentMethod}
+            onChange={() => dispatch(updatePaymentInfo(name))}
+            checked={name === paymentInfo}
             type="radio"
             id={name}
             value={name}
@@ -42,9 +84,9 @@ function Payment() {
       ))}
       <div className={styles.submit}>
         <Button
-          disabled={!cartItems.length}
-          onClick={() => navigate('/orderConfirmed')}
-          data-dis-tip={!cartItems.length ? 'Cart is empty' : undefined}>
+          disabled={!products.length}
+          onClick={handleSubmit}
+          data-dis-tip={!products.length ? 'Cart is empty' : undefined}>
           submit order
         </Button>
       </div>

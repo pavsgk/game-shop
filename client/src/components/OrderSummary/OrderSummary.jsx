@@ -4,7 +4,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 
-function OrderSummary(props) {
+function OrderSummary() {
   const [{products}, {shippingPrice}] = useSelector((store) => [store.cart, store.checkout]);
 
   const subtotal = products.reduce(

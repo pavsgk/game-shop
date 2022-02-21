@@ -110,13 +110,13 @@ const cartSlice = createSlice({
     [getCartFromServer.fulfilled]: (state, action) => {
       console.log('state', state);
       console.log('action', action.payload);
-      if (!action.payload.data) {
+      if (!action.payload) {
         console.log('net bazy');
         state.isCartExist = false;
         return;
       }
-      if (action.payload.data) {
-        state.products = action.payload.data.products;
+      if (action.payload) {
+        state.products = action.payload.products;
         state.isCartExist = true;
       }
     },
@@ -145,8 +145,6 @@ const cartSlice = createSlice({
       console.log(state, 'что то пошло не так');
     },
     [deleteProductFromTheCart.fulfilled]: (state, action) => {
-      console.log('state', state);
-      console.log('action', action.payload.data.products);
       if (action.payload.status === 200) {
         state.products = action.payload.data.products;
       }
