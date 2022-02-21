@@ -1,7 +1,7 @@
 import styles from './ProductItem.module.scss';
 import CustomAccordion from '../CustomAccordion/CustomAccordion';
 import {addItemToTheCart} from '../../store/reducers/cartReducer';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {useEffect, useRef} from 'react';
 import {
   switchImagesModalState,
@@ -10,7 +10,7 @@ import {
 import ProductItemSlider from '../ProductItemSlider/ProductItemSlider';
 
 const ProductItem = (props) => {
-  const {title, currentPrice, description, itemNo, genre, publishe, imageUrls, age} = props.item;
+  const {title, currentPrice, description, itemNo, genre, publisher, imageUrls, age} = props.item;
   const dispatch = useDispatch();
   const sliderRef = useRef(null);
 
@@ -73,6 +73,7 @@ const ProductItem = (props) => {
             title="Description"
             isProductPage={true}
             content={description}
+            style={{textTransform: 'initial'}}
           />
 
           <CustomAccordion
@@ -81,15 +82,21 @@ const ProductItem = (props) => {
             content={
               <>
                 <div className={styles.content_Details_Wrapper_Item}>
-                  <p>Genre:</p>
-                  <span>{genre}</span>
+                  <p style={{width: '40%'}}>Genre:</p>
+                  <span>
+                    {genre.map((e, index) => {
+                      if (index < genre.length - 1) {
+                        return `${e}, `;
+                      } else return `${e}`;
+                    })}
+                  </span>
                 </div>
                 <div className={styles.content_Details_Wrapper_Item}>
-                  <p>Company:</p>
-                  <span>{publishe}</span>
+                  <p style={{width: '40%'}}>Publisher:</p>
+                  <span>{publisher}</span>
                 </div>
                 <div className={styles.content_Details_Wrapper_Item}>
-                  <p>Rating:</p>
+                  <p style={{width: '40%'}}>Rating:</p>
                   <span>{age}</span>
                 </div>
               </>

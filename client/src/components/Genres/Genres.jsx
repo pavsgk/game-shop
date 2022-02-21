@@ -36,7 +36,7 @@ function Genres() {
       <div className={styles.wrapper}>
         {genres.length > 0
           ? genres.map((el) => {
-              return <GenreComponent genre={el.name} />;
+              return <GenreComponent key={el._id} genre={el.name} />;
             })
           : null}
       </div>

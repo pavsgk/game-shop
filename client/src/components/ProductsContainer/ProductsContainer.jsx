@@ -5,8 +5,9 @@ import {getFilteredProducts, getAllProducts} from '../../api/products';
 import ProductsPlaceholder from '../ProductsPlaceholder/ProductsPlaceholder';
 import {useLocation} from 'react-router-dom';
 import {useSelector} from 'react-redux';
+import FilterMenu from '../FilterMenu/FilterMenu';
 
-function ProductsContainer({isWishlist}) {
+function ProductsContainer({isWishlist, isOpen, closeFilters}) {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -37,14 +38,17 @@ function ProductsContainer({isWishlist}) {
   const idItemsInWishlist = wishlist.map((e) => e._id);
 
   return (
-    <div className={styles.productsContainer}>
-      {isLoading && <ProductsPlaceholder />}
-      {isError && <h3>Something went wrong. Please, try again later</h3>}
-      {products.map((item) => {
-        if (idItemsInWishlist.includes(item._id)) {
-          return <ProductCard key={item.itemNo} item={item} isFavorite={true} />;
-        } else return <ProductCard key={item.itemNo} item={item} />;
-      })}
+    <div className={styles.contentWrapper}>
+      <FilterMenu isOpen={isOpen} closeFilters={closeFilters} />
+      <div className={styles.productsContainer}>
+        {isLoading && <ProductsPlaceholder />}
+        {isError && <h3>Something went wrong. Please, try again later</h3>}
+        {products.map((item) => {
+          if (idItemsInWishlist.includes(item._id)) {
+            return <ProductCard key={item.itemNo} item={item} isFavorite={true} />;
+          } else return <ProductCard key={item.itemNo} item={item} />;
+        })}
+      </div>
     </div>
   );
 }

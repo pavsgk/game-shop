@@ -55,7 +55,7 @@ function ProductCard(props) {
             }}
           />
         )}
-        <Link to={'/details'} onClick={() => localStorage.setItem('currentItem', itemNo)}>
+        <Link to={`/details?${itemNo}`}>
           <div className={styles.iconWrapper}>
             <img src={imageUrls[0]} alt={title} height="250" width="220" />
           </div>
