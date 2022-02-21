@@ -5,12 +5,13 @@ import {Link} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 
 function OrderSummary(props) {
-  const [{cartItems}, {shippingPrice}] = useSelector((store) => [store.cart, store.checkout]);
+  const [{products}, {shippingPrice}] = useSelector((store) => [store.cart, store.checkout]);
 
-  const subtotal = cartItems.reduce((prev, next) => prev + next.count * next.currentPrice, 0);
+  const subtotal = products.reduce(
+    (prev, next) => prev + next.cartQuantity * next.product.currentPrice,
+    0,
+  );
   const total = subtotal ? subtotal + shippingPrice : 0;
-
-  // return null
 
   return (
     <div className={styles.wrapper}>
