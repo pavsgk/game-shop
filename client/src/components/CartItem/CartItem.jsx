@@ -3,21 +3,43 @@ import {ReactComponent as DeletePic} from '../../assets/svg/delete.svg';
 import {ReactComponent as MinusPic} from '../../assets/svg/count_minus.svg';
 import {ReactComponent as PlusPic} from '../../assets/svg/count_plus.svg';
 import {useDispatch, useSelector} from 'react-redux';
-import {removeItemFromTheCart, makeLessItem, makeMoreItem} from '../../store/reducers/cartReducer';
+import {
+  addProductToTheCart,
+  decreaseProductQuantity,
+  deleteProductFromTheCart,
+  removeItemFromTheCartForNotLog,
+  makeLessItemForNotLog,
+  makeMoreItemForNotLog,
+} from '../../store/reducers/cartReducer';
 
-const CartItem = ({title, imageUrls, itemNo, currentPrice, count}) => {
+const CartItem = ({product, cartQuantity}) => {
+  const {imageUrls, title, itemNo, currentPrice, _id} = product;
+  const isAuthorized = useSelector((state) => state.user.isAuthorized);
+
   const dispatch = useDispatch();
 
   const removeProductFromCart = () => {
-    dispatch(removeItemFromTheCart(itemNo));
+    if (isAuthorized) {
+      dispatch(deleteProductFromTheCart(_id));
+      return;
+    }
+    dispatch(removeItemFromTheCartForNotLog(itemNo));
   };
 
   const makeMore = () => {
-    dispatch(makeMoreItem(itemNo));
+    if (isAuthorized) {
+      dispatch(addProductToTheCart(_id));
+      return;
+    }
+    dispatch(makeMoreItemForNotLog(itemNo));
   };
 
   const makeLess = () => {
-    dispatch(makeLessItem(itemNo));
+    if (isAuthorized) {
+      dispatch(decreaseProductQuantity(_id));
+      return;
+    }
+    dispatch(makeLessItemForNotLog(itemNo));
   };
 
   return (
@@ -32,10 +54,22 @@ const CartItem = ({title, imageUrls, itemNo, currentPrice, count}) => {
         </div>
         <div className={styles.infoWrapperQuantity}>
           <div className={styles.infoWrapperQuantityBlock}>
-            <div onClick={makeLess} className={styles.infoWrapperQuantityBlockMinus}>
-              <MinusPic className={styles.infoWrapperQuantityBlockMinusItem} />
+            <div
+              onClick={makeLess}
+              className={
+                cartQuantity === 1
+                  ? styles.infoWrapperQuantityBlockMinusNotWork
+                  : styles.infoWrapperQuantityBlockMinus
+              }>
+              <MinusPic
+                className={
+                  cartQuantity === 1
+                    ? styles.infoWrapperQuantityBlockMinusItemNotWork
+                    : styles.infoWrapperQuantityBlockMinusItem
+                }
+              />
             </div>
-            <div className={styles.infoWrapperQuantityBlockValue}>{count}</div>
+            <div className={styles.infoWrapperQuantityBlockValue}>{cartQuantity}</div>
             <div onClick={makeMore} className={styles.infoWrapperQuantityBlockPlus}>
               <PlusPic className={styles.infoWrapperQuantityBlockPlusItem} />
             </div>
@@ -48,7 +82,7 @@ const CartItem = ({title, imageUrls, itemNo, currentPrice, count}) => {
         </div>
         <div className={styles.priceValue}>
           <span>&#8372;</span>
-          {count === 1 ? currentPrice : currentPrice * count}
+          {cartQuantity === 1 ? currentPrice : currentPrice * cartQuantity}
         </div>
       </div>
     </div>

@@ -1,0 +1,81 @@
+@import '../../styles/variables.scss';
+
+.slider {
+  position: relative;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+}
+
+.image {
+  width: 70vw;
+  height: 60vh;
+  object-fit: contain;
+}
+
+.imageFirst {
+  width: 27vw;
+  height: 60vh;
+  border-radius: 10px;
+}
+
+.imageOther {
+  width: 60vw;
+  height: 60vh;
+  border-radius: 10px;
+}
+
+.rightArrow {
+  position: absolute;
+  top: 50%;
+  right: -12px;
+  color: #000;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+  fill: $base-yellow;
+}
+
+.leftArrow {
+  position: absolute;
+  top: 50%;
+  left: -12px;
+  color: #000;
+  z-index: 10;
+  cursor: pointer;
+  user-select: none;
+  fill: $base-yellow;
+}
+
+.slide {
+  opacity: 0;
+  transition-duration: 1s;
+}
+
+.slideActive {
+  opacity: 1;
+  transition-duration: 1s;
+  transform: scale(1.08);
+}
+
+@media (min-width: $tablet) {
+  .rightArrow {
+    right: 0;
+  }
+
+  .leftArrow {
+    left: 0;
+  }
+}
+
+@media (min-width: $desktop) {
+  .rightArrow {
+    right: 20px;
+  }
+
+  .leftArrow {
+    left: 20px;
+  }
+}

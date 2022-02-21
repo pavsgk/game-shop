@@ -9,7 +9,7 @@ import MainPage from './pages/MainPage/MainPage';
 import FavouritePage from './pages/FavouritePage/FavouritePage';
 import ProductsPage from './pages/ProductsPage/ProductsPage';
 import TestPage from './api/test';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useEffect} from 'react';
 import {init} from './store/reducers/userReducer';
 import {AdminPage} from './pages/AdminPage/AdminPage';
@@ -18,13 +18,23 @@ import ImagesModal from './components/ImagesModal/ImagesModal';
 import {getWishlist} from './store/reducers/wishlistReducer';
 import OrderConfirmed from './components/OrderConfirmed/OrderConfirmed';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+import {getCartFromServer, getCartFromLS} from './store/reducers/cartReducer';
 
 function App() {
   const dispatch = useDispatch();
+  const isAuthorized = useSelector((state) => state.user.isAuthorized);
+
   useEffect(() => {
     dispatch(init());
     dispatch(getWishlist());
+    dispatch(getCartFromLS());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (isAuthorized) {
+      dispatch(getCartFromServer());
+    }
+  }, [isAuthorized]);
 
   return (
     <div className={styles.app}>

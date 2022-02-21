@@ -1,7 +1,7 @@
 import styles from './ProductCard.module.scss';
 import {Link} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
-import {addItemToTheCart} from '../../store/reducers/cartReducer';
+import {useDispatch, useSelector} from 'react-redux';
+import {addItemToTheCartForNotLog, addProductToTheCart} from '../../store/reducers/cartReducer';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
@@ -9,10 +9,15 @@ import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishli
 function ProductCard(props) {
   const {item, isFavorite} = props;
   const {title, imageUrls, currentPrice, itemNo, platform, _id} = item;
+  const isAuthorized = useSelector((state) => state.user.isAuthorized);
   const dispatch = useDispatch();
 
   const addToCart = () => {
-    dispatch(addItemToTheCart(item));
+    if (isAuthorized) {
+      dispatch(addProductToTheCart(_id));
+      return;
+    }
+    dispatch(addItemToTheCartForNotLog(props.item));
   };
 
   // const checkPlatform = () => {
