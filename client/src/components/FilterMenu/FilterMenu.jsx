@@ -2,8 +2,9 @@ import CustomAccordion from '../CustomAccordion/CustomAccordion';
 import {Formik, Form, Field} from 'formik';
 import styles from './FilterMenu.module.scss';
 import {useLocation, useNavigate} from 'react-router-dom';
+import CloseIcon from '@mui/icons-material/Close';
 
-function FilterMenu() {
+function FilterMenu({isOpen, closeFilters}) {
   let location = useLocation();
   let navigate = useNavigate();
   const getQueryParams = (paramName) => {
@@ -28,55 +29,112 @@ function FilterMenu() {
     age: getQueryParams('age='),
   };
 
+  const displayValue = isOpen ? 'block' : '';
+
   return (
-    <div className={styles.filter}>
+    <div style={{display: displayValue}} className={styles.filter}>
+      <div onClick={closeFilters} className={styles.menuBackground}></div>
+      <div className={styles.closeFilter}>
+        <span>Filters</span> <CloseIcon onClick={closeFilters} sx={{color: 'white'}} />
+      </div>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-        {() => (
-          <Form>
+        {({resetForm}) => (
+          <Form style={{marginTop: '10px'}}>
             <CustomAccordion
               title="genre"
               content={
                 <>
-                  <label>
-                    <Field data-filter="genre" type="checkbox" name="genre" value="Strategy" />
-                    Strategy
-                  </label>
-                  <label>
-                    <Field data-filter="genre" type="checkbox" name="genre" value="RPG" />
-                    RPG
-                  </label>
-                  <label>
-                    <Field type="checkbox" name="genre" value="MMO" />
-                    MMO
-                  </label>
-                  <label>
-                    <Field type="checkbox" name="genre" value="Indie" />
-                    Indie
-                  </label>
-                  <label>
-                    <Field type="checkbox" name="genre" value="Simulator" />
-                    Simulator
-                  </label>
-                  <label>
-                    <Field type="checkbox" name="genre" value="Action" />
-                    Action
-                  </label>
-                  <label>
-                    <Field type="checkbox" name="genre" value="ForTwo" />
-                    For two
-                  </label>
-                  <label>
-                    <Field type="checkbox" name="genre" value="Sport" />
-                    Sport
-                  </label>
-                  <label>
-                    <Field type="checkbox" name="genre" value="Shooters" />
-                    Shooters
-                  </label>
-                  <label>
-                    <Field type="checkbox" name="genre" value="Arcade" />
-                    Arcade
-                  </label>
+                  <Field
+                    id="Strategy"
+                    className={styles.checkbox}
+                    data-filter="genre"
+                    type="checkbox"
+                    name="genre"
+                    value="Strategy"
+                  />
+                  <label for="Strategy">Strategy</label>
+
+                  <Field
+                    id="RPG"
+                    className={styles.checkbox}
+                    data-filter="genre"
+                    type="checkbox"
+                    name="genre"
+                    value="RPG"
+                  />
+                  <label for="RPG">RPG</label>
+
+                  <Field
+                    id="MMO"
+                    className={styles.checkbox}
+                    type="checkbox"
+                    name="genre"
+                    value="MMO"
+                  />
+                  <label for="MMO">MMO</label>
+
+                  <Field
+                    id="Indie"
+                    className={styles.checkbox}
+                    type="checkbox"
+                    name="genre"
+                    value="Indie"
+                  />
+                  <label for="Indie">Indie</label>
+
+                  <Field
+                    id="Simulator"
+                    className={styles.checkbox}
+                    type="checkbox"
+                    name="genre"
+                    value="Simulator"
+                  />
+                  <label for="Simulator">Simulator</label>
+
+                  <Field
+                    id="Action"
+                    className={styles.checkbox}
+                    type="checkbox"
+                    name="genre"
+                    value="Action"
+                  />
+                  <label for="Action">Action</label>
+
+                  <Field
+                    id="ForTwo"
+                    className={styles.checkbox}
+                    type="checkbox"
+                    name="genre"
+                    value="ForTwo"
+                  />
+                  <label for="ForTwo">For two</label>
+
+                  <Field
+                    id="Sport"
+                    className={styles.checkbox}
+                    type="checkbox"
+                    name="genre"
+                    value="Sport"
+                  />
+                  <label for="Sport">Sport</label>
+
+                  <Field
+                    id="Shooters"
+                    className={styles.checkbox}
+                    type="checkbox"
+                    name="genre"
+                    value="Shooters"
+                  />
+                  <label for="Shooters">Shooters</label>
+
+                  <Field
+                    id="Arcade"
+                    className={styles.checkbox}
+                    type="checkbox"
+                    name="genre"
+                    value="Arcade"
+                  />
+                  <label for="Arcade">Arcade</label>
                 </>
               }
             />
@@ -84,28 +142,47 @@ function FilterMenu() {
               title="age"
               content={
                 <>
-                  <label>
-                    <Field type="checkbox" name="age" value="3" />
-                    3+
-                  </label>
-                  <label>
-                    <Field type="checkbox" name="age" value="7" />
-                    7+
-                  </label>
-                  <label>
-                    <Field type="checkbox" name="age" value="13" />
-                    13+
-                  </label>
-                  <label>
-                    <Field type="checkbox" name="age" value="18" />
-                    18+
-                  </label>
+                  <Field id="3" className={styles.checkbox} type="checkbox" name="age" value="3" />
+                  <label for="3">3+</label>
+
+                  <Field id="7" className={styles.checkbox} type="checkbox" name="age" value="7" />
+                  <label for="7">7+</label>
+
+                  <Field
+                    id="13"
+                    className={styles.checkbox}
+                    type="checkbox"
+                    name="age"
+                    value="13"
+                  />
+                  <label for="13">13+</label>
+
+                  <Field
+                    id="18"
+                    className={styles.checkbox}
+                    type="checkbox"
+                    name="age"
+                    value="18"
+                  />
+                  <label for="18">18+</label>
                 </>
               }
             />
-            <button className={styles.addButton} type="submit">
-              Apply filters
-            </button>
+            <div className={styles.conrolBtnsWrapper}>
+              <button className={styles.addButton} type="submit">
+                Apply filters
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  resetForm({genre: [], age: []});
+                  navigate('/catalog');
+                }}
+                className={styles.addButton}>
+                Clear filters
+              </button>
+            </div>
           </Form>
         )}
       </Formik>

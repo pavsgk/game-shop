@@ -99,6 +99,8 @@
 
 .logOut {
   @extend .logIn;
+  display: none;
+  cursor: pointer;
 }
 
 //------------------TABLET

@@ -40,4 +40,4 @@ const ModalSlider = ({modalContent}) => {
   );
 };
 
-export default ModalSlider;
+// export default ModalSlider;
