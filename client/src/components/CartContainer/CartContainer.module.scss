@@ -51,7 +51,7 @@
 
 .totalPriceWrapperButton {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   margin: 30px 0 60px 0;
 }
 
@@ -77,7 +77,7 @@
 
   .contentWrapper {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
   }
 
   .totalPriceWrapper {

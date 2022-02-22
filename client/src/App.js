@@ -34,7 +34,7 @@ function App() {
     if (isAuthorized) {
       dispatch(getCartFromServer());
     }
-  }, [isAuthorized]);
+  }, [isAuthorized, dispatch]);
 
   return (
     <div className={styles.app}>

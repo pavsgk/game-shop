@@ -1,26 +1,28 @@
 import CartItem from '../CartItem/CartItem';
 import styles from './CartContainer.module.scss';
 import {useSelector, useDispatch} from 'react-redux';
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {countCartSum, getCartFromServer} from '../../store/reducers/cartReducer';
 import {ReactComponent as CartPic} from '../../assets/svg/cart.svg';
 
 const CartContainer = () => {
-  const cart = useSelector((state) => state.cart.products);
-  const sum = useSelector((state) => state.cart.cartSum);
-  const isAuthorized = useSelector((state) => state.user.isAuthorized);
+  const [cart, sum, isAuthorized] = useSelector((state) => [
+    state.cart.products,
+    state.cart.cartSum,
+    state.user.isAuthorized,
+  ]);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(countCartSum());
-  }, [cart]);
+  }, [cart, dispatch, isAuthorized]);
 
   useEffect(() => {
     if (isAuthorized) {
       getCartFromServer();
     }
-  }, []);
+  }, [isAuthorized]);
 
   if (cart.length < 1) {
     return (

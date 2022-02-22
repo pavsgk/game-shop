@@ -81,7 +81,7 @@
 .content_Description_Title {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   &_Item {
     margin-left: 30px;
     color: $text;
@@ -106,7 +106,7 @@
 .content_Details_Title {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   &_Item {
     margin-left: 30px;
     color: $text;
@@ -137,7 +137,7 @@
 .content_Delivery_Title {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   &_Item {
     margin-left: 30px;
     color: $text;
@@ -164,7 +164,7 @@
   &_Title {
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     &_Item {
       margin-left: 30px;
       color: #7d7d78;
@@ -255,11 +255,11 @@
   }
 
   .content_Details_Title {
-    justify-content: start;
+    justify-content: flex-start;
   }
 
   .content_Reviews_Title {
-    justify-content: start;
+    justify-content: flex-start;
   }
 }
 

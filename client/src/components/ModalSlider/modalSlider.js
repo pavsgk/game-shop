@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react';
+import {useState} from 'react';
 import {ReactComponent as RightArrow} from '../../assets/svg/rightArrow.svg';
 import {ReactComponent as LeftArrow} from '../../assets/svg/leftArrow.svg';
 import styles from './modalSlider.module.scss';
@@ -29,9 +29,7 @@ const ModalSlider = ({modalContent}) => {
       {sliderImages.map((slide, index) => {
         return (
           <div className={index === current ? styles.slideActive : styles.slide} key={slide.image}>
-            {index === current && (
-              <img src={slide.image} alt="game image" className={styles.image} />
-            )}
+            {index === current && <img src={slide.image} alt="game" className={styles.image} />}
           </div>
         );
       })}

@@ -1,4 +1,4 @@
-import {createAsyncThunk, createSlice, current} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {
   createRequestOnTheServer,
   requestThePresenceOfTheCartOnTheServer,
@@ -6,8 +6,7 @@ import {
   requestToDecreaseProductQuantity,
   requestToDeleteProductFromTheCart,
 } from '../../api/cart';
-import {useSelector} from 'react-redux';
-import {getFromLS, saveToLS, removeFromLS} from '../../utils/localStorage';
+import {getFromLS, saveToLS} from '../../utils/localStorage';
 
 const initialState = {
   products: [],
@@ -26,7 +25,6 @@ export const createCartOnTheServer = createAsyncThunk('cart/create', async (_id)
   };
 
   const result = await createRequestOnTheServer(newCart);
-  console.log(result, 'result');
   return result;
 });
 
@@ -72,9 +70,7 @@ const cartSlice = createSlice({
       saveToLS('cart', state.products);
     },
     makeLessItemForNotLog(state, action) {
-      console.log(action.payload);
       const index = state.products.findIndex((elem) => elem.product.itemNo === action.payload);
-      console.log(index);
 
       if (state.products[index].cartQuantity === 1) {
         return;
@@ -83,12 +79,9 @@ const cartSlice = createSlice({
       saveToLS('cart', state.products);
     },
     makeMoreItemForNotLog(state, action) {
-      console.log(action.payload);
       const index = state.products.findIndex((elem) => {
-        console.log(elem.product.itemNo);
         return elem.product.itemNo === action.payload;
       });
-      console.log(index);
       state.products[index].cartQuantity += 1;
       saveToLS('cart', state.products);
     },
@@ -108,10 +101,7 @@ const cartSlice = createSlice({
   },
   extraReducers: {
     [getCartFromServer.fulfilled]: (state, action) => {
-      console.log('state', state);
-      console.log('action', action.payload);
       if (!action.payload) {
-        console.log('net bazy');
         state.isCartExist = false;
         return;
       }
@@ -121,28 +111,24 @@ const cartSlice = createSlice({
       }
     },
     [getCartFromServer.rejected]: (state) => {
-      console.log(state, 'что то пошло не так');
+      console.warn('getCartFromServer error: ', state);
       state.isCartExist = false;
     },
     [addProductToTheCart.fulfilled]: (state, action) => {
-      console.log('state', state);
-      console.log('action', action.payload.data.products);
       if (action.payload.status === 200) {
         state.products = action.payload.data.products;
       }
     },
     [addProductToTheCart.rejected]: (state) => {
-      console.log(state, 'что то пошло не так');
+      console.warn('addProductToTheCart error: ', state);
     },
     [decreaseProductQuantity.fulfilled]: (state, action) => {
-      console.log('state', state);
-      console.log('action', action.payload.data.products);
       if (action.payload.status === 200) {
         state.products = action.payload.data.products;
       }
     },
     [decreaseProductQuantity.rejected]: (state) => {
-      console.log(state, 'что то пошло не так');
+      console.warn('decreaseProductQuantity error: ', state);
     },
     [deleteProductFromTheCart.fulfilled]: (state, action) => {
       if (action.payload.status === 200) {
@@ -150,7 +136,7 @@ const cartSlice = createSlice({
       }
     },
     [deleteProductFromTheCart.rejected]: (state) => {
-      console.log(state, 'что то пошло не так');
+      console.warn('deleteProductFromTheCart error: ', state);
     },
   },
 });
