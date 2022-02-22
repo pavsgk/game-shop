@@ -103,14 +103,19 @@
   align-items: center;
   justify-content: center;
 }
-.emptySvgWrapper {
-}
+
 .emptySvgWrapperItem {
   fill: $base-yellow;
   width: 200px;
 }
 .emptyTitle {
   color: $base-yellow;
+  margin-left: 15px;
+}
+.emptyLink {
+  color: $text;
+  text-decoration: underline;
+  margin-top: 10px;
   margin-left: 15px;
 }
 

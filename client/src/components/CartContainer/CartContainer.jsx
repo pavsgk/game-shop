@@ -4,6 +4,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import {useEffect} from 'react';
 import {countCartSum, getCartFromServer} from '../../store/reducers/cartReducer';
 import {ReactComponent as CartPic} from '../../assets/svg/cart.svg';
+import {Link, useNavigate} from 'react-router-dom';
 
 const CartContainer = () => {
   const [cart, sum, isAuthorized] = useSelector((state) => [
@@ -13,6 +14,7 @@ const CartContainer = () => {
   ]);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(countCartSum());
@@ -30,7 +32,12 @@ const CartContainer = () => {
         <div className={styles.emptySvgWrapper}>
           <CartPic className={styles.emptySvgWrapperItem} />
         </div>
-        <h1 className={styles.emptyTitle}>Your cart is empty</h1>
+        <div>
+          <h1 className={styles.emptyTitle}>Your cart is empty</h1>
+          <Link to="/catalog">
+            <h3 className={styles.emptyLink}>Keep shopping</h3>
+          </Link>
+        </div>
       </div>
     );
   }
@@ -39,7 +46,9 @@ const CartContainer = () => {
     <div className={styles.mainWrapper}>
       <div className={styles.cartTitleWrapper}>
         <p className={styles.cartTitleWrapperName}>Item summary</p>
-        <button className={styles.cartTitleWrapperLink}>Keep shopping</button>
+        <button className={styles.cartTitleWrapperLink} onClick={() => navigate('/catalog')}>
+          Keep shopping
+        </button>
       </div>
       <div className={styles.contentWrapper}>
         <div className={styles.contentItems}>
@@ -54,7 +63,11 @@ const CartContainer = () => {
             </div>
           </div>
           <div className={styles.totalPriceWrapperButton}>
-            <button className={styles.totalPriceWrapperButtonItem}>Next</button>
+            <button
+              className={styles.totalPriceWrapperButtonItem}
+              onClick={() => navigate('/checkout')}>
+              Next
+            </button>
           </div>
         </div>
       </div>
