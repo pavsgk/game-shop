@@ -4,15 +4,14 @@ import * as yup from 'yup';
 import styles from './SignIn.module.scss';
 import AltAuthorization from '../AltAuthorization/AltAuthorization';
 import {newLogin} from '../../store/reducers/userReducer';
-import {useDispatch, useSelector} from 'react-redux';
-import {useEffect, useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {useState} from 'react';
 import Preloader from '../Preloader/Preloader';
 import Button from '../Button/Button';
 
 const SignIn = ({closeModal}) => {
   const dispatch = useDispatch();
 
-  const isAuthorized = useSelector((state) => state.user.isAuthorized);
   const [isCorrect, setIsCorrect] = useState(true);
 
   const initialValues = {
@@ -22,23 +21,16 @@ const SignIn = ({closeModal}) => {
 
   const handleSubmit = async (values) => {
     const result = await dispatch(newLogin(values));
-    console.log(result, 'result');
     if (result.payload) {
       setIsCorrect(true);
       closeModal();
       return;
     }
-    if (!result.payload) {
-      setIsCorrect(false);
-    }
+    setIsCorrect(false);
   };
 
-  useEffect(() => {
-    console.log(isAuthorized);
-  }, [isAuthorized]);
-
   const yupValidationSchema = yup.object().shape({
-    loginOrEmail: yup.string().required('Field is required ').email('Wrong email address entered'),
+    loginOrEmail: yup.string().required('Field is required'),
     password: yup
       .string()
       .required('Field is required ')
@@ -55,7 +47,7 @@ const SignIn = ({closeModal}) => {
           <>
             {isSubmitting && <Preloader />}
             <Form className={styles.form}>
-              <CustomField name="loginOrEmail" label="Email" type="text" />
+              <CustomField name="loginOrEmail" label="Email / Username" type="text" />
               <CustomField name="password" label="Password" type="password" />
               <div className={styles.wrapper}>
                 <span className={styles.incorrect}>

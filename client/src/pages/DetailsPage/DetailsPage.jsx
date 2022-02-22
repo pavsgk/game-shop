@@ -15,11 +15,11 @@ function DetailsPage() {
         setItem(data);
         setIsLoading(false);
       } catch (e) {
-        console.log(e);
+        console.warn('useEffect DetailsPage error: ', e);
         setIsLoading(false);
       }
     })();
-  }, []);
+  }, [location.search]);
 
   return isLoading ? null : <ProductItem item={item} />;
 }

@@ -57,9 +57,8 @@ function Payment() {
     };
     if (user.isAuthorized) orderBody.customerId = user.userData.customerId;
 
-    console.log(orderBody);
     try {
-      console.log(await placeOrder(orderBody));
+      await placeOrder(orderBody);
       navigate('orderConfirmed');
     } catch {
       navigate('error');

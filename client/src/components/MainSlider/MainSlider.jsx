@@ -46,14 +46,14 @@ function MainSlider() {
       className={styles.slider}
       onClick={(event) => {
         if (event.target.tagName === 'IMG') {
-          data.map((el) => {
+          data.forEach((el) => {
             if (event.target.src === el.image) {
               navigate(el.url);
             }
           });
         }
         if (event.target.className === 'carousel-caption-bottom') {
-          data.map((el) => {
+          data.forEach((el) => {
             if (event.target.innerText === el.caption) {
               navigate(el.url);
             }

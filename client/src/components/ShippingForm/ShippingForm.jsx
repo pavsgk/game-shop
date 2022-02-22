@@ -46,7 +46,6 @@ const yupValidationSchema = yup.object().shape({
 
 function AutoSaver() {
   const {values, touched} = useFormikContext();
-  const ctx = useFormikContext();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -63,7 +62,7 @@ function AutoSaver() {
         isValid,
       }),
     );
-  }, [values]);
+  }, [dispatch, values, touched]);
 
   return null;
 }

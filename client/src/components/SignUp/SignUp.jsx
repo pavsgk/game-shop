@@ -4,8 +4,7 @@ import * as yup from 'yup';
 import styles from './SignUp.module.scss';
 import AltAuthorization from '../AltAuthorization/AltAuthorization';
 import {registration} from '../../api/user';
-import {useDispatch} from 'react-redux';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import Preloader from '../Preloader/Preloader';
 import Button from '../Button/Button';
 
@@ -33,7 +32,7 @@ const SignUp = ({setActive}) => {
         }
       })
       .catch((error) => {
-        console.log(error);
+        console.warn(error);
       });
   };
 

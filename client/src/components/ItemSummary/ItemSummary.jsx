@@ -5,9 +5,7 @@ import {useSelector} from 'react-redux';
 
 function ItemSummary() {
   const {products} = useSelector((store) => store.cart);
-  console.log(products);
 
-  // return null;
   return (
     <div className={styles.itemSummary}>
       <p className={styles.title}>Item Summary</p>

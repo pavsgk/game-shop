@@ -52,7 +52,7 @@ function FilterMenu({isOpen, closeFilters}) {
                     name="genre"
                     value="Strategy"
                   />
-                  <label for="Strategy">Strategy</label>
+                  <label htmlFor="Strategy">Strategy</label>
 
                   <Field
                     id="RPG"
@@ -62,7 +62,7 @@ function FilterMenu({isOpen, closeFilters}) {
                     name="genre"
                     value="RPG"
                   />
-                  <label for="RPG">RPG</label>
+                  <label htmlFor="RPG">RPG</label>
 
                   <Field
                     id="MMO"
@@ -71,7 +71,7 @@ function FilterMenu({isOpen, closeFilters}) {
                     name="genre"
                     value="MMO"
                   />
-                  <label for="MMO">MMO</label>
+                  <label htmlFor="MMO">MMO</label>
 
                   <Field
                     id="Indie"
@@ -80,7 +80,7 @@ function FilterMenu({isOpen, closeFilters}) {
                     name="genre"
                     value="Indie"
                   />
-                  <label for="Indie">Indie</label>
+                  <label htmlFor="Indie">Indie</label>
 
                   <Field
                     id="Simulator"
@@ -89,7 +89,7 @@ function FilterMenu({isOpen, closeFilters}) {
                     name="genre"
                     value="Simulator"
                   />
-                  <label for="Simulator">Simulator</label>
+                  <label htmlFor="Simulator">Simulator</label>
 
                   <Field
                     id="Action"
@@ -98,7 +98,7 @@ function FilterMenu({isOpen, closeFilters}) {
                     name="genre"
                     value="Action"
                   />
-                  <label for="Action">Action</label>
+                  <label htmlFor="Action">Action</label>
 
                   <Field
                     id="ForTwo"
@@ -107,7 +107,7 @@ function FilterMenu({isOpen, closeFilters}) {
                     name="genre"
                     value="ForTwo"
                   />
-                  <label for="ForTwo">For two</label>
+                  <label htmlFor="ForTwo">For two</label>
 
                   <Field
                     id="Sport"
@@ -116,7 +116,7 @@ function FilterMenu({isOpen, closeFilters}) {
                     name="genre"
                     value="Sport"
                   />
-                  <label for="Sport">Sport</label>
+                  <label htmlFor="Sport">Sport</label>
 
                   <Field
                     id="Shooters"
@@ -125,7 +125,7 @@ function FilterMenu({isOpen, closeFilters}) {
                     name="genre"
                     value="Shooters"
                   />
-                  <label for="Shooters">Shooters</label>
+                  <label htmlFor="Shooters">Shooters</label>
 
                   <Field
                     id="Arcade"
@@ -134,7 +134,7 @@ function FilterMenu({isOpen, closeFilters}) {
                     name="genre"
                     value="Arcade"
                   />
-                  <label for="Arcade">Arcade</label>
+                  <label htmlFor="Arcade">Arcade</label>
                 </>
               }
             />
@@ -143,10 +143,10 @@ function FilterMenu({isOpen, closeFilters}) {
               content={
                 <>
                   <Field id="3" className={styles.checkbox} type="checkbox" name="age" value="3" />
-                  <label for="3">3+</label>
+                  <label htmlFor="3">3+</label>
 
                   <Field id="7" className={styles.checkbox} type="checkbox" name="age" value="7" />
-                  <label for="7">7+</label>
+                  <label htmlFor="7">7+</label>
 
                   <Field
                     id="13"
@@ -155,7 +155,7 @@ function FilterMenu({isOpen, closeFilters}) {
                     name="age"
                     value="13"
                   />
-                  <label for="13">13+</label>
+                  <label htmlFor="13">13+</label>
 
                   <Field
                     id="18"
@@ -164,7 +164,7 @@ function FilterMenu({isOpen, closeFilters}) {
                     name="age"
                     value="18"
                   />
-                  <label for="18">18+</label>
+                  <label htmlFor="18">18+</label>
                 </>
               }
             />
