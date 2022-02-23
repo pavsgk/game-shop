@@ -2,7 +2,7 @@ import CartItem from '../CartItem/CartItem';
 import styles from './CartContainer.module.scss';
 import {useSelector, useDispatch} from 'react-redux';
 import {useEffect} from 'react';
-import {countCartSum, getCartFromServer} from '../../store/reducers/cartReducer';
+import {countCartSum, getCartFromServer, getCartFromLS} from '../../store/reducers/cartReducer';
 import {ReactComponent as CartPic} from '../../assets/svg/cart.svg';
 import {Link, useNavigate} from 'react-router-dom';
 
@@ -22,9 +22,15 @@ const CartContainer = () => {
 
   useEffect(() => {
     if (isAuthorized) {
-      getCartFromServer();
+      dispatch(getCartFromServer());
+      return;
     }
+    dispatch(getCartFromLS());
   }, [isAuthorized]);
+
+  useEffect(() => {
+    console.log(cart);
+  }, [cart]);
 
   if (cart.length < 1) {
     return (
