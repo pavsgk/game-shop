@@ -67,6 +67,7 @@
 .infoWrapperQuantityBlock {
   display: flex;
   align-items: center;
+  min-width: 20%;
 }
 
 .infoWrapperQuantityBlockMinus {
@@ -91,6 +92,8 @@
   color: $text;
   margin: 0 9px;
   font-size: 20px;
+  min-width: 30px;
+  text-align: center;
 }
 
 .infoWrapperQuantityBlockPlus {

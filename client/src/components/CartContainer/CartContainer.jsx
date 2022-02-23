@@ -5,6 +5,7 @@ import {useEffect} from 'react';
 import {countCartSum, getCartFromServer, getCartFromLS} from '../../store/reducers/cartReducer';
 import {ReactComponent as CartPic} from '../../assets/svg/cart.svg';
 import {Link, useNavigate} from 'react-router-dom';
+import Button from '../Button/Button';
 
 const CartContainer = () => {
   const [cart, sum, isAuthorized] = useSelector((state) => [
@@ -27,10 +28,6 @@ const CartContainer = () => {
     }
     dispatch(getCartFromLS());
   }, [isAuthorized]);
-
-  useEffect(() => {
-    console.log(cart);
-  }, [cart]);
 
   if (cart.length < 1) {
     return (
@@ -69,11 +66,12 @@ const CartContainer = () => {
             </div>
           </div>
           <div className={styles.totalPriceWrapperButton}>
-            <button
+            <Button
               className={styles.totalPriceWrapperButtonItem}
-              onClick={() => navigate('/checkout')}>
+              onClick={() => navigate('/checkout')}
+              type={'submit'}>
               Next
-            </button>
+            </Button>
           </div>
         </div>
       </div>

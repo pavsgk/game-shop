@@ -16,3 +16,7 @@ export async function requestToDecreaseProductQuantity(_id) {
 export async function requestToDeleteProductFromTheCart(_id) {
   return await instance.delete(`cart/${_id}`);
 }
+
+export async function requestToDeleteCart() {
+  return await instance.delete(`cart`);
+}

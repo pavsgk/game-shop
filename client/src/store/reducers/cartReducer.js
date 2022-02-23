@@ -1,10 +1,10 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {
-  createRequestOnTheServer,
   requestThePresenceOfTheCartOnTheServer,
   requestAddProductToTheCart,
   requestToDecreaseProductQuantity,
   requestToDeleteProductFromTheCart,
+  requestToDeleteCart,
 } from '../../api/cart';
 import {getFromLS, saveToLS} from '../../utils/localStorage';
 
@@ -31,6 +31,11 @@ export const decreaseProductQuantity = createAsyncThunk('cart/decrease', async (
 export const deleteProductFromTheCart = createAsyncThunk('cart/delete', async (_id) => {
   const result = await requestToDeleteProductFromTheCart(_id);
   return result.data.products;
+});
+
+export const cleanCart = createAsyncThunk('cart/clean', async () => {
+  const result = await requestToDeleteCart();
+  return result.data;
 });
 
 const cartSlice = createSlice({
@@ -116,10 +121,15 @@ const cartSlice = createSlice({
       console.warn('decreaseProductQuantity error: ', state);
     },
     [deleteProductFromTheCart.fulfilled]: (state, action) => {
-      console.log(action);
       state.products = action.payload;
     },
     [deleteProductFromTheCart.rejected]: (state) => {
+      console.warn('deleteProductFromTheCart error: ', state);
+    },
+    [cleanCart.fulfilled]: (state, action) => {
+      state.products = action.payload;
+    },
+    [cleanCart.rejected]: (state) => {
       console.warn('deleteProductFromTheCart error: ', state);
     },
   },
