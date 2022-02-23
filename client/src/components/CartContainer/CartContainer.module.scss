@@ -87,7 +87,7 @@
     height: 30%;
     padding: 25px;
     border: 1px solid $details;
-    width: 250px;
+    min-width: 35%;
   }
   .totalPriceWrapperItemText {
     margin-right: 10px;
@@ -122,5 +122,15 @@
 @media (min-width: $tablet-max) {
   .mainWrapper {
     padding: 0 120px;
+  }
+
+  .totalPriceWrapper {
+    min-width: 30%;
+  }
+}
+
+@media (min-width: $desktop) {
+  .totalPriceWrapper {
+    min-width: 20%;
   }
 }

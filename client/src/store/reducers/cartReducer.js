@@ -1,47 +1,41 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {
-  createRequestOnTheServer,
   requestThePresenceOfTheCartOnTheServer,
   requestAddProductToTheCart,
   requestToDecreaseProductQuantity,
   requestToDeleteProductFromTheCart,
+  requestToDeleteCart,
 } from '../../api/cart';
 import {getFromLS, saveToLS} from '../../utils/localStorage';
 
 const initialState = {
   products: [],
   cartSum: 0,
-  isCartExist: false,
 };
 
-export const createCartOnTheServer = createAsyncThunk('cart/create', async (_id) => {
-  const newCart = {
-    products: [
-      {
-        product: _id,
-        cartQuantity: 1,
-      },
-    ],
-  };
-
-  const result = await createRequestOnTheServer(newCart);
-  return result;
-});
-
 export const getCartFromServer = createAsyncThunk('cart/get', async () => {
-  return await requestThePresenceOfTheCartOnTheServer();
+  const result = await requestThePresenceOfTheCartOnTheServer();
+  return result.products;
 });
 
 export const addProductToTheCart = createAsyncThunk('cart/add', async (_id) => {
-  return await requestAddProductToTheCart(_id);
+  const result = await requestAddProductToTheCart(_id);
+  return result.data.products;
 });
 
 export const decreaseProductQuantity = createAsyncThunk('cart/decrease', async (_id) => {
-  return await requestToDecreaseProductQuantity(_id);
+  const result = await requestToDecreaseProductQuantity(_id);
+  return result.data.products;
 });
 
 export const deleteProductFromTheCart = createAsyncThunk('cart/delete', async (_id) => {
-  return await requestToDeleteProductFromTheCart(_id);
+  const result = await requestToDeleteProductFromTheCart(_id);
+  return result.data.products;
+});
+
+export const cleanCart = createAsyncThunk('cart/clean', async () => {
+  const result = await requestToDeleteCart();
+  return result.data;
 });
 
 const cartSlice = createSlice({
@@ -106,7 +100,7 @@ const cartSlice = createSlice({
         return;
       }
       if (action.payload) {
-        state.products = action.payload.products;
+        state.products = action.payload;
         state.isCartExist = true;
       }
     },
@@ -115,27 +109,27 @@ const cartSlice = createSlice({
       state.isCartExist = false;
     },
     [addProductToTheCart.fulfilled]: (state, action) => {
-      if (action.payload.status === 200) {
-        state.products = action.payload.data.products;
-      }
+      state.products = action.payload;
     },
     [addProductToTheCart.rejected]: (state) => {
       console.warn('addProductToTheCart error: ', state);
     },
     [decreaseProductQuantity.fulfilled]: (state, action) => {
-      if (action.payload.status === 200) {
-        state.products = action.payload.data.products;
-      }
+      state.products = action.payload;
     },
     [decreaseProductQuantity.rejected]: (state) => {
       console.warn('decreaseProductQuantity error: ', state);
     },
     [deleteProductFromTheCart.fulfilled]: (state, action) => {
-      if (action.payload.status === 200) {
-        state.products = action.payload.data.products;
-      }
+      state.products = action.payload;
     },
     [deleteProductFromTheCart.rejected]: (state) => {
+      console.warn('deleteProductFromTheCart error: ', state);
+    },
+    [cleanCart.fulfilled]: (state, action) => {
+      state.products = action.payload;
+    },
+    [cleanCart.rejected]: (state) => {
       console.warn('deleteProductFromTheCart error: ', state);
     },
   },

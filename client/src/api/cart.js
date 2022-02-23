@@ -1,9 +1,5 @@
 import instance from './instance.js';
 
-export async function createRequestOnTheServer(products) {
-  return await instance.post('cart', products);
-}
-
 export async function requestThePresenceOfTheCartOnTheServer() {
   const {data} = await instance.get('cart');
   return data;
@@ -19,4 +15,8 @@ export async function requestToDecreaseProductQuantity(_id) {
 
 export async function requestToDeleteProductFromTheCart(_id) {
   return await instance.delete(`cart/${_id}`);
+}
+
+export async function requestToDeleteCart() {
+  return await instance.delete(`cart`);
 }
