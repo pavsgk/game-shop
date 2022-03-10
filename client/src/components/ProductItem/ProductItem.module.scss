@@ -6,8 +6,7 @@
 
 .mobileProductTitle {
   margin-top: 45px;
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 64px;
   &_Text {
     color: $text;
     font-size: 18px;
@@ -82,7 +81,7 @@
 .content_Description_Title {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   &_Item {
     margin-left: 30px;
     color: $text;
@@ -107,7 +106,7 @@
 .content_Details_Title {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   &_Item {
     margin-left: 30px;
     color: $text;
@@ -138,7 +137,7 @@
 .content_Delivery_Title {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: flex-start;
   &_Item {
     margin-left: 30px;
     color: $text;
@@ -165,7 +164,7 @@
   &_Title {
     display: flex;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
     &_Item {
       margin-left: 30px;
       color: #7d7d78;
@@ -191,12 +190,12 @@
   }
 
   .content_Wrapper {
-    display: flex;
+    display: block;
     align-items: flex-start;
     flex-wrap: wrap;
     justify-content: space-between;
     & > div {
-      width: 40%;
+      width: unset;
       display: flex;
       flex-direction: column;
     }
@@ -234,7 +233,8 @@
   }
 
   .content_Title {
-    display: flex;
+    display: block;
+    margin-bottom: 64px;
   }
 
   .content_Title_Text {
@@ -255,11 +255,11 @@
   }
 
   .content_Details_Title {
-    justify-content: start;
+    justify-content: flex-start;
   }
 
   .content_Reviews_Title {
-    justify-content: start;
+    justify-content: flex-start;
   }
 }
 
@@ -279,6 +279,12 @@
   .content_Price_Button {
     font-size: 20px;
     padding: 13px 38px;
+    &:hover {
+      cursor: pointer;
+      border: 1px solid $text;
+      color: $text;
+      background: $base-yellow;
+    }
   }
 
   .content_Description_Title_Item {
@@ -294,6 +300,8 @@
   }
 
   .content_Details_Wrapper_Item {
+    display: flex;
+    justify-content: flex-start;
     font-size: 22px;
   }
 
@@ -302,6 +310,6 @@
   }
 
   .content_Delivery_Text_item {
-    font-size: 22px;
+    font-size: 16px;
   }
 }

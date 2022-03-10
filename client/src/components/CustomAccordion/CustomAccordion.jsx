@@ -19,12 +19,14 @@ function CustomAccordion({title, content, isProductPage, isExpanded}) {
               textTransform: 'uppercase',
               '&::after': {display: 'none !important'},
               '&::before': {display: 'none !important'},
+              boxShadow: 'none !important',
             }
           : {
               border: 0,
               color: 'white',
               backgroundColor: 'rgba(0, 0, 0, 0)',
               textTransform: 'uppercase',
+              boxShadow: 'none !important',
             }
       }>
       <AccordionSummary

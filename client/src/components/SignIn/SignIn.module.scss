@@ -3,18 +3,21 @@
 .form {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .wrapper {
   display: flex;
-  justify-content: flex-end;
-  margin-top: 7px;
+  justify-content: space-between;
+  padding: 2px 0;
+  margin: 7px 0 10px 0;
 }
 
 .remindPassword {
   color: $details;
   font-size: 11px;
   border-bottom: 1px solid $details;
+  cursor: pointer;
 }
 
 .submitButton {
@@ -26,7 +29,14 @@
   text-transform: uppercase;
 
   &:hover {
-    color: $details;
-    border: 1px solid $details;
+    border: 1px solid $text;
+    color: $text;
+    background: $base-yellow;
+    cursor: pointer;
   }
+}
+
+.incorrect {
+  color: red;
+  font-size: 13px;
 }

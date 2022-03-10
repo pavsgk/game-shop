@@ -7,14 +7,14 @@ const initialState = {
     firstName: '',
     lastName: '',
     country: '',
-    zipCode: '',
+    postal: '',
     address: '',
-    phone: '',
-    test: '',
+    mobile: '',
+    city: '',
   },
   shippingMethod: 'Standart',
   shippingPrice: 29.95,
-  paymentMethod: 'Cash on delivery',
+  paymentInfo: 'Cash on delivery',
 };
 
 const checkoutSlice = createSlice({
@@ -36,12 +36,12 @@ const checkoutSlice = createSlice({
       state.shippingMethod = payload.shippingMethod;
       state.shippingPrice = parseFloat(payload.shippingPrice);
     },
-    updatePaymentMethod(state, {payload}) {
-      state.paymentMethod = payload;
+    updatePaymentInfo(state, {payload}) {
+      state.paymentInfo = payload;
     },
   },
 });
 
-export const {updatePaymentMethod, updateShippingMethod, switchTab, updateFields} =
+export const {updatePaymentInfo, updateShippingMethod, switchTab, updateFields} =
   checkoutSlice.actions;
 export default checkoutSlice.reducer;

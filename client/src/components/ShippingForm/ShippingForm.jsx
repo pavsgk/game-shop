@@ -25,7 +25,12 @@ const yupValidationSchema = yup.object().shape({
     .required('Enter country')
     .min(2, 'min. 2 characters required')
     .matches(/[A-Za-z/s]/),
-  zipCode: yup
+  city: yup
+    .string()
+    .required('Enter city')
+    .min(2, 'min. 2 characters required')
+    .matches(/[A-Za-z/s]/),
+  postal: yup
     .string()
     .required('Enter zip code')
     .min(5, 'min. 5 characters required')
@@ -35,13 +40,12 @@ const yupValidationSchema = yup.object().shape({
     .required('Enter adress')
     .min(5, 'min. 5 characters required')
     .matches(/^[a-zA-Z0-9\s,'-]*$/),
-  phone: yup.string().required('Enter phone').min(7, 'min. 7 characters required').matches(/\d/g),
+  mobile: yup.string().required('Enter phone').min(7, 'min. 7 characters required').matches(/\d/g),
   syncProfile: yup.boolean(),
 });
 
 function AutoSaver() {
   const {values, touched} = useFormikContext();
-  const ctx = useFormikContext();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -58,7 +62,7 @@ function AutoSaver() {
         isValid,
       }),
     );
-  }, [values]);
+  }, [dispatch, values, touched]);
 
   return null;
 }
@@ -82,9 +86,10 @@ function ShippingForm() {
     firstName: '',
     lastName: '',
     country: '',
-    zipCode: '',
+    postal: '',
+    city: '',
     address: '',
-    phone: '',
+    mobile: '',
     syncProfile: false,
   };
 
@@ -103,11 +108,12 @@ function ShippingForm() {
           <CustomField name="firstName" label="First Name" type="text" />
           <CustomField name="lastName" label="Last Name" type="text" />
           <CustomField name="country" label="Country" type="text" />
-          <CustomField name="zipCode" label="Zip code" type="text" />
+          <CustomField name="city" label="City" type="text" />
+          <CustomField name="postal" label="Zip code" type="text" />
           <div className={styles.address}>
             <CustomField name="address" label="Address" type="text" />
           </div>
-          <CustomField name="phone" label="Phone" type="text" />
+          <CustomField name="mobile" label="Phone" type="text" />
 
           {/* <div className={styles.checkbox}>
             <input id="one" type="checkbox" />

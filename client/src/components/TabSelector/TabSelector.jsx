@@ -2,8 +2,8 @@ import {useState} from 'react';
 import styles from './TabSelector.module.scss';
 
 function TabSelector(props) {
-  const {tabs, children, isSignForm} = props;
-  const [active, setActive] = useState(0);
+  const {tabs, children, isSignForm, active, setActive} = props;
+
   if (tabs.lenght < 1) return null;
 
   return (
@@ -29,7 +29,6 @@ function TabSelector(props) {
           );
         })}
       </div>
-
       {children[active]}
     </>
   );

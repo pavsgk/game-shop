@@ -1,17 +1,23 @@
 import styles from './ProductCard.module.scss';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {addItemToTheCart} from '../../store/reducers/cartReducer';
-import {useEffect} from 'react';
+import {addItemToTheCartForNotLog, addProductToTheCart} from '../../store/reducers/cartReducer';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
 
 function ProductCard(props) {
-  const {item} = props;
-  const {title, imageUrls, currentPrice, itemNo, platform} = item;
-
+  const {item, isFavorite} = props;
+  const {title, imageUrls, currentPrice, itemNo, platform, _id} = item;
+  const isAuthorized = useSelector((state) => state.user.isAuthorized);
   const dispatch = useDispatch();
 
   const addToCart = () => {
-    dispatch(addItemToTheCart(item));
+    if (isAuthorized) {
+      dispatch(addProductToTheCart(_id));
+      return;
+    }
+    dispatch(addItemToTheCartForNotLog(props.item));
   };
 
   // const checkPlatform = () => {
@@ -23,7 +29,38 @@ function ProductCard(props) {
   return (
     <>
       <div className={styles.cardContainer}>
-        <Link to={'/details'} onClick={() => localStorage.setItem('currentItem', itemNo)}>
+        {isFavorite ? (
+          <BookmarkIcon
+            onClick={() => {
+              dispatch(removeWishedProduct(_id));
+            }}
+            sx={{
+              color: '#f7d131',
+              fontSize: 'xxx-l',
+              cursor: 'pointer',
+              position: 'absolute',
+              top: '-3px',
+              right: '10px',
+              '&:hover': {scale: '1.2'},
+            }}
+          />
+        ) : (
+          <BookmarkBorderIcon
+            onClick={() => {
+              dispatch(addWishedProduct(_id));
+            }}
+            sx={{
+              color: '#f7d131',
+              fontSize: 'xxx-l',
+              cursor: 'pointer',
+              position: 'absolute',
+              top: '-3px',
+              right: '10px',
+              '&:hover': {scale: '1.2'},
+            }}
+          />
+        )}
+        <Link to={`/details?${itemNo}`}>
           <div className={styles.iconWrapper}>
             <img src={imageUrls[0]} alt={title} height="250" width="220" />
           </div>

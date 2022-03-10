@@ -4,14 +4,22 @@ import React, {useState} from 'react';
 import {ReactComponent as CartImg} from './img/Frame.svg';
 import {ReactComponent as Logo} from './img/star-wars.svg';
 import {ReactComponent as MenuImg} from './img/burgermenu.svg';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
+import {logout} from '../../store/reducers/userReducer';
 
 function Header() {
   const dispatch = useDispatch();
+
   const openModal = () => {
     dispatch(openSignModal());
   };
+
+  const logOut = () => {
+    dispatch(logout());
+  };
+
+  const isAuthorized = useSelector((state) => state.user.isAuthorized);
 
   const [menuActive, setMenuActive] = useState(false);
 
@@ -39,11 +47,6 @@ function Header() {
               </Link>
             </li>
             <li className={styles.navItem}>
-              <Link exact="true" className={styles.navLink} to="/details">
-                details
-              </Link>
-            </li>
-            <li className={styles.navItem}>
               <Link exact="true" className={styles.navLink} to="/wishlist">
                 wishlist
               </Link>
@@ -63,10 +66,15 @@ function Header() {
             <CartImg className={styles.cartImg} />
           </Link>
           <div className={styles.navLine}> </div>
-          <p onClick={openModal} className={styles.logIn}>
-            LOG IN
-          </p>
-          <p className={styles.logOut}>LOG OUT</p>
+          {isAuthorized ? (
+            <p onClick={() => logOut()} className={styles.logOut}>
+              LOG OUT
+            </p>
+          ) : (
+            <p onClick={() => openModal()} className={styles.logIn}>
+              LOG IN
+            </p>
+          )}
         </div>
       </header>
     </>

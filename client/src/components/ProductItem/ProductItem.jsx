@@ -8,10 +8,13 @@ import {
   addContentForImagesModal,
 } from '../../store/reducers/imagesModalReducer';
 import ProductItemSlider from '../ProductItemSlider/ProductItemSlider';
+import {addProductToTheCart, addItemToTheCartForNotLog} from '../../store/reducers/cartReducer';
 
 const ProductItem = (props) => {
-  const {title, currentPrice, description, itemNo, genre, publishe, imageUrls, age} = props.item;
+  const {title, currentPrice, description, itemNo, genre, publisher, imageUrls, age, _id} =
+    props.item;
   const dispatch = useDispatch();
+  const isAuthorized = useSelector((state) => state.user.isAuthorized);
   const sliderRef = useRef(null);
 
   useEffect(() => {
@@ -44,7 +47,11 @@ const ProductItem = (props) => {
   }, []);
 
   const addToCart = () => {
-    dispatch(addItemToTheCart(props.item));
+    if (isAuthorized) {
+      dispatch(addProductToTheCart(_id));
+      return;
+    }
+    dispatch(addItemToTheCartForNotLog(props.item));
   };
 
   return (
@@ -62,7 +69,7 @@ const ProductItem = (props) => {
           <span className={styles.content_Title_Code}>{itemNo}</span>
         </div>
         <div className={styles.content_Price}>
-          <div className={styles.content_Price_Item}>{currentPrice}</div>
+          <div className={styles.content_Price_Item}>&#8372; {currentPrice}</div>
           <button onClick={addToCart} className={styles.content_Price_Button}>
             add to cart
           </button>
@@ -73,6 +80,7 @@ const ProductItem = (props) => {
             title="Description"
             isProductPage={true}
             content={description}
+            style={{textTransform: 'initial'}}
           />
 
           <CustomAccordion
@@ -81,15 +89,21 @@ const ProductItem = (props) => {
             content={
               <>
                 <div className={styles.content_Details_Wrapper_Item}>
-                  <p>Genre:</p>
-                  <span>{genre}</span>
+                  <p style={{width: '40%'}}>Genre:</p>
+                  <span>
+                    {genre.map((e, index) => {
+                      if (index < genre.length - 1) {
+                        return `${e}, `;
+                      } else return `${e}`;
+                    })}
+                  </span>
                 </div>
                 <div className={styles.content_Details_Wrapper_Item}>
-                  <p>Company:</p>
-                  <span>{publishe}</span>
+                  <p style={{width: '40%'}}>Publisher:</p>
+                  <span>{publisher}</span>
                 </div>
                 <div className={styles.content_Details_Wrapper_Item}>
-                  <p>Rating:</p>
+                  <p style={{width: '40%'}}>Rating:</p>
                   <span>{age}</span>
                 </div>
               </>

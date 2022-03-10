@@ -1,58 +1,146 @@
-import {createSlice, current} from '@reduxjs/toolkit';
-import {saveToLS, getFromLS} from '../../utils/localStorage';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {
+  requestThePresenceOfTheCartOnTheServer,
+  requestAddProductToTheCart,
+  requestToDecreaseProductQuantity,
+  requestToDeleteProductFromTheCart,
+  requestToDeleteCart,
+} from '../../api/cart';
+import {getFromLS, saveToLS} from '../../utils/localStorage';
 
 const initialState = {
-  cartItems: getFromLS('cart') || [],
+  products: [],
   cartSum: 0,
 };
+
+export const getCartFromServer = createAsyncThunk('cart/get', async () => {
+  const result = await requestThePresenceOfTheCartOnTheServer();
+  return result.products;
+});
+
+export const addProductToTheCart = createAsyncThunk('cart/add', async (_id) => {
+  const result = await requestAddProductToTheCart(_id);
+  return result.data.products;
+});
+
+export const decreaseProductQuantity = createAsyncThunk('cart/decrease', async (_id) => {
+  const result = await requestToDecreaseProductQuantity(_id);
+  return result.data.products;
+});
+
+export const deleteProductFromTheCart = createAsyncThunk('cart/delete', async (_id) => {
+  const result = await requestToDeleteProductFromTheCart(_id);
+  return result.data.products;
+});
+
+export const cleanCart = createAsyncThunk('cart/clean', async () => {
+  const result = await requestToDeleteCart();
+  return result.data;
+});
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItemToTheCart(state, action) {
-      console.log(action.payload);
-      const index = state.cartItems.findIndex((elem) => elem.itemNo === action.payload.itemNo);
+    addItemToTheCartForNotLog(state, action) {
+      const index = state.products.findIndex(
+        (elem) => elem.product.itemNo === action.payload.itemNo,
+      );
       if (index === -1) {
-        const newItem = {...action.payload, count: 1};
-        state.cartItems.push(newItem);
-        console.log(state.cartItems, 'state.cartItems.push(newItem)');
-        saveToLS('cart', state.cartItems);
+        const newItem = {product: action.payload, cartQuantity: 1};
+        state.products.push(newItem);
+        saveToLS('cart', state.products);
         return;
       }
-      state.cartItems[index].count += 1;
-      saveToLS('cart', state.cartItems);
+      state.products[index].cartQuantity += 1;
+      saveToLS('cart', state.products);
     },
-    removeItemFromTheCart(state, action) {
-      const index = state.cartItems.findIndex((elem) => elem.itemNo === action.payload);
+    removeItemFromTheCartForNotLog(state, action) {
+      const index = state.products.findIndex((elem) => elem.product.itemNo === action.payload);
       if (index === -1) {
         return;
       }
-      state.cartItems.splice(index, 1);
-      saveToLS('cart', state.cartItems);
+      state.products.splice(index, 1);
+      saveToLS('cart', state.products);
     },
-    makeLessItem(state, action) {
-      const index = state.cartItems.findIndex((elem) => elem.itemNo === action.payload);
+    makeLessItemForNotLog(state, action) {
+      const index = state.products.findIndex((elem) => elem.product.itemNo === action.payload);
 
-      if (state.cartItems[index].count === 1) {
+      if (state.products[index].cartQuantity === 1) {
         return;
       }
-      state.cartItems[index].count -= 1;
-      saveToLS('cart', state.cartItems);
+      state.products[index].cartQuantity -= 1;
+      saveToLS('cart', state.products);
     },
-    makeMoreItem(state, action) {
-      const index = state.cartItems.findIndex((elem) => elem.itemNo === action.payload);
-      state.cartItems[index].count += 1;
-      saveToLS('cart', state.cartItems);
+    makeMoreItemForNotLog(state, action) {
+      const index = state.products.findIndex((elem) => {
+        return elem.product.itemNo === action.payload;
+      });
+      state.products[index].cartQuantity += 1;
+      saveToLS('cart', state.products);
+    },
+    getCartFromLS(state) {
+      const cartFromLS = getFromLS('cart');
+      if (cartFromLS) {
+        state.products = cartFromLS;
+      }
     },
     countCartSum(state) {
       let sum = 0;
-      state.cartItems.forEach((element) => (sum += element.currentPrice * element.count));
+      state.products.forEach(
+        (element) => (sum += element.product.currentPrice * element.cartQuantity),
+      );
       state.cartSum = sum;
+    },
+  },
+  extraReducers: {
+    [getCartFromServer.fulfilled]: (state, action) => {
+      if (!action.payload) {
+        state.isCartExist = false;
+        return;
+      }
+      if (action.payload) {
+        state.products = action.payload;
+        state.isCartExist = true;
+      }
+    },
+    [getCartFromServer.rejected]: (state) => {
+      console.warn('getCartFromServer error: ', state);
+      state.isCartExist = false;
+    },
+    [addProductToTheCart.fulfilled]: (state, action) => {
+      state.products = action.payload;
+    },
+    [addProductToTheCart.rejected]: (state) => {
+      console.warn('addProductToTheCart error: ', state);
+    },
+    [decreaseProductQuantity.fulfilled]: (state, action) => {
+      state.products = action.payload;
+    },
+    [decreaseProductQuantity.rejected]: (state) => {
+      console.warn('decreaseProductQuantity error: ', state);
+    },
+    [deleteProductFromTheCart.fulfilled]: (state, action) => {
+      state.products = action.payload;
+    },
+    [deleteProductFromTheCart.rejected]: (state) => {
+      console.warn('deleteProductFromTheCart error: ', state);
+    },
+    [cleanCart.fulfilled]: (state, action) => {
+      state.products = action.payload;
+    },
+    [cleanCart.rejected]: (state) => {
+      console.warn('deleteProductFromTheCart error: ', state);
     },
   },
 });
 
-export const {addItemToTheCart, removeItemFromTheCart, makeMoreItem, makeLessItem, countCartSum} =
-  cartSlice.actions;
+export const {
+  countCartSum,
+  getCartFromLS,
+  addItemToTheCartForNotLog,
+  makeLessItemForNotLog,
+  makeMoreItemForNotLog,
+  removeItemFromTheCartForNotLog,
+} = cartSlice.actions;
 export default cartSlice.reducer;

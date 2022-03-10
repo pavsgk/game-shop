@@ -9,11 +9,13 @@
   &::before {
     content: '';
     border: 1px solid $details;
+    background-color: $details;
     width: calc(50% - 12px);
   }
   &::after {
     content: '';
     border: 1px solid $details;
+    background-color: $details;
     width: calc(50% - 12px);
   }
 }
@@ -25,12 +27,20 @@
 }
 
 .facebookWrapper {
+  border-radius: 20px;
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
   border: 1px solid $details;
   padding: 7px 0;
   width: 48%;
+  color: $details;
+
+  &:hover {
+    background: #3b5898cc;
+    color: $text;
+  }
 
   & .facebookSvg {
     width: 10px;
@@ -38,12 +48,15 @@
   }
   & p {
     margin-left: 10px;
-    color: $details;
+    color: inherit;
   }
 }
 
 .googleWrapper {
   @extend .facebookWrapper;
+  &:hover {
+    background: #db4437cc;
+  }
 
   & .googleSvg {
     fill: white;

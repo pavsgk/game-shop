@@ -35,17 +35,11 @@
   flex-direction: column;
 }
 
-.totalPriceWrapper {
-}
-
 .totalPriceWrapperItem {
   display: flex;
   justify-content: space-between;
   font-size: 26px;
   color: $base-yellow;
-}
-
-.totalPriceWrapperItemText {
 }
 
 .totalPriceWrapperItemPrice {
@@ -57,7 +51,7 @@
 
 .totalPriceWrapperButton {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   margin: 30px 0 60px 0;
 }
 
@@ -68,6 +62,12 @@
   color: $base-yellow;
   font-size: 20px;
   padding: 10px 30px;
+  &:hover {
+    cursor: pointer;
+    border: 1px solid $text;
+    color: $text !important;
+    background: $base-yellow;
+  }
 }
 
 @media (min-width: $tablet) {
@@ -77,7 +77,7 @@
 
   .contentWrapper {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
   }
 
   .totalPriceWrapper {
@@ -87,6 +87,7 @@
     height: 30%;
     padding: 25px;
     border: 1px solid $details;
+    min-width: 35%;
   }
   .totalPriceWrapperItemText {
     margin-right: 10px;
@@ -97,8 +98,39 @@
   }
 }
 
+.emptyMainWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emptySvgWrapperItem {
+  fill: $base-yellow;
+  width: 200px;
+}
+.emptyTitle {
+  color: $base-yellow;
+  margin-left: 15px;
+}
+.emptyLink {
+  color: $text;
+  text-decoration: underline;
+  margin-top: 10px;
+  margin-left: 15px;
+}
+
 @media (min-width: $tablet-max) {
   .mainWrapper {
     padding: 0 120px;
+  }
+
+  .totalPriceWrapper {
+    min-width: 30%;
+  }
+}
+
+@media (min-width: $desktop) {
+  .totalPriceWrapper {
+    min-width: 20%;
   }
 }

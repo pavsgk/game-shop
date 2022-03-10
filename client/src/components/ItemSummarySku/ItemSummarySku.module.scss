@@ -12,7 +12,7 @@
   display: flex;
 }
 
-.name {
+.title {
   color: $text;
   font-weight: 300;
   font-size: 12px;
@@ -59,7 +59,7 @@
 }
 
 .quantity {
-  @extend .name;
+  @extend .title;
   font-size: 10px;
   line-height: 12px;
 }
@@ -73,6 +73,7 @@
   font-weight: 400;
   font-size: 16px;
   margin-left: 10px;
+  text-align: end;
 }
 
 @media (min-width: $tablet) {
@@ -80,7 +81,7 @@
     padding-left: 25px;
   }
 
-  .name {
+  .title {
     font-weight: 400;
     font-size: 14px;
     line-height: 16px;

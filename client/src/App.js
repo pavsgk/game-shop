@@ -5,23 +5,36 @@ import MuiTheme from './components/MuiTheme/MuiTheme';
 import CartPage from './pages/CartPage/CartPage';
 import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
 import DetailsPage from './pages/DetailsPage/DetailsPage';
-import FilterPage from './pages/FilterPage/FilterPage';
 import MainPage from './pages/MainPage/MainPage';
 import FavouritePage from './pages/FavouritePage/FavouritePage';
 import ProductsPage from './pages/ProductsPage/ProductsPage';
 import TestPage from './api/test';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useEffect} from 'react';
 import {init} from './store/reducers/userReducer';
 import {AdminPage} from './pages/AdminPage/AdminPage';
 import SignModalContainer from './components/SignModalContainer/SignModalContainer';
 import ImagesModal from './components/ImagesModal/ImagesModal';
+import {getWishlist} from './store/reducers/wishlistReducer';
+import OrderConfirmed from './components/OrderConfirmed/OrderConfirmed';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
+import {getCartFromServer, getCartFromLS} from './store/reducers/cartReducer';
 
 function App() {
   const dispatch = useDispatch();
+  const isAuthorized = useSelector((state) => state.user.isAuthorized);
+
   useEffect(() => {
     dispatch(init());
+    dispatch(getWishlist());
+    dispatch(getCartFromLS());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (isAuthorized) {
+      dispatch(getCartFromServer());
+    }
+  }, [isAuthorized, dispatch]);
 
   return (
     <div className={styles.app}>
@@ -31,11 +44,13 @@ function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="admin" element={<AdminPage />} />
           <Route path="catalog/*" element={<ProductsPage />} />
-          <Route path="details" element={<DetailsPage />} />
-          <Route path="favourite" element={<FavouritePage />} />
+          <Route path="details/*" element={<DetailsPage />} />
+          <Route path="wishlist" element={<FavouritePage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
+          <Route path="orderConfirmed" element={<OrderConfirmed />} />
           <Route path="test" element={<TestPage />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
         <SignModalContainer />
         <ImagesModal />
