@@ -76,7 +76,7 @@ const ProductItem = (props) => {
         </div>
         <div className={styles.content_Wrapper}>
           <CustomAccordion
-            isExpanded={true}
+            // isExpanded={true}
             title="Description"
             isProductPage={true}
             content={description}
