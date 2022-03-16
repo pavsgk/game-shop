@@ -11,6 +11,7 @@ import {getFromLS, saveToLS} from '../../utils/localStorage';
 const initialState = {
   products: [],
   cartSum: 0,
+  isCartExist: false,
 };
 
 export const getCartFromServer = createAsyncThunk('cart/get', async () => {
