@@ -30,9 +30,7 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 50px 40px;
   }
-  .productsContainerWithOutItems {
-    //margin-top: 50px;
-  }
+
   .filterToolsWrapper {
     width: 740px;
   }
@@ -41,10 +39,6 @@
 @media (min-width: $tablet-max) {
   .productsContainer {
     margin-left: 50px;
-  }
-
-  .productsContainerWithOutItems {
-    //margin-left: 40px;
   }
 
   .filterToolsWrapper {
