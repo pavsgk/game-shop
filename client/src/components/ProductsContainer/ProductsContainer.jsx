@@ -40,14 +40,21 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
   return (
     <div className={styles.contentWrapper}>
       <FilterMenu isOpen={isOpen} closeFilters={closeFilters} />
-      <div className={styles.productsContainer}>
+      <div
+        className={
+          products.length > 0 ? styles.productsContainer : styles.productsContainerWithOutItems
+        }>
         {isLoading && <ProductsPlaceholder />}
         {isError && <h3>Something went wrong. Please, try again later</h3>}
-        {products.map((item) => {
-          if (idItemsInWishlist.includes(item._id)) {
-            return <ProductCard key={item.itemNo} item={item} isFavorite={true} />;
-          } else return <ProductCard key={item.itemNo} item={item} />;
-        })}
+        {products.length > 0 ? (
+          products.map((item) => {
+            if (idItemsInWishlist.includes(item._id)) {
+              return <ProductCard key={item.itemNo} item={item} isFavorite={true} />;
+            } else return <ProductCard key={item.itemNo} item={item} />;
+          })
+        ) : (
+          <h2>There are no products to your request :(</h2>
+        )}
       </div>
     </div>
   );

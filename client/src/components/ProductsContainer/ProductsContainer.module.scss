@@ -11,10 +11,17 @@
 
   .contentWrapper {
     display: flex;
+    justify-content: center;
   }
 
   .filterToolsWrapper {
     width: 220px;
+  }
+  .productsContainerWithOutItems {
+    color: $text;
+    text-align: center;
+    width: 72%;
+    margin: 50px 0 0 0;
   }
 }
 
@@ -23,7 +30,9 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 50px 40px;
   }
-
+  .productsContainerWithOutItems {
+    //margin-top: 50px;
+  }
   .filterToolsWrapper {
     width: 740px;
   }
@@ -32,6 +41,10 @@
 @media (min-width: $tablet-max) {
   .productsContainer {
     margin-left: 50px;
+  }
+
+  .productsContainerWithOutItems {
+    //margin-left: 40px;
   }
 
   .filterToolsWrapper {
