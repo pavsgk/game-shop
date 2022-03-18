@@ -37,6 +37,10 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
 
   const idItemsInWishlist = wishlist.map((e) => e._id);
 
+  useEffect(() => {
+    console.log(location, 'location.search');
+  }, [location]);
+
   return (
     <div className={styles.contentWrapper}>
       <FilterMenu isOpen={isOpen} closeFilters={closeFilters} />

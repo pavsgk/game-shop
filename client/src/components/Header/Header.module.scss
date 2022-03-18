@@ -4,6 +4,9 @@
   display: flex;
   justify-content: space-between;
   background: $background;
+  position: fixed;
+  z-index: 3;
+  width: 100%;
 }
 
 .nav {
