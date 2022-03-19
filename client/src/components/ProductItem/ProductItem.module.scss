@@ -5,7 +5,7 @@
 }
 
 .mobileProductTitle {
-  margin-top: 45px;
+  //margin-top: 45px;
   margin-bottom: 64px;
   &_Text {
     color: $text;
@@ -209,6 +209,9 @@
   .content_Reviews_Title {
     justify-content: end;
   }
+  .productIMGWrapper {
+    margin-top: 119px;
+  }
 }
 
 @media (min-width: $tablet-max) {
@@ -216,7 +219,6 @@
     padding: 0 80px;
     display: flex;
     justify-content: space-between;
-    margin-top: 80px;
   }
 
   .mobileProductTitle {
@@ -230,7 +232,7 @@
 
   .content {
     width: 55%;
-    margin-top: 0;
+    margin-top: 199px;
   }
 
   .content_Title {
@@ -261,6 +263,9 @@
 
   .content_Reviews_Title {
     justify-content: flex-start;
+  }
+  .productIMGWrapper {
+    margin-top: 199px;
   }
 }
 

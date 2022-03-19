@@ -12,6 +12,7 @@ const initialState = {
   products: [],
   cartSum: 0,
   isCartExist: false,
+  cartQuantity: 0,
 };
 
 export const getCartFromServer = createAsyncThunk('cart/get', async () => {
@@ -93,6 +94,11 @@ const cartSlice = createSlice({
       );
       state.cartSum = sum;
     },
+    countCartQuantity(state) {
+      let quantity = 0;
+      state.products.forEach((element) => (quantity += element.cartQuantity));
+      state.cartQuantity = quantity;
+    },
   },
   extraReducers: {
     [getCartFromServer.fulfilled]: (state, action) => {
@@ -143,5 +149,6 @@ export const {
   makeLessItemForNotLog,
   makeMoreItemForNotLog,
   removeItemFromTheCartForNotLog,
+  countCartQuantity,
 } = cartSlice.actions;
 export default cartSlice.reducer;
