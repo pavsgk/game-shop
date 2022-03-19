@@ -69,14 +69,13 @@ const ProductItem = (props) => {
           <span className={styles.content_Title_Code}>{itemNo}</span>
         </div>
         <div className={styles.content_Price}>
-          <div className={styles.content_Price_Item}>&#8372; {currentPrice}</div>
+          <div className={styles.content_Price_Item}>{currentPrice} &#8372; </div>
           <button onClick={addToCart} className={styles.content_Price_Button}>
             add to cart
           </button>
         </div>
         <div className={styles.content_Wrapper}>
           <CustomAccordion
-            isExpanded={true}
             title="Description"
             isProductPage={true}
             content={description}
@@ -130,7 +129,8 @@ const ProductItem = (props) => {
                     days) and standard (4-5 business days) delivery methods.
                   </p>
                   <p className={styles.content_Delivery_Text_item}>
-                    Prices: courier - $16,95, express - $10,95, standard - $7,95.
+                    Prices: courier - 120 &#8372;, express - 79,95 &#8372;, standard - 29,95
+                    &#8372;.
                   </p>
                 </div>
               </>

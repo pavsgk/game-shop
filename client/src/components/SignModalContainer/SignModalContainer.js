@@ -32,7 +32,7 @@ const SignModalContainer = () => {
           active={active}
           setActive={setActive}>
           <SignIn closeModal={closeModal} />
-          <SignUp setActive={setActive} />
+          <SignUp closeModal={closeModal} />
         </TabSelector>
       </div>
       <div onClick={closeModal} className={style.background} />

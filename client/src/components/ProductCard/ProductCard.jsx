@@ -20,12 +20,6 @@ function ProductCard(props) {
     dispatch(addItemToTheCartForNotLog(props.item));
   };
 
-  // const checkPlatform = () => {
-  //   if (Array.isArray(platform)) {
-  //     return platform.join(", ");
-  //   }
-  // }
-
   return (
     <>
       <div className={styles.cardContainer}>
@@ -70,7 +64,7 @@ function ProductCard(props) {
           Platform: {Array.isArray(platform) ? platform.join(', ') : platform}
         </p>
         <div className={styles.priceWrapper}>
-          <span className={styles.price}>&#8372; {currentPrice}</span>
+          <span className={styles.price}>{currentPrice} &#8372;</span>
           <button onClick={addToCart} className={styles.addButton}>
             Add to cart
           </button>

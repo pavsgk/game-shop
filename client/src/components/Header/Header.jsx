@@ -1,12 +1,18 @@
 import styles from './Header.module.scss';
 import {Link} from 'react-router-dom';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ReactComponent as CartImg} from './img/Frame.svg';
 import {ReactComponent as Logo} from './img/star-wars.svg';
 import {ReactComponent as MenuImg} from './img/burgermenu.svg';
 import {useDispatch, useSelector} from 'react-redux';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
 import {logout} from '../../store/reducers/userReducer';
+import {
+  countCartQuantity,
+  countCartSum,
+  getCartFromLS,
+  getCartFromServer,
+} from '../../store/reducers/cartReducer';
 
 function Header() {
   const dispatch = useDispatch();
@@ -19,7 +25,24 @@ function Header() {
     dispatch(logout());
   };
 
-  const isAuthorized = useSelector((state) => state.user.isAuthorized);
+  const [cart, isAuthorized, cartQuantity] = useSelector((state) => [
+    state.cart.products,
+    state.user.isAuthorized,
+    state.cart.cartQuantity,
+  ]);
+
+  useEffect(() => {
+    dispatch(countCartSum());
+    dispatch(countCartQuantity());
+  }, [cart, dispatch, isAuthorized]);
+
+  useEffect(() => {
+    if (isAuthorized) {
+      dispatch(getCartFromServer());
+      return;
+    }
+    dispatch(getCartFromLS());
+  }, [isAuthorized]);
 
   const [menuActive, setMenuActive] = useState(false);
 
@@ -64,6 +87,7 @@ function Header() {
           </Link>
           <Link exact="true" to="/cart">
             <CartImg className={styles.cartImg} />
+            <div className={styles.cartQuantityWrapper}>{cartQuantity}</div>
           </Link>
           <div className={styles.navLine}> </div>
           {isAuthorized ? (

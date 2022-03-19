@@ -11,6 +11,7 @@
   color: $text;
   border-bottom: 1px solid $details;
   padding-bottom: 5px;
+  padding-top: 120px;
 }
 
 .cartTitleWrapperName {
@@ -68,6 +69,16 @@
     color: $text !important;
     background: $base-yellow;
   }
+  .emptySvgWrapper {
+    margin-right: 15px;
+  }
+
+  .emptyMainWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 15px;
+  }
 }
 
 @media (min-width: $tablet) {
@@ -104,19 +115,23 @@
   justify-content: center;
 }
 
+.emptySvgWrapper {
+  margin-top: 160px;
+  margin-right: 30px;
+}
+
 .emptySvgWrapperItem {
   fill: $base-yellow;
   width: 200px;
 }
 .emptyTitle {
   color: $base-yellow;
-  margin-left: 15px;
+  margin-top: 160px;
 }
 .emptyLink {
   color: $text;
   text-decoration: underline;
   margin-top: 10px;
-  margin-left: 15px;
 }
 
 @media (min-width: $tablet-max) {
@@ -126,6 +141,9 @@
 
   .totalPriceWrapper {
     min-width: 30%;
+  }
+  .cartTitleWrapper {
+    padding-top: 170px;
   }
 }
 

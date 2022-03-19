@@ -7,9 +7,12 @@ import {registration} from '../../api/user';
 import {useState} from 'react';
 import Preloader from '../Preloader/Preloader';
 import Button from '../Button/Button';
+import {useDispatch} from 'react-redux';
+import {newLogin} from '../../store/reducers/userReducer';
 
-const SignUp = ({setActive}) => {
+const SignUp = ({closeModal}) => {
   const [isSuccesReg, setIsSuccesReg] = useState(false);
+  const dispatch = useDispatch();
 
   const initialValues = {
     firstName: '',
@@ -21,14 +24,21 @@ const SignUp = ({setActive}) => {
 
   const handleSubmit = (values, actions) => {
     registration(values)
-      .then((res) => {
+      .then(async (res) => {
         if (res.status === 200) {
           actions.resetForm();
           setIsSuccesReg(true);
           setTimeout(() => {
             setIsSuccesReg(false);
-            setActive(0);
-          }, 2000);
+          }, 3000);
+
+          const loginOrEmail = values.login;
+          const password = values.password;
+          const valuesForSignIn = {loginOrEmail, password};
+          const result = await dispatch(newLogin(valuesForSignIn));
+          if (result.payload) {
+            closeModal();
+          }
         }
       })
       .catch((error) => {

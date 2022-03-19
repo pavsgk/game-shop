@@ -2,13 +2,12 @@
 @media (min-width: $mobile) {
   .productsPage {
     display: flex;
-    align-items: center;
     flex-direction: column;
   }
 }
 
 @media (min-width: $desktop) {
   .productsPage {
-    margin: 50px 0 130px 0;
+    margin: 0 0 130px 0;
   }
 }
