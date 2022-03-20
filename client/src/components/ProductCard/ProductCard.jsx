@@ -35,7 +35,7 @@ function ProductCard(props) {
               position: 'absolute',
               top: '-3px',
               right: '10px',
-              '&:hover': {scale: '1.2'},
+              '&:hover': {transform: 'scale(1.2)'},
             }}
           />
         ) : (
@@ -50,7 +50,7 @@ function ProductCard(props) {
               position: 'absolute',
               top: '-3px',
               right: '10px',
-              '&:hover': {scale: '1.2'},
+              '&:hover': {transform: 'scale(1.2)'},
             }}
           />
         )}

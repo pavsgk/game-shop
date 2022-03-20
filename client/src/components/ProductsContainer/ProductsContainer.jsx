@@ -13,6 +13,8 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
   const [isError, setIsError] = useState(false);
   let location = useLocation();
   const {wishlist} = useSelector((state) => state.wishlist);
+  const {isAuthorized} = useSelector((state) => state.user);
+  console.log(isAuthorized);
 
   useEffect(() => {
     (async () => {
@@ -33,7 +35,7 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
         setIsError(true);
       }
     })();
-  }, [location.search, wishlist]);
+  }, [location.search, wishlist, isAuthorized]);
 
   const idItemsInWishlist = wishlist.map((e) => e._id);
 
@@ -49,7 +51,7 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
           {isError && <h3>Something went wrong. Please, try again later</h3>}
           {products.length > 0 ? (
             products.map((item) => {
-              if (idItemsInWishlist.includes(item._id)) {
+              if (idItemsInWishlist.includes(item._id) && isAuthorized) {
                 return <ProductCard key={item.itemNo} item={item} isFavorite={true} />;
               } else return <ProductCard key={item.itemNo} item={item} />;
             })

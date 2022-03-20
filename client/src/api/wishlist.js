@@ -5,6 +5,11 @@ export async function getWishedProducts() {
   return data.products;
 }
 
+// export async function addProductToWishlist(itemNo) {
+//   const {data} = await instance.put(`/wishlist/${itemNo}`);
+//   return data.products;
+// }
+
 export async function addProductToWishlist(itemNo) {
   const {data} = await instance.put(`/wishlist/${itemNo}`);
   return data.products;
