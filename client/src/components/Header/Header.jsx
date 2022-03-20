@@ -101,6 +101,7 @@ function Header() {
           )}
         </div>
       </header>
+      <div className={styles.dummy}></div>
     </>
   );
 }

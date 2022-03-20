@@ -14,7 +14,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 99px;
+  margin-top: 20px;
 }
 
 .tabs {
@@ -37,7 +37,7 @@ h2 {
 
   .summary {
     display: flex;
-    margin-top: 119px;
+    margin-top: 20px;
   }
 
   .tabs {
@@ -56,13 +56,13 @@ h2 {
     margin-right: 30px;
     padding: 12px 35px 30px 35px;
     order: 1;
-    margin-top: 149px;
+    margin-top: 20px;
   }
   .summary {
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
     order: 2;
-    margin-top: 149px;
+    margin-top: 20px;
   }
 }
