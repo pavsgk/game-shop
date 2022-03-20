@@ -21,7 +21,7 @@ function DetailsPage() {
     })();
   }, [location.search]);
 
-  return isLoading ? null : <ProductItem item={item} />;
+  return isLoading ? null : <ProductItem {...item} />;
 }
 
 export default DetailsPage;

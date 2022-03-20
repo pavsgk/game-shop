@@ -9,6 +9,10 @@
   width: 100%;
 }
 
+.dummy {
+  height: 95px;
+}
+
 .nav {
   display: flex;
   align-items: center;
@@ -157,6 +161,10 @@
 //------------------TABLET-MAX
 
 @media (min-width: $tablet-max) {
+  .dummy {
+    height: 145px;
+  }
+
   .menu {
     display: none;
   }

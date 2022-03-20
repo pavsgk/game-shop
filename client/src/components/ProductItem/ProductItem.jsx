@@ -1,6 +1,5 @@
 import styles from './ProductItem.module.scss';
 import CustomAccordion from '../CustomAccordion/CustomAccordion';
-import {addItemToTheCart} from '../../store/reducers/cartReducer';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useRef} from 'react';
 import {
@@ -9,10 +8,11 @@ import {
 } from '../../store/reducers/imagesModalReducer';
 import ProductItemSlider from '../ProductItemSlider/ProductItemSlider';
 import {addProductToTheCart, addItemToTheCartForNotLog} from '../../store/reducers/cartReducer';
+import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 
 const ProductItem = (props) => {
-  const {title, currentPrice, description, itemNo, genre, publisher, imageUrls, age, _id} =
-    props.item;
+  const {title, currentPrice, description, itemNo, genre, publisher, imageUrls, age, _id} = props;
+
   const dispatch = useDispatch();
   const isAuthorized = useSelector((state) => state.user.isAuthorized);
   const sliderRef = useRef(null);
@@ -24,16 +24,17 @@ const ProductItem = (props) => {
     };
 
     const slider = sliderRef.current;
+    if (slider) {
+      slider.querySelector('#thumbnail-div').style.justifyContent = 'space-evenly';
+      slider.querySelector('#thumbnail-div').style.marginTop = '40px';
+      slider.querySelectorAll('.thumbnail').forEach((item) => (item.style.height = `70px`));
 
-    slider.querySelector('#thumbnail-div').style.justifyContent = 'space-evenly';
-    slider.querySelector('#thumbnail-div').style.marginTop = '40px';
-    slider.querySelectorAll('.thumbnail').forEach((item) => (item.style.height = `70px`));
-
-    slider.addEventListener('click', (event) => {
-      if (event.target.tagName === 'IMG') {
-        openModalImages();
-      }
-    });
+      slider.addEventListener('click', (event) => {
+        if (event.target.tagName === 'IMG') {
+          openModalImages();
+        }
+      });
+    }
 
     return () => {
       if (slider) {
@@ -54,6 +55,7 @@ const ProductItem = (props) => {
     dispatch(addItemToTheCartForNotLog(props.item));
   };
 
+  if (!Object.keys(props).length) return <NotFoundPage />;
   return (
     <div className={styles.mainWrapper}>
       <div className={styles.mobileProductTitle}>
@@ -110,7 +112,7 @@ const ProductItem = (props) => {
           />
 
           <CustomAccordion
-            title="Shipping & delivery"
+            title="Shipping &#38; delivery"
             isProductPage={true}
             content={
               <>
