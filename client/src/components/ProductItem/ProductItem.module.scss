@@ -2,10 +2,11 @@
 
 .mainWrapper {
   padding: 0 30px;
+  margin-top: 40px;
 }
 
 .mobileProductTitle {
-  //margin-top: 45px;
+  margin-top: 45px;
   margin-bottom: 64px;
   &_Text {
     color: $text;
@@ -209,9 +210,6 @@
   .content_Reviews_Title {
     justify-content: end;
   }
-  .productIMGWrapper {
-    margin-top: 119px;
-  }
 }
 
 @media (min-width: $tablet-max) {
@@ -232,7 +230,6 @@
 
   .content {
     width: 55%;
-    margin-top: 199px;
   }
 
   .content_Title {
@@ -263,9 +260,6 @@
 
   .content_Reviews_Title {
     justify-content: flex-start;
-  }
-  .productIMGWrapper {
-    margin-top: 199px;
   }
 }
 
