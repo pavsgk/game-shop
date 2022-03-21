@@ -10,7 +10,7 @@
 }
 
 .dummy {
-  height: 95px;
+  height: 99px;
 }
 
 .nav {
@@ -156,13 +156,16 @@
     padding-right: 10px;
     margin: 5px;
   }
+  .dummy {
+    height: 119px;
+  }
 }
 
 //------------------TABLET-MAX
 
 @media (min-width: $tablet-max) {
   .dummy {
-    height: 145px;
+    height: 149px;
   }
 
   .menu {

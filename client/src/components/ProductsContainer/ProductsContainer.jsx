@@ -14,7 +14,6 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
   let location = useLocation();
   const {wishlist} = useSelector((state) => state.wishlist);
   const {isAuthorized} = useSelector((state) => state.user);
-  console.log(isAuthorized);
 
   useEffect(() => {
     (async () => {
