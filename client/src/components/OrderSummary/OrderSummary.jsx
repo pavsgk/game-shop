@@ -19,19 +19,19 @@ function OrderSummary() {
       <div className={styles.details}>
         <p>Subtotal</p>
         <p>
-          <span>{subtotal} ₴</span>
+          <span>{subtotal} &#8372;</span>
         </p>
       </div>
       <div className={styles.details}>
         <p>Shipping</p>
         <p>
-          <span>{total ? shippingPrice : 0} ₴</span>
+          <span>{total ? shippingPrice : 0} &#8372;</span>
         </p>
       </div>
       <div className={styles.total}>
         <p>Total</p>
         <p>
-          <span>{total} ₴</span>
+          <span>{total} &#8372;</span>
         </p>
       </div>
       <div className={styles.flexCenter}>

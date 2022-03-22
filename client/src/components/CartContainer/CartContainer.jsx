@@ -1,13 +1,6 @@
 import CartItem from '../CartItem/CartItem';
 import styles from './CartContainer.module.scss';
-import {useSelector, useDispatch} from 'react-redux';
-import {useEffect} from 'react';
-import {
-  countCartSum,
-  getCartFromServer,
-  getCartFromLS,
-  countCartQuantity,
-} from '../../store/reducers/cartReducer';
+import {useSelector} from 'react-redux';
 import {ReactComponent as CartPic} from '../../assets/svg/cart.svg';
 import {Link, useNavigate} from 'react-router-dom';
 import Button from '../Button/Button';
@@ -49,8 +42,7 @@ const CartContainer = () => {
           <div className={styles.totalPriceWrapperItem}>
             <p className={styles.totalPriceWrapperItemText}>Total:</p>
             <div className={styles.totalPriceWrapperItemPrice}>
-              <span>&#8372;</span>
-              {sum}
+              <span>{sum} &#8372;</span>
             </div>
           </div>
           <div className={styles.totalPriceWrapperButton}>

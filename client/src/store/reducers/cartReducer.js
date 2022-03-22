@@ -88,11 +88,11 @@ const cartSlice = createSlice({
       }
     },
     countCartSum(state) {
-      let sum = 0;
-      state.products.forEach(
-        (element) => (sum += element.product.currentPrice * element.cartQuantity),
+      const newSum = state.products.reduce(
+        (acc, cur) => acc + cur.product.currentPrice * cur.cartQuantity,
+        0,
       );
-      state.cartSum = sum;
+      state.cartSum = newSum;
     },
     countCartQuantity(state) {
       let quantity = 0;

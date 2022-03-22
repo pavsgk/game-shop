@@ -15,7 +15,7 @@ function MainComponent(props) {
             <p className={styles.name}>{name}</p>
             <p className={styles.price}>
               {price}
-              <span> ₴</span>
+              <span> &#8372;</span>
             </p>
           </div>
         </div>

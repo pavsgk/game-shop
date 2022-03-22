@@ -81,8 +81,12 @@ const CartItem = ({product, cartQuantity}) => {
           <DeletePic className={styles.deleteWrapperItem} />
         </div>
         <div className={styles.priceValue}>
-          <span>&#8372;</span>
-          {cartQuantity === 1 ? currentPrice : currentPrice * cartQuantity}
+          <span>
+            {cartQuantity > 1
+              ? `${currentPrice} x ${cartQuantity} = ${currentPrice * cartQuantity}`
+              : currentPrice}{' '}
+            &#8372;
+          </span>
         </div>
       </div>
     </div>

@@ -71,7 +71,7 @@ const ProductItem = (props) => {
           <span className={styles.content_Title_Code}>{itemNo}</span>
         </div>
         <div className={styles.content_Price}>
-          <div className={styles.content_Price_Item}>{currentPrice} &#8372; </div>
+          <div className={styles.content_Price_Item}>{currentPrice} &#8372;</div>
           <button onClick={addToCart} className={styles.content_Price_Button}>
             add to cart
           </button>

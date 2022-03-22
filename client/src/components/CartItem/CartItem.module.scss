@@ -6,6 +6,9 @@
   border-bottom: 1px solid $details;
   display: flex;
   justify-content: space-between;
+  & svg {
+    cursor: pointer;
+  }
 }
 
 .imgWrapper {
@@ -127,6 +130,7 @@
   color: $base-yellow;
   & span {
     margin-right: 5px;
+    white-space: nowrap;
   }
 }
 

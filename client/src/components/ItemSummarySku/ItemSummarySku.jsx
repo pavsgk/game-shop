@@ -22,7 +22,7 @@ function ItemSummarySku(props) {
           </div>
         </div>
         <p className={styles.price}>
-          {quantity > 1 ? `${price} x ${quantity} = ${price * quantity}` : price} ₴
+          {quantity > 1 ? `${price} x ${quantity} = ${price * quantity}` : price} &#8372;
         </p>
       </div>
     </>
