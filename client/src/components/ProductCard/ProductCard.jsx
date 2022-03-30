@@ -5,10 +5,11 @@ import {addItemToTheCartForNotLog, addProductToTheCart} from '../../store/reduce
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
+import {ReactComponent as Sale} from './img/sale3.svg';
 
 function ProductCard(props) {
   const {item, isFavorite} = props;
-  const {title, imageUrls, currentPrice, itemNo, platform, _id} = item;
+  const {title, imageUrls, previousPrice, currentPrice, itemNo, platform, _id} = item;
   const isAuthorized = useSelector((state) => state.user.isAuthorized);
   const dispatch = useDispatch();
 
@@ -64,7 +65,15 @@ function ProductCard(props) {
           Platform: {Array.isArray(platform) ? platform.join(', ') : platform}
         </p>
         <div className={styles.priceWrapper}>
-          <span className={styles.price}>{currentPrice} &#8372;</span>
+          {previousPrice !== 0 && previousPrice !== currentPrice ? (
+            <div className={styles.priceBox}>
+              <Sale className={styles.saleSvg} />
+              <span className={styles.price}>{currentPrice} &#8372;</span>
+              <span className={styles.previousPrice}>{previousPrice} &#8372;</span>
+            </div>
+          ) : (
+            <span className={styles.price}>{currentPrice} &#8372;</span>
+          )}
           <button onClick={addToCart} className={styles.addButton}>
             Add to cart
           </button>

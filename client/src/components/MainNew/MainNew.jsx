@@ -8,7 +8,7 @@ function MainNew() {
 
   useEffect(() => {
     (async () => {
-      const res = await instance.get('products/filter?perPage=8&sort=-date');
+      const res = await instance.get('products/filter?perPage=12&sort=-date');
       setNewProd(res.data.products);
     })();
   }, []);

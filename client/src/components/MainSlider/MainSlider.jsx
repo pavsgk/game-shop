@@ -6,7 +6,7 @@ const data = [
   {
     image: 'https://www.mobiflip.de/wp-content/uploads/2020/11/star-wars-jedi-fallen-order.jpg',
     caption: 'STAR WARS Jedi: Fallen Order',
-    url: 'details?605185',
+    url: 'details?577563',
   },
   {
     image:
@@ -22,7 +22,7 @@ const data = [
   {
     image: 'https://vgtimes.ru/uploads/games_previews/60906/assassins-creed-valhalla_vgdb.jpg',
     caption: "Assassin's Creed Valhalla",
-    url: 'details?546973',
+    url: 'details?549083',
   },
   {
     image:
