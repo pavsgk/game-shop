@@ -11,7 +11,7 @@
 }
 
 .dummy {
-  height: 70px;
+  height: 80px;
 }
 
 .nav {
@@ -79,7 +79,7 @@
 
 .logo {
   width: 90px;
-  height: 65px;
+  height: 75px;
 }
 
 .additionalNav {
@@ -119,8 +119,8 @@
   border-radius: 50%;
   padding: 0.5px 4px;
   position: absolute;
-  left: 111px;
-  top: 45px;
+  left: 102px;
+  top: 13px;
   font-size: 11px;
 }
 
@@ -159,6 +159,9 @@
   }
   .dummy {
     height: 80px;
+  }
+  .cartQuantityWrapper {
+    left: 109px;
   }
 }
 
@@ -221,5 +224,9 @@
   .menuImg {
     width: 50px;
     height: 50px;
+  }
+  .cartQuantityWrapper {
+    left: 113px;
+    top: 16px;
   }
 }
