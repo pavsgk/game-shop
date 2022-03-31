@@ -12,6 +12,7 @@ import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 
 const ProductItem = (props) => {
   const {title, currentPrice, description, itemNo, genre, publisher, imageUrls, age, _id} = props;
+  console.log(imageUrls, 'imageUrls');
 
   const dispatch = useDispatch();
   const isAuthorized = useSelector((state) => state.user.isAuthorized);
