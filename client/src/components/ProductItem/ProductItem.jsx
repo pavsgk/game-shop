@@ -9,7 +9,7 @@ import {
 import ProductItemSlider from '../ProductItemSlider/ProductItemSlider';
 import {addProductToTheCart, addItemToTheCartForNotLog} from '../../store/reducers/cartReducer';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
-import {ReactComponent as Sale} from '../ProductCard/img/sale3.svg';
+import {ReactComponent as Sale} from '../ProductCard/img/sale.svg';
 
 const ProductItem = (props) => {
   const {

@@ -5,7 +5,7 @@ import {addItemToTheCartForNotLog, addProductToTheCart} from '../../store/reduce
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
-import {ReactComponent as Sale} from './img/sale3.svg';
+import {ReactComponent as Sale} from './img/sale.svg';
 
 function ProductCard(props) {
   const {item, isFavorite} = props;
