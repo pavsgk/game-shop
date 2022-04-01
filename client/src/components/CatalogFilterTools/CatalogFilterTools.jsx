@@ -6,8 +6,11 @@ function CatalogFilterTools({openFilters}) {
   return (
     <div className={styles.filterToolsWrapper}>
       <Button className={styles.openFiltersBtn} onClick={openFilters} children="Filter" />
-      <Select defaultValue="Recomended" sx={{color: '#ffc500', outline: 'none'}}>
-        <MenuItem value="Recomended" children="Recomended" />
+      <Select
+        defaultValue="Recommended"
+        sx={{color: '#ffc500', outline: 'none'}}
+        classes={'.MuiSelect-icon {color: red}'}>
+        <MenuItem value="Recommended" children="Recommended" />
         <MenuItem value="lowest" children="Price: lowest first" />
         <MenuItem value="highest" children="Price: highest first" />
         <MenuItem value="newest" children="Time: newly listed" />

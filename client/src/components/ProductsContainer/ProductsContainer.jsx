@@ -41,7 +41,7 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
   return (
     <div className={styles.contentProductsWrapper}>
       <div className={isWishlist ? styles.containerWishlist : styles.container}>
-        <FilterMenu isOpen={isOpen} closeFilters={closeFilters} />
+        {!isWishlist && <FilterMenu isOpen={isOpen} closeFilters={closeFilters} />}
         <div
           className={
             products.length > 0 ? styles.productsContainer : styles.productsContainerWithOutItems

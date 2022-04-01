@@ -74,11 +74,6 @@ function Header() {
                 wishlist
               </Link>
             </li>
-            <li className={styles.navItem}>
-              <Link exact="true" className={styles.navLink} to="/checkout">
-                Checkout
-              </Link>
-            </li>
           </ul>
         </nav>
         <div className={styles.additionalNav}>

@@ -1,9 +1,10 @@
 import {useState} from 'react';
 import {ReactComponent as RightArrow} from '../../assets/svg/rightArrow.svg';
 import {ReactComponent as LeftArrow} from '../../assets/svg/leftArrow.svg';
+import {ReactComponent as CloseButton} from '../../assets/svg/close.svg';
 import styles from './modalSlider.module.scss';
 
-const ModalSlider = ({modalContent}) => {
+const ModalSlider = ({modalContent, closeModalImagesContent}) => {
   const sliderImages = modalContent.map((item) => {
     return {image: item};
   });
@@ -33,6 +34,9 @@ const ModalSlider = ({modalContent}) => {
           </div>
         );
       })}
+      <div onClick={closeModalImagesContent} className={styles.close}>
+        <CloseButton />
+      </div>
       <RightArrow className={styles.rightArrow} onClick={nextSlide} />
     </section>
   );

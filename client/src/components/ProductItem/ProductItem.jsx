@@ -1,14 +1,17 @@
 import styles from './ProductItem.module.scss';
 import CustomAccordion from '../CustomAccordion/CustomAccordion';
 import {useDispatch, useSelector} from 'react-redux';
-import {useEffect, useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {
   switchImagesModalState,
   addContentForImagesModal,
 } from '../../store/reducers/imagesModalReducer';
 import ProductItemSlider from '../ProductItemSlider/ProductItemSlider';
 import {addProductToTheCart, addItemToTheCartForNotLog} from '../../store/reducers/cartReducer';
+import {openSignModal} from '../../store/reducers/signInUpReducer';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
+import Button from '../Button/Button';
+import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
 
 const ProductItem = (props) => {
   const {title, currentPrice, description, itemNo, genre, publisher, imageUrls, age, _id} = props;
@@ -16,6 +19,8 @@ const ProductItem = (props) => {
   const dispatch = useDispatch();
   const isAuthorized = useSelector((state) => state.user.isAuthorized);
   const sliderRef = useRef(null);
+  const {wishlist} = useSelector((state) => state.wishlist);
+  const [isFavourite, setIsFavourite] = useState(false);
 
   useEffect(() => {
     const openModalImages = () => {
@@ -47,12 +52,43 @@ const ProductItem = (props) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (wishlist.length === 0) {
+      setIsFavourite(false);
+      return;
+    }
+
+    wishlist.forEach((item) => {
+      if (item.itemNo === itemNo) {
+        setIsFavourite(true);
+        return;
+      }
+      setIsFavourite(false);
+    });
+  }, [wishlist]);
+
   const addToCart = () => {
     if (isAuthorized) {
       dispatch(addProductToTheCart(_id));
       return;
     }
     dispatch(addItemToTheCartForNotLog(props.item));
+  };
+
+  const openModal = () => {
+    dispatch(openSignModal());
+  };
+
+  const switchWishItem = () => {
+    if (isAuthorized) {
+      if (isFavourite) {
+        dispatch(removeWishedProduct(_id));
+        return;
+      }
+      dispatch(addWishedProduct(_id));
+      return;
+    }
+    openModal();
   };
 
   if (!Object.keys(props).length) return <NotFoundPage />;
@@ -72,9 +108,20 @@ const ProductItem = (props) => {
         </div>
         <div className={styles.content_Price}>
           <div className={styles.content_Price_Item}>{currentPrice} &#8372;</div>
-          <button onClick={addToCart} className={styles.content_Price_Button}>
-            add to cart
-          </button>
+          <div className={styles.content_Price_Wrapper}>
+            <Button
+              onClick={addToCart}
+              type={'button'}
+              className={styles.content_Price_Wrapper_Button}>
+              add to cart
+            </Button>
+            <Button
+              onClick={switchWishItem}
+              type={'button'}
+              className={styles.content_Price_Wrapper_Button}>
+              {isFavourite ? 'remove from wishlist' : 'add to wishlist'}
+            </Button>
+          </div>
         </div>
         <div className={styles.content_Wrapper}>
           <CustomAccordion
