@@ -2,7 +2,7 @@
 
 .mainWrapper {
   padding: 0 30px;
-  margin-top: 40px;
+  margin-top: 90px;
 }
 
 .mobileProductTitle {
@@ -29,7 +29,6 @@
 }
 
 .content {
-  margin-top: 50px;
   display: flex;
   flex-direction: column;
 
@@ -69,6 +68,11 @@
       border: 1px solid $base-yellow;
       background: none;
       color: $base-yellow;
+      &:hover {
+        border: 1px solid $text;
+        color: $text;
+        background: $base-yellow;
+      }
     }
   }
 }

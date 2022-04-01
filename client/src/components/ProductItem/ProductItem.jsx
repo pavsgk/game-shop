@@ -8,11 +8,11 @@ import {
 } from '../../store/reducers/imagesModalReducer';
 import ProductItemSlider from '../ProductItemSlider/ProductItemSlider';
 import {addProductToTheCart, addItemToTheCartForNotLog} from '../../store/reducers/cartReducer';
+import {openSignModal} from '../../store/reducers/signInUpReducer';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 
 const ProductItem = (props) => {
   const {title, currentPrice, description, itemNo, genre, publisher, imageUrls, age, _id} = props;
-  console.log(imageUrls, 'imageUrls');
 
   const dispatch = useDispatch();
   const isAuthorized = useSelector((state) => state.user.isAuthorized);
@@ -54,6 +54,10 @@ const ProductItem = (props) => {
       return;
     }
     dispatch(addItemToTheCartForNotLog(props.item));
+  };
+
+  const openModal = () => {
+    dispatch(openSignModal());
   };
 
   if (!Object.keys(props).length) return <NotFoundPage />;
