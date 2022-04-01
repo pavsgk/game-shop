@@ -54,24 +54,33 @@
   &_Price {
     display: flex;
     justify-content: space-around;
+    margin-top: 60px;
     align-items: center;
     &_Item {
       font-size: 20px;
       line-height: 33px;
       color: $base-yellow;
+      margin-right: 20%;
     }
-    &_Button {
-      font-size: 15px;
-      line-height: 24px;
-      text-transform: uppercase;
-      padding: 8px 30px;
-      border: 1px solid $base-yellow;
-      background: none;
-      color: $base-yellow;
-      &:hover {
-        border: 1px solid $text;
-        color: $text;
-        background: $base-yellow;
+    &_Wrapper {
+      display: flex;
+
+      & > :first-child {
+        margin-right: 15px;
+      }
+      &_Button {
+        font-size: 15px;
+        line-height: 24px;
+        text-transform: uppercase;
+        padding: 8px 20px;
+        border: 1px solid $base-yellow;
+        background: none;
+        color: $base-yellow;
+        &:hover {
+          border: 1px solid $text;
+          color: $text;
+          background: $base-yellow;
+        }
       }
     }
   }
@@ -246,7 +255,7 @@
   }
 
   .content_Price {
-    max-width: 65%;
+    max-width: 90%;
     justify-content: space-between;
   }
 
