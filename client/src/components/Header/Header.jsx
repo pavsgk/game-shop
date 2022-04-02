@@ -30,6 +30,7 @@ function Header() {
     state.user.isAuthorized,
     state.cart.cartQuantity,
   ]);
+  const {wishlist} = useSelector((state) => state.wishlist);
 
   useEffect(() => {
     dispatch(countCartSum());
@@ -72,6 +73,9 @@ function Header() {
             <li className={styles.navItem}>
               <Link exact="true" className={styles.navLink} to="/wishlist">
                 wishlist
+                {wishlist.length > 0 && isAuthorized && (
+                  <div className={styles.wishlistQuantityWrapper}>{wishlist.length}</div>
+                )}
               </Link>
             </li>
           </ul>
@@ -82,7 +86,7 @@ function Header() {
           </Link>
           <Link exact="true" to="/cart">
             <CartImg className={styles.cartImg} />
-            <div className={styles.cartQuantityWrapper}>{cartQuantity}</div>
+            {cartQuantity > 0 && <div className={styles.cartQuantityWrapper}>{cartQuantity}</div>}
           </Link>
           <div className={styles.navLine}> </div>
           {isAuthorized ? (

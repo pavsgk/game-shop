@@ -60,6 +60,7 @@
 .navItem {
   width: 100%;
   border-bottom: $text solid 1px;
+  position: relative;
 }
 
 .navItem:last-child {
@@ -124,6 +125,10 @@
   font-size: 11px;
 }
 
+.wishlistQuantityWrapper {
+  @extend .cartQuantityWrapper;
+}
+
 //------------------TABLET
 
 @media (min-width: $tablet) {
@@ -162,6 +167,9 @@
   }
   .cartQuantityWrapper {
     left: 109px;
+  }
+  .wishlistQuantityWrapper {
+    top: 20px;
   }
 }
 
@@ -228,5 +236,8 @@
   .cartQuantityWrapper {
     left: 113px;
     top: 16px;
+  }
+  .wishlistQuantityWrapper {
+    top: 25px;
   }
 }
