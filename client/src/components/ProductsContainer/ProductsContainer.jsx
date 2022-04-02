@@ -4,8 +4,10 @@ import styles from './ProductsContainer.module.scss';
 import {getFilteredProducts, getAllProducts} from '../../api/products';
 import ProductsPlaceholder from '../ProductsPlaceholder/ProductsPlaceholder';
 import {useLocation} from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import FilterMenu from '../FilterMenu/FilterMenu';
+import {openSignModal} from '../../store/reducers/signInUpReducer';
+import {getWishlist} from '../../store/reducers/wishlistReducer';
 
 function ProductsContainer({isWishlist, isOpen, closeFilters}) {
   const [products, setProducts] = useState([]);
@@ -14,6 +16,13 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
   let location = useLocation();
   const {wishlist} = useSelector((state) => state.wishlist);
   const {isAuthorized} = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    {
+      !isAuthorized && isWishlist && dispatch(openSignModal());
+    }
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -34,7 +43,7 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
         setIsError(true);
       }
     })();
-  }, [location.search, wishlist, isAuthorized]);
+  }, [location.search, isAuthorized]);
 
   const idItemsInWishlist = wishlist.map((e) => e._id);
 
@@ -42,22 +51,42 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
     <div className={styles.contentProductsWrapper}>
       <div className={isWishlist ? styles.containerWishlist : styles.container}>
         {!isWishlist && <FilterMenu isOpen={isOpen} closeFilters={closeFilters} />}
-        <div
-          className={
-            products.length > 0 ? styles.productsContainer : styles.productsContainerWithOutItems
-          }>
-          {isLoading && <ProductsPlaceholder />}
-          {isError && <h3>Something went wrong. Please, try again later</h3>}
-          {products.length > 0 ? (
-            products.map((item) => {
-              if (idItemsInWishlist.includes(item._id) && isAuthorized) {
-                return <ProductCard key={item.itemNo} item={item} isFavorite={true} />;
-              } else return <ProductCard key={item.itemNo} item={item} />;
-            })
-          ) : (
-            <h2>There are no products to your request :(</h2>
-          )}
-        </div>
+        {!isWishlist && (
+          <div
+            className={
+              products.length > 0 ? styles.productsContainer : styles.productsContainerWithOutItems
+            }>
+            {isLoading && <ProductsPlaceholder />}
+            {isError && <h3>Something went wrong. Please, try again later</h3>}
+            {products.length > 0 ? (
+              products.map((item) => {
+                if (idItemsInWishlist.includes(item._id) && isAuthorized) {
+                  return <ProductCard key={item.itemNo} item={item} isFavorite={true} />;
+                } else return <ProductCard key={item.itemNo} item={item} />;
+              })
+            ) : (
+              <h2>There are no products to your request</h2>
+            )}
+          </div>
+        )}
+        {isWishlist && (
+          <div
+            className={
+              wishlist.length > 0 && isAuthorized
+                ? styles.productsContainer
+                : styles.productsContainerWithOutItems
+            }>
+            {isLoading && <ProductsPlaceholder />}
+            {isError && <h3>Something went wrong. Please, try again later</h3>}
+            {isAuthorized ? (
+              wishlist.map((item) => (
+                <ProductCard key={item.itemNo} item={item} isFavorite={true} />
+              ))
+            ) : (
+              <h2>There are no products to your request</h2>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

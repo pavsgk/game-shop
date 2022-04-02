@@ -26,13 +26,16 @@ function App() {
 
   useEffect(() => {
     dispatch(init());
-    dispatch(getWishlist());
+    if (isAuthorized) {
+      dispatch(getWishlist());
+    }
     dispatch(getCartFromLS());
   }, [dispatch]);
 
   useEffect(() => {
     if (isAuthorized) {
       dispatch(getCartFromServer());
+      dispatch(getWishlist());
     }
   }, [isAuthorized, dispatch]);
 
