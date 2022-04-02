@@ -11,6 +11,7 @@ const initialState = {
     address: '',
     mobile: '',
     city: '',
+    email: '',
   },
   shippingMethod: 'Standart',
   shippingPrice: 29.95,
@@ -22,7 +23,7 @@ const checkoutSlice = createSlice({
   initialState,
   reducers: {
     switchTab(state, {payload}) {
-      if (state.isValid && payload !== state.checkoutActiveTab) {
+      if (payload !== state.checkoutActiveTab) {
         state.checkoutActiveTab = payload;
       }
     },
