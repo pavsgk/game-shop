@@ -7,7 +7,7 @@
 
 .mobileProductTitle {
   margin-top: 45px;
-  margin-bottom: 64px;
+  margin-bottom: 30px;
   &_Text {
     color: $text;
     font-size: 18px;
@@ -73,19 +73,20 @@
       font-size: 20px;
       line-height: 33px;
       color: $base-yellow;
-      margin-right: 20%;
     }
     &_Wrapper {
       display: flex;
+      flex-direction: column;
+      width: 169px;
 
       & > :first-child {
-        margin-right: 15px;
+        margin-bottom: 10px;
       }
       &_Button {
-        font-size: 15px;
+        font-size: 12px;
         line-height: 24px;
         text-transform: uppercase;
-        padding: 8px 20px;
+        padding: 4px 8px;
         border: 1px solid $base-yellow;
         background: none;
         color: $base-yellow;
@@ -236,6 +237,21 @@
   .content_Reviews_Title {
     justify-content: end;
   }
+  .content_Price {
+    max-width: 80%;
+    margin-top: 0;
+  }
+  .content_Price_Wrapper {
+    flex-direction: row;
+    width: auto;
+    & > :first-child {
+      margin-bottom: 0;
+      margin-right: 15px;
+    }
+    & > :last-child {
+      width: 169px;
+    }
+  }
 }
 
 @media (min-width: $tablet-max) {
@@ -268,7 +284,7 @@
   }
 
   .content_Price {
-    max-width: 90%;
+    max-width: 80%;
     justify-content: space-between;
   }
 
