@@ -127,9 +127,20 @@ const ProductItem = (props) => {
           ) : (
             <div className={styles.content_Price_Item}>{currentPrice} &#8372;</div>
           )}
-          <button onClick={addToCart} className={styles.content_Price_Button}>
-            add to cart
-          </button>
+          <div className={styles.content_Price_Wrapper}>
+            <Button
+              onClick={addToCart}
+              type={'button'}
+              className={styles.content_Price_Wrapper_Button}>
+              add to cart
+            </Button>
+            <Button
+              onClick={switchWishItem}
+              type={'button'}
+              className={styles.content_Price_Wrapper_Button}>
+              {isFavourite ? 'remove from wishlist' : 'add to wishlist'}
+            </Button>
+          </div>
         </div>
         <div className={styles.content_Wrapper}>
           <CustomAccordion
