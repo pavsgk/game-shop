@@ -3,6 +3,7 @@ import styles from './MainPage.module.scss';
 import MainSlider from '../../components/MainSlider/MainSlider';
 import Genres from '../../components/Genres/Genres';
 import MainNew from '../../components/MainNew/MainNew';
+import MainSale from '../../components/MainSale/MainSale';
 
 function MainPage() {
   return (
@@ -10,6 +11,7 @@ function MainPage() {
       <MainSlider />
       <Genres />
       <MainNew />
+      <MainSale />
     </div>
   );
 }

@@ -10,11 +10,23 @@ import ProductItemSlider from '../ProductItemSlider/ProductItemSlider';
 import {addProductToTheCart, addItemToTheCartForNotLog} from '../../store/reducers/cartReducer';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
+import {ReactComponent as Sale} from '../ProductCard/img/sale.svg';
 import Button from '../Button/Button';
 import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
 
 const ProductItem = (props) => {
-  const {title, currentPrice, description, itemNo, genre, publisher, imageUrls, age, _id} = props;
+  const {
+    title,
+    currentPrice,
+    previousPrice,
+    description,
+    itemNo,
+    genre,
+    publisher,
+    imageUrls,
+    age,
+    _id,
+  } = props;
 
   const dispatch = useDispatch();
   const isAuthorized = useSelector((state) => state.user.isAuthorized);
@@ -107,21 +119,17 @@ const ProductItem = (props) => {
           <span className={styles.content_Title_Code}>{itemNo}</span>
         </div>
         <div className={styles.content_Price}>
-          <div className={styles.content_Price_Item}>{currentPrice} &#8372;</div>
-          <div className={styles.content_Price_Wrapper}>
-            <Button
-              onClick={addToCart}
-              type={'button'}
-              className={styles.content_Price_Wrapper_Button}>
-              add to cart
-            </Button>
-            <Button
-              onClick={switchWishItem}
-              type={'button'}
-              className={styles.content_Price_Wrapper_Button}>
-              {isFavourite ? 'remove from wishlist' : 'add to wishlist'}
-            </Button>
-          </div>
+          {previousPrice !== 0 && previousPrice !== currentPrice ? (
+            <div className={styles.priceBox}>
+              <div className={styles.content_Price_Item}>{currentPrice} &#8372;</div>
+              <div className={styles.previousPrice}>{previousPrice} &#8372;</div>
+            </div>
+          ) : (
+            <div className={styles.content_Price_Item}>{currentPrice} &#8372;</div>
+          )}
+          <button onClick={addToCart} className={styles.content_Price_Button}>
+            add to cart
+          </button>
         </div>
         <div className={styles.content_Wrapper}>
           <CustomAccordion
