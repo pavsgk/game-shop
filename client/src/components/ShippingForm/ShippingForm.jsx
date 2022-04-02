@@ -41,6 +41,7 @@ const yupValidationSchema = yup.object().shape({
     .min(5, 'min. 5 characters required')
     .matches(/^[a-zA-Z0-9\s,'-]*$/),
   mobile: yup.string().required('Enter phone').min(7, 'min. 7 characters required').matches(/\d/g),
+  email: yup.string().email('Incorrect email').required('Enter email'),
   syncProfile: yup.boolean(),
 });
 
@@ -90,6 +91,7 @@ function ShippingForm() {
     city: '',
     address: '',
     mobile: '',
+    email: '',
     syncProfile: false,
   };
 
@@ -114,6 +116,7 @@ function ShippingForm() {
             <CustomField name="address" label="Address" type="text" />
           </div>
           <CustomField name="mobile" label="Phone" type="text" />
+          <CustomField name="email" label="Email" type="text" />
 
           {/* <div className={styles.checkbox}>
             <input id="one" type="checkbox" />
