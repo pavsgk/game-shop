@@ -160,6 +160,9 @@
       line-height: 35px;
       margin-top: 30px;
     }
+    & > span {
+      text-align: end;
+    }
   }
 }
 

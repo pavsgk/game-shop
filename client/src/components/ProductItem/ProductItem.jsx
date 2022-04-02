@@ -26,6 +26,7 @@ const ProductItem = (props) => {
     imageUrls,
     age,
     _id,
+    platform,
   } = props;
 
   const dispatch = useDispatch();
@@ -35,11 +36,15 @@ const ProductItem = (props) => {
   const [isFavourite, setIsFavourite] = useState(false);
 
   useEffect(() => {
-    const openModalImages = () => {
-      dispatch(addContentForImagesModal(imageUrls));
+    const openModalImages = (currentImg) => {
+      const currentUrls = imageUrls.slice();
+      const index = currentUrls.findIndex((item) => item === currentImg);
+      currentUrls.splice(index, 1);
+      currentUrls.unshift(currentImg);
+      dispatch(addContentForImagesModal(currentUrls));
       dispatch(switchImagesModalState());
     };
-
+    console.log(platform, 'platform');
     const slider = sliderRef.current;
     if (slider) {
       slider.querySelector('#thumbnail-div').style.justifyContent = 'space-evenly';
@@ -48,7 +53,7 @@ const ProductItem = (props) => {
 
       slider.addEventListener('click', (event) => {
         if (event.target.tagName === 'IMG') {
-          openModalImages();
+          openModalImages(event.target.src);
         }
       });
     }
@@ -57,7 +62,7 @@ const ProductItem = (props) => {
       if (slider) {
         slider.removeEventListener('click', (event) => {
           if (event.target.tagName === 'IMG') {
-            openModalImages();
+            openModalImages(event.target.src);
           }
         });
       }
@@ -164,6 +169,10 @@ const ProductItem = (props) => {
                       } else return `${e}`;
                     })}
                   </span>
+                </div>
+                <div className={styles.content_Details_Wrapper_Item}>
+                  <p style={{width: '40%'}}>Platforms:</p>
+                  <span>{Array.isArray(platform) ? platform.join(', ') : platform}</span>
                 </div>
                 <div className={styles.content_Details_Wrapper_Item}>
                   <p style={{width: '40%'}}>Publisher:</p>
