@@ -26,6 +26,7 @@ const ProductItem = (props) => {
     imageUrls,
     age,
     _id,
+    platform,
   } = props;
 
   const dispatch = useDispatch();
@@ -43,7 +44,7 @@ const ProductItem = (props) => {
       dispatch(addContentForImagesModal(currentUrls));
       dispatch(switchImagesModalState());
     };
-
+    console.log(platform, 'platform');
     const slider = sliderRef.current;
     if (slider) {
       slider.querySelector('#thumbnail-div').style.justifyContent = 'space-evenly';
@@ -168,6 +169,10 @@ const ProductItem = (props) => {
                       } else return `${e}`;
                     })}
                   </span>
+                </div>
+                <div className={styles.content_Details_Wrapper_Item}>
+                  <p style={{width: '40%'}}>Platforms:</p>
+                  <span>{Array.isArray(platform) ? platform.join(', ') : platform}</span>
                 </div>
                 <div className={styles.content_Details_Wrapper_Item}>
                   <p style={{width: '40%'}}>Publisher:</p>
