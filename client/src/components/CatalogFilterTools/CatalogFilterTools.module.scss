@@ -2,10 +2,10 @@
 
 @media (min-width: $mobile) {
   .filterToolsWrapper {
-    width: 350px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 20px;
   }
 
   .openFiltersBtn {
@@ -55,16 +55,10 @@
   }
 }
 
-@media (min-width: $tablet) {
-  .filterToolsWrapper {
-    width: 740px;
-  }
-}
-
 @media (min-width: $tablet-max) {
   .filterToolsWrapper {
-    width: 1036px;
     justify-content: end;
+    margin: 40px 20px 20px 20px;
   }
 
   .openFiltersBtn {
@@ -74,7 +68,6 @@
 
 @media (min-width: $desktop) {
   .filterToolsWrapper {
-    width: 1296px;
     justify-content: end;
   }
 

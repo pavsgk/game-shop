@@ -2,6 +2,7 @@ import ProductItem from '../../components/ProductItem/ProductItem';
 import instance from '../../api/instance';
 import {useState, useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 
 function DetailsPage() {
   const [item, setItem] = useState({});

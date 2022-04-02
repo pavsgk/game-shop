@@ -31,10 +31,10 @@ const ImagesModal = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
-        <div onClick={closeModalImagesContent} className={styles.closeButton}>
-          <CloseButton />
-        </div>
-        <ModalSlider modalContent={modalContent} />
+        <ModalSlider
+          modalContent={modalContent}
+          closeModalImagesContent={closeModalImagesContent}
+        />
       </div>
       <div onClick={closeModalImagesContent} className={styles.background} />
     </div>

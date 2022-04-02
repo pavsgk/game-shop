@@ -1,15 +1,18 @@
 import styles from './ProductItem.module.scss';
 import CustomAccordion from '../CustomAccordion/CustomAccordion';
 import {useDispatch, useSelector} from 'react-redux';
-import {useEffect, useRef} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {
   switchImagesModalState,
   addContentForImagesModal,
 } from '../../store/reducers/imagesModalReducer';
 import ProductItemSlider from '../ProductItemSlider/ProductItemSlider';
 import {addProductToTheCart, addItemToTheCartForNotLog} from '../../store/reducers/cartReducer';
+import {openSignModal} from '../../store/reducers/signInUpReducer';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 import {ReactComponent as Sale} from '../ProductCard/img/sale.svg';
+import Button from '../Button/Button';
+import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
 
 const ProductItem = (props) => {
   const {
@@ -28,6 +31,8 @@ const ProductItem = (props) => {
   const dispatch = useDispatch();
   const isAuthorized = useSelector((state) => state.user.isAuthorized);
   const sliderRef = useRef(null);
+  const {wishlist} = useSelector((state) => state.wishlist);
+  const [isFavourite, setIsFavourite] = useState(false);
 
   useEffect(() => {
     const openModalImages = () => {
@@ -59,12 +64,43 @@ const ProductItem = (props) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (wishlist.length === 0) {
+      setIsFavourite(false);
+      return;
+    }
+
+    wishlist.forEach((item) => {
+      if (item.itemNo === itemNo) {
+        setIsFavourite(true);
+        return;
+      }
+      setIsFavourite(false);
+    });
+  }, [wishlist]);
+
   const addToCart = () => {
     if (isAuthorized) {
       dispatch(addProductToTheCart(_id));
       return;
     }
     dispatch(addItemToTheCartForNotLog(props.item));
+  };
+
+  const openModal = () => {
+    dispatch(openSignModal());
+  };
+
+  const switchWishItem = () => {
+    if (isAuthorized) {
+      if (isFavourite) {
+        dispatch(removeWishedProduct(_id));
+        return;
+      }
+      dispatch(addWishedProduct(_id));
+      return;
+    }
+    openModal();
   };
 
   if (!Object.keys(props).length) return <NotFoundPage />;

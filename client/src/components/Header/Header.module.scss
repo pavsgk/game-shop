@@ -7,10 +7,11 @@
   position: fixed;
   z-index: 3;
   width: 100%;
+  border-bottom: 1px solid olive;
 }
 
 .dummy {
-  height: 99px;
+  height: 80px;
 }
 
 .nav {
@@ -68,7 +69,7 @@
 .navLink {
   color: $base-yellow;
   text-transform: uppercase;
-  padding: 10px 50px 10px 15px;
+  padding: 22px 50px 22px 15px;
   margin: 2px;
   font-size: 18px;
   display: block;
@@ -78,7 +79,7 @@
 
 .logo {
   width: 90px;
-  height: 95px;
+  height: 75px;
 }
 
 .additionalNav {
@@ -118,8 +119,8 @@
   border-radius: 50%;
   padding: 0.5px 4px;
   position: absolute;
-  left: 111px;
-  top: 45px;
+  left: 102px;
+  top: 13px;
   font-size: 11px;
 }
 
@@ -146,7 +147,7 @@
 
   .logo {
     width: 110px;
-    height: 115px;
+    height: 75px;
   }
 
   .logIn {
@@ -157,7 +158,10 @@
     margin: 5px;
   }
   .dummy {
-    height: 119px;
+    height: 80px;
+  }
+  .cartQuantityWrapper {
+    left: 109px;
   }
 }
 
@@ -165,7 +169,7 @@
 
 @media (min-width: $tablet-max) {
   .dummy {
-    height: 149px;
+    height: 90px;
   }
 
   .menu {
@@ -201,7 +205,7 @@
 
   .logo {
     width: 137px;
-    height: 145px;
+    height: 85px;
     margin-left: 15px;
   }
 
@@ -220,5 +224,9 @@
   .menuImg {
     width: 50px;
     height: 50px;
+  }
+  .cartQuantityWrapper {
+    left: 113px;
+    top: 16px;
   }
 }

@@ -6,12 +6,17 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
 import {ReactComponent as Sale} from './img/sale.svg';
+import {openSignModal} from '../../store/reducers/signInUpReducer';
 
 function ProductCard(props) {
   const {item, isFavorite} = props;
   const {title, imageUrls, previousPrice, currentPrice, itemNo, platform, _id} = item;
   const isAuthorized = useSelector((state) => state.user.isAuthorized);
   const dispatch = useDispatch();
+
+  const openModal = () => {
+    dispatch(openSignModal());
+  };
 
   const addToCart = () => {
     if (isAuthorized) {
@@ -27,7 +32,7 @@ function ProductCard(props) {
         {isFavorite ? (
           <BookmarkIcon
             onClick={() => {
-              dispatch(removeWishedProduct(_id));
+              isAuthorized ? dispatch(removeWishedProduct(_id)) : openModal();
             }}
             sx={{
               color: '#f7d131',
@@ -42,7 +47,7 @@ function ProductCard(props) {
         ) : (
           <BookmarkBorderIcon
             onClick={() => {
-              dispatch(addWishedProduct(_id));
+              isAuthorized ? dispatch(addWishedProduct(_id)) : openModal();
             }}
             sx={{
               color: '#f7d131',
