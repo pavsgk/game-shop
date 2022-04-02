@@ -35,8 +35,12 @@ const ProductItem = (props) => {
   const [isFavourite, setIsFavourite] = useState(false);
 
   useEffect(() => {
-    const openModalImages = () => {
-      dispatch(addContentForImagesModal(imageUrls));
+    const openModalImages = (currentImg) => {
+      const currentUrls = imageUrls.slice();
+      const index = currentUrls.findIndex((item) => item === currentImg);
+      currentUrls.splice(index, 1);
+      currentUrls.unshift(currentImg);
+      dispatch(addContentForImagesModal(currentUrls));
       dispatch(switchImagesModalState());
     };
 
@@ -48,7 +52,7 @@ const ProductItem = (props) => {
 
       slider.addEventListener('click', (event) => {
         if (event.target.tagName === 'IMG') {
-          openModalImages();
+          openModalImages(event.target.src);
         }
       });
     }
@@ -57,7 +61,7 @@ const ProductItem = (props) => {
       if (slider) {
         slider.removeEventListener('click', (event) => {
           if (event.target.tagName === 'IMG') {
-            openModalImages();
+            openModalImages(event.target.src);
           }
         });
       }
