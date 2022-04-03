@@ -78,7 +78,7 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
             }>
             {isLoading && <ProductsPlaceholder />}
             {isError && <h3>Something went wrong. Please, try again later</h3>}
-            {isAuthorized ? (
+            {isAuthorized && wishlist.length > 0 ? (
               wishlist.map((item) => (
                 <ProductCard key={item.itemNo} item={item} isFavorite={true} />
               ))
