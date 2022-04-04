@@ -30,46 +30,49 @@ function ProductCard(props) {
   return (
     <>
       <div className={styles.cardContainer}>
-        {isFavorite ? (
-          <BookmarkIcon
-            onClick={() => {
-              isAuthorized ? dispatch(removeWishedProduct(_id)) : openModal();
-            }}
-            sx={{
-              color: '#f7d131',
-              fontSize: 'xxx-l',
-              cursor: 'pointer',
-              position: 'absolute',
-              top: '-3px',
-              right: '10px',
-              '&:hover': {transform: 'scale(1.2)'},
-            }}
-          />
-        ) : (
-          <BookmarkBorderIcon
-            onClick={() => {
-              isAuthorized ? dispatch(addWishedProduct(_id)) : openModal();
-            }}
-            sx={{
-              color: '#f7d131',
-              fontSize: 'xxx-l',
-              cursor: 'pointer',
-              position: 'absolute',
-              top: '-3px',
-              right: '10px',
-              '&:hover': {transform: 'scale(1.2)'},
-            }}
-          />
-        )}
-        <Link to={`/details?${itemNo}`}>
-          <div className={styles.iconWrapper}>
-            <img src={imageUrls[0]} alt={title} height="250" width="220" />
-          </div>
-          <h3 className={styles.productDecription}>{title}</h3>
-        </Link>
-        <p className={styles.productPlatform}>
-          Platform: {Array.isArray(platform) ? platform.join(', ') : platform}
-        </p>
+        <div>
+          {isFavorite ? (
+            <BookmarkIcon
+              onClick={() => {
+                isAuthorized ? dispatch(removeWishedProduct(_id)) : openModal();
+              }}
+              sx={{
+                color: '#f7d131',
+                fontSize: 'xxx-l',
+                cursor: 'pointer',
+                position: 'absolute',
+                top: '-3px',
+                right: '10px',
+                '&:hover': {transform: 'scale(1.2)'},
+              }}
+            />
+          ) : (
+            <BookmarkBorderIcon
+              onClick={() => {
+                isAuthorized ? dispatch(addWishedProduct(_id)) : openModal();
+              }}
+              sx={{
+                color: '#f7d131',
+                fontSize: 'xxx-l',
+                cursor: 'pointer',
+                position: 'absolute',
+                top: '-3px',
+                right: '10px',
+                '&:hover': {transform: 'scale(1.2)'},
+              }}
+            />
+          )}
+          <Link to={`/details?${itemNo}`}>
+            <div className={styles.iconWrapper}>
+              <img src={imageUrls[0]} alt={title} height="250" width="220" />
+            </div>
+            <h3 className={styles.productDecription}>{title}</h3>
+          </Link>
+          <p className={styles.productPlatform}>
+            Platform: {Array.isArray(platform) ? platform.join(', ') : platform}
+          </p>
+        </div>
+
         <div className={styles.priceWrapper}>
           {previousPrice !== 0 && previousPrice !== currentPrice ? (
             <div className={styles.priceBox}>

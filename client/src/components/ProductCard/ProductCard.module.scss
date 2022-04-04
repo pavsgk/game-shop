@@ -2,10 +2,12 @@
 @media (min-width: $mobile) {
   .cardContainer {
     width: 220px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+    margin-bottom: 20px;
   }
 
   .bookmark {
@@ -13,7 +15,7 @@
     position: absolute;
     right: 10px;
     &:hover {
-      transform: scale(1.2#f7d131);
+      transform: scale(1.2);
     }
   }
 
