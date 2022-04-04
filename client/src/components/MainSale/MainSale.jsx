@@ -4,9 +4,11 @@ import React, {useEffect, useState} from 'react';
 import instance from '../../api/instance';
 import {ReactComponent as Sale} from './img/sale.svg';
 
-function MainSale() {
+function MainSale(props) {
+  const {isMain = true} = props;
   const [saleProd, setSaleProd] = useState([]);
   const sale = [];
+  let x = null;
 
   useEffect(() => {
     (async () => {
@@ -23,6 +25,11 @@ function MainSale() {
         }
       });
     }
+    if (isMain) {
+      x = sale.slice(0, 12);
+    } else {
+      x = sale;
+    }
   })();
 
   return (
@@ -32,7 +39,7 @@ function MainSale() {
         <Sale className={styles.titleSvg} />
       </div>
       <div className={styles.wrapper}>
-        {sale.slice(0, 12).map((el) => {
+        {x.map((el) => {
           return (
             <>
               <div className={styles.componentWrapper}>

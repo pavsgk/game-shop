@@ -8,6 +8,7 @@ import DetailsPage from './pages/DetailsPage/DetailsPage';
 import MainPage from './pages/MainPage/MainPage';
 import FavouritePage from './pages/FavouritePage/FavouritePage';
 import ProductsPage from './pages/ProductsPage/ProductsPage';
+import SalePage from './pages/SalePage/SalePage';
 import TestPage from './api/test';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect} from 'react';
@@ -55,6 +56,7 @@ function App() {
           <Route path="catalog/*" element={<ProductsPage />} />
           <Route path="details/*" element={<DetailsPage />} />
           <Route path="wishlist" element={<FavouritePage />} />
+          <Route path="sale" element={<SalePage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
           <Route path="orderConfirmed" element={<OrderConfirmed />} />
