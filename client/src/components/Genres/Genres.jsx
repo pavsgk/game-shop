@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styles from './Genres.module.scss';
 import React, {useEffect, useState} from 'react';
 import {getAllFilters} from '../../api/filters';
@@ -18,6 +19,10 @@ function GenreComponent(props) {
     </>
   );
 }
+
+GenreComponent.propTypes = {
+  genre: PropTypes.string,
+};
 
 function Genres() {
   const [genres, setGenres] = useState([]);

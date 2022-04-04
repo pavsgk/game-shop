@@ -4,7 +4,6 @@ import {useSelector} from 'react-redux';
 import {ReactComponent as CartPic} from '../../assets/svg/cart.svg';
 import {Link, useNavigate} from 'react-router-dom';
 import Button from '../Button/Button';
-import {useEffect} from 'react';
 
 const CartContainer = () => {
   const [cart, sum] = useSelector((state) => [state.cart.products, state.cart.cartSum]);

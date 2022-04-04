@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import CustomAccordion from '../CustomAccordion/CustomAccordion';
 import {Formik, Form, Field} from 'formik';
 import styles from './FilterMenu.module.scss';
@@ -189,5 +190,10 @@ function FilterMenu({isOpen, closeFilters}) {
     </div>
   );
 }
+
+FilterMenu.propTypes = {
+  closeFilters: PropTypes.func,
+  isOpen: PropTypes.bool,
+};
 
 export default FilterMenu;
