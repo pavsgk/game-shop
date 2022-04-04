@@ -7,12 +7,18 @@ import {
   addContentForImagesModal,
 } from '../../store/reducers/imagesModalReducer';
 import ProductItemSlider from '../ProductItemSlider/ProductItemSlider';
-import {addProductToTheCart, addItemToTheCartForNotLog} from '../../store/reducers/cartReducer';
+import {
+  addProductToTheCart,
+  addItemToTheCartForNotLog,
+  addMoreThanOneProductsToTheCart,
+} from '../../store/reducers/cartReducer';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 import {ReactComponent as Sale} from '../ProductCard/img/sale.svg';
 import Button from '../Button/Button';
 import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
+import {ReactComponent as MinusPic} from '../../assets/svg/count_minus.svg';
+import {ReactComponent as PlusPic} from '../../assets/svg/count_plus.svg';
 
 const ProductItem = (props) => {
   const {
@@ -27,6 +33,7 @@ const ProductItem = (props) => {
     age,
     _id,
     platform,
+    quantity,
   } = props;
 
   const dispatch = useDispatch();
@@ -34,6 +41,16 @@ const ProductItem = (props) => {
   const sliderRef = useRef(null);
   const {wishlist} = useSelector((state) => state.wishlist);
   const [isFavourite, setIsFavourite] = useState(false);
+  const [countInputValue, setCountInputValue] = useState(1);
+  const [cart, sum] = useSelector((state) => [state.cart.products, state.cart.cartSum]);
+
+  useEffect(() => {
+    console.log(countInputValue, 'countInputValue');
+  }, [countInputValue]);
+
+  useEffect(() => {
+    console.log(cart, 'cart');
+  }, [cart]);
 
   useEffect(() => {
     const openModalImages = (currentImg) => {
@@ -44,7 +61,7 @@ const ProductItem = (props) => {
       dispatch(addContentForImagesModal(currentUrls));
       dispatch(switchImagesModalState());
     };
-    console.log(platform, 'platform');
+
     const slider = sliderRef.current;
     if (slider) {
       slider.querySelector('#thumbnail-div').style.justifyContent = 'space-evenly';
@@ -85,11 +102,13 @@ const ProductItem = (props) => {
   }, [wishlist]);
 
   const addToCart = () => {
+    const cartItem = {product: props, cartQuantity: countInputValue};
+
     if (isAuthorized) {
-      dispatch(addProductToTheCart(_id));
+      dispatch(addMoreThanOneProductsToTheCart(cartItem));
       return;
     }
-    dispatch(addItemToTheCartForNotLog(props.item));
+    dispatch(addItemToTheCartForNotLog(cartItem));
   };
 
   const openModal = () => {
@@ -132,19 +151,64 @@ const ProductItem = (props) => {
           ) : (
             <div className={styles.content_Price_Item}>{currentPrice} &#8372;</div>
           )}
-          <div className={styles.content_Price_Wrapper}>
-            <Button
-              onClick={addToCart}
-              type={'button'}
-              className={styles.content_Price_Wrapper_Button}>
-              add to cart
-            </Button>
-            <Button
-              onClick={switchWishItem}
-              type={'button'}
-              className={styles.content_Price_Wrapper_Button}>
-              {isFavourite ? 'remove from wishlist' : 'add to wishlist'}
-            </Button>
+          <div className={styles.content_Price_ButtonsWrapper}>
+            <div className={styles.content_Price_infoWrapperQuantity}>
+              <div className={styles.content_Price_infoWrapperQuantityItem}>
+                Quantity:{quantity}
+              </div>
+              <div className={styles.content_Price_infoWrapperQuantityBlock}>
+                <div
+                  onClick={() => countInputValue > 1 && setCountInputValue(countInputValue - 1)}
+                  className={
+                    countInputValue <= 1
+                      ? styles.content_Price_infoWrapperQuantityBlockMinusNotWork
+                      : styles.content_Price_infoWrapperQuantityBlockMinus
+                  }>
+                  <MinusPic
+                    className={
+                      countInputValue <= 1
+                        ? styles.content_Price_infoWrapperQuantityBlockMinusItemNotWork
+                        : styles.content_Price_infoWrapperQuantityBlockMinusItem
+                    }
+                  />
+                </div>
+                <input
+                  className={styles.content_Price_infoWrapperQuantityBlockInput}
+                  type="text"
+                  value={countInputValue}
+                  onChange={({target}) => {
+                    setCountInputValue('');
+                    if (!isNaN(target.value) && target.value <= quantity && target.value > 0) {
+                      setCountInputValue(Number(target.value));
+                    }
+                  }}
+                  onBlur={() => {
+                    countInputValue === '' && setCountInputValue(1);
+                  }}
+                />
+                <div
+                  onClick={() =>
+                    countInputValue < quantity && setCountInputValue(countInputValue + 1)
+                  }
+                  className={styles.content_Price_infoWrapperQuantityBlockPlus}>
+                  <PlusPic className={styles.content_Price_infoWrapperQuantityBlockPlusItem} />
+                </div>
+                <Button
+                  onClick={addToCart}
+                  type={'button'}
+                  className={styles.content_Price_infoWrapperQuantity_Button}>
+                  add to cart
+                </Button>
+              </div>
+            </div>
+            <div className={styles.content_WishlistWrapper}>
+              <Button
+                onClick={switchWishItem}
+                type={'button'}
+                className={styles.content_WishlistWrapper_Item}>
+                {isFavourite ? 'remove from wishlist' : 'add to wishlist'}
+              </Button>
+            </div>
           </div>
         </div>
         <div className={styles.content_Wrapper}>

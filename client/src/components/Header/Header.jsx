@@ -12,7 +12,9 @@ import {
   countCartSum,
   getCartFromLS,
   getCartFromServer,
+  updateCartFromLs,
 } from '../../store/reducers/cartReducer';
+import {removeFromLS} from '../../utils/localStorage';
 
 function Header() {
   const dispatch = useDispatch();
@@ -36,14 +38,6 @@ function Header() {
     dispatch(countCartSum());
     dispatch(countCartQuantity());
   }, [cart, dispatch, isAuthorized]);
-
-  useEffect(() => {
-    if (isAuthorized) {
-      dispatch(getCartFromServer());
-      return;
-    }
-    dispatch(getCartFromLS());
-  }, [isAuthorized]);
 
   const [menuActive, setMenuActive] = useState(false);
 

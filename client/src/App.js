@@ -18,7 +18,8 @@ import ImagesModal from './components/ImagesModal/ImagesModal';
 import {getWishlist} from './store/reducers/wishlistReducer';
 import OrderConfirmed from './components/OrderConfirmed/OrderConfirmed';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
-import {getCartFromServer, getCartFromLS} from './store/reducers/cartReducer';
+import {getCartFromServer, getCartFromLS, updateCartFromLs} from './store/reducers/cartReducer';
+import {getFromLS} from './utils/localStorage';
 
 function App() {
   const dispatch = useDispatch();
@@ -34,6 +35,10 @@ function App() {
 
   useEffect(() => {
     if (isAuthorized) {
+      const cartFromLS = getFromLS('cart');
+      if (cartFromLS) {
+        dispatch(updateCartFromLs());
+      }
       dispatch(getCartFromServer());
       dispatch(getWishlist());
     }

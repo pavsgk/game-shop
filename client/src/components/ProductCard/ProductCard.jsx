@@ -23,7 +23,8 @@ function ProductCard(props) {
       dispatch(addProductToTheCart(_id));
       return;
     }
-    dispatch(addItemToTheCartForNotLog(props.item));
+    const cartItem = {product: item, cartQuantity: 1};
+    dispatch(addItemToTheCartForNotLog(cartItem));
   };
 
   return (
