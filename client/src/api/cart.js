@@ -1,5 +1,5 @@
 import instance from './instance.js';
-import {getFromLS, removeFromLS} from '../utils/localStorage';
+import {getFromLS, removeFromLS, saveToLS} from '../utils/localStorage';
 
 export async function requestThePresenceOfTheCartOnTheServer() {
   const {data} = await instance.get('cart');
@@ -9,7 +9,6 @@ export async function requestThePresenceOfTheCartOnTheServer() {
 export async function requestToUpdateCartFromLs() {
   const updatedCart = {products: getFromLS('cart')};
   const {data} = await instance.put('cart', updatedCart);
-  removeFromLS('cart');
   return data;
 }
 

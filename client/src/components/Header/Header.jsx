@@ -14,7 +14,7 @@ import {
   getCartFromServer,
   updateCartFromLs,
 } from '../../store/reducers/cartReducer';
-import {removeFromLS} from '../../utils/localStorage';
+import {removeFromLS, saveToLS} from '../../utils/localStorage';
 
 function Header() {
   const dispatch = useDispatch();
@@ -38,6 +38,10 @@ function Header() {
     dispatch(countCartSum());
     dispatch(countCartQuantity());
   }, [cart, dispatch, isAuthorized]);
+
+  useEffect(() => {
+    isAuthorized && saveToLS('cart', cart);
+  }, [cart]);
 
   const [menuActive, setMenuActive] = useState(false);
 

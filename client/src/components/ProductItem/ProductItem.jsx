@@ -45,14 +45,6 @@ const ProductItem = (props) => {
   const [cart, sum] = useSelector((state) => [state.cart.products, state.cart.cartSum]);
 
   useEffect(() => {
-    console.log(countInputValue, 'countInputValue');
-  }, [countInputValue]);
-
-  useEffect(() => {
-    console.log(cart, 'cart');
-  }, [cart]);
-
-  useEffect(() => {
     const openModalImages = (currentImg) => {
       const currentUrls = imageUrls.slice();
       const index = currentUrls.findIndex((item) => item === currentImg);

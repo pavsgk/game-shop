@@ -40,6 +40,7 @@ function App() {
         dispatch(updateCartFromLs());
       }
       dispatch(getCartFromServer());
+
       dispatch(getWishlist());
     }
   }, [isAuthorized, dispatch]);

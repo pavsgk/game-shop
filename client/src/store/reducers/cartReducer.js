@@ -127,7 +127,6 @@ const cartSlice = createSlice({
       state.isCartExist = false;
     },
     [updateCartFromLs.fulfilled]: (state, action) => {
-      console.log(action.payload, 'action.payload');
       if (action.payload) {
         state.products = action.payload;
       }
