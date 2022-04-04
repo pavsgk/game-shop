@@ -12,7 +12,9 @@ import {
   countCartSum,
   getCartFromLS,
   getCartFromServer,
+  updateCartFromLs,
 } from '../../store/reducers/cartReducer';
+import {removeFromLS, saveToLS} from '../../utils/localStorage';
 
 function Header() {
   const dispatch = useDispatch();
@@ -38,12 +40,8 @@ function Header() {
   }, [cart, dispatch, isAuthorized]);
 
   useEffect(() => {
-    if (isAuthorized) {
-      dispatch(getCartFromServer());
-      return;
-    }
-    dispatch(getCartFromLS());
-  }, [isAuthorized]);
+    isAuthorized && saveToLS('cart', cart);
+  }, [cart]);
 
   const [menuActive, setMenuActive] = useState(false);
 
