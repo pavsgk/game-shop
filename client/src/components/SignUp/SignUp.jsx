@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {Form, Formik} from 'formik';
 import CustomField from '../CustomField/CustomField';
 import * as yup from 'yup';
@@ -7,9 +8,12 @@ import {registration} from '../../api/user';
 import {useState} from 'react';
 import Preloader from '../Preloader/Preloader';
 import Button from '../Button/Button';
+import {useDispatch} from 'react-redux';
+import {newLogin} from '../../store/reducers/userReducer';
 
-const SignUp = ({setActive}) => {
+const SignUp = ({closeModal}) => {
   const [isSuccesReg, setIsSuccesReg] = useState(false);
+  const dispatch = useDispatch();
 
   const initialValues = {
     firstName: '',
@@ -21,14 +25,21 @@ const SignUp = ({setActive}) => {
 
   const handleSubmit = (values, actions) => {
     registration(values)
-      .then((res) => {
+      .then(async (res) => {
         if (res.status === 200) {
           actions.resetForm();
           setIsSuccesReg(true);
           setTimeout(() => {
             setIsSuccesReg(false);
-            setActive(0);
-          }, 2000);
+          }, 3000);
+
+          const loginOrEmail = values.login;
+          const password = values.password;
+          const valuesForSignIn = {loginOrEmail, password};
+          const result = await dispatch(newLogin(valuesForSignIn));
+          if (result.payload) {
+            closeModal();
+          }
         }
       })
       .catch((error) => {
@@ -87,6 +98,10 @@ const SignUp = ({setActive}) => {
       }}
     </Formik>
   );
+};
+
+SignUp.propTypes = {
+  closeModal: PropTypes.func.isRequired,
 };
 
 export default SignUp;

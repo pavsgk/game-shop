@@ -1,20 +1,32 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {
-  requestThePresenceOfTheCartOnTheServer,
   requestAddProductToTheCart,
+  requestThePresenceOfTheCartOnTheServer,
+  requestToAddMoreThanOneProductsToTheCart,
   requestToDecreaseProductQuantity,
-  requestToDeleteProductFromTheCart,
   requestToDeleteCart,
+  requestToDeleteProductFromTheCart,
+  requestToUpdateCartFromLs,
 } from '../../api/cart';
 import {getFromLS, saveToLS} from '../../utils/localStorage';
 
 const initialState = {
   products: [],
   cartSum: 0,
+  cartQuantity: 0,
 };
 
 export const getCartFromServer = createAsyncThunk('cart/get', async () => {
   const result = await requestThePresenceOfTheCartOnTheServer();
+  return result.products;
+});
+export const updateCartFromLs = createAsyncThunk('cart/put', async () => {
+  const result = await requestToUpdateCartFromLs();
+  return result.products;
+});
+
+export const addMoreThanOneProductsToTheCart = createAsyncThunk('cart/put', async (cartItem) => {
+  const result = await requestToAddMoreThanOneProductsToTheCart(cartItem);
   return result.products;
 });
 
@@ -44,15 +56,14 @@ const cartSlice = createSlice({
   reducers: {
     addItemToTheCartForNotLog(state, action) {
       const index = state.products.findIndex(
-        (elem) => elem.product.itemNo === action.payload.itemNo,
+        (elem) => elem.product.itemNo === action.payload.product.itemNo,
       );
       if (index === -1) {
-        const newItem = {product: action.payload, cartQuantity: 1};
-        state.products.push(newItem);
+        state.products.push(action.payload);
         saveToLS('cart', state.products);
         return;
       }
-      state.products[index].cartQuantity += 1;
+      state.products[index].cartQuantity += action.payload.cartQuantity;
       saveToLS('cart', state.products);
     },
     removeItemFromTheCartForNotLog(state, action) {
@@ -86,27 +97,31 @@ const cartSlice = createSlice({
       }
     },
     countCartSum(state) {
-      let sum = 0;
-      state.products.forEach(
-        (element) => (sum += element.product.currentPrice * element.cartQuantity),
+      state.cartSum = state.products.reduce(
+        (prev, {product: {currentPrice}, cartQuantity}) => prev + currentPrice * cartQuantity,
+        0,
       );
-      state.cartSum = sum;
+    },
+
+    countCartQuantity(state) {
+      let quantity = 0;
+      state.products.forEach((element) => (quantity += element.cartQuantity));
+      state.cartQuantity = quantity;
     },
   },
   extraReducers: {
     [getCartFromServer.fulfilled]: (state, action) => {
-      if (!action.payload) {
-        state.isCartExist = false;
-        return;
-      }
-      if (action.payload) {
-        state.products = action.payload;
-        state.isCartExist = true;
-      }
+      state.products = action.payload;
     },
     [getCartFromServer.rejected]: (state) => {
       console.warn('getCartFromServer error: ', state);
       state.isCartExist = false;
+    },
+    [updateCartFromLs.fulfilled]: (state, action) => {
+      state.products = action.payload;
+    },
+    [updateCartFromLs.rejected]: (state) => {
+      console.warn('getCartFromServer error: ', state);
     },
     [addProductToTheCart.fulfilled]: (state, action) => {
       state.products = action.payload;
@@ -142,5 +157,6 @@ export const {
   makeLessItemForNotLog,
   makeMoreItemForNotLog,
   removeItemFromTheCartForNotLog,
+  countCartQuantity,
 } = cartSlice.actions;
 export default cartSlice.reducer;

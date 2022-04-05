@@ -10,7 +10,7 @@ function OrderingComponent(props) {
         <p className={styles.text}>{name}</p>
         <p className={styles.details}>{description}</p>
       </div>
-      {costValue && <p className={styles.price}>{costValue} ₴</p>}
+      {costValue && <p className={styles.price}>{costValue} &#8372;</p>}
     </div>
   );
 }

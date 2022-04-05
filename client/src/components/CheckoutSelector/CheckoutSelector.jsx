@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styles from './CheckoutSelector.module.scss';
 import {useSelector} from 'react-redux';
 import {switchTab} from '../../store/reducers/checkoutReducer';
@@ -25,5 +26,10 @@ function CheckoutSelector({children, tabs}) {
     </>
   );
 }
+
+CheckoutSelector.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+  tabs: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export default CheckoutSelector;

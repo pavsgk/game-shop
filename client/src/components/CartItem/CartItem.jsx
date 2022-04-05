@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styles from './CartItem.module.scss';
 import {ReactComponent as DeletePic} from '../../assets/svg/delete.svg';
 import {ReactComponent as MinusPic} from '../../assets/svg/count_minus.svg';
@@ -81,12 +82,38 @@ const CartItem = ({product, cartQuantity}) => {
           <DeletePic className={styles.deleteWrapperItem} />
         </div>
         <div className={styles.priceValue}>
-          <span>&#8372;</span>
-          {cartQuantity === 1 ? currentPrice : currentPrice * cartQuantity}
+          <span>
+            {cartQuantity > 1
+              ? `${currentPrice} x ${cartQuantity} = ${currentPrice * cartQuantity}`
+              : currentPrice}{' '}
+            &#8372;
+          </span>
         </div>
       </div>
     </div>
   );
+};
+
+CartItem.propTypes = {
+  cartQuantity: PropTypes.number,
+  product: PropTypes.shape({
+    _id: PropTypes.string,
+    currentPrice: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    imageUrls: PropTypes.arrayOf(PropTypes.string),
+    itemNo: PropTypes.string,
+    title: PropTypes.string,
+  }),
+};
+
+CartItem.defaultProps = {
+  cartQuantity: 1,
+  product: {
+    _id: '0',
+    currentPrice: 0,
+    imageUrls: ['./unknown-w.png'],
+    itemNo: '0',
+    title: 'unknown',
+  },
 };
 
 export default CartItem;

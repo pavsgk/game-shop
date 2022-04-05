@@ -4,6 +4,10 @@
   margin-bottom: 20px;
 }
 
+.componentWrapper {
+  position: relative;
+}
+
 .title {
   color: $text;
   font-weight: 400;
@@ -21,8 +25,10 @@
 
 .svg {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 0;
+  right: -10px;
+  min-width: 100px;
+  height: 70px;
 }
 
 .card {

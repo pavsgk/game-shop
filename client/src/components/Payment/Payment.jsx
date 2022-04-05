@@ -18,13 +18,20 @@ const methods = [
 ];
 
 function Payment() {
-  const [paymentInfo, products] = useSelector((store) => [
-    store.checkout.paymentInfo,
+  const [{paymentInfo, isValid}, products] = useSelector((store) => [
+    store.checkout,
     store.cart.products,
   ]);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const formDisableTip = () => {
+    const tip = [];
+    if (!isValid) tip.push('Invalid shipping info');
+    if (products.length === 0) tip.push('Cart is empty');
+    return tip.length > 1 ? tip.join(', ') : tip.join('');
+  };
 
   const handleSubmit = async () => {
     const {user, cart, checkout} = store.getState();
@@ -35,7 +42,7 @@ function Payment() {
       paymentInfo,
       checkoutFields: {mobile},
     } = checkout;
-    const email = user.userData.email || checkout.checkoutFields.email;
+    const email = checkout.checkoutFields.email || user.userData.email;
 
     const orderBody = {
       products: cart.products,
@@ -59,9 +66,9 @@ function Payment() {
 
     try {
       await placeOrder(orderBody);
-      navigate('orderConfirmed');
+      navigate('/orderConfirmed');
     } catch {
-      navigate('error');
+      navigate('/error');
     }
   };
 
@@ -83,9 +90,9 @@ function Payment() {
       ))}
       <div className={styles.submit}>
         <Button
-          disabled={!products.length}
+          disabled={!products.length || !isValid}
           onClick={handleSubmit}
-          data-dis-tip={!products.length ? 'Cart is empty' : undefined}>
+          data-dis-tip={formDisableTip()}>
           submit order
         </Button>
       </div>

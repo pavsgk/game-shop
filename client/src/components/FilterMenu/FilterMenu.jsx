@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import CustomAccordion from '../CustomAccordion/CustomAccordion';
 import {Formik, Form, Field} from 'formik';
 import styles from './FilterMenu.module.scss';
@@ -142,10 +143,22 @@ function FilterMenu({isOpen, closeFilters}) {
               title="age"
               content={
                 <>
-                  <Field id="3" className={styles.checkbox} type="checkbox" name="age" value="3" />
+                  <Field
+                    id="3"
+                    className={styles.checkbox}
+                    type="checkbox"
+                    name="age"
+                    value="3%2B"
+                  />
                   <label htmlFor="3">3+</label>
 
-                  <Field id="7" className={styles.checkbox} type="checkbox" name="age" value="7" />
+                  <Field
+                    id="7"
+                    className={styles.checkbox}
+                    type="checkbox"
+                    name="age"
+                    value="7%2B"
+                  />
                   <label htmlFor="7">7+</label>
 
                   <Field
@@ -153,7 +166,7 @@ function FilterMenu({isOpen, closeFilters}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="age"
-                    value="13"
+                    value="13%2B"
                   />
                   <label htmlFor="13">13+</label>
 
@@ -162,7 +175,7 @@ function FilterMenu({isOpen, closeFilters}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="age"
-                    value="18"
+                    value="18%2B"
                   />
                   <label htmlFor="18">18+</label>
                 </>
@@ -189,5 +202,10 @@ function FilterMenu({isOpen, closeFilters}) {
     </div>
   );
 }
+
+FilterMenu.propTypes = {
+  closeFilters: PropTypes.func,
+  isOpen: PropTypes.bool,
+};
 
 export default FilterMenu;

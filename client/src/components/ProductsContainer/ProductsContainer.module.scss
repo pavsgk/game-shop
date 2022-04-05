@@ -9,12 +9,33 @@
     margin-top: 25px;
   }
 
-  .contentWrapper {
+  .container {
     display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .containerWishlist {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 60px;
+  }
+
+  .contentProductsWrapper {
+    display: flex;
+    justify-content: center;
   }
 
   .filterToolsWrapper {
     width: 220px;
+  }
+
+  .productsContainerWithOutItems {
+    color: $text;
+    text-align: center;
+    width: 62%;
+    margin: 50px 0 0 0;
   }
 }
 

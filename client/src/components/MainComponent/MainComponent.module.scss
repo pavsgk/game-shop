@@ -11,14 +11,6 @@
   }
 }
 
-.svg {
-  position: absolute;
-  top: -5px;
-  right: -20px;
-  min-width: 120px;
-  height: 85px;
-}
-
 .img {
   width: 250px;
   height: 320px;
@@ -38,17 +30,28 @@
 }
 
 .name {
-  font-size: 16px;
+  font-size: 18px;
   color: $text;
   padding-right: 5px;
   align-self: flex-end;
   text-overflow: ellipsis;
 }
 
+.priceBox {
+  display: flex;
+}
+
 .price {
   @extend .name;
-  font-size: 18px;
+  font-size: 22px;
   color: $base-yellow;
   font-weight: 500;
   margin-top: 5px;
+}
+
+.previousPrice {
+  @extend .price;
+  font-size: 18px;
+  color: $sale;
+  text-decoration: line-through;
 }

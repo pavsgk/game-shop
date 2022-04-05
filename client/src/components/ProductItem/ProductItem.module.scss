@@ -2,11 +2,12 @@
 
 .mainWrapper {
   padding: 0 30px;
+  margin-top: 90px;
 }
 
 .mobileProductTitle {
   margin-top: 45px;
-  margin-bottom: 64px;
+  margin-bottom: 30px;
   &_Text {
     color: $text;
     font-size: 18px;
@@ -24,12 +25,46 @@
 
 .productIMGWrapper {
   justify-content: center;
+  cursor: pointer;
+}
+
+.priceBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.previousPrice {
+  line-height: 23px;
+  text-align: center;
+  text-decoration: line-through;
+  color: $sale;
+  font-size: 16px;
 }
 
 .content {
-  margin-top: 50px;
   display: flex;
   flex-direction: column;
+  &_WishlistWrapper {
+    margin-top: 30px;
+    display: flex;
+    justify-content: end;
+
+    &_Item {
+      font-size: 12px;
+      line-height: 17px;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border: 1px solid $base-yellow;
+      background: none;
+      color: $base-yellow;
+      width: 205px;
+      &:hover {
+        border: 1px solid $text;
+        color: $text;
+        background: $base-yellow;
+      }
+    }
+  }
 
   &_Title {
     display: none;
@@ -52,20 +87,100 @@
   }
   &_Price {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-between;
+    margin-top: 60px;
+    align-items: end;
+
+    &_ButtonsWrapper {
+      display: flex;
+      flex-direction: column;
+    }
+    &_infoWrapperQuantity {
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: column;
+      margin-left: 20px;
+    }
+    &_infoWrapperQuantityItem {
+      color: white;
+      font-size: 10px;
+      margin-bottom: 5px;
+    }
+    &_infoWrapperQuantityValue {
+      font-size: 10px;
+      color: $text;
+      margin-bottom: 8px;
+    }
+
+    .content_Price_infoWrapperQuantity_Button {
+      font-size: 12px;
+      line-height: 17px;
+      text-transform: uppercase;
+      padding: 4px 8px;
+      border: 1px solid $base-yellow;
+      background: none;
+      color: $base-yellow;
+      margin-left: 20px;
+      &:hover {
+        border: 1px solid $text;
+        color: $text;
+        background: $base-yellow;
+      }
+    }
+
+    &_infoWrapperQuantityBlock {
+      display: flex;
+      align-items: center;
+      min-width: 20%;
+    }
+
+    &_infoWrapperQuantityBlockMinus {
+      border: 1px solid $text;
+      display: flex;
+    }
+
+    &_infoWrapperQuantityBlockMinusNotWork {
+      border: 1px solid grey;
+      display: flex;
+    }
+
+    &_infoWrapperQuantityBlockMinusItem {
+      fill: $text;
+    }
+
+    &_infoWrapperQuantityBlockMinusItemNotWork {
+      fill: grey;
+    }
+
+    &_infoWrapperQuantityBlockValue {
+      color: $text;
+      margin: 0 9px;
+      font-size: 20px;
+      min-width: 30px;
+      text-align: center;
+    }
+
+    &_infoWrapperQuantityBlockPlus {
+      display: flex;
+      border: 1px solid $text;
+    }
+
+    &_infoWrapperQuantityBlockPlusItem {
+      fill: $text;
+    }
+    &_infoWrapperQuantityBlockInput {
+      border: none;
+      background: #1e1e1e;
+      color: white;
+      width: 35px;
+      display: flex;
+      height: 26px;
+      outline: none;
+      text-align: center;
+    }
     &_Item {
       font-size: 20px;
       line-height: 33px;
-      color: $base-yellow;
-    }
-    &_Button {
-      font-size: 15px;
-      line-height: 24px;
-      text-transform: uppercase;
-      padding: 8px 30px;
-      border: 1px solid $base-yellow;
-      background: none;
       color: $base-yellow;
     }
   }
@@ -130,6 +245,9 @@
       font-size: 17px;
       line-height: 35px;
       margin-top: 30px;
+    }
+    & > span {
+      text-align: end;
     }
   }
 }
@@ -200,13 +318,32 @@
       flex-direction: column;
     }
   }
-
   .content_Details_Title {
     justify-content: end;
   }
 
   .content_Reviews_Title {
     justify-content: end;
+  }
+  .content_Price {
+    margin-top: 60px;
+    &_ButtonsWrapper {
+      flex-direction: row;
+    }
+  }
+  .content_Price_Wrapper {
+    flex-direction: row;
+    width: auto;
+    & > :first-child {
+      margin-bottom: 0;
+      margin-right: 15px;
+    }
+    & > :last-child {
+      width: 169px;
+    }
+  }
+  .content_WishlistWrapper {
+    margin-left: 40px;
   }
 }
 
@@ -215,7 +352,6 @@
     padding: 0 80px;
     display: flex;
     justify-content: space-between;
-    margin-top: 80px;
   }
 
   .mobileProductTitle {
@@ -229,7 +365,14 @@
 
   .content {
     width: 55%;
-    margin-top: 0;
+  }
+
+  .content_Price_ButtonsWrapper {
+    flex-direction: column;
+  }
+
+  .content_WishlistWrapper {
+    margin-left: 0;
   }
 
   .content_Title {
@@ -242,8 +385,9 @@
   }
 
   .content_Price {
-    max-width: 65%;
+    max-width: 80%;
     justify-content: space-between;
+    margin-top: 0;
   }
 
   .content_Wrapper {
@@ -285,6 +429,15 @@
       color: $text;
       background: $base-yellow;
     }
+  }
+
+  .content_Price_ButtonsWrapper {
+    flex-direction: row;
+  }
+
+  .content_WishlistWrapper {
+    margin-left: 40px;
+    width: 150px;
   }
 
   .content_Description_Title_Item {

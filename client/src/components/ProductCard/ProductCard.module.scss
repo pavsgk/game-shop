@@ -2,10 +2,12 @@
 @media (min-width: $mobile) {
   .cardContainer {
     width: 220px;
+    height: 400px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
+    margin-bottom: 20px;
   }
 
   .bookmark {
@@ -13,7 +15,7 @@
     position: absolute;
     right: 10px;
     &:hover {
-      transform: scale(1.2#f7d131);
+      transform: scale(1.2);
     }
   }
 
@@ -40,8 +42,15 @@
   .priceWrapper {
     display: flex;
     justify-content: space-between;
+    align-items: end;
     margin-top: 10px;
   }
+
+  .priceBox {
+    display: flex;
+    flex-direction: column;
+  }
+
   .price {
     font-weight: 900;
     font-size: 20px;
@@ -49,6 +58,21 @@
     text-align: center;
     text-transform: uppercase;
     color: $base-yellow;
+  }
+
+  .previousPrice {
+    @extend .price;
+    text-decoration: line-through;
+    color: $sale;
+    font-size: 16px;
+  }
+
+  .saleSvg {
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: -20px;
+    left: -20px;
   }
 
   .addButton {
@@ -65,7 +89,7 @@
   .iconWrapper {
     cursor: pointer;
     &:hover {
-      box-shadow: 0px 0px 10px 1px $active-btn;
+      box-shadow: 0 0 10px 1px $active-btn;
     }
   }
 

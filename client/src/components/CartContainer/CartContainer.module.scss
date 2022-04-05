@@ -3,6 +3,7 @@
 
 .mainWrapper {
   padding: 0 30px;
+  margin-top: 50px;
 }
 
 .cartTitleWrapper {
@@ -68,6 +69,16 @@
     color: $text !important;
     background: $base-yellow;
   }
+  .emptySvgWrapper {
+    margin-right: 15px;
+  }
+
+  .emptyMainWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 15px;
+  }
 }
 
 @media (min-width: $tablet) {
@@ -104,19 +115,23 @@
   justify-content: center;
 }
 
+.emptySvgWrapper {
+  margin-top: 60px;
+  margin-right: 30px;
+}
+
 .emptySvgWrapperItem {
   fill: $base-yellow;
   width: 200px;
 }
 .emptyTitle {
   color: $base-yellow;
-  margin-left: 15px;
+  margin-top: 60px;
 }
 .emptyLink {
   color: $text;
   text-decoration: underline;
   margin-top: 10px;
-  margin-left: 15px;
 }
 
 @media (min-width: $tablet-max) {

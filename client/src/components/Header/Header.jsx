@@ -1,12 +1,20 @@
 import styles from './Header.module.scss';
 import {Link} from 'react-router-dom';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ReactComponent as CartImg} from './img/Frame.svg';
 import {ReactComponent as Logo} from './img/star-wars.svg';
 import {ReactComponent as MenuImg} from './img/burgermenu.svg';
 import {useDispatch, useSelector} from 'react-redux';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
 import {logout} from '../../store/reducers/userReducer';
+import {
+  countCartQuantity,
+  countCartSum,
+  getCartFromLS,
+  getCartFromServer,
+  updateCartFromLs,
+} from '../../store/reducers/cartReducer';
+import {removeFromLS, saveToLS} from '../../utils/localStorage';
 
 function Header() {
   const dispatch = useDispatch();
@@ -19,7 +27,21 @@ function Header() {
     dispatch(logout());
   };
 
-  const isAuthorized = useSelector((state) => state.user.isAuthorized);
+  const [cart, isAuthorized, cartQuantity] = useSelector((state) => [
+    state.cart.products,
+    state.user.isAuthorized,
+    state.cart.cartQuantity,
+  ]);
+  const {wishlist} = useSelector((state) => state.wishlist);
+
+  useEffect(() => {
+    dispatch(countCartSum());
+    dispatch(countCartQuantity());
+  }, [cart, dispatch, isAuthorized]);
+
+  useEffect(() => {
+    isAuthorized && saveToLS('cart', cart);
+  }, [cart]);
 
   const [menuActive, setMenuActive] = useState(false);
 
@@ -49,11 +71,9 @@ function Header() {
             <li className={styles.navItem}>
               <Link exact="true" className={styles.navLink} to="/wishlist">
                 wishlist
-              </Link>
-            </li>
-            <li className={styles.navItem}>
-              <Link exact="true" className={styles.navLink} to="/checkout">
-                Checkout
+                {wishlist.length > 0 && isAuthorized && (
+                  <div className={styles.wishlistQuantityWrapper}>{wishlist.length}</div>
+                )}
               </Link>
             </li>
           </ul>
@@ -64,6 +84,7 @@ function Header() {
           </Link>
           <Link exact="true" to="/cart">
             <CartImg className={styles.cartImg} />
+            {cartQuantity > 0 && <div className={styles.cartQuantityWrapper}>{cartQuantity}</div>}
           </Link>
           <div className={styles.navLine}> </div>
           {isAuthorized ? (
@@ -77,6 +98,7 @@ function Header() {
           )}
         </div>
       </header>
+      <div className={styles.dummy}></div>
     </>
   );
 }
