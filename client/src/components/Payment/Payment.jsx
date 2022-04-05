@@ -42,7 +42,6 @@ function Payment() {
       paymentInfo,
       checkoutFields: {mobile},
     } = checkout;
-    console.log(checkout);
     const email = checkout.checkoutFields.email || user.userData.email;
 
     const orderBody = {
@@ -66,7 +65,6 @@ function Payment() {
     if (user.isAuthorized) orderBody.customerId = user.userData.customerId;
 
     try {
-      console.log(orderBody);
       await placeOrder(orderBody);
       navigate('/orderConfirmed');
     } catch {

@@ -1,3 +1,4 @@
+import {circularProgressClasses} from '@mui/material';
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {
   requestThePresenceOfTheCartOnTheServer,
@@ -59,7 +60,6 @@ const cartSlice = createSlice({
       const index = state.products.findIndex(
         (elem) => elem.product.itemNo === action.payload.product.itemNo,
       );
-      console.log(index, 'index');
       if (index === -1) {
         state.products.push(action.payload);
         saveToLS('cart', state.products);
@@ -99,11 +99,10 @@ const cartSlice = createSlice({
       }
     },
     countCartSum(state) {
-      let sum = 0;
-      state.products.forEach(
-        (element) => (sum += element.product.currentPrice * element.cartQuantity),
+      state.cartSum = state.products.reduce(
+        (prev, {product: {currentPrice}, cartQuantity}) => prev + currentPrice * cartQuantity,
+        0,
       );
-      state.cartSum = sum;
     },
     countCartQuantity(state) {
       let quantity = 0;
