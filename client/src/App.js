@@ -1,6 +1,7 @@
 import {Routes, Route} from 'react-router-dom';
 import styles from './App.module.scss';
 import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import MuiTheme from './components/MuiTheme/MuiTheme';
 import CartPage from './pages/CartPage/CartPage';
 import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
@@ -63,6 +64,7 @@ function App() {
           <Route path="test" element={<TestPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
+        <Footer />
         <SignModalContainer />
         <ImagesModal />
       </MuiTheme>
