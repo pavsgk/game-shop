@@ -8,13 +8,11 @@ import {
 } from '../../store/reducers/imagesModalReducer';
 import ProductItemSlider from '../ProductItemSlider/ProductItemSlider';
 import {
-  addProductToTheCart,
   addItemToTheCartForNotLog,
   addMoreThanOneProductsToTheCart,
 } from '../../store/reducers/cartReducer';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
-import {ReactComponent as Sale} from '../ProductCard/img/sale.svg';
 import Button from '../Button/Button';
 import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
 import {ReactComponent as MinusPic} from '../../assets/svg/count_minus.svg';

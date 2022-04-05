@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {Field, useField} from 'formik';
 import styles from './CustomField.module.scss';
 
@@ -21,5 +22,15 @@ function CustomField(props) {
     </div>
   );
 }
+
+CustomField.propTypes = {
+  label: PropTypes.string,
+  type: PropTypes.string,
+};
+
+CustomField.defaultProps = {
+  label: '',
+  type: 'text',
+};
 
 export default CustomField;

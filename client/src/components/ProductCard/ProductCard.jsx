@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styles from './ProductCard.module.scss';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
@@ -91,5 +92,18 @@ function ProductCard(props) {
     </>
   );
 }
+
+ProductCard.propTypes = {
+  isFavorite: PropTypes.bool,
+  item: PropTypes.shape({
+    _id: PropTypes.string,
+    currentPrice: PropTypes.number,
+    imageUrls: PropTypes.arrayOf(PropTypes.string),
+    itemNo: PropTypes.string,
+    platform: PropTypes.arrayOf(PropTypes.string),
+    previousPrice: PropTypes.number,
+    title: PropTypes.string,
+  }),
+};
 
 export default ProductCard;

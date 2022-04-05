@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {useState, useEffect} from 'react';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import styles from './ProductsContainer.module.scss';
@@ -7,7 +8,6 @@ import {useLocation} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import FilterMenu from '../FilterMenu/FilterMenu';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
-import {getWishlist} from '../../store/reducers/wishlistReducer';
 
 function ProductsContainer({isWishlist, isOpen, closeFilters}) {
   const [products, setProducts] = useState([]);
@@ -91,5 +91,11 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
     </div>
   );
 }
+
+ProductsContainer.propTypes = {
+  closeFilters: PropTypes.func,
+  isOpen: PropTypes.bool,
+  isWishlist: PropTypes.bool,
+};
 
 export default ProductsContainer;

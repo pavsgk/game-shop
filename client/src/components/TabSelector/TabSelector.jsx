@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import PropTypes from 'prop-types';
 import styles from './TabSelector.module.scss';
 
 function TabSelector(props) {
@@ -33,5 +33,13 @@ function TabSelector(props) {
     </>
   );
 }
+
+TabSelector.propTypes = {
+  active: PropTypes.number,
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+  isSignForm: PropTypes.bool,
+  setActive: PropTypes.func,
+  tabs: PropTypes.arrayOf(PropTypes.string),
+};
 
 export default TabSelector;
