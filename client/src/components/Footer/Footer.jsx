@@ -10,7 +10,7 @@ function Footer() {
 
   useEffect(() => {
     const observer = new MutationObserver(() => {
-      if (document.body.clientHeight < 1000) {
+      if (document.body.clientHeight < 500) {
         setIsAbsolute(true);
       } else {
         if (isAbsolute) setIsAbsolute(false);
