@@ -25,17 +25,27 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
   }, []);
 
   useEffect(() => {
+    console.log(products, 'prosucts');
+  }, [products]);
+
+  useEffect(() => {
+    console.log(wishlist, 'wishlist');
+  }, [wishlist]);
+
+  useEffect(() => {
     (async () => {
       try {
         let data = [];
         if (location.search) {
           data = await getFilteredProducts(location.search.slice(1, -1));
         } else if (isWishlist) {
+          console.log('wishwork');
           data = wishlist;
         } else {
           data = await getAllProducts();
         }
         setProducts(data);
+        console.log('get data');
         setIsLoading(false);
       } catch (e) {
         console.warn(e);
@@ -45,48 +55,33 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
     })();
   }, [location.search, isAuthorized]);
 
+  useEffect(() => {
+    console.log(isAuthorized, 'isAuthorized');
+  }, [isAuthorized]);
+
   const idItemsInWishlist = wishlist.map((e) => e._id);
 
   return (
     <div className={styles.contentProductsWrapper}>
-      <div className={isWishlist ? styles.containerWishlist : styles.container}>
+      <div className={styles.container}>
         {!isWishlist && <FilterMenu isOpen={isOpen} closeFilters={closeFilters} />}
-        {!isWishlist && (
-          <div
-            className={
-              products.length > 0 ? styles.productsContainer : styles.productsContainerWithOutItems
-            }>
-            {isLoading && <ProductsPlaceholder />}
-            {isError && <h3>Something went wrong. Please, try again later</h3>}
-            {products.length > 0 ? (
-              products.map((item) => {
-                if (idItemsInWishlist.includes(item._id) && isAuthorized) {
-                  return <ProductCard key={item.itemNo} item={item} isFavorite={true} />;
-                } else return <ProductCard key={item.itemNo} item={item} />;
-              })
-            ) : (
-              <h2>There are no products to your request</h2>
-            )}
-          </div>
-        )}
-        {isWishlist && (
-          <div
-            className={
-              wishlist.length > 0 && isAuthorized
-                ? styles.productsContainer
-                : styles.productsContainerWithOutItems
-            }>
-            {isLoading && <ProductsPlaceholder />}
-            {isError && <h3>Something went wrong. Please, try again later</h3>}
-            {isAuthorized && wishlist.length > 0 ? (
-              wishlist.map((item) => (
-                <ProductCard key={item.itemNo} item={item} isFavorite={true} />
-              ))
-            ) : (
-              <h2>There are no products to your request</h2>
-            )}
-          </div>
-        )}
+        <div
+          className={
+            products.length > 0 ? styles.productsContainer : styles.productsContainerWithOutItems
+          }>
+          {isLoading && <ProductsPlaceholder />}
+          {isError && <h3>Something went wrong. Please, try again later</h3>}
+          {products.length > 0 && !isError ? (
+            products.map((item) => {
+              if (idItemsInWishlist.includes(item._id)) {
+                return <ProductCard key={item.itemNo} item={item} isFavorite={true} />;
+              }
+              return <ProductCard key={item.itemNo} item={item} />;
+            })
+          ) : (
+            <h3>There are no products to your request</h3>
+          )}
+        </div>
       </div>
     </div>
   );
