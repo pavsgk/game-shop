@@ -1,20 +1,18 @@
-import {circularProgressClasses} from '@mui/material';
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {
-  requestThePresenceOfTheCartOnTheServer,
   requestAddProductToTheCart,
-  requestToDecreaseProductQuantity,
-  requestToDeleteProductFromTheCart,
-  requestToDeleteCart,
-  requestToUpdateCartFromLs,
+  requestThePresenceOfTheCartOnTheServer,
   requestToAddMoreThanOneProductsToTheCart,
+  requestToDecreaseProductQuantity,
+  requestToDeleteCart,
+  requestToDeleteProductFromTheCart,
+  requestToUpdateCartFromLs,
 } from '../../api/cart';
 import {getFromLS, saveToLS} from '../../utils/localStorage';
 
 const initialState = {
   products: [],
   cartSum: 0,
-  isCartExist: false,
   cartQuantity: 0,
 };
 
@@ -104,6 +102,7 @@ const cartSlice = createSlice({
         0,
       );
     },
+
     countCartQuantity(state) {
       let quantity = 0;
       state.products.forEach((element) => (quantity += element.cartQuantity));
@@ -112,23 +111,14 @@ const cartSlice = createSlice({
   },
   extraReducers: {
     [getCartFromServer.fulfilled]: (state, action) => {
-      if (!action.payload) {
-        state.isCartExist = false;
-        return;
-      }
-      if (action.payload) {
-        state.products = action.payload;
-        state.isCartExist = true;
-      }
+      state.products = action.payload;
     },
     [getCartFromServer.rejected]: (state) => {
       console.warn('getCartFromServer error: ', state);
       state.isCartExist = false;
     },
     [updateCartFromLs.fulfilled]: (state, action) => {
-      if (action.payload) {
-        state.products = action.payload;
-      }
+      state.products = action.payload;
     },
     [updateCartFromLs.rejected]: (state) => {
       console.warn('getCartFromServer error: ', state);
