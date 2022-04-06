@@ -18,10 +18,6 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
   const {isAuthorized} = useSelector((state) => state.user);
 
   useEffect(() => {
-    isAuthorized && setProducts(wishlist);
-  }, [wishlist]);
-
-  useEffect(() => {
     (async () => {
       try {
         let data = [];
@@ -46,13 +42,13 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
 
   return (
     <div className={styles.contentProductsWrapper}>
-      <div className={styles.container}>
+      <div className={isWishlist ? styles.containerWishlist : styles.container}>
         {!isWishlist && <FilterMenu isOpen={isOpen} closeFilters={closeFilters} />}
         <div
           className={
             products.length > 0 ? styles.productsContainer : styles.productsContainerWithOutItems
           }>
-          {isLoading && <ProductsPlaceholder />}
+          {/*{isLoading && <ProductsPlaceholder />}*/}
           {isError && <h3>Something went wrong. Please, try again later</h3>}
           {products.length > 0 && !isError ? (
             products.map((item) => {

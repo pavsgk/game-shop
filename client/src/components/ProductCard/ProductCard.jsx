@@ -65,7 +65,7 @@ function ProductCard(props) {
           )}
           <Link to={`/details?${itemNo}`}>
             <div className={styles.iconWrapper}>
-              <img src={imageUrls[0]} alt={title} height="250" width="220" />
+              <img className={styles.img} src={imageUrls[0]} alt={title} />
             </div>
             <h3 className={styles.productDecription}>{title}</h3>
           </Link>
