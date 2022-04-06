@@ -10,7 +10,7 @@ import FilterMenu from '../FilterMenu/FilterMenu';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
 import Preloader from '../Preloader/Preloader';
 
-function ProductsContainer({isWishlist, isOpen, closeFilters}) {
+function ProductsContainer({isWishlist, isOpen, closeFilters, isCatalog}) {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -30,8 +30,9 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
         } else if (isWishlist) {
           data = wishlist;
           data.length < 1 ? setIsProductsAbsence(true) : setIsProductsAbsence(false);
-        } else {
+        } else if (isCatalog) {
           data = await getAllProducts();
+          data.length < 1 ? setIsProductsAbsence(true) : setIsProductsAbsence(false);
         }
         setProducts(data);
         setIsLoading(false);
@@ -56,12 +57,14 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
           {isLoading && <Preloader />}
           {isError && <h3>Something went wrong. Please, try again later</h3>}
           {isProductsAbsence && <h3>There are no products to your request</h3>}
-          {products.map((item) => {
-            if (idItemsInWishlist.includes(item._id)) {
-              return <ProductCard key={item.itemNo} item={item} isFavorite={true} />;
-            }
-            return <ProductCard key={item.itemNo} item={item} />;
-          })}
+          {isWishlist && wishlist.map((item) => <ProductCard key={item.itemNo} item={item} />)}
+          {isCatalog &&
+            products.map((item) => {
+              if (idItemsInWishlist.includes(item._id)) {
+                return <ProductCard key={item.itemNo} item={item} isFavorite={true} />;
+              }
+              return <ProductCard key={item.itemNo} item={item} />;
+            })}
         </div>
       </div>
     </div>
