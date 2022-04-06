@@ -12,13 +12,14 @@ const SignModalContainer = () => {
 
   const [active, setActive] = useState(0);
 
-  const closeModal = () => {
-    dispatch(closeSignModal());
-  };
+  const closeModal = () => dispatch(closeSignModal());
 
-  const modalState = useSelector((state) => state.signModal.modalState);
+  const {
+    signModal: {modalState},
+    user: {isAuthorized},
+  } = useSelector((state) => state);
 
-  if (!modalState) return null;
+  if (!modalState || isAuthorized) return null;
 
   return (
     <div className={style.wrapper}>

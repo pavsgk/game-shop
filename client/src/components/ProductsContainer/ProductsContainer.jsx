@@ -19,8 +19,8 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    {
-      !isAuthorized && isWishlist && dispatch(openSignModal());
+    if (!isAuthorized && isWishlist) {
+      dispatch(openSignModal());
     }
   }, []);
 
