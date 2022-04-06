@@ -16,20 +16,9 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
   let location = useLocation();
   const {wishlist} = useSelector((state) => state.wishlist);
   const {isAuthorized} = useSelector((state) => state.user);
-  const dispatch = useDispatch();
 
   useEffect(() => {
-    {
-      !isAuthorized && isWishlist && dispatch(openSignModal());
-    }
-  }, []);
-
-  useEffect(() => {
-    console.log(products, 'prosucts');
-  }, [products]);
-
-  useEffect(() => {
-    console.log(wishlist, 'wishlist');
+    isAuthorized && setProducts(wishlist);
   }, [wishlist]);
 
   useEffect(() => {
@@ -39,13 +28,11 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
         if (location.search) {
           data = await getFilteredProducts(location.search.slice(1, -1));
         } else if (isWishlist) {
-          console.log('wishwork');
           data = wishlist;
         } else {
           data = await getAllProducts();
         }
         setProducts(data);
-        console.log('get data');
         setIsLoading(false);
       } catch (e) {
         console.warn(e);
@@ -54,10 +41,6 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
       }
     })();
   }, [location.search, isAuthorized]);
-
-  useEffect(() => {
-    console.log(isAuthorized, 'isAuthorized');
-  }, [isAuthorized]);
 
   const idItemsInWishlist = wishlist.map((e) => e._id);
 

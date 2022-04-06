@@ -68,14 +68,16 @@ function Header() {
                 catalog
               </Link>
             </li>
-            <li className={styles.navItem}>
-              <Link exact="true" className={styles.navLink} to="/wishlist">
-                wishlist
-                {wishlist.length > 0 && isAuthorized && (
-                  <div className={styles.wishlistQuantityWrapper}>{wishlist.length}</div>
-                )}
-              </Link>
-            </li>
+            {isAuthorized && (
+              <li className={styles.navItem}>
+                <Link exact="true" className={styles.navLink} to="/wishlist">
+                  wishlist
+                  {wishlist.length > 0 && isAuthorized && (
+                    <div className={styles.wishlistQuantityWrapper}>{wishlist.length}</div>
+                  )}
+                </Link>
+              </li>
+            )}
           </ul>
         </nav>
         <div className={styles.additionalNav}>

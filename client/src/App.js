@@ -1,4 +1,4 @@
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route, Navigate} from 'react-router-dom';
 import styles from './App.module.scss';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -29,9 +29,6 @@ function App() {
 
   useEffect(() => {
     dispatch(init());
-    if (isAuthorized) {
-      dispatch(getWishlist());
-    }
     dispatch(getCartFromLS());
   }, [dispatch]);
 
@@ -42,7 +39,6 @@ function App() {
         dispatch(updateCartFromLs());
       }
       dispatch(getCartFromServer());
-
       dispatch(getWishlist());
     }
   }, [isAuthorized, dispatch]);
@@ -56,7 +52,7 @@ function App() {
           <Route path="admin" element={<AdminPage />} />
           <Route path="catalog/*" element={<ProductsPage />} />
           <Route path="details/*" element={<DetailsPage />} />
-          <Route path="wishlist" element={<FavouritePage />} />
+          <Route path="wishlist" element={isAuthorized ? <FavouritePage /> : <Navigate to="/" />} />
           <Route path="sale" element={<SalePage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
