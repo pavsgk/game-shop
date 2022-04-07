@@ -8,12 +8,14 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
 import {ReactComponent as Sale} from './img/sale.svg';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
+import {useRef} from 'react';
 
 function ProductCard(props) {
   const {item, isFavorite} = props;
   const {title, imageUrls, previousPrice, currentPrice, itemNo, platform, _id} = item;
   const isAuthorized = useSelector((state) => state.user.isAuthorized);
   const dispatch = useDispatch();
+  const imgErr = useRef(false);
 
   const openModal = () => {
     dispatch(openSignModal());
@@ -26,6 +28,15 @@ function ProductCard(props) {
     }
     const cartItem = {product: item, cartQuantity: 1};
     dispatch(addItemToTheCartForNotLog(cartItem));
+  };
+
+  const handleImgError = ({target}) => {
+    if (!imgErr.current) {
+      target.src = './unknown-w.png';
+      imgErr.current = true;
+      return;
+    }
+    target.src = '';
   };
 
   return (
@@ -65,7 +76,7 @@ function ProductCard(props) {
           )}
           <Link to={`/details?${itemNo}`}>
             <div className={styles.iconWrapper}>
-              <img className={styles.img} src={imageUrls[0]} alt={title} />
+              <img src={imageUrls[0]} className={styles.img} alt={title} onError={handleImgError} />
             </div>
             <h3 className={styles.productDecription}>{title}</h3>
           </Link>
