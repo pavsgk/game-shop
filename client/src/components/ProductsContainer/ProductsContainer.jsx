@@ -27,7 +27,6 @@ function ProductsContainer({isWishlist, isOpen, closeFilters, isCatalog, isSale}
             data = filteredProducts.filter(
               (el) => el.previousPrice !== 0 && el.previousPrice !== el.currentPrice,
             );
-            console.log(data, 'sale');
           } else data = await getFilteredProducts(location.search.slice(1, -1));
         } else if (isWishlist && isAuthorized) {
           data = wishlist;
@@ -54,14 +53,15 @@ function ProductsContainer({isWishlist, isOpen, closeFilters, isCatalog, isSale}
   return (
     <div className={styles.contentProductsWrapper}>
       <div className={isWishlist ? styles.containerWishlist : styles.container}>
-        {!isWishlist && <FilterMenu isSale={true} isOpen={isOpen} closeFilters={closeFilters} />}
+        {isCatalog && <FilterMenu isOpen={isOpen} closeFilters={closeFilters} />}
+        {isSale && <FilterMenu isSale={true} isOpen={isOpen} closeFilters={closeFilters} />}
         <div
           className={
             products.length > 0 ? styles.productsContainer : styles.productsContainerWithOutItems
           }>
           {isLoading && <ProductsPlaceholder />}
           {isError && <h3>Something went wrong. Please, try again later</h3>}
-          {products.length < 1 && <h3>There are no products to your request</h3>}
+          {products.length < 1 && !isError && <h3>There are no products to your request</h3>}
           {isWishlist &&
             products.map((item) => <ProductCard key={item.itemNo} item={item} isFavorite={true} />)}
           {isCatalog &&
