@@ -69,6 +69,11 @@ function Header() {
               </Link>
             </li>
             <li className={styles.navItem}>
+              <Link exact="true" className={styles.navLink} to="/sale">
+                sale
+              </Link>
+            </li>
+            <li className={styles.navItem}>
               <Link exact="true" className={styles.navLink} to="/wishlist">
                 wishlist
                 {wishlist.length > 0 && isAuthorized && (
