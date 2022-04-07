@@ -16,7 +16,12 @@ function ProductsPage() {
       <div className={styles.filterToolsWrapper}>
         <CatalogFilterTools openFilters={openFilters} />
       </div>
-      <ProductsContainer isOpen={isOpen} closeFilters={closeFilters} openFilters={openFilters} />
+      <ProductsContainer
+        isOpen={isOpen}
+        closeFilters={closeFilters}
+        openFilters={openFilters}
+        isCatalog={true}
+      />
     </div>
   );
 }
