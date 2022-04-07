@@ -5,7 +5,7 @@ import styles from './FilterMenu.module.scss';
 import {useLocation, useNavigate} from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 
-function FilterMenu({isOpen, closeFilters}) {
+function FilterMenu({isOpen, closeFilters, isSale}) {
   let location = useLocation();
   let navigate = useNavigate();
   const getQueryParams = (paramName) => {
@@ -22,7 +22,9 @@ function FilterMenu({isOpen, closeFilters}) {
         query += `${key}=${values[key]}&`;
       }
     }
-    navigate(`/catalog/filters${query.slice(0, -1)}/`);
+    isSale
+      ? navigate(`/sale/filters${query.slice(0, -1)}/`)
+      : navigate(`/catalog/filters${query.slice(0, -1)}/`);
   };
 
   const initialValues = {

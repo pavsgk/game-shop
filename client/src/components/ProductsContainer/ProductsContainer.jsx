@@ -5,17 +5,13 @@ import styles from './ProductsContainer.module.scss';
 import {getFilteredProducts, getAllProducts} from '../../api/products';
 import ProductsPlaceholder from '../ProductsPlaceholder/ProductsPlaceholder';
 import {useLocation} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import FilterMenu from '../FilterMenu/FilterMenu';
-import {openSignModal} from '../../store/reducers/signInUpReducer';
-import Preloader from '../Preloader/Preloader';
-import {getWishedProducts} from '../../api/wishlist';
 
-function ProductsContainer({isWishlist, isOpen, closeFilters, isCatalog}) {
+function ProductsContainer({isWishlist, isOpen, closeFilters, isCatalog, isSale}) {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [isProductsAbsence, setIsProductsAbsence] = useState(false);
 
   let location = useLocation();
   const {wishlist} = useSelector((state) => state.wishlist);
@@ -26,14 +22,22 @@ function ProductsContainer({isWishlist, isOpen, closeFilters, isCatalog}) {
       try {
         let data = [];
         if (location.search) {
-          data = await getFilteredProducts(location.search.slice(1, -1));
-          data.length < 1 ? setIsProductsAbsence(true) : setIsProductsAbsence(false);
+          if (isSale) {
+            const filteredProducts = await getFilteredProducts(location.search.slice(1, -1));
+            data = filteredProducts.filter(
+              (el) => el.previousPrice !== 0 && el.previousPrice !== el.currentPrice,
+            );
+            console.log(data, 'sale');
+          } else data = await getFilteredProducts(location.search.slice(1, -1));
         } else if (isWishlist && isAuthorized) {
           data = wishlist;
-          data.length < 1 ? setIsProductsAbsence(true) : setIsProductsAbsence(false);
         } else if (isCatalog) {
           data = await getAllProducts();
-          data.length < 1 ? setIsProductsAbsence(true) : setIsProductsAbsence(false);
+        } else if (isSale) {
+          const allProducts = await getAllProducts();
+          data = allProducts.filter(
+            (el) => el.previousPrice !== 0 && el.previousPrice !== el.currentPrice,
+          );
         }
         setProducts(data);
         setIsLoading(false);
@@ -50,7 +54,7 @@ function ProductsContainer({isWishlist, isOpen, closeFilters, isCatalog}) {
   return (
     <div className={styles.contentProductsWrapper}>
       <div className={isWishlist ? styles.containerWishlist : styles.container}>
-        {!isWishlist && <FilterMenu isOpen={isOpen} closeFilters={closeFilters} />}
+        {!isWishlist && <FilterMenu isSale={true} isOpen={isOpen} closeFilters={closeFilters} />}
         <div
           className={
             products.length > 0 ? styles.productsContainer : styles.productsContainerWithOutItems
@@ -61,6 +65,13 @@ function ProductsContainer({isWishlist, isOpen, closeFilters, isCatalog}) {
           {isWishlist &&
             products.map((item) => <ProductCard key={item.itemNo} item={item} isFavorite={true} />)}
           {isCatalog &&
+            products.map((item) => {
+              if (idItemsInWishlist.includes(item._id)) {
+                return <ProductCard key={item.itemNo} item={item} isFavorite={true} />;
+              }
+              return <ProductCard key={item.itemNo} item={item} />;
+            })}
+          {isSale &&
             products.map((item) => {
               if (idItemsInWishlist.includes(item._id)) {
                 return <ProductCard key={item.itemNo} item={item} isFavorite={true} />;
