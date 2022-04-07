@@ -8,7 +8,7 @@ import {useLocation} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import FilterMenu from '../FilterMenu/FilterMenu';
 
-function ProductsContainer({isWishlist, isOpen, closeFilters, isCatalog}) {
+function ProductsContainer({isWishlist, isOpen, closeFilters, isCatalog, isSale}) {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -22,11 +22,22 @@ function ProductsContainer({isWishlist, isOpen, closeFilters, isCatalog}) {
       try {
         let data = [];
         if (location.search) {
-          data = await getFilteredProducts(location.search.slice(1, -1));
+          if (isSale) {
+            const filteredProducts = await getFilteredProducts(location.search.slice(1, -1));
+            data = filteredProducts.filter(
+              (el) => el.previousPrice !== 0 && el.previousPrice !== el.currentPrice,
+            );
+            console.log(data, 'sale');
+          } else data = await getFilteredProducts(location.search.slice(1, -1));
         } else if (isWishlist && isAuthorized) {
           data = wishlist;
         } else if (isCatalog) {
           data = await getAllProducts();
+        } else if (isSale) {
+          const allProducts = await getAllProducts();
+          data = allProducts.filter(
+            (el) => el.previousPrice !== 0 && el.previousPrice !== el.currentPrice,
+          );
         }
         setProducts(data);
         setIsLoading(false);
@@ -43,7 +54,7 @@ function ProductsContainer({isWishlist, isOpen, closeFilters, isCatalog}) {
   return (
     <div className={styles.contentProductsWrapper}>
       <div className={isWishlist ? styles.containerWishlist : styles.container}>
-        {!isWishlist && <FilterMenu isOpen={isOpen} closeFilters={closeFilters} />}
+        {!isWishlist && <FilterMenu isSale={true} isOpen={isOpen} closeFilters={closeFilters} />}
         <div
           className={
             products.length > 0 ? styles.productsContainer : styles.productsContainerWithOutItems
@@ -54,6 +65,13 @@ function ProductsContainer({isWishlist, isOpen, closeFilters, isCatalog}) {
           {isWishlist &&
             products.map((item) => <ProductCard key={item.itemNo} item={item} isFavorite={true} />)}
           {isCatalog &&
+            products.map((item) => {
+              if (idItemsInWishlist.includes(item._id)) {
+                return <ProductCard key={item.itemNo} item={item} isFavorite={true} />;
+              }
+              return <ProductCard key={item.itemNo} item={item} />;
+            })}
+          {isSale &&
             products.map((item) => {
               if (idItemsInWishlist.includes(item._id)) {
                 return <ProductCard key={item.itemNo} item={item} isFavorite={true} />;

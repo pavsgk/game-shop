@@ -1,26 +1,28 @@
 import styles from './SalePage.module.scss';
-import React, {useEffect, useState} from 'react';
-import instance from '../../api/instance';
-import ProductCard from '../../components/ProductCard/ProductCard';
+import React, {useState} from 'react';
+import CatalogFilterTools from '../../components/CatalogFilterTools/CatalogFilterTools';
+import ProductsContainer from '../../components/ProductsContainer/ProductsContainer';
 
 function SalePage() {
-  const [allProd, setAllProd] = useState([]);
-  useEffect(() => {
-    (async () => {
-      const res = await instance.get('/products');
-      setAllProd(res.data);
-    })();
-  }, []);
+  const [isOpen, setIsOpen] = useState(false);
+  const openFilters = () => {
+    setIsOpen(true);
+  };
+  const closeFilters = () => {
+    setIsOpen(false);
+  };
 
   return (
-    <div className={styles.sale}>
-      <div className={styles.wrapper}>
-        {allProd.map((el) => {
-          if (el.previousPrice !== 0 && el.previousPrice !== el.currentPrice) {
-            return <ProductCard key={el.itemNo} item={el} />;
-          }
-        })}
+    <div className={styles.salePage}>
+      <div className={styles.filterToolsWrapper}>
+        <CatalogFilterTools openFilters={openFilters} />
       </div>
+      <ProductsContainer
+        isOpen={isOpen}
+        closeFilters={closeFilters}
+        openFilters={openFilters}
+        isSale={true}
+      />
     </div>
   );
 }

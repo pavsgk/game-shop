@@ -57,7 +57,7 @@ function App() {
           <Route path="catalog/*" element={<ProductsPage />} />
           <Route path="details/*" element={<DetailsPage />} />
           <Route path="wishlist" element={<FavouritePage />} />
-          <Route path="sale" element={<SalePage />} />
+          <Route path="sale/*" element={<SalePage />} />
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
           <Route path="orderConfirmed" element={<OrderConfirmed />} />
