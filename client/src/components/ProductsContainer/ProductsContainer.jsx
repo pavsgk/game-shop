@@ -54,7 +54,7 @@ function ProductsContainer({isWishlist, isOpen, closeFilters, isCatalog}) {
           className={
             products.length > 0 ? styles.productsContainer : styles.productsContainerWithOutItems
           }>
-          {isLoading && <Preloader />}
+          {isLoading && <ProductsPlaceholder />}
           {isError && <h3>Something went wrong. Please, try again later</h3>}
           {isProductsAbsence && <h3>There are no products to your request</h3>}
           {isWishlist && wishlist.map((item) => <ProductCard key={item.itemNo} item={item} />)}
