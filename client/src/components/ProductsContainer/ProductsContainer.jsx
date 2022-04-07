@@ -3,9 +3,11 @@ import {useState, useEffect} from 'react';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import styles from './ProductsContainer.module.scss';
 import {getFilteredProducts, getAllProducts} from '../../api/products';
+import ProductsPlaceholder from '../ProductsPlaceholder/ProductsPlaceholder';
 import {useLocation} from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import FilterMenu from '../FilterMenu/FilterMenu';
+import {openSignModal} from '../../store/reducers/signInUpReducer';
 import Preloader from '../Preloader/Preloader';
 
 function ProductsContainer({isWishlist, isOpen, closeFilters, isCatalog}) {
@@ -52,11 +54,10 @@ function ProductsContainer({isWishlist, isOpen, closeFilters, isCatalog}) {
           className={
             products.length > 0 ? styles.productsContainer : styles.productsContainerWithOutItems
           }>
-          {isLoading && <Preloader />}
+          {isLoading && <ProductsPlaceholder />}
           {isError && <h3>Something went wrong. Please, try again later</h3>}
           {isProductsAbsence && <h3>There are no products to your request</h3>}
-          {isWishlist &&
-            wishlist.map((item) => <ProductCard key={item.itemNo} item={item} isFavorite={true} />)}
+          {isWishlist && wishlist.map((item) => <ProductCard key={item.itemNo} item={item} />)}
           {isCatalog &&
             products.map((item) => {
               if (idItemsInWishlist.includes(item._id)) {
