@@ -22,6 +22,7 @@ import OrderConfirmed from './components/OrderConfirmed/OrderConfirmed';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import {getCartFromServer, getCartFromLS, updateCartFromLs} from './store/reducers/cartReducer';
 import {getFromLS} from './utils/localStorage';
+import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 
 function App() {
   const dispatch = useDispatch();
@@ -49,25 +50,27 @@ function App() {
 
   return (
     <div className={styles.app}>
-      <MuiTheme>
-        <Header />
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="admin" element={<AdminPage />} />
-          <Route path="catalog/*" element={<ProductsPage />} />
-          <Route path="details/*" element={<DetailsPage />} />
-          <Route path="wishlist" element={<FavouritePage />} />
-          <Route path="sale/*" element={<SalePage />} />
-          <Route path="cart" element={<CartPage />} />
-          <Route path="checkout" element={<CheckoutPage />} />
-          <Route path="orderConfirmed" element={<OrderConfirmed />} />
-          <Route path="test" element={<TestPage />} />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-        <Footer />
-        <SignModalContainer />
-        <ImagesModal />
-      </MuiTheme>
+      <ErrorBoundary>
+        <MuiTheme>
+          <Header />
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="admin" element={<AdminPage />} />
+            <Route path="catalog/*" element={<ProductsPage />} />
+            <Route path="details/*" element={<DetailsPage />} />
+            <Route path="wishlist" element={<FavouritePage />} />
+            <Route path="sale/*" element={<SalePage />} />
+            <Route path="cart" element={<CartPage />} />
+            <Route path="checkout" element={<CheckoutPage />} />
+            <Route path="orderConfirmed" element={<OrderConfirmed />} />
+            <Route path="test" element={<TestPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+          <Footer />
+          <SignModalContainer />
+          <ImagesModal />
+        </MuiTheme>
+      </ErrorBoundary>
     </div>
   );
 }
