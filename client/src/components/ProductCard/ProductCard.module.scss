@@ -21,7 +21,7 @@
 
   .iconWrapper {
     width: fit-content;
-    height: 250px;
+    height: 240px;
   }
 
   .img {
@@ -94,7 +94,7 @@
   .iconWrapper {
     cursor: pointer;
     &:hover {
-      box-shadow: 0 0 10px 1px $active-btn;
+      box-shadow: 0 0 5px 1px $active-btn;
     }
   }
 
