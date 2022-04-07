@@ -1,11 +1,55 @@
-.wrapper {
-  position: absolute;
+@import '../../styles/variables.scss';
+
+.loader {
+  width: 250px;
+  height: 50px;
+  line-height: 50px;
   text-align: center;
-  width: 20%;
-  top: 35%;
-  right: 40%;
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: helvetica, arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: darkviolet;
+  font-size: 20px;
+  letter-spacing: 0.2em;
+  opacity: 10;
+
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    width: 15px;
+    height: 15px;
+    background: darkviolet;
+    position: absolute;
+    animation: load 0.7s infinite alternate ease-in-out;
+  }
+
+  &::before {
+    top: 0;
+  }
+
+  &::after {
+    bottom: 0;
+  }
 }
 
-.preloader {
-  width: 80%;
+@keyframes load {
+  0% {
+    left: 0;
+    height: 30px;
+    width: 15px;
+  }
+  50% {
+    height: 8px;
+    width: 40px;
+  }
+  100% {
+    left: 235px;
+    height: 30px;
+    width: 15px;
+  }
 }
