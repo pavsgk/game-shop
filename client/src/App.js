@@ -30,9 +30,6 @@ function App() {
 
   useEffect(() => {
     dispatch(init());
-    if (isAuthorized) {
-      dispatch(getWishlist());
-    }
     dispatch(getCartFromLS());
   }, [dispatch]);
 
@@ -43,8 +40,6 @@ function App() {
         dispatch(updateCartFromLs());
       }
       dispatch(getCartFromServer());
-
-      dispatch(getWishlist());
     }
   }, [isAuthorized, dispatch]);
 

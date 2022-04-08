@@ -1,0 +1,49 @@
+@import '../../styles/variables.scss';
+
+.outWrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 50px 0;
+  justify-items: center;
+  width: fit-content;
+  margin: 25px 0 35px 0;
+}
+
+.noAuth {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: $base-yellow;
+  margin-top: 70px;
+  & > span {
+    margin-top: 15px;
+    cursor: pointer;
+    border-bottom: 1px solid;
+    width: 20%;
+    align-self: center;
+  }
+}
+
+.noItems {
+  @extend .noAuth;
+}
+
+@media (min-width: $tablet) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 50px 40px;
+  }
+}
+
+@media (min-width: $desktop) {
+  .productsContainer {
+    justify-items: end;
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

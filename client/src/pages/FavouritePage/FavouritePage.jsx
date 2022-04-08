@@ -1,7 +1,7 @@
-import ProductsContainer from '../../components/ProductsContainer/ProductsContainer';
+import WishlistContainer from '../../components/WishlistContainer/WishlistContainer';
 
 function FavouritePage() {
-  return <ProductsContainer isWishlist={true} />;
+  return <WishlistContainer />;
 }
 
 export default FavouritePage;
