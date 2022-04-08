@@ -17,10 +17,7 @@ function MainSlider() {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const [products, setProducts] = useState([]);
-  useEffect(() => {
-    console.log(isLoading, 'isLoading');
-    console.log(isError, 'isError');
-  }, [isLoading, isError]);
+
   useEffect(() => {
     try {
       (async () => {
