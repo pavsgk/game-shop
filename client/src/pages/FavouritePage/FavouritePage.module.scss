@@ -1,0 +1,20 @@
+@import '../../styles/variables.scss';
+
+.noAuth {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+  margin-top: 70px;
+  & > span {
+    margin-top: 15px;
+    cursor: pointer;
+    border-bottom: 1px solid;
+    max-width: 20%;
+    align-self: center;
+  }
+}
+
+.noItems {
+  @extend .noAuth;
+}

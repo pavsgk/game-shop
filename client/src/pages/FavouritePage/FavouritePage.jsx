@@ -5,7 +5,7 @@ import {openSignModal} from '../../store/reducers/signInUpReducer';
 import {getWishlist} from '../../store/reducers/wishlistReducer';
 import Preloader from '../../components/Preloader/Preloader';
 import SomethingWentWrong from '../../components/SomethingWentWrong/SomethingWentWrong';
-import styles from '../../components/WishlistContainer/WishlistContainer.module.scss';
+import styles from './FavouritePage.module.scss';
 
 function FavouritePage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -37,6 +37,12 @@ function FavouritePage() {
       })();
     }
   }, [isAuthorized]);
+
+  useEffect(() => {
+    if (!isAuthorized) {
+      dispatch(openSignModal());
+    }
+  }, []);
 
   return (
     <>
