@@ -77,19 +77,16 @@ function Header() {
               <Link exact="true" className={styles.navLink} to="/wishlist">
                 wishlist
                 {wishlist.length > 0 && isAuthorized && (
-                  <div className={styles.wishlistQuantityWrapper}>{wishlist.length}</div>
+                  <div className={styles.wishlistQuantity}>{wishlist.length}</div>
                 )}
               </Link>
             </li>
           </ul>
         </nav>
         <div className={styles.additionalNav}>
-          <Link exact="true" className={styles.navLink} to="/admin">
-            ~
-          </Link>
           <Link exact="true" to="/cart">
             <CartImg className={styles.cartImg} />
-            {cartQuantity > 0 && <div className={styles.cartQuantityWrapper}>{cartQuantity}</div>}
+            {cartQuantity > 0 && <div className={styles.cartQuantity}>{cartQuantity}</div>}
           </Link>
           <div className={styles.navLine}> </div>
           {isAuthorized ? (

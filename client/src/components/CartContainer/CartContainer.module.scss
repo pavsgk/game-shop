@@ -2,8 +2,8 @@
 @import '../../styles/reset';
 
 .mainWrapper {
-  padding: 0 30px;
-  margin-top: 50px;
+  padding: 0 10px;
+  margin-top: 30px;
 }
 
 .cartTitleWrapper {
@@ -15,12 +15,12 @@
 }
 
 .cartTitleWrapperName {
-  font-size: 20px;
-  line-height: 23px;
+  font-size: 18px;
+  line-height: 20px;
 }
 
 .cartTitleWrapperLink {
-  font-size: 13px;
+  font-size: 14px;
   border: none;
   background: none;
   color: $base-yellow;
@@ -39,7 +39,7 @@
 .totalPriceWrapperItem {
   display: flex;
   justify-content: space-between;
-  font-size: 26px;
+  font-size: 20px;
   color: $base-yellow;
 }
 
@@ -53,7 +53,7 @@
 .totalPriceWrapperButton {
   display: flex;
   justify-content: flex-end;
-  margin: 30px 0 60px 0;
+  margin: 40px 0 60px 0;
 }
 
 .totalPriceWrapperButtonItem {
@@ -84,6 +84,12 @@
 @media (min-width: $tablet) {
   .mainWrapper {
     padding: 0 90px;
+    margin-top: 50px;
+  }
+
+  .cartTitleWrapperName {
+    font-size: 20px;
+    line-height: 23px;
   }
 
   .contentWrapper {
@@ -96,10 +102,15 @@
     display: flex;
     flex-direction: column;
     height: 30%;
-    padding: 25px;
+    padding: 22px;
     border: 1px solid $details;
     min-width: 35%;
   }
+
+  .totalPriceWrapperItem {
+    font-size: 26px;
+  }
+
   .totalPriceWrapperItemText {
     margin-right: 10px;
   }
