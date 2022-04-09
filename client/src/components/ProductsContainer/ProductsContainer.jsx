@@ -1,14 +1,9 @@
 import PropTypes from 'prop-types';
-import {useState, useEffect} from 'react';
 import ProductCard from '../../components/ProductCard/ProductCard';
 import styles from './ProductsContainer.module.scss';
-import {getFilteredProducts, getAllProducts} from '../../api/products';
 import ProductsPlaceholder from '../ProductsPlaceholder/ProductsPlaceholder';
-import {useLocation} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import FilterMenu from '../FilterMenu/FilterMenu';
-import SomethingWentWrong from '../SomethingWentWrong/SomethingWentWrong';
-import Preloader from '../Preloader/Preloader';
 
 function ProductsContainer({
   isOpen,

@@ -29,10 +29,8 @@ function ProductsPage() {
         setIsLoading(true);
         if (location.search) {
           data = await getFilteredProducts(location.search.slice(1, -1));
-          console.log(data, 'filteredData');
         } else {
           data = await getAllProducts();
-          console.log(data, 'data');
         }
         setProducts(data);
         setIsBeRequest(true);
