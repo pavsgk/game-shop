@@ -1,7 +1,7 @@
 @import '../../styles/variables.scss';
 
 .mainWrapper {
-  padding: 0 30px;
+  padding: 0 15px;
   margin-top: 90px;
 }
 
@@ -89,7 +89,7 @@
     display: flex;
     justify-content: space-between;
     margin-top: 60px;
-    align-items: end;
+    align-items: center;
 
     &_ButtonsWrapper {
       display: flex;
@@ -305,6 +305,10 @@
     font-size: 16px;
     margin-top: 15px;
     margin-bottom: 15px;
+  }
+
+  .content_Price_Item {
+    font-size: 24px;
   }
 
   .content_Wrapper {

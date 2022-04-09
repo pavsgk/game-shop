@@ -1,8 +1,8 @@
 @import '../../styles/variables.scss';
 
 .mainWrapper {
-  margin-bottom: 30px;
-  padding-bottom: 30px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
   border-bottom: 1px solid $details;
   display: flex;
   justify-content: space-between;
@@ -13,7 +13,9 @@
 
 .imgWrapper {
   display: flex;
-  max-width: 15%;
+  max-width: 80px;
+  max-height: 100px;
+  min-height: 100px;
   & > * {
     width: 100%;
     border: 1px solid #ffffff;
@@ -35,14 +37,14 @@
 }
 
 .infoWrapperTitleText {
-  font-size: 15px;
-  line-height: 23px;
+  font-size: 14px;
+  line-height: 18px;
   color: $text;
 }
 
 .infoWrapperTitleCode {
   color: $details;
-  align-self: flex-end;
+  align-self: flex-start;
   font-size: 10px;
   margin: 5px 0 10px 0;
 }
@@ -94,7 +96,7 @@
 .infoWrapperQuantityBlockValue {
   color: $text;
   margin: 0 9px;
-  font-size: 20px;
+  font-size: 16px;
   min-width: 30px;
   text-align: center;
 }
@@ -126,7 +128,8 @@
 
 .priceValue {
   display: flex;
-  font-size: 20px;
+  font-size: 16px;
+  //font-size: 20px;
   color: $base-yellow;
   & span {
     margin-right: 5px;
@@ -135,9 +138,18 @@
 }
 
 @media (min-width: $tablet) {
-  .imgWrapper {
-    max-width: 25%;
+  .mainWrapper {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
   }
+
+  .imgWrapper {
+    max-width: 120px;
+    min-width: 120px;
+    max-height: 170px;
+    min-height: 170px;
+  }
+
   .infoWrapperTitleText {
     font-size: 20px;
   }
@@ -145,8 +157,12 @@
     font-size: 14px;
   }
 
+  .infoWrapperQuantityBlockValue {
+    font-size: 20px;
+  }
+
   .priceValue {
-    font-size: 24px;
+    font-size: 20px;
   }
 }
 

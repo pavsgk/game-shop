@@ -16,8 +16,8 @@
 
 .svg {
   position: absolute;
-  bottom: 55px;
-  left: 2px;
+  bottom: 50px;
+  left: 0;
   min-width: 60px;
   height: 60px;
 }
@@ -51,6 +51,11 @@
     justify-items: center;
     align-items: center;
   }
+
+  .svg {
+    bottom: 64px;
+  }
+
   .img {
     width: 150px;
   }
