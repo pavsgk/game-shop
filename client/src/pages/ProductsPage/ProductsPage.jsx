@@ -3,7 +3,7 @@ import styles from './ProductsPage.module.scss';
 import {useEffect, useState, useRef} from 'react';
 import CatalogFilterTools from '../../components/CatalogFilterTools/CatalogFilterTools';
 import {useLocation} from 'react-router-dom';
-import {getAllProducts, getFilteredProducts} from '../../api/products';
+import {getFilteredProducts} from '../../api/products';
 import SomethingWentWrong from '../../components/SomethingWentWrong/SomethingWentWrong';
 
 function ProductsPage() {
@@ -42,7 +42,6 @@ function ProductsPage() {
       scrollHeight - (scrollTop + windowHeight) < 100 &&
       productsLength.current < productsQuantity.current
     ) {
-      console.log(isFilter.current);
       isFilter.current ? setIsFilterFetch(true) : setIsMainFetch(true);
     }
   };

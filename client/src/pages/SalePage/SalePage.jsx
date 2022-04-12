@@ -3,10 +3,10 @@ import React, {useEffect, useRef, useState} from 'react';
 import CatalogFilterTools from '../../components/CatalogFilterTools/CatalogFilterTools';
 import ProductsContainer from '../../components/ProductsContainer/ProductsContainer';
 import {useLocation} from 'react-router-dom';
-import {getAllProducts, getFilteredProducts} from '../../api/products';
+import {getFilteredProducts} from '../../api/products';
 import SomethingWentWrong from '../../components/SomethingWentWrong/SomethingWentWrong';
 
-function SalePage() {
+function SalePage(query) {
   const [products, setProducts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -41,7 +41,6 @@ function SalePage() {
       scrollHeight - (scrollTop + windowHeight) < 100 &&
       productsLength.current < productsQuantity.current
     ) {
-      console.log(isFilter.current);
       isFilter.current ? setIsFilterFetch(true) : setIsMainFetch(true);
     }
   };
@@ -69,7 +68,6 @@ function SalePage() {
     (async () => {
       try {
         data = await getFilteredProducts(queryString);
-        console.log(data, 'data');
         mainCatalog ? setCurrentMain(currentMain + 1) : setCurrentFilter(currentFilter + 1);
         productsQuantity.current = data.data.productsQuantity;
         firstFilter
