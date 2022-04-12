@@ -23,6 +23,8 @@ import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import {getCartFromServer, getCartFromLS, updateCartFromLs} from './store/reducers/cartReducer';
 import {getFromLS} from './utils/localStorage';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
+import SearchResults from './components/SearchResults/SearchResults';
+import RouteTracker from './components/RouteTracker/RouteTracker';
 
 function App() {
   const dispatch = useDispatch();
@@ -48,6 +50,7 @@ function App() {
       <ErrorBoundary>
         <MuiTheme>
           <Header />
+          <SearchResults />
           <Routes>
             <Route path="/" element={<MainPage />} />
             <Route path="admin" element={<AdminPage />} />
@@ -61,6 +64,7 @@ function App() {
             <Route path="test" element={<TestPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
+          <RouteTracker />
           <Footer />
           <SignModalContainer />
           <ImagesModal />
