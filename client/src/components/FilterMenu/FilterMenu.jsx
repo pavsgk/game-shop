@@ -192,7 +192,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                 type="button"
                 onClick={() => {
                   resetForm({genre: [], age: []});
-                  navigate('/catalog');
+                  isSale ? navigate('/sale') : navigate('/catalog');
                 }}
                 className={styles.addButton}>
                 Clear filters

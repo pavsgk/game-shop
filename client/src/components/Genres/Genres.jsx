@@ -37,7 +37,9 @@ function Genres() {
 
   return (
     <>
-      <p className={styles.title}>genres</p>
+      <Link exact="true" to="catalog" className={styles.title}>
+        genres
+      </Link>
       <div className={styles.wrapper}>
         {genres.length > 0
           ? genres.map((el) => {

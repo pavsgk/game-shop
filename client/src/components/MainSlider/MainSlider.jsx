@@ -44,7 +44,7 @@ function MainSlider() {
       onClick={(event) => {
         if (event.target.tagName === 'IMG') {
           products.forEach((el) => {
-            if (event.target.src === el.image) {
+            if (event.target.src === el.image.replace('.', window.location.origin)) {
               navigate(el.url);
             }
           });
@@ -77,6 +77,7 @@ function MainSlider() {
             textAlign: 'center',
             width: '100%',
             maxHeight: '500px',
+            cursor: 'pointer',
           }}
         />
       )}
