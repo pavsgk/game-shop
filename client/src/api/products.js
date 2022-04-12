@@ -14,6 +14,12 @@ export async function getProduct(itemNo) {
   return data;
 }
 
+export async function searchProducts(query) {
+  if (query.trim() === '' || typeof query !== 'string') return [];
+  const {data} = await instance.post('products/search', {query});
+  return data;
+}
+
 export async function getFilteredProducts(querystring) {
   let query = '';
   if (typeof querystring === 'object') {

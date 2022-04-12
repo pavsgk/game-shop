@@ -5,6 +5,7 @@ import signInUpReducer from './reducers/signInUpReducer';
 import checkoutReducer from './reducers/checkoutReducer';
 import imagesModalReducer from './reducers/imagesModalReducer';
 import wishlistReducer from './reducers/wishlistReducer';
+import searchReducer from './reducers/searchReducer';
 
 export default configureStore({
   reducer: {
@@ -14,5 +15,6 @@ export default configureStore({
     checkout: checkoutReducer,
     imagesModal: imagesModalReducer,
     wishlist: wishlistReducer,
+    search: searchReducer,
   },
 });

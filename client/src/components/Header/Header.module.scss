@@ -61,6 +61,8 @@
   width: 100%;
   border-bottom: $text solid 1px;
   position: relative;
+  align-items: center;
+  display: flex;
 }
 
 .navItem:last-child {

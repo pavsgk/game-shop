@@ -15,6 +15,7 @@ import {
   updateCartFromLs,
 } from '../../store/reducers/cartReducer';
 import {removeFromLS, saveToLS} from '../../utils/localStorage';
+import SearchBar from '../SearchBar/SearchBar';
 
 function Header() {
   const dispatch = useDispatch();
@@ -80,6 +81,9 @@ function Header() {
                   <div className={styles.wishlistQuantity}>{wishlist.length}</div>
                 )}
               </Link>
+            </li>
+            <li className={styles.navItem}>
+              <SearchBar />
             </li>
           </ul>
         </nav>
