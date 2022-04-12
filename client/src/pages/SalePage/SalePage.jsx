@@ -6,7 +6,7 @@ import {useLocation} from 'react-router-dom';
 import {getFilteredProducts} from '../../api/products';
 import SomethingWentWrong from '../../components/SomethingWentWrong/SomethingWentWrong';
 
-function SalePage(query) {
+function SalePage() {
   const [products, setProducts] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
 
