@@ -9,12 +9,15 @@ const initialState = {
   results: [],
 };
 
-const updateQuery = createAsyncThunk('search/updateQuery', (queryString) => queryString);
+export const updateQueryString = createAsyncThunk(
+  'search/updateQuery',
+  (queryString) => queryString,
+);
 
 export const newSearchRequest = createAsyncThunk(
   'search/request',
   async (queryString, {dispatch}) => {
-    dispatch(updateQuery(queryString));
+    dispatch(updateQueryString(queryString));
     const response = await searchProducts(queryString);
     return response;
   },
@@ -34,7 +37,6 @@ const searchSlice = createSlice({
   },
   extraReducers: {
     [newSearchRequest.fulfilled]: (state, {payload}) => {
-      console.log(state);
       return {...state, isError: false, isPending: false, isVisible: true, results: payload};
     },
     [newSearchRequest.pending]: (state) => {
@@ -45,8 +47,8 @@ const searchSlice = createSlice({
       return {...state, isError: true, isPending: false};
     },
 
-    [updateQuery.fulfilled]: (state, {payload}) => {
-      if (typeof payload === 'string' && payload) state.queryString = payload;
+    [updateQueryString.fulfilled]: (state, {payload}) => {
+      if (typeof payload === 'string') state.queryString = payload;
     },
   },
 });

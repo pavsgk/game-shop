@@ -17,7 +17,6 @@ import {init} from './store/reducers/userReducer';
 import {AdminPage} from './pages/AdminPage/AdminPage';
 import SignModalContainer from './components/SignModalContainer/SignModalContainer';
 import ImagesModal from './components/ImagesModal/ImagesModal';
-import {getWishlist} from './store/reducers/wishlistReducer';
 import OrderConfirmed from './components/OrderConfirmed/OrderConfirmed';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
 import {getCartFromServer, getCartFromLS, updateCartFromLs} from './store/reducers/cartReducer';

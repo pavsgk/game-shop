@@ -4,12 +4,12 @@ import {useLocation} from 'react-router-dom';
 import {setResultsVisibility} from '../../store/reducers/searchReducer';
 
 function RouteTracker({children}) {
-  const loaction = useLocation();
   const dispatch = useDispatch();
+  const location = useLocation();
 
   useEffect(() => {
     dispatch(setResultsVisibility(false));
-  }, [loaction.pathname, dispatch]);
+  }, [location, dispatch]);
 
   return children || null;
 }

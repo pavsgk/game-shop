@@ -11,22 +11,30 @@ function SearchResults() {
   );
   const dispatch = useDispatch();
 
+  const hideOnClick = (e) => {
+    if (e.target === e.currentTarget) dispatch(setResultsVisibility(false));
+  };
+
   if (!isVisible) return null;
 
   return (
     <>
-      <div className={styles.container} onClick={() => dispatch(setResultsVisibility(false))}>
+      <div className={styles.container} onClick={hideOnClick}>
         <button
           className={styles.closeButton}
           onClick={() => {
             dispatch(setResultsVisibility(false));
           }}>
-          X
+          &#10006;
         </button>
         {isPending && <Preloader />}
         {isError && <h2>Check your internet connection and try again</h2>}
         {!isPending && !isError && (
-          <ItemSummary products={results} title={`Search results for '${queryString}'`} />
+          <ItemSummary
+            products={results}
+            title={`Search results for '${queryString}'`}
+            perPage={3}
+          />
         )}
       </div>
     </>
