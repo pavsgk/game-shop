@@ -1,0 +1,81 @@
+@import '../../styles/variables.scss';
+
+.wrapper {
+  margin-top: 60px;
+  & > div {
+    margin-bottom: 30px;
+  }
+}
+
+.wrapperItem {
+  color: $text;
+  font-size: 17px;
+  line-height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > * {
+    font-size: 17px;
+    line-height: 35px;
+    margin-top: 30px;
+  }
+  & > span {
+    text-align: end;
+  }
+}
+
+.deliveryWrapper {
+  color: $text;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+  &Item {
+    text-align: justify;
+    font-size: 17px;
+    line-height: 35px;
+    margin-top: 30px;
+  }
+}
+
+.reviews {
+  margin-left: 30px;
+  color: #7d7d78;
+  font-size: 22px;
+  line-height: 35px;
+}
+
+@media (min-width: $tablet) {
+  .wrapper {
+    display: block;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    & > div {
+      width: unset;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+@media (min-width: $tablet-max) {
+  .wrapper {
+    flex-wrap: nowrap;
+    flex-direction: column;
+    & > div {
+      width: 100%;
+    }
+  }
+}
+
+@media (min-width: $desktop) {
+  .wrapperItem {
+    display: flex;
+    justify-content: flex-start;
+    font-size: 22px;
+  }
+  .deliveryWrapperItem {
+    font-size: 16px;
+  }
+}

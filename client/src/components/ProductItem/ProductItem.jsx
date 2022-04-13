@@ -1,5 +1,4 @@
 import styles from './ProductItem.module.scss';
-import CustomAccordion from '../CustomAccordion/CustomAccordion';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useRef, useState} from 'react';
 import {
@@ -13,10 +12,9 @@ import {
 } from '../../store/reducers/cartReducer';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
-import Button from '../Button/Button';
+import ProductItemAbout from '../ProductItemAbout/ProductItemAbout';
+import ProductItemButtons from '../ProductItemButtons/ProductItemButtons';
 import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
-import {ReactComponent as MinusPic} from '../../assets/svg/count_minus.svg';
-import {ReactComponent as PlusPic} from '../../assets/svg/count_plus.svg';
 
 const ProductItem = (props) => {
   const {
@@ -40,7 +38,6 @@ const ProductItem = (props) => {
   const {wishlist} = useSelector((state) => state.wishlist);
   const [isFavourite, setIsFavourite] = useState(false);
   const [countInputValue, setCountInputValue] = useState(1);
-  const [cart, sum] = useSelector((state) => [state.cart.products, state.cart.cartSum]);
 
   useEffect(() => {
     const openModalImages = (currentImg) => {
@@ -141,139 +138,22 @@ const ProductItem = (props) => {
           ) : (
             <div className={styles.content_Price_Item}>{currentPrice} &#8372;</div>
           )}
-          <div className={styles.content_Price_ButtonsWrapper}>
-            <div className={styles.content_Price_infoWrapperQuantity}>
-              <div className={styles.content_Price_infoWrapperQuantityItem}>
-                Quantity:{quantity}
-              </div>
-              <div className={styles.content_Price_infoWrapperQuantityBlock}>
-                <div
-                  onClick={() => countInputValue > 1 && setCountInputValue(countInputValue - 1)}
-                  className={
-                    countInputValue <= 1
-                      ? styles.content_Price_infoWrapperQuantityBlockMinusNotWork
-                      : styles.content_Price_infoWrapperQuantityBlockMinus
-                  }>
-                  <MinusPic
-                    className={
-                      countInputValue <= 1
-                        ? styles.content_Price_infoWrapperQuantityBlockMinusItemNotWork
-                        : styles.content_Price_infoWrapperQuantityBlockMinusItem
-                    }
-                  />
-                </div>
-                <input
-                  className={styles.content_Price_infoWrapperQuantityBlockInput}
-                  type="text"
-                  value={countInputValue}
-                  onChange={({target}) => {
-                    setCountInputValue('');
-                    if (!isNaN(target.value) && target.value <= quantity && target.value > 0) {
-                      setCountInputValue(Number(target.value));
-                    }
-                  }}
-                  onBlur={() => {
-                    countInputValue === '' && setCountInputValue(1);
-                  }}
-                />
-                <div
-                  onClick={() =>
-                    countInputValue < quantity && setCountInputValue(countInputValue + 1)
-                  }
-                  className={styles.content_Price_infoWrapperQuantityBlockPlus}>
-                  <PlusPic className={styles.content_Price_infoWrapperQuantityBlockPlusItem} />
-                </div>
-                <Button
-                  onClick={addToCart}
-                  type={'button'}
-                  className={styles.content_Price_infoWrapperQuantity_Button}>
-                  add to cart
-                </Button>
-              </div>
-            </div>
-            <div className={styles.content_WishlistWrapper}>
-              <Button
-                onClick={switchWishItem}
-                type={'button'}
-                className={styles.content_WishlistWrapper_Item}>
-                {isFavourite ? 'remove from wishlist' : 'add to wishlist'}
-              </Button>
-            </div>
-          </div>
-        </div>
-        <div className={styles.content_Wrapper}>
-          <CustomAccordion
-            title="Description"
-            isProductPage={true}
-            content={description}
-            style={{textTransform: 'initial'}}
-          />
-
-          <CustomAccordion
-            title="Product details"
-            isProductPage={true}
-            content={
-              <>
-                <div className={styles.content_Details_Wrapper_Item}>
-                  <p style={{width: '40%'}}>Genre:</p>
-                  <span>
-                    {genre.map((e, index) => {
-                      if (index < genre.length - 1) {
-                        return `${e}, `;
-                      } else return `${e}`;
-                    })}
-                  </span>
-                </div>
-                <div className={styles.content_Details_Wrapper_Item}>
-                  <p style={{width: '40%'}}>Platforms:</p>
-                  <span>{Array.isArray(platform) ? platform.join(', ') : platform}</span>
-                </div>
-                <div className={styles.content_Details_Wrapper_Item}>
-                  <p style={{width: '40%'}}>Publisher:</p>
-                  <span>{publisher}</span>
-                </div>
-                <div className={styles.content_Details_Wrapper_Item}>
-                  <p style={{width: '40%'}}>Rating:</p>
-                  <span>{age}</span>
-                </div>
-              </>
-            }
-          />
-
-          <CustomAccordion
-            title="Shipping &#38; delivery"
-            isProductPage={true}
-            content={
-              <>
-                <div className={styles.content_Delivery_Text}>
-                  <p className={styles.content_Delivery_Text_item}>
-                    Product Delivery generally takes 1-6 business days, depending on location and
-                    delivery method.
-                  </p>
-                  <p className={styles.content_Delivery_Text_item}>
-                    Courier delivery in Kyiv. When ordering, our managers clarify all the necessary
-                    information. Specialists check the address, find out when it is convenient for
-                    you to meet the courier.
-                  </p>
-                  <p className={styles.content_Delivery_Text_item}>
-                    You can also order delivery with Nova Posta. There are express (1-3 business
-                    days) and standard (4-5 business days) delivery methods.
-                  </p>
-                  <p className={styles.content_Delivery_Text_item}>
-                    Prices: courier - 120 &#8372;, express - 79,95 &#8372;, standard - 29,95
-                    &#8372;.
-                  </p>
-                </div>
-              </>
-            }
-          />
-
-          <CustomAccordion
-            title="Reviews"
-            isProductPage={true}
-            content={<p className={styles.content_Reviews_Title_Item}>Reviews</p>}
+          <ProductItemButtons
+            quantity={quantity}
+            setCountInputValue={setCountInputValue}
+            countInputValue={countInputValue}
+            addToCart={addToCart}
+            switchWishItem={switchWishItem}
+            isFavourite={isFavourite}
           />
         </div>
+        <ProductItemAbout
+          description={description}
+          genre={genre}
+          platform={platform}
+          publisher={publisher}
+          age={age}
+        />
       </div>
     </div>
   );
