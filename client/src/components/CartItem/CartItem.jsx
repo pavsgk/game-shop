@@ -40,9 +40,7 @@ const CartItem = ({product, cartQuantity}) => {
       dispatch(decreaseProductQuantity(_id));
       return;
     }
-    if (cartQuantity > 1) {
-      dispatch(makeLessItemForNotLog(itemNo));
-    }
+    dispatch(makeLessItemForNotLog(itemNo));
   };
 
   return (

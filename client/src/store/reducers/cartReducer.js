@@ -76,7 +76,6 @@ const cartSlice = createSlice({
     },
     makeLessItemForNotLog(state, action) {
       const index = state.products.findIndex((elem) => elem.product.itemNo === action.payload);
-
       if (state.products[index].cartQuantity === 1) {
         return;
       }
@@ -102,7 +101,6 @@ const cartSlice = createSlice({
         0,
       );
     },
-
     countCartQuantity(state) {
       let quantity = 0;
       state.products.forEach((element) => (quantity += element.cartQuantity));
@@ -115,7 +113,6 @@ const cartSlice = createSlice({
     },
     [getCartFromServer.rejected]: (state) => {
       console.warn('getCartFromServer error: ', state);
-      state.isCartExist = false;
     },
     [updateCartFromLs.fulfilled]: (state, action) => {
       state.products = action.payload;
