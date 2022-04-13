@@ -1,4 +1,4 @@
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route, Navigate} from 'react-router-dom';
 import styles from './App.module.scss';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
@@ -24,6 +24,7 @@ import {getFromLS} from './utils/localStorage';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import SearchResults from './components/SearchResults/SearchResults';
 import RouteTracker from './components/RouteTracker/RouteTracker';
+import BreadCrumbs from './components/BreadCrumbs/BreadCrumbs';
 
 function App() {
   const dispatch = useDispatch();
@@ -49,6 +50,7 @@ function App() {
       <ErrorBoundary>
         <MuiTheme>
           <Header />
+          <BreadCrumbs />
           <SearchResults />
           <Routes>
             <Route path="/" element={<MainPage />} />
@@ -61,7 +63,8 @@ function App() {
             <Route path="checkout" element={<CheckoutPage />} />
             <Route path="orderConfirmed" element={<OrderConfirmed />} />
             <Route path="test" element={<TestPage />} />
-            <Route path="*" element={<NotFoundPage />} />
+            <Route path="notFound" element={<NotFoundPage />} />
+            <Route path="*" element={<Navigate to="notFound" replace />} />
           </Routes>
           <RouteTracker />
           <Footer />

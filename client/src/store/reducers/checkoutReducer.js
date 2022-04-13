@@ -23,7 +23,7 @@ const checkoutSlice = createSlice({
   initialState,
   reducers: {
     switchTab(state, {payload}) {
-      if (payload !== state.checkoutActiveTab) {
+      if (payload !== state.checkoutActiveTab && state.isValid) {
         state.checkoutActiveTab = payload;
       }
     },
