@@ -14,7 +14,7 @@ import {
 } from '../../store/reducers/cartReducer';
 
 const CartItem = ({product, cartQuantity}) => {
-  const {imageUrls, title, itemNo, currentPrice, _id} = product;
+  const {imageUrls, title, itemNo, currentPrice, _id, quantity} = product;
   const isAuthorized = useSelector((state) => state.user.isAuthorized);
 
   const dispatch = useDispatch();
@@ -28,11 +28,13 @@ const CartItem = ({product, cartQuantity}) => {
   };
 
   const makeMore = () => {
-    if (isAuthorized) {
+    if (isAuthorized && cartQuantity < quantity) {
       dispatch(addProductToTheCart(_id));
       return;
     }
-    dispatch(makeMoreItemForNotLog(itemNo));
+    if (cartQuantity < quantity) {
+      dispatch(makeMoreItemForNotLog(itemNo));
+    }
   };
 
   const makeLess = () => {

@@ -20,6 +20,7 @@ export const getCartFromServer = createAsyncThunk('cart/get', async () => {
   const result = await requestThePresenceOfTheCartOnTheServer();
   return result.products;
 });
+
 export const updateCartFromLs = createAsyncThunk('cart/put', async () => {
   const result = await requestToUpdateCartFromLs();
   return result.products;
