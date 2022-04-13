@@ -36,11 +36,13 @@ const CartItem = ({product, cartQuantity}) => {
   };
 
   const makeLess = () => {
-    if (isAuthorized) {
+    if (isAuthorized && cartQuantity > 1) {
       dispatch(decreaseProductQuantity(_id));
       return;
     }
-    dispatch(makeLessItemForNotLog(itemNo));
+    if (cartQuantity > 1) {
+      dispatch(makeLessItemForNotLog(itemNo));
+    }
   };
 
   return (
