@@ -1,0 +1,15 @@
+@import '../../styles/variables.scss';
+
+.btn {
+  border: none;
+  background-color: transparent;
+  color: $base-yellow;
+  font-weight: 800;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0 10px;
+
+  &:disabled {
+    color: $details;
+  }
+}
