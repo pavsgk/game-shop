@@ -29,7 +29,11 @@
   background-color: transparent;
 }
 
-@media (min-width: $tablet) {
+.errorMessage {
+  margin-top: 15%;
+}
+
+@media (min-width: $tablet-max) {
   .container {
     top: 90px;
   }

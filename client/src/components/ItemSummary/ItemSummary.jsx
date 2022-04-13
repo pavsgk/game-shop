@@ -8,6 +8,8 @@ function ItemSummary({products, title, emptyText, perPage}) {
   const [page, setPage] = useState(0);
 
   const maxPage = Math.ceil(items.length / perPage) - 1;
+  const minHeight = {minHeight: 105 * (perPage + 1) + 'px'};
+
   const controls = (
     <div className={styles.controls}>
       <button className={styles.pageButton} onClick={() => setPage(page - 1)} disabled={page <= 0}>
@@ -26,7 +28,7 @@ function ItemSummary({products, title, emptyText, perPage}) {
   );
 
   return (
-    <div className={styles.itemSummary}>
+    <div className={styles.itemSummary} style={minHeight}>
       <p className={styles.title}>{title}</p>
       <div className={styles.elem}></div>
       {items.length === 0 && <p className={styles.empty}>{emptyText}</p>}
@@ -62,4 +64,4 @@ ItemSummary.defaultProps = {
   perPage: 3,
 };
 
-export default React.memo(ItemSummary);
+export default ItemSummary;

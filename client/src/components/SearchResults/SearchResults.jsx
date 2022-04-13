@@ -28,7 +28,9 @@ function SearchResults() {
           &#10006;
         </button>
         {isPending && <Preloader />}
-        {isError && <h2>Check your internet connection and try again</h2>}
+        {isError && (
+          <h2 className={styles.errorMessage}>Check your internet connection and try again</h2>
+        )}
         {!isPending && !isError && (
           <ItemSummary
             products={results}
