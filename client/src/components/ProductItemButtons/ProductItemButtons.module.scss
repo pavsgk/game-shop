@@ -1,0 +1,147 @@
+@import '../../styles/variables.scss';
+
+.buttonsWrapper {
+  display: flex;
+  flex-direction: column;
+}
+.infoWrapperQuantity {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  margin-left: 20px;
+}
+.infoWrapperQuantityItem {
+  color: white;
+  font-size: 10px;
+  margin-bottom: 5px;
+}
+.infoWrapperQuantityValue {
+  font-size: 10px;
+  color: $text;
+  margin-bottom: 8px;
+}
+
+.infoWrapperQuantity_Button {
+  font-size: 12px;
+  line-height: 17px;
+  text-transform: uppercase;
+  padding: 4px 8px;
+  border: 1px solid $base-yellow;
+  background: none;
+  color: $base-yellow;
+  margin-left: 20px;
+  &:hover {
+    border: 1px solid $text;
+    color: $text;
+    background: $base-yellow;
+  }
+  &:active {
+    transform: scale(1.1);
+  }
+}
+
+.infoWrapperQuantityBlock {
+  display: flex;
+  align-items: center;
+  min-width: 20%;
+}
+
+.infoWrapperQuantityBlockMinus {
+  border: 1px solid $text;
+  display: flex;
+}
+
+.infoWrapperQuantityBlockMinusNotWork {
+  border: 1px solid grey;
+  display: flex;
+}
+
+.infoWrapperQuantityBlockMinusItem {
+  fill: $text;
+}
+
+.infoWrapperQuantityBlockMinusItemNotWork {
+  fill: grey;
+}
+
+.infoWrapperQuantityBlockValue {
+  color: $text;
+  margin: 0 9px;
+  font-size: 20px;
+  min-width: 30px;
+  text-align: center;
+}
+
+.infoWrapperQuantityBlockPlus {
+  display: flex;
+  border: 1px solid $text;
+}
+
+.infoWrapperQuantityBlockPlusItem {
+  fill: $text;
+}
+.infoWrapperQuantityBlockInput {
+  border: none;
+  background: #1e1e1e;
+  color: white;
+  width: 35px;
+  display: flex;
+  height: 26px;
+  outline: none;
+  text-align: center;
+}
+
+.wishlistWrapper {
+  margin-top: 30px;
+  display: flex;
+  justify-content: end;
+
+  &_Item {
+    font-size: 12px;
+    line-height: 17px;
+    text-transform: uppercase;
+    padding: 4px 8px;
+    border: 1px solid $base-yellow;
+    background: none;
+    color: $base-yellow;
+    width: 205px;
+    &:hover {
+      border: 1px solid $text;
+      color: $text;
+      background: $base-yellow;
+    }
+  }
+}
+
+@media (min-width: $tablet) {
+  .buttonsWrapper {
+    flex-direction: row;
+  }
+
+  .wishlistWrapper {
+    margin-left: 40px;
+    &:active {
+      transform: scale(1.1);
+    }
+  }
+}
+
+@media (min-width: $tablet-max) {
+  .buttonsWrapper {
+    flex-direction: column;
+  }
+  .wishlistWrapper {
+    margin-left: 0;
+  }
+}
+
+@media (min-width: $desktop) {
+  .buttonsWrapper {
+    flex-direction: row;
+  }
+
+  .wishlistWrapper {
+    margin-left: 40px;
+    width: 150px;
+  }
+}
