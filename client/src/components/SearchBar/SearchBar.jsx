@@ -19,11 +19,11 @@ function SearchBar() {
   );
 
   return (
-    <>
+    <div className={styles.searchBox}>
       <input
         className={styles.searchBar}
         type="text"
-        placeholder="Search"
+        placeholder="     Search..."
         value={searchString}
         onFocus={({target: {value}}) => {
           if (value.trim().length > 2) dispatch(setResultsVisibility(true));
@@ -34,7 +34,7 @@ function SearchBar() {
           search.current(value);
         }}
       />
-    </>
+    </div>
   );
 }
 

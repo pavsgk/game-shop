@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom';
 import React, {useEffect, useState} from 'react';
 import {ReactComponent as CartImg} from './img/Frame.svg';
 import {ReactComponent as Logo} from './img/star-wars.svg';
+import {ReactComponent as SearchActive} from './img/search.svg';
+import {ReactComponent as Search} from './img/search1.svg';
 import {ReactComponent as MenuImg} from './img/burgermenu.svg';
 import {useDispatch, useSelector} from 'react-redux';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
@@ -45,12 +47,34 @@ function Header() {
   }, [cart]);
 
   const [menuActive, setMenuActive] = useState(false);
+  const [mobileSearch, setMobileSearch] = useState(false);
+
+  const mobile = (
+    <div className={styles.mobileSearch}>
+      <SearchBar />
+    </div>
+  );
 
   return (
     <>
       <header className={styles.header}>
-        <div className={styles.menu}>
-          <MenuImg className={styles.menuImg} onClick={() => setMenuActive(!menuActive)} />
+        <div className={styles.menuBox}>
+          <div className={styles.menu}>
+            <MenuImg className={styles.menuImg} onClick={() => setMenuActive(!menuActive)} />
+          </div>
+          <div
+            className={styles.searchWrapper}
+            onClick={() => {
+              setMobileSearch(!mobileSearch);
+            }}>
+            <div className={styles.navLine}> </div>
+            {!mobileSearch ? (
+              <SearchActive className={styles.searchImg} />
+            ) : (
+              <Search className={styles.searchImg} />
+            )}
+          </div>
+          {mobileSearch ? mobile : null}
         </div>
         <Link exact="true" to="/">
           <Logo className={styles.logo} />
@@ -82,8 +106,8 @@ function Header() {
                 )}
               </Link>
             </li>
-            <li className={styles.navItem}>
-              <SearchBar />
+            <li className={styles.searchDesktop}>
+              <SearchBar className={styles.navItem} />
             </li>
           </ul>
         </nav>

@@ -31,6 +31,35 @@
   z-index: 1;
 }
 
+.searchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchImg {
+  width: 25px;
+  height: 25px;
+  margin-left: 5px;
+}
+
+.mobileSearch {
+  display: flex;
+  position: absolute;
+  top: 65px;
+  left: 60px;
+}
+
+.menuBox {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+}
+
+.searchDesktop {
+  display: none;
+}
+
 .none {
   display: none;
 }
@@ -39,8 +68,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 10px;
-  margin-right: 20px;
+  padding: 10px 5px 10px 10px;
   position: relative;
   cursor: pointer;
 }
@@ -172,6 +200,10 @@
     height: 80px;
   }
 
+  .mobileSearch {
+    left: 75px;
+  }
+
   .cartQuantity {
     font-size: 11px;
     left: 28px;
@@ -195,6 +227,10 @@
     display: none;
   }
 
+  .menuBox {
+    display: none;
+  }
+
   .nav {
     position: relative;
     top: 0;
@@ -203,6 +239,10 @@
 
   .navItem {
     border: 0;
+  }
+
+  .searchWrapper {
+    display: none;
   }
 
   .navList {
@@ -222,6 +262,21 @@
     text-shadow: 0 0 15px $active-btn;
   }
 
+  .mobileSearch {
+    display: none;
+  }
+
+  .searchDesktop {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+  }
+
+  .searchDesktop:hover {
+    transform: scale(1.1);
+    align-items: center;
+  }
+
   .logo {
     width: 137px;
     height: 85px;
@@ -236,6 +291,7 @@
     width: 50px;
     height: 50px;
   }
+
   .cartQuantity {
     left: 32px;
     top: 13px;
