@@ -12,6 +12,7 @@ import {countCartQuantity, countCartSum} from '../../store/reducers/cartReducer'
 import {saveToLS} from '../../utils/localStorage';
 import SearchBar from '../SearchBar/SearchBar';
 import OutsideTracker from '../OutsideTracker/OutsideTracker';
+import NavButton from '../NavButton/NavButton';
 
 function Header() {
   const dispatch = useDispatch();

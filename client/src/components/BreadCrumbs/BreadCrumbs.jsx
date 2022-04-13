@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link, useLocation} from 'react-router-dom';
+import NavButton from '../NavButton/NavButton';
 import styles from './BreadCrumbs.module.scss';
 
 function BreadCrumbs() {
@@ -17,14 +18,16 @@ function BreadCrumbs() {
 
   return (
     <div className={styles.breadCrumbs}>
-      {path.map((el) => (
+      <NavButton />
+      {path.map((el, i) => (
         <React.Fragment key={el[0]}>
           <Link className={styles.link} to={el[1]}>
             {el[0]}
           </Link>
-          <pre className={styles.separator}> &#62;&#62; </pre>
+          {i !== path.length - 1 && <pre className={styles.separator}> &#62;&#62; </pre>}
         </React.Fragment>
       ))}
+      <NavButton direction={1}>&#62;</NavButton>
     </div>
   );
 }
