@@ -1,7 +1,6 @@
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
 import {useLocation} from 'react-router-dom';
-import {pushHistory} from '../../store/reducers/routerReducer';
 import {setResultsVisibility} from '../../store/reducers/searchReducer';
 
 function RouteTracker({children}) {
@@ -9,7 +8,6 @@ function RouteTracker({children}) {
   const location = useLocation();
 
   useEffect(() => {
-    dispatch(pushHistory(location));
     dispatch(setResultsVisibility(false));
   }, [location, dispatch]);
 
