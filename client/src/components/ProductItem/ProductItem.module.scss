@@ -126,6 +126,9 @@
         color: $text;
         background: $base-yellow;
       }
+      &:active {
+        transform: scale(1.1);
+      }
     }
 
     &_infoWrapperQuantityBlock {
@@ -348,6 +351,9 @@
   }
   .content_WishlistWrapper {
     margin-left: 40px;
+    &:active {
+      transform: scale(1.1);
+    }
   }
 }
 

@@ -89,6 +89,9 @@
     color: $base-yellow;
     text-transform: uppercase;
   }
+  .addButton:active {
+    transform: scale(1.1);
+  }
 }
 
 @media (min-width: $tablet-max) {
