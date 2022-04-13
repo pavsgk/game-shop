@@ -138,11 +138,6 @@
   color: $text;
 }
 
-.logOut {
-  @extend .logIn;
-  cursor: pointer;
-}
-
 .cartQuantity {
   display: inline-block;
   background: darkgreen;

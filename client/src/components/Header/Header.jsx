@@ -3,31 +3,25 @@ import {Link} from 'react-router-dom';
 import React, {useEffect, useState} from 'react';
 import {ReactComponent as CartImg} from './img/Frame.svg';
 import {ReactComponent as Logo} from './img/star-wars.svg';
-import {ReactComponent as SearchActive} from './img/search.svg';
-import {ReactComponent as Search} from './img/search1.svg';
+import {ReactComponent as Search} from './img/search.svg';
 import {ReactComponent as MenuImg} from './img/burgermenu.svg';
 import {useDispatch, useSelector} from 'react-redux';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
 import {logout} from '../../store/reducers/userReducer';
-import {
-  countCartQuantity,
-  countCartSum,
-  getCartFromLS,
-  getCartFromServer,
-  updateCartFromLs,
-} from '../../store/reducers/cartReducer';
-import {removeFromLS, saveToLS} from '../../utils/localStorage';
+import {countCartQuantity, countCartSum} from '../../store/reducers/cartReducer';
+import {saveToLS} from '../../utils/localStorage';
 import SearchBar from '../SearchBar/SearchBar';
+import OutsideTracker from '../OutsideTracker/OutsideTracker';
 
 function Header() {
   const dispatch = useDispatch();
 
-  const openModal = () => {
+  const handleAuthorization = () => {
+    if (isAuthorized) {
+      dispatch(logout());
+      return;
+    }
     dispatch(openSignModal());
-  };
-
-  const logOut = () => {
-    dispatch(logout());
   };
 
   const [cart, isAuthorized, cartQuantity] = useSelector((state) => [
@@ -40,19 +34,18 @@ function Header() {
   useEffect(() => {
     dispatch(countCartSum());
     dispatch(countCartQuantity());
+    if (isAuthorized) saveToLS('cart', cart);
   }, [cart, dispatch, isAuthorized]);
-
-  useEffect(() => {
-    isAuthorized && saveToLS('cart', cart);
-  }, [cart]);
 
   const [menuActive, setMenuActive] = useState(false);
   const [mobileSearch, setMobileSearch] = useState(false);
 
-  const mobile = (
-    <div className={styles.mobileSearch}>
-      <SearchBar />
-    </div>
+  const searchBarMobile = (
+    <OutsideTracker func={() => setMobileSearch(false)}>
+      <div className={styles.mobileSearch}>
+        <SearchBar />
+      </div>
+    </OutsideTracker>
   );
 
   return (
@@ -68,64 +61,54 @@ function Header() {
               setMobileSearch(!mobileSearch);
             }}>
             <div className={styles.navLine}> </div>
-            {!mobileSearch ? (
-              <SearchActive className={styles.searchImg} />
-            ) : (
-              <Search className={styles.searchImg} />
-            )}
+            <Search className={styles.searchImg} />
           </div>
-          {mobileSearch ? mobile : null}
+          {mobileSearch ? searchBarMobile : null}
         </div>
         <Link exact="true" to="/">
           <Logo className={styles.logo} />
         </Link>
-        <nav className={styles.nav}>
-          <ul
-            className={menuActive ? styles.navList : styles.none}
-            onClick={() => setMenuActive(false)}>
-            <li className={styles.navItem}>
-              <Link exact="true" className={styles.navLink} to="/">
-                Home
-              </Link>
-            </li>
-            <li className={styles.navItem}>
-              <Link exact="true" className={styles.navLink} to="/catalog">
-                catalog
-              </Link>
-            </li>
-            <li className={styles.navItem}>
-              <Link exact="true" className={styles.navLink} to="/sale">
-                sale
-              </Link>
-            </li>
-            <li className={styles.navItem}>
-              <Link exact="true" className={styles.navLink} to="/wishlist">
-                wishlist
-                {wishlist.length > 0 && isAuthorized && (
-                  <div className={styles.wishlistQuantity}>{wishlist.length}</div>
-                )}
-              </Link>
-            </li>
-            <li className={styles.searchDesktop}>
-              <SearchBar className={styles.navItem} />
-            </li>
-          </ul>
-        </nav>
+        <OutsideTracker func={() => setMenuActive(false)}>
+          <nav className={styles.nav}>
+            <ul
+              className={menuActive ? styles.navList : styles.none}
+              onClick={() => setMenuActive(false)}>
+              <li className={styles.navItem}>
+                <Link exact="true" className={styles.navLink} to="/">
+                  Home
+                </Link>
+              </li>
+              <li className={styles.navItem}>
+                <Link exact="true" className={styles.navLink} to="/catalog">
+                  catalog
+                </Link>
+              </li>
+              <li className={styles.navItem}>
+                <Link exact="true" className={styles.navLink} to="/sale">
+                  sale
+                </Link>
+              </li>
+              <li className={styles.navItem}>
+                <Link exact="true" className={styles.navLink} to="/wishlist">
+                  wishlist
+                  {wishlist.length > 0 && isAuthorized && (
+                    <div className={styles.wishlistQuantity}>{wishlist.length}</div>
+                  )}
+                </Link>
+              </li>
+              <li className={styles.searchDesktop}>{mobileSearch || <SearchBar />}</li>
+            </ul>
+          </nav>
+        </OutsideTracker>
         <div className={styles.additionalNav}>
           <Link exact="true" to="/cart">
             <CartImg className={styles.cartImg} />
             {cartQuantity > 0 && <div className={styles.cartQuantity}>{cartQuantity}</div>}
           </Link>
           <div className={styles.navLine}> </div>
-          {isAuthorized ? (
-            <p onClick={() => logOut()} className={styles.logOut}>
-              LOG OUT
-            </p>
-          ) : (
-            <p onClick={() => openModal()} className={styles.logIn}>
-              LOG IN
-            </p>
-          )}
+          <p onClick={() => handleAuthorization()} className={styles.logIn}>
+            {isAuthorized ? 'Log out' : 'Log in'}
+          </p>
         </div>
       </header>
       <div className={styles.dummy}></div>
