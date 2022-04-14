@@ -14,7 +14,7 @@ function SalePage() {
   const [isError, setIsError] = useState(false);
   const [isBeRequest, setIsBeRequest] = useState(false);
 
-  const [isMainFetch, setIsMainFetch] = useState(true);
+  const [isMainFetch, setIsMainFetch] = useState(false);
   const [isFilterFetch, setIsFilterFetch] = useState(false);
 
   const isFilter = useRef(false);
@@ -57,23 +57,30 @@ function SalePage() {
     productsLength.current = products.length;
   }, [products]);
 
-  function ProcessingOfEnquiries(mainCatalog, firstFilter) {
+  function ProcessingOfEnquiries(noFilter, firstFilter) {
     let data = [];
-    const queryString = mainCatalog
+    const queryString = noFilter
       ? `&minPreviousPrice=1&maxPreviousPrice=3000&perPage=12&startPage=${currentMain}`
       : location.search.slice(1, -1) +
         `&minPreviousPrice=1&maxPreviousPrice=3000&perPage=12&startPage=${currentFilter}`;
-    mainCatalog ? (isFilter.current = false) : (isFilter.current = true);
-
     (async () => {
       try {
+        setIsLoading(true);
+
         data = await getFilteredProducts(queryString);
-        mainCatalog ? setCurrentMain(currentMain + 1) : setCurrentFilter(currentFilter + 1);
+
+        noFilter ? setCurrentMain(currentMain + 1) : setCurrentFilter(currentFilter + 1);
         productsQuantity.current = data.data.productsQuantity;
-        firstFilter
-          ? setProducts(data.data.products)
-          : setProducts([...products, ...data.data.products]);
-        mainCatalog ? setIsMainFetch(false) : setIsFilterFetch(false);
+
+        noFilter && isFilter.current === false && setProducts([...products, ...data.data.products]);
+        noFilter && isFilter.current === true && setProducts(data.data.products);
+
+        firstFilter && setProducts(data.data.products);
+        !firstFilter && !noFilter && setProducts([...products, ...data.data.products]);
+
+        noFilter ? setIsMainFetch(false) : setIsFilterFetch(false);
+        noFilter ? (isFilter.current = false) : (isFilter.current = true);
+
         setIsBeRequest(true);
         setIsLoading(false);
         setIsError(false);
@@ -88,6 +95,11 @@ function SalePage() {
     if (location.search.length > 0) {
       ProcessingOfEnquiries(false, true);
     }
+    if (location.search.length === 0) {
+      setIsMainFetch(true);
+      setCurrentMain(1);
+      setCurrentFilter(1);
+    }
   }, [location.search]);
 
   useEffect(() => {
@@ -97,7 +109,7 @@ function SalePage() {
   }, [isFilterFetch]);
 
   useEffect(() => {
-    if (isMainFetch && location.search.length === 0) {
+    if (isMainFetch) {
       ProcessingOfEnquiries(true, false);
     }
   }, [isMainFetch]);
