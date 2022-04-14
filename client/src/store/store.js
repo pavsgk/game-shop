@@ -17,6 +17,6 @@ export default configureStore({
     imagesModal: imagesModalReducer,
     wishlist: wishlistReducer,
     search: searchReducer,
-    SuccessAddModal: successAddModalReducer,
+    successAddModal: successAddModalReducer,
   },
 });

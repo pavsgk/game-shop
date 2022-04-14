@@ -3,8 +3,8 @@ import styles from './SuccessfullyAddModal.module.scss';
 
 function SuccessfullyAddModal() {
   const [modalState, text] = useSelector((state) => [
-    state.SuccessAddModal.modalState,
-    state.SuccessAddModal.modalText,
+    state.successAddModal.modalState,
+    state.successAddModal.modalText,
   ]);
 
   if (!modalState) {
