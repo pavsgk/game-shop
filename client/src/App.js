@@ -25,25 +25,14 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import SearchResults from './components/SearchResults/SearchResults';
 import RouteTracker from './components/RouteTracker/RouteTracker';
 import BreadCrumbs from './components/BreadCrumbs/BreadCrumbs';
+import SuccessfullyAddModal from './components/SuccessfullyAddModal/SuccessfullyAddModal';
 
 function App() {
   const dispatch = useDispatch();
-  const isAuthorized = useSelector((state) => state.user.isAuthorized);
 
   useEffect(() => {
     dispatch(init());
-    dispatch(getCartFromLS());
   }, [dispatch]);
-
-  useEffect(() => {
-    if (isAuthorized) {
-      const cartFromLS = getFromLS('cart');
-      if (cartFromLS) {
-        dispatch(updateCartFromLs());
-      }
-      dispatch(getCartFromServer());
-    }
-  }, [isAuthorized, dispatch]);
 
   return (
     <div className={styles.app}>
@@ -66,6 +55,7 @@ function App() {
             <Route path="notFound" element={<NotFoundPage />} />
             <Route path="*" element={<Navigate to="notFound" replace />} />
           </Routes>
+          <SuccessfullyAddModal />
           <RouteTracker />
           <Footer />
           <SignModalContainer />

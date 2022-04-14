@@ -112,38 +112,20 @@ const cartSlice = createSlice({
     [getCartFromServer.fulfilled]: (state, action) => {
       state.products = action.payload;
     },
-    [getCartFromServer.rejected]: (state) => {
-      console.warn('getCartFromServer error: ', state);
-    },
     [updateCartFromLs.fulfilled]: (state, action) => {
       state.products = action.payload;
-    },
-    [updateCartFromLs.rejected]: (state) => {
-      console.warn('getCartFromServer error: ', state);
     },
     [addProductToTheCart.fulfilled]: (state, action) => {
       state.products = action.payload;
     },
-    [addProductToTheCart.rejected]: (state) => {
-      console.warn('addProductToTheCart error: ', state);
-    },
     [decreaseProductQuantity.fulfilled]: (state, action) => {
       state.products = action.payload;
-    },
-    [decreaseProductQuantity.rejected]: (state) => {
-      console.warn('decreaseProductQuantity error: ', state);
     },
     [deleteProductFromTheCart.fulfilled]: (state, action) => {
       state.products = action.payload;
     },
-    [deleteProductFromTheCart.rejected]: (state) => {
-      console.warn('deleteProductFromTheCart error: ', state);
-    },
     [cleanCart.fulfilled]: (state, action) => {
       state.products = action.payload;
-    },
-    [cleanCart.rejected]: (state) => {
-      console.warn('deleteProductFromTheCart error: ', state);
     },
   },
 });

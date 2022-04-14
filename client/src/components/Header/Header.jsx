@@ -8,7 +8,7 @@ import {ReactComponent as MenuImg} from './img/burgermenu.svg';
 import {useDispatch, useSelector} from 'react-redux';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
 import {logout} from '../../store/reducers/userReducer';
-import {countCartQuantity, countCartSum} from '../../store/reducers/cartReducer';
+import {countCartQuantity, countCartSum, getCartFromLS} from '../../store/reducers/cartReducer';
 import {saveToLS} from '../../utils/localStorage';
 import SearchBar from '../SearchBar/SearchBar';
 import OutsideTracker from '../OutsideTracker/OutsideTracker';
@@ -35,8 +35,15 @@ function Header() {
   useEffect(() => {
     dispatch(countCartSum());
     dispatch(countCartQuantity());
-    if (isAuthorized) saveToLS('cart', cart);
-  }, [cart, dispatch, isAuthorized]);
+  }, [cart]);
+
+  useEffect(() => {
+    isAuthorized && saveToLS('cart', cart);
+  }, [isAuthorized, cart]);
+
+  useEffect(() => {
+    dispatch(getCartFromLS());
+  }, []);
 
   const [menuActive, setMenuActive] = useState(false);
   const [mobileSearch, setMobileSearch] = useState(false);

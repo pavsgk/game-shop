@@ -28,7 +28,7 @@
   justify-content: space-between;
   flex-direction: column;
   align-items: flex-start;
-  width: 100%;
+  width: 85%;
 }
 
 .infoWrapperTitle {
@@ -115,6 +115,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  text-align: end;
   margin-left: 20px;
 }
 
@@ -130,10 +131,14 @@
 .priceValue {
   display: flex;
   font-size: 16px;
-  //font-size: 20px;
+  color: $base-yellow;
+}
+
+.priceValueOneItem {
+  display: flex;
+  font-size: 16px;
   color: $base-yellow;
   & span {
-    margin-right: 5px;
     white-space: nowrap;
   }
 }
@@ -163,6 +168,12 @@
   }
 
   .priceValue {
+    font-size: 20px;
+    & span {
+      white-space: nowrap;
+    }
+  }
+  .priceValueOneItem {
     font-size: 20px;
   }
 }
