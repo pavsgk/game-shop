@@ -15,6 +15,11 @@ import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 import ProductItemAbout from '../ProductItemAbout/ProductItemAbout';
 import ProductItemButtons from '../ProductItemButtons/ProductItemButtons';
 import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
+import {
+  closeSuccessAddModal,
+  fillSuccessAddModal,
+  openSuccessAddModal,
+} from '../../store/reducers/successAddModalReducer';
 
 const ProductItem = (props) => {
   const {
@@ -38,6 +43,14 @@ const ProductItem = (props) => {
   const {wishlist} = useSelector((state) => state.wishlist);
   const [isFavourite, setIsFavourite] = useState(false);
   const [countInputValue, setCountInputValue] = useState(1);
+
+  const ShowAddedMessage = () => {
+    dispatch(fillSuccessAddModal('Successfully added to the cart'));
+    dispatch(openSuccessAddModal());
+    setTimeout(() => {
+      dispatch(closeSuccessAddModal());
+    }, 1000);
+  };
 
   useEffect(() => {
     const openModalImages = (currentImg) => {
@@ -89,6 +102,7 @@ const ProductItem = (props) => {
   }, [wishlist]);
 
   const addToCart = () => {
+    ShowAddedMessage();
     const cartItem = {product: props, cartQuantity: countInputValue};
 
     if (isAuthorized) {

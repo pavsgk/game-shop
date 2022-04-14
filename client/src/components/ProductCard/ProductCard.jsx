@@ -6,6 +6,11 @@ import {addItemToTheCartForNotLog, addProductToTheCart} from '../../store/reduce
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
+import {
+  fillSuccessAddModal,
+  closeSuccessAddModal,
+  openSuccessAddModal,
+} from '../../store/reducers/successAddModalReducer';
 import {ReactComponent as Sale} from './img/sale.svg';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
 import {useRef} from 'react';
@@ -21,7 +26,16 @@ function ProductCard(props) {
     dispatch(openSignModal());
   };
 
+  const ShowAddedMessage = () => {
+    dispatch(fillSuccessAddModal('Successfully added to the cart'));
+    dispatch(openSuccessAddModal());
+    setTimeout(() => {
+      dispatch(closeSuccessAddModal());
+    }, 1000);
+  };
+
   const addToCart = () => {
+    ShowAddedMessage();
     if (isAuthorized) {
       dispatch(addProductToTheCart(_id));
       return;
