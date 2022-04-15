@@ -12,7 +12,7 @@ function SalePage() {
 
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
-  const [isBeRequest, setIsBeRequest] = useState(false);
+  const [lastLocationSearch, setLastLocationSearch] = useState('');
 
   const [isMainFetch, setIsMainFetch] = useState(false);
   const [isFilterFetch, setIsFilterFetch] = useState(false);
@@ -81,7 +81,7 @@ function SalePage() {
         noFilter ? setIsMainFetch(false) : setIsFilterFetch(false);
         noFilter ? (isFilter.current = false) : (isFilter.current = true);
 
-        setIsBeRequest(true);
+        setLastLocationSearch(location.search);
         setIsLoading(false);
         setIsError(false);
       } catch (e) {
@@ -130,7 +130,6 @@ function SalePage() {
             isSale={true}
             products={products}
             isLoading={isLoading}
-            isBeRequest={isBeRequest}
           />
         </div>
       )}

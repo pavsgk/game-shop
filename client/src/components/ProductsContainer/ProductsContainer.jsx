@@ -5,18 +5,9 @@ import ProductsPlaceholder from '../ProductsPlaceholder/ProductsPlaceholder';
 import {useSelector} from 'react-redux';
 import FilterMenu from '../FilterMenu/FilterMenu';
 
-function ProductsContainer({
-  isOpen,
-  closeFilters,
-  isCatalog,
-  isSale,
-  products,
-  isLoading,
-  isBeRequest,
-}) {
+function ProductsContainer({isOpen, closeFilters, isCatalog, isSale, products, isLoading}) {
   const {wishlist} = useSelector((state) => state.wishlist);
   const idItemsInWishlist = wishlist.map((e) => e._id);
-  const emptyRequest = isBeRequest && products.length < 1;
 
   return (
     <div className={styles.contentProductsWrapper}>
@@ -25,9 +16,11 @@ function ProductsContainer({
         {isSale && <FilterMenu isSale={true} isOpen={isOpen} closeFilters={closeFilters} />}
         <div
           className={
-            emptyRequest ? styles.productsContainerWithOutItems : styles.productsContainer
+            products.length < 1 && !isLoading
+              ? styles.productsContainerWithOutItems
+              : styles.productsContainer
           }>
-          {emptyRequest && !isLoading ? (
+          {products.length < 1 && !isLoading ? (
             <h3>There are no products to your request</h3>
           ) : (
             products.map((item) => {
