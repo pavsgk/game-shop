@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {Form, Formik} from 'formik';
 import CustomField from '../CustomField/CustomField';
 import * as yup from 'yup';
@@ -97,6 +98,10 @@ const SignUp = ({closeModal}) => {
       }}
     </Formik>
   );
+};
+
+SignUp.propTypes = {
+  closeModal: PropTypes.func.isRequired,
 };
 
 export default SignUp;

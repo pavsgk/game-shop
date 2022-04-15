@@ -2,11 +2,14 @@ import styles from './MainSale.module.scss';
 import MainComponent from '../MainComponent/MainComponent';
 import React, {useEffect, useState} from 'react';
 import instance from '../../api/instance';
+import {Link} from 'react-router-dom';
 import {ReactComponent as Sale} from './img/sale.svg';
 
-function MainSale() {
+function MainSale(props) {
+  const {isMain = true} = props;
   const [saleProd, setSaleProd] = useState([]);
   const sale = [];
+  let saleMain = null;
 
   useEffect(() => {
     (async () => {
@@ -23,21 +26,25 @@ function MainSale() {
         }
       });
     }
+    if (isMain) {
+      saleMain = sale.slice(0, 12);
+    } else {
+      saleMain = sale;
+    }
   })();
 
   return (
     <>
-      <div className={styles.title}>
+      <Link exact="true" to="sale" className={styles.title}>
         sale
         <Sale className={styles.titleSvg} />
-      </div>
+      </Link>
       <div className={styles.wrapper}>
-        {sale.slice(0, 12).map((el) => {
+        {saleMain.map((el) => {
           return (
-            <>
+            <React.Fragment key={el.itemNo}>
               <div className={styles.componentWrapper}>
                 <MainComponent
-                  key={el.itemNo}
                   name={el.title}
                   price={el.currentPrice}
                   img={el.imageUrls.slice(0, 1)}
@@ -46,7 +53,7 @@ function MainSale() {
                 />
                 <Sale className={styles.svg} />
               </div>
-            </>
+            </React.Fragment>
           );
         })}
       </div>

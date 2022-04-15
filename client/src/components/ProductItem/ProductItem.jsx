@@ -1,5 +1,4 @@
 import styles from './ProductItem.module.scss';
-import CustomAccordion from '../CustomAccordion/CustomAccordion';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useRef, useState} from 'react';
 import {
@@ -7,12 +6,20 @@ import {
   addContentForImagesModal,
 } from '../../store/reducers/imagesModalReducer';
 import ProductItemSlider from '../ProductItemSlider/ProductItemSlider';
-import {addProductToTheCart, addItemToTheCartForNotLog} from '../../store/reducers/cartReducer';
+import {
+  addItemToTheCartForNotLog,
+  addMoreThanOneProductsToTheCart,
+} from '../../store/reducers/cartReducer';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
-import {ReactComponent as Sale} from '../ProductCard/img/sale.svg';
-import Button from '../Button/Button';
+import ProductItemAbout from '../ProductItemAbout/ProductItemAbout';
+import ProductItemButtons from '../ProductItemButtons/ProductItemButtons';
 import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
+import {
+  closeSuccessAddModal,
+  fillSuccessAddModal,
+  openSuccessAddModal,
+} from '../../store/reducers/successAddModalReducer';
 
 const ProductItem = (props) => {
   const {
@@ -27,6 +34,7 @@ const ProductItem = (props) => {
     age,
     _id,
     platform,
+    quantity,
   } = props;
 
   const dispatch = useDispatch();
@@ -34,6 +42,15 @@ const ProductItem = (props) => {
   const sliderRef = useRef(null);
   const {wishlist} = useSelector((state) => state.wishlist);
   const [isFavourite, setIsFavourite] = useState(false);
+  const [countInputValue, setCountInputValue] = useState(1);
+
+  const ShowAddedMessage = () => {
+    dispatch(fillSuccessAddModal('Successfully added to the cart'));
+    dispatch(openSuccessAddModal());
+    setTimeout(() => {
+      dispatch(closeSuccessAddModal());
+    }, 1000);
+  };
 
   useEffect(() => {
     const openModalImages = (currentImg) => {
@@ -44,7 +61,7 @@ const ProductItem = (props) => {
       dispatch(addContentForImagesModal(currentUrls));
       dispatch(switchImagesModalState());
     };
-    console.log(platform, 'platform');
+
     const slider = sliderRef.current;
     if (slider) {
       slider.querySelector('#thumbnail-div').style.justifyContent = 'space-evenly';
@@ -85,11 +102,14 @@ const ProductItem = (props) => {
   }, [wishlist]);
 
   const addToCart = () => {
+    ShowAddedMessage();
+    const cartItem = {product: props, cartQuantity: countInputValue};
+
     if (isAuthorized) {
-      dispatch(addProductToTheCart(_id));
+      dispatch(addMoreThanOneProductsToTheCart(cartItem));
       return;
     }
-    dispatch(addItemToTheCartForNotLog(props.item));
+    dispatch(addItemToTheCartForNotLog(cartItem));
   };
 
   const openModal = () => {
@@ -132,94 +152,22 @@ const ProductItem = (props) => {
           ) : (
             <div className={styles.content_Price_Item}>{currentPrice} &#8372;</div>
           )}
-          <div className={styles.content_Price_Wrapper}>
-            <Button
-              onClick={addToCart}
-              type={'button'}
-              className={styles.content_Price_Wrapper_Button}>
-              add to cart
-            </Button>
-            <Button
-              onClick={switchWishItem}
-              type={'button'}
-              className={styles.content_Price_Wrapper_Button}>
-              {isFavourite ? 'remove from wishlist' : 'add to wishlist'}
-            </Button>
-          </div>
-        </div>
-        <div className={styles.content_Wrapper}>
-          <CustomAccordion
-            title="Description"
-            isProductPage={true}
-            content={description}
-            style={{textTransform: 'initial'}}
-          />
-
-          <CustomAccordion
-            title="Product details"
-            isProductPage={true}
-            content={
-              <>
-                <div className={styles.content_Details_Wrapper_Item}>
-                  <p style={{width: '40%'}}>Genre:</p>
-                  <span>
-                    {genre.map((e, index) => {
-                      if (index < genre.length - 1) {
-                        return `${e}, `;
-                      } else return `${e}`;
-                    })}
-                  </span>
-                </div>
-                <div className={styles.content_Details_Wrapper_Item}>
-                  <p style={{width: '40%'}}>Platforms:</p>
-                  <span>{Array.isArray(platform) ? platform.join(', ') : platform}</span>
-                </div>
-                <div className={styles.content_Details_Wrapper_Item}>
-                  <p style={{width: '40%'}}>Publisher:</p>
-                  <span>{publisher}</span>
-                </div>
-                <div className={styles.content_Details_Wrapper_Item}>
-                  <p style={{width: '40%'}}>Rating:</p>
-                  <span>{age}</span>
-                </div>
-              </>
-            }
-          />
-
-          <CustomAccordion
-            title="Shipping &#38; delivery"
-            isProductPage={true}
-            content={
-              <>
-                <div className={styles.content_Delivery_Text}>
-                  <p className={styles.content_Delivery_Text_item}>
-                    Product Delivery generally takes 1-6 business days, depending on location and
-                    delivery method.
-                  </p>
-                  <p className={styles.content_Delivery_Text_item}>
-                    Courier delivery in Kyiv. When ordering, our managers clarify all the necessary
-                    information. Specialists check the address, find out when it is convenient for
-                    you to meet the courier.
-                  </p>
-                  <p className={styles.content_Delivery_Text_item}>
-                    You can also order delivery with Nova Posta. There are express (1-3 business
-                    days) and standard (4-5 business days) delivery methods.
-                  </p>
-                  <p className={styles.content_Delivery_Text_item}>
-                    Prices: courier - 120 &#8372;, express - 79,95 &#8372;, standard - 29,95
-                    &#8372;.
-                  </p>
-                </div>
-              </>
-            }
-          />
-
-          <CustomAccordion
-            title="Reviews"
-            isProductPage={true}
-            content={<p className={styles.content_Reviews_Title_Item}>Reviews</p>}
+          <ProductItemButtons
+            quantity={quantity}
+            setCountInputValue={setCountInputValue}
+            countInputValue={countInputValue}
+            addToCart={addToCart}
+            switchWishItem={switchWishItem}
+            isFavourite={isFavourite}
           />
         </div>
+        <ProductItemAbout
+          description={description}
+          genre={genre}
+          platform={platform}
+          publisher={publisher}
+          age={age}
+        />
       </div>
     </div>
   );

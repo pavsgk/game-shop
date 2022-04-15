@@ -1,7 +1,7 @@
 import styles from './Payment.module.scss';
 import OrderingComponent from '../OrderingComponent/OrderingComponent';
 import Button from '../Button/Button';
-import React from 'react';
+import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {updatePaymentInfo} from '../../store/reducers/checkoutReducer';
 import {useNavigate} from 'react-router-dom';
@@ -23,17 +23,20 @@ function Payment() {
     store.cart.products,
   ]);
 
+  const [isProcessingOrder, setIsProcessingOrder] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const formDisableTip = () => {
     const tip = [];
+    if (isProcessingOrder) return 'Order is being processed';
     if (!isValid) tip.push('Invalid shipping info');
     if (products.length === 0) tip.push('Cart is empty');
     return tip.length > 1 ? tip.join(', ') : tip.join('');
   };
 
   const handleSubmit = async () => {
+    setIsProcessingOrder(true);
     const {user, cart, checkout} = store.getState();
     const {country, city, address, postal} = checkout.checkoutFields;
     const {
@@ -42,7 +45,6 @@ function Payment() {
       paymentInfo,
       checkoutFields: {mobile},
     } = checkout;
-    console.log(checkout);
     const email = checkout.checkoutFields.email || user.userData.email;
 
     const orderBody = {
@@ -66,7 +68,6 @@ function Payment() {
     if (user.isAuthorized) orderBody.customerId = user.userData.customerId;
 
     try {
-      console.log(orderBody);
       await placeOrder(orderBody);
       navigate('/orderConfirmed');
     } catch {
@@ -92,7 +93,7 @@ function Payment() {
       ))}
       <div className={styles.submit}>
         <Button
-          disabled={!products.length || !isValid}
+          disabled={!products.length || !isValid || isProcessingOrder}
           onClick={handleSubmit}
           data-dis-tip={formDisableTip()}>
           submit order

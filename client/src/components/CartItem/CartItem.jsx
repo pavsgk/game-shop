@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styles from './CartItem.module.scss';
 import {ReactComponent as DeletePic} from '../../assets/svg/delete.svg';
 import {ReactComponent as MinusPic} from '../../assets/svg/count_minus.svg';
@@ -12,31 +13,63 @@ import {
   makeMoreItemForNotLog,
 } from '../../store/reducers/cartReducer';
 
-const CartItem = ({product, cartQuantity}) => {
-  const {imageUrls, title, itemNo, currentPrice, _id} = product;
+const CartItem = ({product, cartQuantity, setIsError, setIsLoading}) => {
+  const {imageUrls, title, itemNo, currentPrice, _id, quantity} = product;
   const isAuthorized = useSelector((state) => state.user.isAuthorized);
 
   const dispatch = useDispatch();
 
   const removeProductFromCart = () => {
     if (isAuthorized) {
-      dispatch(deleteProductFromTheCart(_id));
+      (async () => {
+        try {
+          setIsLoading(true);
+          await dispatch(deleteProductFromTheCart(_id));
+          setIsLoading(false);
+          setIsError(false);
+        } catch (e) {
+          setIsLoading(false);
+          setIsError(true);
+        }
+      })();
       return;
     }
     dispatch(removeItemFromTheCartForNotLog(itemNo));
   };
 
   const makeMore = () => {
-    if (isAuthorized) {
-      dispatch(addProductToTheCart(_id));
+    if (isAuthorized && cartQuantity < quantity) {
+      (async () => {
+        try {
+          setIsLoading(true);
+          await dispatch(addProductToTheCart(_id));
+          setIsLoading(false);
+          setIsError(false);
+        } catch (e) {
+          setIsLoading(false);
+          setIsError(true);
+        }
+      })();
       return;
     }
-    dispatch(makeMoreItemForNotLog(itemNo));
+    if (cartQuantity < quantity) {
+      dispatch(makeMoreItemForNotLog(itemNo));
+    }
   };
 
   const makeLess = () => {
-    if (isAuthorized) {
-      dispatch(decreaseProductQuantity(_id));
+    if (isAuthorized && cartQuantity > 1) {
+      (async () => {
+        try {
+          setIsLoading(true);
+          await dispatch(decreaseProductQuantity(_id));
+          setIsLoading(false);
+          setIsError(false);
+        } catch (e) {
+          setIsLoading(false);
+          setIsError(true);
+        }
+      })();
       return;
     }
     dispatch(makeLessItemForNotLog(itemNo));
@@ -80,7 +113,7 @@ const CartItem = ({product, cartQuantity}) => {
         <div className={styles.deleteWrapper} onClick={removeProductFromCart}>
           <DeletePic className={styles.deleteWrapperItem} />
         </div>
-        <div className={styles.priceValue}>
+        <div className={cartQuantity > 1 ? styles.priceValue : styles.priceValueOneItem}>
           <span>
             {cartQuantity > 1
               ? `${currentPrice} x ${cartQuantity} = ${currentPrice * cartQuantity}`
@@ -91,6 +124,32 @@ const CartItem = ({product, cartQuantity}) => {
       </div>
     </div>
   );
+};
+
+CartItem.propTypes = {
+  cartQuantity: PropTypes.number,
+  setIsError: PropTypes.func,
+  setIsLoading: PropTypes.func,
+  product: PropTypes.shape({
+    _id: PropTypes.string,
+    currentPrice: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    imageUrls: PropTypes.arrayOf(PropTypes.string),
+    itemNo: PropTypes.string,
+    title: PropTypes.string,
+    quantity: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  }),
+};
+
+CartItem.defaultProps = {
+  cartQuantity: 1,
+  product: {
+    _id: '0',
+    currentPrice: 0,
+    imageUrls: ['./unknown-w.png'],
+    itemNo: '0',
+    title: 'unknown',
+    quantity: 0,
+  },
 };
 
 export default CartItem;

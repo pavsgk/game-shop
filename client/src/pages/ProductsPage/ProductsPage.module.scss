@@ -3,11 +3,12 @@
   .productsPage {
     display: flex;
     flex-direction: column;
+    margin-bottom: 50px;
   }
 }
 
 @media (min-width: $desktop) {
   .productsPage {
-    margin: 0 0 130px 0;
+    margin-bottom: 130px;
   }
 }

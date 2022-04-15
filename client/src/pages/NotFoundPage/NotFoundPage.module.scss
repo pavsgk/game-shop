@@ -6,7 +6,7 @@
   justify-content: space-around;
   align-items: center;
   padding: calc(100vh / 15) 0px;
-  gap: calc(100vh / 15);
+  gap: calc(100vh / 25);
 
   h2 {
     color: $base-yellow;
@@ -19,6 +19,7 @@
 
   h3 {
     color: $base-yellow;
+    margin: 10px 20px;
   }
 
   a {
@@ -41,5 +42,11 @@
   }
   to {
     transform: rotateZ(-180deg);
+  }
+}
+
+@media (min-width: $tablet) {
+  .notFoundPage {
+    gap: calc(100vh / 15);
   }
 }

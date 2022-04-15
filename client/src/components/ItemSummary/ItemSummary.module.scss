@@ -2,13 +2,44 @@
 
 .itemSummary {
   margin: 15px;
+  min-width: $mobile;
 }
 
 .elem {
   height: 1px;
   max-width: 440px;
   background: $details;
-  margin: 10px 0 15px 0;
+  margin: 10px 0;
+}
+
+.controls {
+  display: flex;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pageIndicator {
+  color: $text;
+  font-size: 16px;
+}
+
+.pageButton {
+  background: $background;
+  border: 1px solid $text;
+  padding: 5px 5px;
+  color: $text;
+  cursor: pointer;
+
+  &:disabled {
+    color: $details;
+  }
+
+  &:hover:enabled {
+    background-color: $base-yellow;
+    color: $background;
+  }
 }
 
 .title {
@@ -30,7 +61,7 @@
   }
 
   .elem {
-    margin: 15px 0 25px 0;
+    margin: 15px 0;
   }
 }
 

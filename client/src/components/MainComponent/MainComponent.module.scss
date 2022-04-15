@@ -4,7 +4,8 @@
   width: 250px;
   height: 320px;
   position: relative;
-  margin: 5px;
+  margin-bottom: 15px;
+
   &:hover {
     box-shadow: 0 0 10px 1px $active-btn;
     cursor: pointer;
@@ -30,7 +31,7 @@
 }
 
 .name {
-  font-size: 18px;
+  font-size: 17px;
   color: $text;
   padding-right: 5px;
   align-self: flex-end;

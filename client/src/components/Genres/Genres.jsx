@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import styles from './Genres.module.scss';
 import React, {useEffect, useState} from 'react';
 import {getAllFilters} from '../../api/filters';
@@ -19,6 +20,10 @@ function GenreComponent(props) {
   );
 }
 
+GenreComponent.propTypes = {
+  genre: PropTypes.string,
+};
+
 function Genres() {
   const [genres, setGenres] = useState([]);
 
@@ -32,7 +37,9 @@ function Genres() {
 
   return (
     <>
-      <p className={styles.title}>genres</p>
+      <Link exact="true" to="catalog" className={styles.title}>
+        genres
+      </Link>
       <div className={styles.wrapper}>
         {genres.length > 0
           ? genres.map((el) => {

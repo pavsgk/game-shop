@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import {Accordion, Container} from '@mui/material';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Typography from '@mui/material/Typography';
@@ -50,5 +51,17 @@ function CustomAccordion({title, content, isProductPage, isExpanded}) {
     </Accordion>
   );
 }
+
+CustomAccordion.propTypes = {
+  content: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+  isExpanded: PropTypes.bool,
+  isProductPage: PropTypes.bool,
+  title: PropTypes.string,
+};
+
+CustomAccordion.defaultProps = {
+  content: 'No content',
+  title: 'No titile',
+};
 
 export default CustomAccordion;

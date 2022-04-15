@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import {Select, MenuItem} from '@mui/material';
 import styles from './CatalogFilterTools.module.scss';
@@ -27,19 +28,27 @@ function CatalogFilterTools({openFilters}) {
 
   return (
     <div className={styles.filterToolsWrapper}>
-      <Button className={styles.openFiltersBtn} onClick={openFilters} children="Filter" />
+      <Button className={styles.openFiltersBtn} onClick={openFilters}>
+        Filter
+      </Button>
       <Select
         defaultValue="default"
         sx={{color: '#ffc500', outline: 'none'}}
+        filter-menu-fix
         classes={'.MuiSelect-icon {color: red}'}
         onChange={({target}) => handleChange(target)}>
         <MenuItem value="default" children="Recommended" />
         <MenuItem value="+currentPrice" children="Price: lowest first" />
         <MenuItem value="-currentPrice" children="Price: highest first" />
         <MenuItem value="-date" children="Time: newly listed" />
+
       </Select>
     </div>
   );
 }
+
+CatalogFilterTools.propTypes = {
+  openFilters: PropTypes.func.isRequired,
+};
 
 export default CatalogFilterTools;

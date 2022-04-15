@@ -1,22 +1,33 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {
-  requestThePresenceOfTheCartOnTheServer,
   requestAddProductToTheCart,
+  requestThePresenceOfTheCartOnTheServer,
+  requestToAddMoreThanOneProductsToTheCart,
   requestToDecreaseProductQuantity,
-  requestToDeleteProductFromTheCart,
   requestToDeleteCart,
+  requestToDeleteProductFromTheCart,
+  requestToUpdateCartFromLs,
 } from '../../api/cart';
 import {getFromLS, saveToLS} from '../../utils/localStorage';
 
 const initialState = {
   products: [],
   cartSum: 0,
-  isCartExist: false,
   cartQuantity: 0,
 };
 
 export const getCartFromServer = createAsyncThunk('cart/get', async () => {
   const result = await requestThePresenceOfTheCartOnTheServer();
+  return result.products;
+});
+
+export const updateCartFromLs = createAsyncThunk('cart/put', async () => {
+  const result = await requestToUpdateCartFromLs();
+  return result.products;
+});
+
+export const addMoreThanOneProductsToTheCart = createAsyncThunk('cart/put', async (cartItem) => {
+  const result = await requestToAddMoreThanOneProductsToTheCart(cartItem);
   return result.products;
 });
 
@@ -46,15 +57,14 @@ const cartSlice = createSlice({
   reducers: {
     addItemToTheCartForNotLog(state, action) {
       const index = state.products.findIndex(
-        (elem) => elem.product.itemNo === action.payload.itemNo,
+        (elem) => elem.product.itemNo === action.payload.product.itemNo,
       );
       if (index === -1) {
-        const newItem = {product: action.payload, cartQuantity: 1};
-        state.products.push(newItem);
+        state.products.push(action.payload);
         saveToLS('cart', state.products);
         return;
       }
-      state.products[index].cartQuantity += 1;
+      state.products[index].cartQuantity += action.payload.cartQuantity;
       saveToLS('cart', state.products);
     },
     removeItemFromTheCartForNotLog(state, action) {
@@ -67,7 +77,6 @@ const cartSlice = createSlice({
     },
     makeLessItemForNotLog(state, action) {
       const index = state.products.findIndex((elem) => elem.product.itemNo === action.payload);
-
       if (state.products[index].cartQuantity === 1) {
         return;
       }
@@ -88,11 +97,10 @@ const cartSlice = createSlice({
       }
     },
     countCartSum(state) {
-      const newSum = state.products.reduce(
-        (acc, cur) => acc + cur.product.currentPrice * cur.cartQuantity,
+      state.cartSum = state.products.reduce(
+        (prev, {product: {currentPrice}, cartQuantity}) => prev + currentPrice * cartQuantity,
         0,
       );
-      state.cartSum = newSum;
     },
     countCartQuantity(state) {
       let quantity = 0;
@@ -102,42 +110,22 @@ const cartSlice = createSlice({
   },
   extraReducers: {
     [getCartFromServer.fulfilled]: (state, action) => {
-      if (!action.payload) {
-        state.isCartExist = false;
-        return;
-      }
-      if (action.payload) {
-        state.products = action.payload;
-        state.isCartExist = true;
-      }
+      state.products = action.payload;
     },
-    [getCartFromServer.rejected]: (state) => {
-      console.warn('getCartFromServer error: ', state);
-      state.isCartExist = false;
+    [updateCartFromLs.fulfilled]: (state, action) => {
+      state.products = action.payload;
     },
     [addProductToTheCart.fulfilled]: (state, action) => {
       state.products = action.payload;
     },
-    [addProductToTheCart.rejected]: (state) => {
-      console.warn('addProductToTheCart error: ', state);
-    },
     [decreaseProductQuantity.fulfilled]: (state, action) => {
       state.products = action.payload;
-    },
-    [decreaseProductQuantity.rejected]: (state) => {
-      console.warn('decreaseProductQuantity error: ', state);
     },
     [deleteProductFromTheCart.fulfilled]: (state, action) => {
       state.products = action.payload;
     },
-    [deleteProductFromTheCart.rejected]: (state) => {
-      console.warn('deleteProductFromTheCart error: ', state);
-    },
     [cleanCart.fulfilled]: (state, action) => {
       state.products = action.payload;
-    },
-    [cleanCart.rejected]: (state) => {
-      console.warn('deleteProductFromTheCart error: ', state);
     },
   },
 });

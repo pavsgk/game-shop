@@ -1,4 +1,5 @@
 import {useState} from 'react';
+import PropTypes from 'prop-types';
 import CustomAccordion from '../CustomAccordion/CustomAccordion';
 import {Formik, Form, Field} from 'formik';
 import styles from './FilterMenu.module.scss';
@@ -7,7 +8,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import {Slider} from '@mui/material';
 import getQueryParams from '../../utils/queryParser';
 
-function FilterMenu({isOpen, closeFilters}) {
+function FilterMenu({isOpen, closeFilters, isSale}) {
   let location = useLocation();
   let navigate = useNavigate();
   const [minPrice, setMinPrice] = useState(250);
@@ -32,7 +33,10 @@ function FilterMenu({isOpen, closeFilters}) {
     if (minPrice !== 250 || maxPrice !== 2250) {
       query += `minPrice=${minPrice}&maxPrice=${maxPrice}&`;
     }
-    navigate(`/catalog/filters${query.slice(0, -1)}`);
+    navigate(`/catalog/filters${query}`);
+    isSale
+      ? navigate(`/sale/filters${query}/`)
+      : navigate(`/catalog/filters${query}/`);
   };
 
   const initialValues = {
@@ -449,10 +453,22 @@ function FilterMenu({isOpen, closeFilters}) {
               title="age"
               content={
                 <>
-                  <Field id="3" className={styles.checkbox} type="checkbox" name="age" value="3" />
+                  <Field
+                    id="3"
+                    className={styles.checkbox}
+                    type="checkbox"
+                    name="age"
+                    value="3%2B"
+                  />
                   <label htmlFor="3">3+</label>
 
-                  <Field id="7" className={styles.checkbox} type="checkbox" name="age" value="7" />
+                  <Field
+                    id="7"
+                    className={styles.checkbox}
+                    type="checkbox"
+                    name="age"
+                    value="7%2B"
+                  />
                   <label htmlFor="7">7+</label>
 
                   <Field
@@ -460,7 +476,7 @@ function FilterMenu({isOpen, closeFilters}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="age"
-                    value="13"
+                    value="13%2B"
                   />
                   <label htmlFor="13">13+</label>
 
@@ -469,7 +485,7 @@ function FilterMenu({isOpen, closeFilters}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="age"
-                    value="18"
+                    value="18%2B"
                   />
                   <label htmlFor="18">18+</label>
                 </>
@@ -518,6 +534,7 @@ function FilterMenu({isOpen, closeFilters}) {
                   setMaxPrice(2250);
                   resetForm({genre: [], age: [], publisher: []});
                   navigate('/catalog');
+                  isSale ? navigate('/sale') : navigate('/catalog');
                 }}
                 className={styles.addButton}>
                 Clear filters
@@ -529,5 +546,10 @@ function FilterMenu({isOpen, closeFilters}) {
     </div>
   );
 }
+
+FilterMenu.propTypes = {
+  closeFilters: PropTypes.func,
+  isOpen: PropTypes.bool,
+};
 
 export default FilterMenu;

@@ -21,10 +21,9 @@ function MainNew() {
         {newProd.length > 0
           ? newProd.map((el) => {
               return (
-                <>
+                <React.Fragment key={el.itemNo}>
                   <div className={styles.componentWrapper}>
                     <MainComponent
-                      key={el.itemNo}
                       name={el.title}
                       price={el.currentPrice}
                       img={el.imageUrls.slice(0, 1)}
@@ -32,7 +31,7 @@ function MainNew() {
                     />
                     <New className={styles.svg} />
                   </div>
-                </>
+                </React.Fragment>
               );
             })
           : null}
