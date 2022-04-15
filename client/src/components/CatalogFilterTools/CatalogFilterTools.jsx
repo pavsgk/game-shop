@@ -2,21 +2,46 @@ import PropTypes from 'prop-types';
 import Button from '../Button/Button';
 import {Select, MenuItem} from '@mui/material';
 import styles from './CatalogFilterTools.module.scss';
+import {useLocation, useNavigate} from 'react-router-dom';
 
 function CatalogFilterTools({openFilters}) {
+  let location = useLocation();
+  let navigate = useNavigate();
+  const handleChange = ({value}) => {
+    if (location.search === '') {
+      navigate(`/catalog/filters?sort=${value}`);
+    } else {
+      const objectOfParams = {};
+      const substring = location.search.split('?')[1].split('&');
+      substring.forEach((param) => {
+        const keyVluePair = param.split('=');
+        objectOfParams[keyVluePair[0]] = keyVluePair[1];
+      });
+      objectOfParams.sort = value;
+      let queryString = '';
+      for (let key in objectOfParams) {
+        queryString += `${key}=${objectOfParams[key]}&`;
+      }
+      navigate(`/catalog/filters?${queryString.slice(0, -1)}`);
+    }
+  };
+
   return (
     <div className={styles.filterToolsWrapper}>
       <Button className={styles.openFiltersBtn} onClick={openFilters}>
         Filter
       </Button>
       <Select
-        defaultValue="Recommended"
+        defaultValue="default"
         sx={{color: '#ffc500', outline: 'none'}}
-        classes={{'.MuiSelect-icon': {color: 'red'}}}>
-        <MenuItem value="Recommended" children="Recommended" />
-        <MenuItem value="lowest" children="Price: lowest first" />
-        <MenuItem value="highest" children="Price: highest first" />
-        <MenuItem value="newest" children="Time: newly listed" />
+        filter-menu-fix
+        classes={'.MuiSelect-icon {color: red}'}
+        onChange={({target}) => handleChange(target)}>
+        <MenuItem value="default" children="Recommended" />
+        <MenuItem value="+currentPrice" children="Price: lowest first" />
+        <MenuItem value="-currentPrice" children="Price: highest first" />
+        <MenuItem value="-date" children="Time: newly listed" />
+
       </Select>
     </div>
   );

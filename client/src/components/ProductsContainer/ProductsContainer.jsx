@@ -15,6 +15,36 @@ function ProductsContainer({
   isBeRequest,
 }) {
   const {wishlist} = useSelector((state) => state.wishlist);
+  const {isAuthorized} = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    {
+      !isAuthorized && isWishlist && dispatch(openSignModal());
+    }
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        let data = [];
+        if (location.search) {
+          data = await getFilteredProducts(location.search.slice(1));
+        } else if (isWishlist) {
+          data = wishlist;
+        } else {
+          data = await getAllProducts();
+        }
+        setProducts(data);
+        setIsLoading(false);
+      } catch (e) {
+        console.warn(e);
+        setIsLoading(false);
+        setIsError(true);
+      }
+    })();
+  }, [location.search, isAuthorized]);
+
   const idItemsInWishlist = wishlist.map((e) => e._id);
   const emptyRequest = isBeRequest && products.length < 1;
 
