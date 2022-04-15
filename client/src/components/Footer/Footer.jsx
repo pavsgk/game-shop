@@ -4,6 +4,7 @@ import {ReactComponent as Phone} from './img/call.svg';
 import {ReactComponent as Mail} from './img/mail.svg';
 import {ReactComponent as Inst} from './img/instagram.svg';
 import {ReactComponent as Location} from './img/location.svg';
+import {ReactComponent as User} from './img/user.svg';
 import {Link} from 'react-router-dom';
 
 function Footer() {
@@ -28,6 +29,9 @@ function Footer() {
     <div className={isAbsolute ? styles.absFooter : styles.footer}>
       <Link exact="true" className={styles.navLink} to="/admin">
         ~
+      </Link>
+      <Link exact="true" className={styles.navLink} to="/user">
+        <User className={styles.details} />
       </Link>
       <div className={styles.section}>
         <div className={styles.info}>
