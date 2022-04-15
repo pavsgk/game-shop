@@ -79,6 +79,15 @@
     margin-top: 16px;
     margin-left: 16px;
   }
+
+  .priceInputsWrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .priceInput {
+    width: 40%;
+  }
 }
 
 @media (min-width: $tablet) {

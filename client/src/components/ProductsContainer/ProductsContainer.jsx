@@ -29,7 +29,7 @@ function ProductsContainer({isWishlist, isOpen, closeFilters}) {
       try {
         let data = [];
         if (location.search) {
-          data = await getFilteredProducts(location.search.slice(1, -1));
+          data = await getFilteredProducts(location.search.slice(1));
         } else if (isWishlist) {
           data = wishlist;
         } else {

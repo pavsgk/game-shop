@@ -42,7 +42,9 @@ function CustomAccordion({title, content, isProductPage, isExpanded}) {
             {content}
           </Container>
         ) : (
-          <Typography className={styles.checkboxesWrapper}>{content}</Typography>
+          <Typography component={'div'} className={styles.checkboxesWrapper}>
+            {content}
+          </Typography>
         )}
       </AccordionDetails>
     </Accordion>
