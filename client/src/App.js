@@ -37,28 +37,30 @@ function App() {
   return (
     <div className={styles.app}>
       <ErrorBoundary>
-        <Header />
-        <BreadCrumbs />
-        <SearchResults />
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route path="admin" element={<AdminPage />} />
-          <Route path="catalog/*" element={<ProductsPage />} />
-          <Route path="details/*" element={<DetailsPage />} />
-          <Route path="wishlist" element={<FavouritePage />} />
-          <Route path="sale/*" element={<SalePage />} />
-          <Route path="cart" element={<CartPage />} />
-          <Route path="checkout" element={<CheckoutPage />} />
-          <Route path="orderConfirmed" element={<OrderConfirmed />} />
-          <Route path="test" element={<TestPage />} />
-          <Route path="notFound" element={<NotFoundPage />} />
-          <Route path="*" element={<Navigate to="notFound" replace />} />
-        </Routes>
-        <ActionMessage />
-        <RouteTracker />
-        <Footer />
-        <SignModalContainer />
-        <ImagesModal />
+        <MuiTheme>
+          <Header />
+          <BreadCrumbs />
+          <SearchResults />
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route path="admin" element={<AdminPage />} />
+            <Route path="catalog/*" element={<ProductsPage />} />
+            <Route path="details/*" element={<DetailsPage />} />
+            <Route path="wishlist" element={<FavouritePage />} />
+            <Route path="sale/*" element={<SalePage />} />
+            <Route path="cart" element={<CartPage />} />
+            <Route path="checkout" element={<CheckoutPage />} />
+            <Route path="orderConfirmed" element={<OrderConfirmed />} />
+            <Route path="test" element={<TestPage />} />
+            <Route path="notFound" element={<NotFoundPage />} />
+            <Route path="*" element={<Navigate to="notFound" replace />} />
+          </Routes>
+          <ActionMessage />
+          <RouteTracker />
+          <Footer />
+          <SignModalContainer />
+          <ImagesModal />
+        </MuiTheme>
       </ErrorBoundary>
     </div>
   );
