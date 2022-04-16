@@ -1,7 +1,7 @@
-import styles from './ProductItemAbout.module.scss';
+import styles from './ProductDetailsAbout.module.scss';
 import CustomAccordion from '../CustomAccordion/CustomAccordion';
 
-function ProductItemContent(props) {
+function ProductDetailsAbout(props) {
   const {description, genre, platform, publisher, age} = props;
 
   return (
@@ -80,4 +80,4 @@ function ProductItemContent(props) {
   );
 }
 
-export default ProductItemContent;
+export default ProductDetailsAbout;

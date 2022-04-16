@@ -1,6 +1,6 @@
 import styles from './WishlistContainer.module.scss';
 import {useSelector} from 'react-redux';
-import ProductCard from '../ProductCard/ProductCard';
+import ProductsItem from '../ProductsItem/ProductsItem';
 
 function WishlistContainer() {
   const {wishlist} = useSelector((state) => state.wishlist);
@@ -9,7 +9,7 @@ function WishlistContainer() {
     <div className={styles.outWrapper}>
       <div className={styles.container}>
         {wishlist.map((item) => (
-          <ProductCard key={item.itemNo} item={item} isFavorite={true} />
+          <ProductsItem key={item.itemNo} item={item} isFavorite={true} />
         ))}
       </div>
     </div>

@@ -1,9 +1,9 @@
-import styles from './ProductItemButtons.module.scss';
+import styles from './ProductDetailsButtons.module.scss';
 import {ReactComponent as MinusPic} from '../../assets/svg/count_minus.svg';
 import {ReactComponent as PlusPic} from '../../assets/svg/count_plus.svg';
 import Button from '../Button/Button';
 
-function ProductItemButtons(props) {
+function ProductDetailsButtons(props) {
   const {quantity, setCountInputValue, countInputValue, addToCart, switchWishItem, isFavourite} =
     props;
 
@@ -60,4 +60,4 @@ function ProductItemButtons(props) {
   );
 }
 
-export default ProductItemButtons;
+export default ProductDetailsButtons;

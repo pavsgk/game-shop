@@ -33,10 +33,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
     if (minPrice !== 250 || maxPrice !== 2250) {
       query += `minPrice=${minPrice}&maxPrice=${maxPrice}&`;
     }
-    navigate(`/catalog/filters${query}`);
-    isSale
-      ? navigate(`/sale/filters${query}/`)
-      : navigate(`/catalog/filters${query}/`);
+    isSale ? navigate(`/sale/filters${query}`) : navigate(`/catalog/filters${query}`);
   };
 
   const initialValues = {

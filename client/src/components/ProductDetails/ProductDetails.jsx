@@ -1,19 +1,19 @@
-import styles from './ProductItem.module.scss';
+import styles from './ProductDetails.module.scss';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useRef, useState} from 'react';
 import {
   switchImagesModalState,
   addContentForImagesModal,
 } from '../../store/reducers/imagesModalReducer';
-import ProductItemSlider from '../ProductItemSlider/ProductItemSlider';
+import ProductDetailsSlider from '../ProductDetailsSlider/ProductDetailsSlider';
 import {
   addItemToTheCartForNotLog,
   addMoreThanOneProductsToTheCart,
 } from '../../store/reducers/cartReducer';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
-import ProductItemAbout from '../ProductItemAbout/ProductItemAbout';
-import ProductItemButtons from '../ProductItemButtons/ProductItemButtons';
+import ProductDetailsAbout from '../ProductDetailsAbout/ProductDetailsAbout';
+import ProductDetailsButtons from '../ProductDetailsButtons/ProductDetailsButtons';
 import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
 import {
   closeSuccessAddModal,
@@ -21,7 +21,7 @@ import {
   openSuccessAddModal,
 } from '../../store/reducers/successAddModalReducer';
 
-const ProductItem = (props) => {
+const ProductDetails = (props) => {
   const {
     title,
     currentPrice,
@@ -136,7 +136,7 @@ const ProductItem = (props) => {
         <span className={styles.mobileProductTitle_Code}>{itemNo}</span>
       </div>
       <div ref={sliderRef} className={styles.productIMGWrapper}>
-        <ProductItemSlider imageUrls={imageUrls} />
+        <ProductDetailsSlider imageUrls={imageUrls} />
       </div>
       <div className={styles.content}>
         <div className={styles.content_Title}>
@@ -152,7 +152,7 @@ const ProductItem = (props) => {
           ) : (
             <div className={styles.content_Price_Item}>{currentPrice} &#8372;</div>
           )}
-          <ProductItemButtons
+          <ProductDetailsButtons
             quantity={quantity}
             setCountInputValue={setCountInputValue}
             countInputValue={countInputValue}
@@ -161,7 +161,7 @@ const ProductItem = (props) => {
             isFavourite={isFavourite}
           />
         </div>
-        <ProductItemAbout
+        <ProductDetailsAbout
           description={description}
           genre={genre}
           platform={platform}
@@ -173,4 +173,4 @@ const ProductItem = (props) => {
   );
 };
 
-export default ProductItem;
+export default ProductDetails;

@@ -1,6 +1,6 @@
 import {Carousel} from 'react-carousel-minimal';
 
-const ProductItemSlider = ({imageUrls}) => {
+const ProductDetailsSlider = ({imageUrls}) => {
   const data = imageUrls.map((item) => {
     return {
       image: item,
@@ -26,4 +26,4 @@ const ProductItemSlider = ({imageUrls}) => {
   );
 };
 
-export default ProductItemSlider;
+export default ProductDetailsSlider;
