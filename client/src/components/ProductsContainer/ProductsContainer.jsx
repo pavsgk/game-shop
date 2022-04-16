@@ -44,14 +44,19 @@ function ProductsContainer({setIsError, isCatalog, isSale}) {
 
   useEffect(() => {
     productsLength.current = products.length;
-    // console.log(products, "products")
+    console.log(presentFilterPage.current, 'presentFilterPage');
   }, [products]);
+
+  // useEffect( ()=> {
+  //   console.log(presentFilterPage, "presentFilterPage")
+  // }, [presentFilterPage])
 
   function ProcessingOfEnquiries(isNotFilter, isFirstFilter) {
     let data = [];
     const baseUrl =
       (isCatalog && `&perPage=12&startPage=`) ||
       (isSale && `&minPreviousPrice=1&maxPreviousPrice=3000&perPage=12&startPage=`);
+
     const queryString = isNotFilter
       ? `${baseUrl}` + `${presentMainPage.current}`
       : location.search.slice(1, -1) + `${baseUrl}` + `${presentFilterPage.current}`;
@@ -60,10 +65,6 @@ function ProductsContainer({setIsError, isCatalog, isSale}) {
       try {
         setIsLoading(true);
         data = await getFilteredProducts(queryString);
-        // console.log(data, "data")
-        // console.log(queryString, "queryString")
-        // console.log(baseUrl, "baseUrl")
-        // console.log(location.search.slice(1, -1), "location.search.slice(1, -1)")
 
         isNotFilter ? (presentMainPage.current += 1) : (presentFilterPage.current += 1);
         productsQuantity.current = data.data.productsQuantity;
@@ -90,16 +91,14 @@ function ProductsContainer({setIsError, isCatalog, isSale}) {
   }
 
   useEffect(() => {
-    if (location.search.length > lastLocationSearch.length && presentFilterPage.current > 1) {
-      presentFilterPage.current = 1;
-    }
+    presentFilterPage.current = 1;
+
     if (location.search.length > 0 && lastLocationSearch !== location.search) {
       ProcessingOfEnquiries(false, true);
     }
     if (location.search.length === 0) {
       setIsMainFetch(true);
       presentMainPage.current = 1;
-      presentFilterPage.current = 1;
     }
   }, [location.search]);
 

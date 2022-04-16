@@ -7,29 +7,26 @@ import {useLocation, useNavigate} from 'react-router-dom';
 function CatalogFilterTools({openFilters}) {
   let location = useLocation();
   let navigate = useNavigate();
+
   const handleChange = ({value}) => {
-    console.log(value, 'value');
     if (location.search === '') {
       navigate(`/catalog/filters?sort=${value}/`);
     } else {
       const objectOfParams = {};
       const substring = location.search.split('?')[1].split('&');
-      console.log(substring, 'substring');
       substring.forEach((param) => {
         const keyValuePair = param.split('=');
-        console.log(keyValuePair, 'keyValuePair');
         objectOfParams[keyValuePair[0]] = keyValuePair[1];
       });
 
       objectOfParams.sort = value;
       let queryString = '';
       for (let key in objectOfParams) {
-        console.log(objectOfParams, 'objectOfParams');
-        queryString += `${key}=${objectOfParams[key]}&`;
+        if (objectOfParams[key] !== undefined) {
+          queryString += `${key}=${objectOfParams[key]}&`;
+        }
       }
       navigate(`/catalog/filters?${queryString.slice(0, -1)}/`);
-
-      console.log(queryString, 'queryString');
     }
   };
 
