@@ -20,6 +20,7 @@ import {
   addTypeActionMessage,
   addTextActionMessage,
 } from '../../store/reducers/actionMessageReducer';
+import instance from '../../api/instance';
 
 const ProductDetails = (props) => {
   const {
@@ -44,13 +45,13 @@ const ProductDetails = (props) => {
   const [isFavourite, setIsFavourite] = useState(false);
   const [countInputValue, setCountInputValue] = useState(1);
 
-  const ShowAddedMessage = () => {
-    dispatch(addTypeActionMessage('successful'));
-    dispatch(addTextActionMessage('Successfully added to the cart'));
+  const actionMessage = (type, text, time) => {
+    dispatch(addTypeActionMessage(type));
+    dispatch(addTextActionMessage(text));
     dispatch(switchActionMessage());
     setTimeout(() => {
       dispatch(switchActionMessage());
-    }, 1000);
+    }, time);
   };
 
   useEffect(() => {
@@ -103,14 +104,21 @@ const ProductDetails = (props) => {
   }, [wishlist]);
 
   const addToCart = () => {
-    ShowAddedMessage();
     const cartItem = {product: props, cartQuantity: countInputValue};
 
     if (isAuthorized) {
-      dispatch(addMoreThanOneProductsToTheCart(cartItem));
+      (async () => {
+        try {
+          await dispatch(addMoreThanOneProductsToTheCart(cartItem));
+          actionMessage('successful', 'Successfully added to the cart', 1000);
+        } catch (e) {
+          actionMessage('error', 'Something went wrong, please try to reload page', 1500);
+        }
+      })();
       return;
     }
     dispatch(addItemToTheCartForNotLog(cartItem));
+    actionMessage('successful', 'Successfully added to the cart', 1000);
   };
 
   const openModal = () => {
@@ -123,7 +131,14 @@ const ProductDetails = (props) => {
         dispatch(removeWishedProduct(_id));
         return;
       }
-      dispatch(addWishedProduct(_id));
+      (async () => {
+        try {
+          await dispatch(addWishedProduct(_id));
+          actionMessage('successful', 'Successfully added to the wishlist', 1000);
+        } catch (e) {
+          actionMessage('error', 'Something went wrong, please try to reload page', 1500);
+        }
+      })();
       return;
     }
     openModal();

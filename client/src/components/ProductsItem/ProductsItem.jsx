@@ -26,23 +26,51 @@ function ProductsItem(props) {
     dispatch(openSignModal());
   };
 
-  const ShowAddedMessage = () => {
-    dispatch(addTypeActionMessage('successful'));
-    dispatch(addTextActionMessage('Successfully added to the cart'));
+  const actionMessage = (type, text, time) => {
+    dispatch(addTypeActionMessage(type));
+    dispatch(addTextActionMessage(text));
     dispatch(switchActionMessage());
     setTimeout(() => {
       dispatch(switchActionMessage());
-    }, 1000);
+    }, time);
   };
 
   const addToCart = () => {
-    ShowAddedMessage();
     if (isAuthorized) {
-      dispatch(addProductToTheCart(_id));
+      (async () => {
+        try {
+          await dispatch(addProductToTheCart(_id));
+          actionMessage('successful', 'Successfully added to the cart', 1000);
+        } catch (e) {
+          actionMessage('error', 'Something went wrong, please try to reload page', 1500);
+        }
+      })();
       return;
     }
     const cartItem = {product: item, cartQuantity: 1};
     dispatch(addItemToTheCartForNotLog(cartItem));
+    actionMessage('successful', 'Successfully added to the cart', 1000);
+  };
+
+  const addToWishlist = () => {
+    (async () => {
+      try {
+        await dispatch(addWishedProduct(_id));
+        actionMessage('successful', 'Successfully added to the wishlist', 1000);
+      } catch (e) {
+        actionMessage('error', 'Something went wrong, please try to reload page', 1500);
+      }
+    })();
+  };
+
+  const removeFromWishlist = () => {
+    (async () => {
+      try {
+        await dispatch(removeWishedProduct(_id));
+      } catch (e) {
+        actionMessage('error', 'Something went wrong, please try to reload page', 1500);
+      }
+    })();
   };
 
   const handleImgError = ({target}) => {
@@ -61,7 +89,7 @@ function ProductsItem(props) {
           {isFavorite ? (
             <BookmarkIcon
               onClick={() => {
-                isAuthorized ? dispatch(removeWishedProduct(_id)) : openModal();
+                isAuthorized ? removeFromWishlist() : openModal();
               }}
               sx={{
                 color: '#f7d131',
@@ -76,7 +104,7 @@ function ProductsItem(props) {
           ) : (
             <BookmarkBorderIcon
               onClick={() => {
-                isAuthorized ? dispatch(addWishedProduct(_id)) : openModal();
+                isAuthorized ? addToWishlist() : openModal();
               }}
               sx={{
                 color: '#f7d131',
@@ -99,7 +127,6 @@ function ProductsItem(props) {
             Platform: {Array.isArray(platform) ? platform.join(', ') : platform}
           </p>
         </div>
-
         <div className={styles.priceWrapper}>
           {previousPrice !== 0 && previousPrice !== currentPrice ? (
             <div className={styles.priceBox}>

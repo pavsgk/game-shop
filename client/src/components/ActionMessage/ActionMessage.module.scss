@@ -23,6 +23,23 @@
 }
 
 .error {
-  @extend .successful;
-  background-color: red;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: sans-serif;
+  & > span {
+    background-color: red;
+    padding: 15px;
+    border-radius: 30px;
+    color: $base-yellow;
+    margin: 0 auto;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+  }
 }
