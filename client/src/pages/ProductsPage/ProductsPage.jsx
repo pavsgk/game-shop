@@ -34,7 +34,7 @@ function ProductsPage() {
     setIsOpen(false);
   };
 
-  const scrollHand = ({target}) => {
+  const scrollHandler = ({target}) => {
     const scrollHeight = target.documentElement.scrollHeight;
     const scrollTop = target.documentElement.scrollTop;
     const windowHeight = window.innerHeight;
@@ -48,10 +48,9 @@ function ProductsPage() {
   };
 
   useEffect(() => {
-    document.addEventListener('scroll', scrollHand);
-
+    document.addEventListener('scroll', scrollHandler);
     return function () {
-      document.removeEventListener('scroll', scrollHand);
+      document.removeEventListener('scroll', scrollHandler);
     };
   }, []);
 
@@ -106,15 +105,11 @@ function ProductsPage() {
   }, [location.search]);
 
   useEffect(() => {
-    if (isFilterFetch) {
-      ProcessingOfEnquiries(false, false);
-    }
+    isFilterFetch && ProcessingOfEnquiries(false, false);
   }, [isFilterFetch]);
 
   useEffect(() => {
-    if (isMainFetch) {
-      ProcessingOfEnquiries(true, false);
-    }
+    isMainFetch && ProcessingOfEnquiries(true, false);
   }, [isMainFetch]);
 
   return (
@@ -123,7 +118,7 @@ function ProductsPage() {
         <SomethingWentWrong />
       ) : (
         <div className={styles.productsPage}>
-          <div className={styles.filterToolsWrapper}>
+          <div>
             <CatalogFilterTools openFilters={openFilters} />
           </div>
           <ProductsContainer

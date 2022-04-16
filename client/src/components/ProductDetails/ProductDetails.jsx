@@ -1,4 +1,4 @@
-import styles from './ProductItem.module.scss';
+import styles from './ProductDetails.module.scss';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect, useRef, useState} from 'react';
 import {
@@ -21,7 +21,7 @@ import {
   openSuccessAddModal,
 } from '../../store/reducers/successAddModalReducer';
 
-const ProductItem = (props) => {
+const ProductDetails = (props) => {
   const {
     title,
     currentPrice,
@@ -173,4 +173,4 @@ const ProductItem = (props) => {
   );
 };
 
-export default ProductItem;
+export default ProductDetails;
