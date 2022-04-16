@@ -25,7 +25,7 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import SearchResults from './components/SearchResults/SearchResults';
 import RouteTracker from './components/RouteTracker/RouteTracker';
 import BreadCrumbs from './components/BreadCrumbs/BreadCrumbs';
-import SuccessfullyAddModal from './components/SuccessfullyAddModal/SuccessfullyAddModal';
+import ActionMessage from './components/ActionMessage/ActionMessage';
 
 function App() {
   const dispatch = useDispatch();
@@ -55,7 +55,7 @@ function App() {
             <Route path="notFound" element={<NotFoundPage />} />
             <Route path="*" element={<Navigate to="notFound" replace />} />
           </Routes>
-          <SuccessfullyAddModal />
+          <ActionMessage />
           <RouteTracker />
           <Footer />
           <SignModalContainer />

@@ -7,10 +7,10 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
 import {
-  fillSuccessAddModal,
-  closeSuccessAddModal,
-  openSuccessAddModal,
-} from '../../store/reducers/successAddModalReducer';
+  switchActionMessage,
+  addTypeActionMessage,
+  addTextActionMessage,
+} from '../../store/reducers/actionMessageReducer';
 import {ReactComponent as Sale} from './img/sale.svg';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
 import {useRef} from 'react';
@@ -27,10 +27,11 @@ function ProductsItem(props) {
   };
 
   const ShowAddedMessage = () => {
-    dispatch(fillSuccessAddModal('Successfully added to the cart'));
-    dispatch(openSuccessAddModal());
+    dispatch(addTypeActionMessage('successful'));
+    dispatch(addTextActionMessage('Successfully added to the cart'));
+    dispatch(switchActionMessage());
     setTimeout(() => {
-      dispatch(closeSuccessAddModal());
+      dispatch(switchActionMessage());
     }, 1000);
   };
 

@@ -16,10 +16,10 @@ import ProductDetailsAbout from '../ProductDetailsAbout/ProductDetailsAbout';
 import ProductDetailsButtons from '../ProductDetailsButtons/ProductDetailsButtons';
 import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
 import {
-  closeSuccessAddModal,
-  fillSuccessAddModal,
-  openSuccessAddModal,
-} from '../../store/reducers/successAddModalReducer';
+  switchActionMessage,
+  addTypeActionMessage,
+  addTextActionMessage,
+} from '../../store/reducers/actionMessageReducer';
 
 const ProductDetails = (props) => {
   const {
@@ -45,10 +45,11 @@ const ProductDetails = (props) => {
   const [countInputValue, setCountInputValue] = useState(1);
 
   const ShowAddedMessage = () => {
-    dispatch(fillSuccessAddModal('Successfully added to the cart'));
-    dispatch(openSuccessAddModal());
+    dispatch(addTypeActionMessage('successful'));
+    dispatch(addTextActionMessage('Successfully added to the cart'));
+    dispatch(switchActionMessage());
     setTimeout(() => {
-      dispatch(closeSuccessAddModal());
+      dispatch(switchActionMessage());
     }, 1000);
   };
 
