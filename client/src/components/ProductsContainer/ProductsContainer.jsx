@@ -44,6 +44,7 @@ function ProductsContainer({setIsError, isCatalog, isSale}) {
 
   useEffect(() => {
     productsLength.current = products.length;
+    // console.log(products, "products")
   }, [products]);
 
   function ProcessingOfEnquiries(isNotFilter, isFirstFilter) {
@@ -59,6 +60,10 @@ function ProductsContainer({setIsError, isCatalog, isSale}) {
       try {
         setIsLoading(true);
         data = await getFilteredProducts(queryString);
+        // console.log(data, "data")
+        // console.log(queryString, "queryString")
+        // console.log(baseUrl, "baseUrl")
+        // console.log(location.search.slice(1, -1), "location.search.slice(1, -1)")
 
         isNotFilter ? (presentMainPage.current += 1) : (presentFilterPage.current += 1);
         productsQuantity.current = data.data.productsQuantity;

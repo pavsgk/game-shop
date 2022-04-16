@@ -8,21 +8,28 @@ function CatalogFilterTools({openFilters}) {
   let location = useLocation();
   let navigate = useNavigate();
   const handleChange = ({value}) => {
+    console.log(value, 'value');
     if (location.search === '') {
-      navigate(`/catalog/filters?sort=${value}`);
+      navigate(`/catalog/filters?sort=${value}/`);
     } else {
       const objectOfParams = {};
       const substring = location.search.split('?')[1].split('&');
+      console.log(substring, 'substring');
       substring.forEach((param) => {
-        const keyVluePair = param.split('=');
-        objectOfParams[keyVluePair[0]] = keyVluePair[1];
+        const keyValuePair = param.split('=');
+        console.log(keyValuePair, 'keyValuePair');
+        objectOfParams[keyValuePair[0]] = keyValuePair[1];
       });
+
       objectOfParams.sort = value;
       let queryString = '';
       for (let key in objectOfParams) {
+        console.log(objectOfParams, 'objectOfParams');
         queryString += `${key}=${objectOfParams[key]}&`;
       }
-      navigate(`/catalog/filters?${queryString.slice(0, -1)}`);
+      navigate(`/catalog/filters?${queryString.slice(0, -1)}/`);
+
+      console.log(queryString, 'queryString');
     }
   };
 
@@ -41,7 +48,6 @@ function CatalogFilterTools({openFilters}) {
         <MenuItem value="+currentPrice" children="Price: lowest first" />
         <MenuItem value="-currentPrice" children="Price: highest first" />
         <MenuItem value="-date" children="Time: newly listed" />
-
       </Select>
     </div>
   );
