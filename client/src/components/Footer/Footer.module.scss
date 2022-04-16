@@ -39,6 +39,10 @@
   margin-left: 6px;
 }
 
+.details > svg {
+  @extend .svg;
+}
+
 .section {
   display: flex;
   flex-direction: column;

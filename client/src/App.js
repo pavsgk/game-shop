@@ -2,7 +2,6 @@ import {Routes, Route, Navigate} from 'react-router-dom';
 import styles from './App.module.scss';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import MuiTheme from './components/MuiTheme/MuiTheme';
 import CartPage from './pages/CartPage/CartPage';
 import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
 import DetailsPage from './pages/DetailsPage/DetailsPage';
@@ -11,6 +10,7 @@ import FavouritePage from './pages/FavouritePage/FavouritePage';
 import ProductsPage from './pages/ProductsPage/ProductsPage';
 import SalePage from './pages/SalePage/SalePage';
 import TestPage from './api/test';
+import UserPage from './pages/UserPage/UserPage';
 import {useDispatch, useSelector} from 'react-redux';
 import {useEffect} from 'react';
 import {init} from './store/reducers/userReducer';
@@ -37,30 +37,29 @@ function App() {
   return (
     <div className={styles.app}>
       <ErrorBoundary>
-        <MuiTheme>
-          <Header />
-          <BreadCrumbs />
-          <SearchResults />
-          <Routes>
-            <Route path="/" element={<MainPage />} />
-            <Route path="admin" element={<AdminPage />} />
-            <Route path="catalog/*" element={<ProductsPage />} />
-            <Route path="details/*" element={<DetailsPage />} />
-            <Route path="wishlist" element={<FavouritePage />} />
-            <Route path="sale/*" element={<SalePage />} />
-            <Route path="cart" element={<CartPage />} />
-            <Route path="checkout" element={<CheckoutPage />} />
-            <Route path="orderConfirmed" element={<OrderConfirmed />} />
-            <Route path="test" element={<TestPage />} />
-            <Route path="notFound" element={<NotFoundPage />} />
-            <Route path="*" element={<Navigate to="notFound" replace />} />
-          </Routes>
-          <ActionMessage />
-          <RouteTracker />
-          <Footer />
-          <SignModalContainer />
-          <ImagesModal />
-        </MuiTheme>
+        <Header />
+        <BreadCrumbs />
+        <SearchResults />
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="admin" element={<AdminPage />} />
+          <Route path="catalog/*" element={<ProductsPage />} />
+          <Route path="details/*" element={<DetailsPage />} />
+          <Route path="wishlist" element={<FavouritePage />} />
+          <Route path="sale/*" element={<SalePage />} />
+          <Route path="cart" element={<CartPage />} />
+          <Route path="checkout" element={<CheckoutPage />} />
+          <Route path="orderConfirmed" element={<OrderConfirmed />} />
+          <Route path="test" element={<TestPage />} />
+          <Route path="notFound" element={<NotFoundPage />} />
+          <Route path="user" element={<UserPage />} />
+          <Route path="*" element={<Navigate to="notFound" replace />} />
+        </Routes>
+        <ActionMessage />
+        <RouteTracker />
+        <Footer />
+        <SignModalContainer />
+        <ImagesModal />
       </ErrorBoundary>
     </div>
   );
