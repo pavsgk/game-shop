@@ -4,13 +4,15 @@ import {Select, MenuItem} from '@mui/material';
 import styles from './CatalogFilterTools.module.scss';
 import {useLocation, useNavigate} from 'react-router-dom';
 
-function CatalogFilterTools({openFilters}) {
+function CatalogFilterTools({openFilters, isSale}) {
   let location = useLocation();
   let navigate = useNavigate();
 
   const handleChange = ({value}) => {
     if (location.search === '') {
-      navigate(`/catalog/filters?sort=${value}/`);
+      isSale
+        ? navigate(`/sale/filters?sort=${value}/`)
+        : navigate(`/catalog/filters?sort=${value}/`);
     } else {
       const objectOfParams = {};
       const substring = location.search.split('?')[1].split('&');
@@ -25,8 +27,11 @@ function CatalogFilterTools({openFilters}) {
         if (objectOfParams[key] !== undefined) {
           queryString += `${key}=${objectOfParams[key]}&`;
         }
+
+        isSale
+          ? navigate(`/sale/filters?${queryString.slice(0, -1)}/`)
+          : navigate(`/catalog/filters?${queryString.slice(0, -1)}/`);
       }
-      navigate(`/catalog/filters?${queryString.slice(0, -1)}/`);
     }
   };
 
