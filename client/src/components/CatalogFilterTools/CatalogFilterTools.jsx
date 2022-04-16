@@ -4,25 +4,34 @@ import {Select, MenuItem} from '@mui/material';
 import styles from './CatalogFilterTools.module.scss';
 import {useLocation, useNavigate} from 'react-router-dom';
 
-function CatalogFilterTools({openFilters}) {
+function CatalogFilterTools({openFilters, isSale}) {
   let location = useLocation();
   let navigate = useNavigate();
+
   const handleChange = ({value}) => {
     if (location.search === '') {
-      navigate(`/catalog/filters?sort=${value}`);
+      isSale
+        ? navigate(`/sale/filters?sort=${value}/`)
+        : navigate(`/catalog/filters?sort=${value}/`);
     } else {
       const objectOfParams = {};
       const substring = location.search.split('?')[1].split('&');
       substring.forEach((param) => {
-        const keyVluePair = param.split('=');
-        objectOfParams[keyVluePair[0]] = keyVluePair[1];
+        const keyValuePair = param.split('=');
+        objectOfParams[keyValuePair[0]] = keyValuePair[1];
       });
+
       objectOfParams.sort = value;
       let queryString = '';
       for (let key in objectOfParams) {
-        queryString += `${key}=${objectOfParams[key]}&`;
+        if (objectOfParams[key] !== undefined) {
+          queryString += `${key}=${objectOfParams[key]}&`;
+        }
+
+        isSale
+          ? navigate(`/sale/filters?${queryString.slice(0, -1)}/`)
+          : navigate(`/catalog/filters?${queryString.slice(0, -1)}/`);
       }
-      navigate(`/catalog/filters?${queryString.slice(0, -1)}`);
     }
   };
 
@@ -41,7 +50,6 @@ function CatalogFilterTools({openFilters}) {
         <MenuItem value="+currentPrice" children="Price: lowest first" />
         <MenuItem value="-currentPrice" children="Price: highest first" />
         <MenuItem value="-date" children="Time: newly listed" />
-
       </Select>
     </div>
   );
@@ -49,6 +57,7 @@ function CatalogFilterTools({openFilters}) {
 
 CatalogFilterTools.propTypes = {
   openFilters: PropTypes.func.isRequired,
+  isSale: PropTypes.bool,
 };
 
 export default CatalogFilterTools;

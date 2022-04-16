@@ -51,6 +51,7 @@ function ProductsContainer({setIsError, isCatalog, isSale}) {
     const baseUrl =
       (isCatalog && `&perPage=12&startPage=`) ||
       (isSale && `&minPreviousPrice=1&maxPreviousPrice=3000&perPage=12&startPage=`);
+
     const queryString = isNotFilter
       ? `${baseUrl}` + `${presentMainPage.current}`
       : location.search.slice(1, -1) + `${baseUrl}` + `${presentFilterPage.current}`;
@@ -85,16 +86,14 @@ function ProductsContainer({setIsError, isCatalog, isSale}) {
   }
 
   useEffect(() => {
-    if (location.search.length > lastLocationSearch.length && presentFilterPage.current > 1) {
-      presentFilterPage.current = 1;
-    }
+    presentFilterPage.current = 1;
+
     if (location.search.length > 0 && lastLocationSearch !== location.search) {
       ProcessingOfEnquiries(false, true);
     }
     if (location.search.length === 0) {
       setIsMainFetch(true);
       presentMainPage.current = 1;
-      presentFilterPage.current = 1;
     }
   }, [location.search]);
 

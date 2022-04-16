@@ -22,7 +22,7 @@ function ProductsContainerItem({isCatalog, isSale, products, isLoading}) {
 
   return (
     <>
-      <CatalogFilterTools openFilters={openFilters} />
+      <CatalogFilterTools isSale={isSale} openFilters={openFilters} />
       <div className={styles.contentProductsWrapper}>
         <div className={styles.container}>
           {isCatalog && <FilterMenu isOpen={isOpen} closeFilters={closeFilters} />}
