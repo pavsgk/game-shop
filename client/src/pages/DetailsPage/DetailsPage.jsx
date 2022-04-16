@@ -1,4 +1,4 @@
-import ProductItem from '../../components/ProductItem/ProductItem';
+import ProductDetails from '../../components/ProductDetails/ProductDetails';
 import instance from '../../api/instance';
 import {useState, useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
@@ -22,7 +22,7 @@ function DetailsPage() {
     })();
   }, [location.search]);
 
-  return isLoading ? null : <ProductItem {...item} />;
+  return isLoading ? null : <ProductDetails {...item} />;
 }
 
 export default DetailsPage;
