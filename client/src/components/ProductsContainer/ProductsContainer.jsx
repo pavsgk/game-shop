@@ -44,12 +44,7 @@ function ProductsContainer({setIsError, isCatalog, isSale}) {
 
   useEffect(() => {
     productsLength.current = products.length;
-    console.log(presentFilterPage.current, 'presentFilterPage');
   }, [products]);
-
-  // useEffect( ()=> {
-  //   console.log(presentFilterPage, "presentFilterPage")
-  // }, [presentFilterPage])
 
   function ProcessingOfEnquiries(isNotFilter, isFirstFilter) {
     let data = [];

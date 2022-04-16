@@ -57,6 +57,7 @@ function CatalogFilterTools({openFilters, isSale}) {
 
 CatalogFilterTools.propTypes = {
   openFilters: PropTypes.func.isRequired,
+  isSale: PropTypes.bool,
 };
 
 export default CatalogFilterTools;
