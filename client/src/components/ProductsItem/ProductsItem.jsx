@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import styles from './ProductCard.module.scss';
+import styles from './ProductsItem.module.scss';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {addItemToTheCartForNotLog, addProductToTheCart} from '../../store/reducers/cartReducer';
@@ -15,7 +15,7 @@ import {ReactComponent as Sale} from './img/sale.svg';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
 import {useRef} from 'react';
 
-function ProductCard(props) {
+function ProductsItem(props) {
   const {item, isFavorite} = props;
   const {title, imageUrls, previousPrice, currentPrice, itemNo, platform, _id} = item;
   const isAuthorized = useSelector((state) => state.user.isAuthorized);
@@ -118,7 +118,7 @@ function ProductCard(props) {
   );
 }
 
-ProductCard.propTypes = {
+ProductsItem.propTypes = {
   isFavorite: PropTypes.bool,
   item: PropTypes.shape({
     _id: PropTypes.string,
@@ -131,4 +131,4 @@ ProductCard.propTypes = {
   }),
 };
 
-export default ProductCard;
+export default ProductsItem;
