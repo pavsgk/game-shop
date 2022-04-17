@@ -3,11 +3,9 @@ export function debounce(func, timeout = 1000) {
   let timer = null;
   return () => {
     if (ready) {
-      console.log('ready');
       func();
       ready = false;
     } else {
-      console.log('not ready');
       clearTimeout(timer);
     }
     timer = setTimeout(() => {

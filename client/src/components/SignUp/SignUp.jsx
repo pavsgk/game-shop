@@ -4,7 +4,7 @@ import CustomField from '../CustomField/CustomField';
 import * as yup from 'yup';
 import styles from './SignUp.module.scss';
 import AltAuthorization from '../AltAuthorization/AltAuthorization';
-import {registration} from '../../api/user';
+import {createNewUser} from '../../api/user';
 import {useState} from 'react';
 import Preloader from '../Preloader/Preloader';
 import Button from '../Button/Button';
@@ -41,7 +41,7 @@ const SignUp = ({closeModal}) => {
     (async () => {
       try {
         setIsLoading(true);
-        await registration(values);
+        await createNewUser(values);
         setIsLoading(false);
         actionMessage('successful', 'you have been successfully registered!', 3000);
         actions.resetForm();

@@ -1,16 +1,15 @@
-import {Formik, Form, useFormikContext} from 'formik';
+import {Formik, Form} from 'formik';
 import CustomField from '../../components/CustomField/CustomField';
 import styles from './UserPage.module.scss';
 import * as yup from 'yup';
 import Button from '../../components/Button/Button';
 import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import {switchTab, updateFields} from '../../store/reducers/checkoutReducer';
-import store from '../../store/store';
 import {useRef} from 'react';
-import instance from '../../api/instance';
-import {logout} from '../../store/reducers/userReducer';
-import {useLocation, useNavigate} from 'react-router-dom';
+import {logout, updateUserData} from '../../store/reducers/userReducer';
+import {useNavigate, useLocation} from 'react-router-dom';
+import {updateUser} from '../../api/user';
+import {addTextActionMessage, switchActionMessage} from '../../store/reducers/actionMessageReducer';
 
 const yupValidationSchema = yup.object().shape({
   firstName: yup
@@ -45,145 +44,106 @@ const yupValidationSchema = yup.object().shape({
     .string()
     .min(5, 'min. 5 characters required')
     .matches(/^[a-zA-Z0-9\s,'-]*$/),
-  mobile: yup.string().min(7, 'min. 7 characters required').matches(/\d/g),
-  password: yup
-    .string()
-    .required('Enter password')
-    .required('Field is required ')
-    .matches(/[0-9A-Za-z]/, 'Wrong password format'),
-  newPassword: yup
-    .string()
-    .required('Enter password')
-    .required('Field is required ')
-    .matches(/[0-9A-Za-z]/, 'Wrong password format'),
-  syncProfile: yup.boolean(),
+  telephone: yup.string().min(7, 'min. 7 characters required').matches(/\d/g),
 });
-
-function AutoSaver() {
-  const {values, touched} = useFormikContext();
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (Object.keys(touched).length === 0) return;
-    let isValid = false;
-    try {
-      yupValidationSchema.validateSync(values);
-      isValid = true;
-    } catch {}
-
-    dispatch(
-      updateFields({
-        ...values,
-        isValid,
-      }),
-    );
-  }, [dispatch, values, touched]);
-  return null;
-}
 
 function UserPage() {
   const formikRef = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const {isAuthorized} = useSelector((state) => state.user);
+  const location = useLocation();
+  const {isAuthorized, userData} = useSelector((state) => state.user);
+  const [isSubmiting, setIsSubmiting] = useState(false);
 
   useEffect(() => {
-    const {
-      checkout: {checkoutFields},
-    } = store.getState();
-    if (formikRef) {
-      for (const [key, val] of Object.entries(checkoutFields)) {
-        formikRef.current.setFieldValue(key, val);
-      }
+    for (const [key, val] of Object.entries(userData)) {
+      if (key in formikRef.current.values) formikRef.current.setFieldValue(key, val);
     }
   }, []);
 
-  const [user, setUser] = useState([]);
-
   useEffect(() => {
-    (async () => {
-      const res = await instance.get('/customers/customer');
-      setUser(res.data);
-      console.log(res.data);
-    })();
-  }, []);
-
-  useEffect(() => {
-    !isAuthorized && navigate('/');
+    if (!isAuthorized) navigate('/');
   }, [isAuthorized]);
 
-  let initialValues = null;
-
-  (function getInitialValues() {
-    if (user.length > 0) {
-      initialValues = user;
-    } else {
-      initialValues = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        login: '',
-        country: '',
-        postal: '',
-        city: '',
-        address: '',
-        mobile: '',
-        password: '',
-        newPassword: '',
-        syncProfile: false,
-      };
-    }
-  })();
-
-  const handleSubmit = () => {
-    dispatch(switchTab(1));
+  const initialValues = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    login: '',
+    country: '',
+    postal: '',
+    city: '',
+    address: '',
+    telephone: '',
   };
 
-  function LogOut() {
-    dispatch(logout());
-  }
+  const handleFormSubmit = async (values) => {
+    setIsSubmiting(true);
+    try {
+      await updateUser(values);
+      dispatch(switchActionMessage());
+      dispatch(addTextActionMessage('Customer data updated successfully'));
+      dispatch(updateUserData(values));
+      setTimeout(() => {
+        dispatch(switchActionMessage());
+      }, 3000);
+      navigate('/');
+    } catch (e) {
+      console.warn(e);
+      dispatch(switchActionMessage());
+      dispatch(addTextActionMessage('Unable to update customer data'));
+      setTimeout(() => {
+        dispatch(switchActionMessage());
+      }, 3000);
+    }
+  };
+
+  const LogOut = () => dispatch(logout());
 
   return (
     <div className={styles.user}>
       <div className={styles.info}>
         <Formik
+          onSubmit={handleFormSubmit}
           innerRef={formikRef}
           initialValues={initialValues}
-          onSubmit={handleSubmit}
           validationSchema={yupValidationSchema}>
-          <Form>
-            <div className={styles.section}>
-              <p className={styles.text}>required fields</p>
-              <CustomField
-                className={styles.string}
-                name="firstName"
-                label="First Name"
-                type="text"
-              />
-              <CustomField
-                className={styles.string}
-                name="lastName"
-                label="Last Name"
-                type="text"
-              />
-              <CustomField name="email" label="Email" type="text" />
-              <CustomField name="login" label="Login" type="text" />
-            </div>
-            <div className={styles.section}>
-              <div className={styles.text}>delivery information</div>
-              <CustomField name="country" label="Country" type="text" />
-              <CustomField name="city" label="City" type="text" />
-              <CustomField name="postal" label="Zip code" type="text" />
-              <CustomField name="address" label="Address" type="text" />
-              <CustomField name="mobile" label="Phone" type="text" />
-              <div className={styles.btnBox}>
-                <Button type="submit">save changes</Button>
+          {(props) => (
+            <Form onSubmit={props.handleSubmit}>
+              <div className={styles.section}>
+                <p className={styles.text}>required fields</p>
+                <CustomField
+                  className={styles.string}
+                  name="firstName"
+                  label="First Name"
+                  type="text"
+                />
+                <CustomField
+                  className={styles.string}
+                  name="lastName"
+                  label="Last Name"
+                  type="text"
+                />
+                <CustomField name="email" label="Email" type="text" />
+                <CustomField name="login" label="Login" type="text" />
               </div>
-            </div>
-            <AutoSaver />
-          </Form>
+              <div className={styles.section}>
+                <div className={styles.text}>delivery information</div>
+                <CustomField name="country" label="Country" type="text" />
+                <CustomField name="city" label="City" type="text" />
+                <CustomField name="postal" label="Zip code" type="text" />
+                <CustomField name="address" label="Address" type="text" />
+                <CustomField name="telephone" label="Phone" type="text" />
+                <div className={styles.btnBox}>
+                  <Button type="submit" disabled={isSubmiting}>
+                    save changes
+                  </Button>
+                </div>
+              </div>
+            </Form>
+          )}
         </Formik>
-        <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+        {/* <Formik initialValues={initialValues} onSubmit={handleSubmit}>
           <Form>
             <div className={styles.section}>
               <p className={styles.text}>change password</p>
@@ -194,12 +154,10 @@ function UserPage() {
               </div>
             </div>
           </Form>
-        </Formik>
+        </Formik> */}
       </div>
       <div className={styles.btnOut}>
-        <Button onClick={LogOut} type="submit">
-          log out
-        </Button>
+        <Button onClick={LogOut}>log out</Button>
       </div>
     </div>
   );

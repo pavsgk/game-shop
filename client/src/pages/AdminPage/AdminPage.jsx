@@ -7,8 +7,11 @@ import {searchProducts} from '../../api/products';
 import SearchBar from '../../components/SearchBar/SearchBar';
 import inputThrottle from '../../utils/decorators';
 import SearchResults from '../../components/SearchResults/SearchResults';
+import {useDispatch} from 'react-redux';
+import {getUserFields} from '../../store/reducers/checkoutReducer';
 
 export function AdminPage() {
+  const dispatch = useDispatch();
   const [isLocal, setIsLocal] = useState(
     instance.defaults.baseURL === 'http://localhost:5000/api/' ? true : false,
   );
@@ -38,7 +41,7 @@ export function AdminPage() {
             Switch source ({isLocal ? 'local' : 'remote'})
           </button>
           <SearchBar />
-          <button onClick={() => {}}>test</button>
+          <button onClick={() => dispatch(getUserFields())}>test</button>
         </div>
       </div>
       <SearchResults />
