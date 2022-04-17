@@ -3,6 +3,7 @@ import MainComponent from '../MainComponent/MainComponent';
 import React, {useEffect, useState} from 'react';
 import instance from '../../api/instance';
 import {ReactComponent as New} from './img/new.svg';
+import {Link} from 'react-router-dom';
 
 function MainNew() {
   const [newProd, setNewProd] = useState([]);
@@ -16,7 +17,9 @@ function MainNew() {
 
   return (
     <>
-      <p className={styles.title}>new</p>
+      <Link exact="true" to="/catalog/filters?sort=-date/" className={styles.title}>
+        new
+      </Link>
       <div className={styles.wrapper}>
         {newProd.length > 0
           ? newProd.map((el) => {
