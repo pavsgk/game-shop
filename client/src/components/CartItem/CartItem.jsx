@@ -4,6 +4,7 @@ import {ReactComponent as DeletePic} from '../../assets/svg/delete.svg';
 import {ReactComponent as MinusPic} from '../../assets/svg/count_minus.svg';
 import {ReactComponent as PlusPic} from '../../assets/svg/count_plus.svg';
 import {useDispatch, useSelector} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {
   addProductToTheCart,
   decreaseProductQuantity,
@@ -77,14 +78,14 @@ const CartItem = ({product, cartQuantity, setIsError, setIsLoading}) => {
 
   return (
     <div className={styles.mainWrapper}>
-      <div className={styles.imgWrapper}>
+      <Link to={`/details?${itemNo}`} className={styles.imgWrapper}>
         <img src={imageUrls[0]} alt="some product pic" />
-      </div>
+      </Link>
       <div className={styles.infoWrapper}>
-        <div className={styles.infoWrapperTitle}>
+        <Link to={`/details?${itemNo}`} className={styles.infoWrapperTitle}>
           <p className={styles.infoWrapperTitleText}>{title}</p>
           <span className={styles.infoWrapperTitleCode}>{itemNo}</span>
-        </div>
+        </Link>
         <div className={styles.infoWrapperQuantity}>
           <div className={styles.infoWrapperQuantityBlock}>
             <div

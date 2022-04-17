@@ -2,19 +2,18 @@
 
 .successful {
   position: fixed;
-  top: 0;
-  left: 0;
+  top: -30%;
+  right: 0;
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: sans-serif;
   & > span {
-    background-color: darkgreen;
+    background-color: black;
     padding: 15px;
-    border-radius: 30px;
-    color: $base-yellow;
+    border: 1px solid lightskyblue;
+    color: lightskyblue;
     margin: 0 auto;
     z-index: 2;
     display: flex;
@@ -23,23 +22,21 @@
 }
 
 .error {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: sans-serif;
+  @extend .successful;
   & > span {
-    background-color: red;
-    padding: 15px;
-    border-radius: 30px;
-    color: $base-yellow;
-    margin: 0 auto;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
+    border: 1px solid $sale;
+    color: $sale;
+  }
+}
+
+@media (min-width: $tablet) {
+  .successful {
+    top: -30%;
+    right: -30%;
+  }
+}
+@media (min-width: $tablet-max) {
+  .successful {
+    right: -35%;
   }
 }
