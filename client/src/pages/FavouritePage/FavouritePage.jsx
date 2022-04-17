@@ -44,7 +44,7 @@ function FavouritePage() {
     <>
       {isLoading && <Preloader />}
       {isError && <SomethingWentWrong />}
-      {wishlist.length < 1 && !isLoading && (
+      {wishlist.length < 1 && !isLoading && isAuthorized && (
         <h3 className={styles.noItems}>You dont have any wishlist items</h3>
       )}
       {!isAuthorized && (
