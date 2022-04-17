@@ -10,9 +10,14 @@ import Preloader from '../Preloader/Preloader';
 import Button from '../Button/Button';
 import {useDispatch} from 'react-redux';
 import {newLogin} from '../../store/reducers/userReducer';
+import {
+  addTextActionMessage,
+  addTypeActionMessage,
+  switchActionMessage,
+} from '../../store/reducers/actionMessageReducer';
 
 const SignUp = ({closeModal}) => {
-  const [isSuccesReg, setIsSuccesReg] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
 
   const initialValues = {
@@ -23,28 +28,36 @@ const SignUp = ({closeModal}) => {
     password: '',
   };
 
-  const handleSubmit = (values, actions) => {
-    registration(values)
-      .then(async (res) => {
-        if (res.status === 200) {
-          actions.resetForm();
-          setIsSuccesReg(true);
-          setTimeout(() => {
-            setIsSuccesReg(false);
-          }, 3000);
+  const actionMessage = (type, text, time) => {
+    dispatch(addTypeActionMessage(type));
+    dispatch(addTextActionMessage(text));
+    dispatch(switchActionMessage());
+    setTimeout(() => {
+      dispatch(switchActionMessage());
+    }, time);
+  };
 
-          const loginOrEmail = values.login;
-          const password = values.password;
-          const valuesForSignIn = {loginOrEmail, password};
-          const result = await dispatch(newLogin(valuesForSignIn));
-          if (result.payload) {
-            closeModal();
-          }
+  const handleSubmit = (values, actions) => {
+    (async () => {
+      try {
+        setIsLoading(true);
+        await registration(values);
+        setIsLoading(false);
+        actionMessage('successful', 'you have been successfully registered!', 3000);
+        actions.resetForm();
+
+        const loginOrEmail = values.login;
+        const password = values.password;
+        const valuesForSignIn = {loginOrEmail, password};
+        const result = await dispatch(newLogin(valuesForSignIn));
+        if (result.payload) {
+          closeModal();
         }
-      })
-      .catch((error) => {
-        console.warn(error);
-      });
+      } catch (e) {
+        setIsLoading(false);
+        actionMessage('error', 'Something went wrong, please try to reload page', 1500);
+      }
+    })();
   };
 
   const yupValidationSchema = yup.object().shape({
@@ -62,11 +75,13 @@ const SignUp = ({closeModal}) => {
     login: yup
       .string()
       .required('Field is required')
-      .min(2, 'min. 2 characters required')
+      .min(3, 'min. 2 characters required')
+      .max(10, 'max. 10 characters required')
       .matches(/^[a-zA-Z0-9]+$/),
     password: yup
       .string()
       .required('Field is required ')
+      .min(7, 'min. 7 characters required')
       .matches(/[0-9A-Za-z]/, 'Wrong password format'),
   });
 
@@ -75,10 +90,10 @@ const SignUp = ({closeModal}) => {
       initialValues={initialValues}
       onSubmit={handleSubmit}
       validationSchema={yupValidationSchema}>
-      {({dirty, isSubmitting}) => {
+      {() => {
         return (
           <>
-            {isSubmitting && <Preloader />}
+            {isLoading && <Preloader />}
             <Form className={styles.form}>
               <div className={styles.wrapper}>
                 <CustomField name="firstName" label="Name" type="text" autoCapitalize="none" />
@@ -90,9 +105,6 @@ const SignUp = ({closeModal}) => {
               <Button type={'submit'}>Register</Button>
             </Form>
             <AltAuthorization />
-            {isSuccesReg && (
-              <div className={styles.successReg}>you have been successfully registered!</div>
-            )}
           </>
         );
       }}
