@@ -76,8 +76,8 @@ function Header() {
         <Link exact="true" to="/">
           <Logo className={styles.logo} />
         </Link>
-        <OutsideTracker func={() => setMenuActive(false)}>
-          <nav className={styles.nav}>
+        <nav className={styles.nav}>
+          <OutsideTracker func={() => setMenuActive(false)}>
             <ul
               className={menuActive ? styles.navList : styles.none}
               onClick={() => setMenuActive(false)}>
@@ -106,8 +106,8 @@ function Header() {
               </li>
               <li className={styles.searchDesktop}>{mobileSearch || <SearchBar />}</li>
             </ul>
-          </nav>
-        </OutsideTracker>
+          </OutsideTracker>
+        </nav>
         <div className={styles.additionalNav}>
           <Link exact="true" to="/cart">
             <CartImg className={styles.cartImg} />
