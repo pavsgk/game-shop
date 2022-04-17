@@ -20,7 +20,6 @@ import {
   addTypeActionMessage,
   addTextActionMessage,
 } from '../../store/reducers/actionMessageReducer';
-import instance from '../../api/instance';
 
 const ProductDetails = (props) => {
   const {

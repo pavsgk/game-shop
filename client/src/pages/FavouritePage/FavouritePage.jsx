@@ -10,7 +10,6 @@ import styles from './FavouritePage.module.scss';
 function FavouritePage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [isBeRequest, setIsBeRequest] = useState(false);
   const {wishlist} = useSelector((state) => state.wishlist);
   const {isAuthorized} = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -20,17 +19,14 @@ function FavouritePage() {
   };
 
   useEffect(() => {
-    setIsBeRequest(false);
     if (isAuthorized) {
       (async () => {
         try {
           setIsLoading(true);
           await dispatch(getWishlist());
-          setIsBeRequest(true);
           setIsLoading(false);
           setIsError(false);
         } catch (e) {
-          console.warn(e);
           setIsLoading(false);
           setIsError(true);
         }
@@ -48,7 +44,7 @@ function FavouritePage() {
     <>
       {isLoading && <Preloader />}
       {isError && <SomethingWentWrong />}
-      {wishlist.length < 1 && isBeRequest && (
+      {wishlist.length < 1 && !isLoading && (
         <h3 className={styles.noItems}>You dont have any wishlist items</h3>
       )}
       {!isAuthorized && (
