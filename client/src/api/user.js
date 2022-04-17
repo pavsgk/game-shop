@@ -12,10 +12,16 @@ export async function getToken(loginOrEmail, password) {
   return data.token;
 }
 
-export async function registration(values) {
-  if (!values) throw new Error('arg. "values" cannot be empty');
+export async function createNewUser(newCustomer) {
+  if (!newCustomer) throw new Error('arg. "newCustomer" cannot be empty');
 
-  return await instance.post('/customers', values);
+  return await instance.post('/customers', newCustomer);
+}
+
+export async function updateUser(updatedCustomer) {
+  if (!updatedCustomer) throw new Error('arg. "updatedCustomer" cannot be empty');
+
+  return await instance.put('/customers', updatedCustomer);
 }
 
 export async function getUserData() {

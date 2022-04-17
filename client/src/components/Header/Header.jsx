@@ -14,6 +14,7 @@ import SearchBar from '../SearchBar/SearchBar';
 import OutsideTracker from '../OutsideTracker/OutsideTracker';
 import NavButton from '../NavButton/NavButton';
 import {ReactComponent as User} from '../Footer/img/user.svg';
+import {getUserFields} from '../../store/reducers/checkoutReducer';
 
 function Header() {
   const dispatch = useDispatch();
@@ -35,7 +36,10 @@ function Header() {
   }, [cart]);
 
   useEffect(() => {
-    isAuthorized && saveToLS('cart', cart);
+    if (isAuthorized) {
+      saveToLS('cart', cart);
+      dispatch(getUserFields());
+    }
   }, [isAuthorized, cart]);
 
   useEffect(() => {

@@ -48,6 +48,9 @@ const userSlice = createSlice({
     isAuthorized: false,
   },
   reducers: {
+    updateUserData(state, {payload}) {
+      state.userData = {...state.userData, ...payload};
+    },
     logout(state) {
       unauthorize(state);
     },
@@ -73,5 +76,5 @@ const userSlice = createSlice({
   },
 });
 
-export const {logout} = userSlice.actions;
+export const {logout, updateUserData} = userSlice.actions;
 export default userSlice.reducer;
