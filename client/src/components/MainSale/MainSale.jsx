@@ -1,38 +1,11 @@
 import styles from './MainSale.module.scss';
 import MainComponent from '../MainComponent/MainComponent';
-import React, {useEffect, useState} from 'react';
-import instance from '../../api/instance';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import {ReactComponent as Sale} from './img/sale.svg';
+import PropTypes from 'prop-types';
 
-function MainSale(props) {
-  const {isMain = true} = props;
-  const [saleProd, setSaleProd] = useState([]);
-  const sale = [];
-  let saleMain = null;
-
-  useEffect(() => {
-    (async () => {
-      const res = await instance.get('/products');
-      setSaleProd(res.data);
-    })();
-  }, []);
-
-  (function () {
-    if (saleProd.length > 0) {
-      saleProd.forEach((el) => {
-        if (el.previousPrice !== 0 && el.previousPrice !== el.currentPrice) {
-          sale.push(el);
-        }
-      });
-    }
-    if (isMain) {
-      saleMain = sale.slice(0, 12);
-    } else {
-      saleMain = sale;
-    }
-  })();
-
+function MainSale({saleProducts}) {
   return (
     <>
       <Link exact="true" to="sale" className={styles.title}>
@@ -40,7 +13,7 @@ function MainSale(props) {
         <Sale className={styles.titleSvg} />
       </Link>
       <div className={styles.wrapper}>
-        {saleMain.map((el) => {
+        {saleProducts.map((el) => {
           return (
             <React.Fragment key={el.itemNo}>
               <div className={styles.componentWrapper}>
@@ -60,5 +33,9 @@ function MainSale(props) {
     </>
   );
 }
+
+MainSale.propTypes = {
+  saleProducts: PropTypes.array,
+};
 
 export default MainSale;

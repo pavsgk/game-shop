@@ -1,10 +1,7 @@
 import styles from './MainSlider.module.scss';
 import {Carousel} from 'react-carousel-minimal';
 import {useNavigate} from 'react-router-dom';
-import {useEffect, useState} from 'react';
-import {getSliderItems} from '../../api/mainSlider';
-import Preloader from '../Preloader/Preloader';
-import SomethingWentWrong from '../SomethingWentWrong/SomethingWentWrong';
+import PropTypes from 'prop-types';
 
 const captionStyle = {
   fontSize: '1.2em',
@@ -12,56 +9,38 @@ const captionStyle = {
   backgroundColor: '#8f8f89a3',
 };
 
-function MainSlider() {
+function MainSlider({sliderProducts}) {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-  const [products, setProducts] = useState([]);
+  const sliderData = sliderProducts.map((item) => {
+    return {
+      image: item.imageUrl,
+      caption: item.title,
+      url: 'details?' + item.itemNo,
+    };
+  });
 
-  useEffect(() => {
-    try {
-      (async () => {
-        const result = await getSliderItems();
-        const dataForSlider = result.map((item) => {
-          return {
-            image: item.imageUrl,
-            caption: item.title,
-            url: 'details?' + item.itemNo,
-          };
-        });
-        setProducts(dataForSlider);
-      })();
-      setIsLoading(false);
-    } catch (e) {
-      setIsLoading(false);
-      setIsError(true);
+  function PicturesNavigate(event) {
+    if (event.target.tagName === 'IMG') {
+      sliderData.forEach((el) => {
+        if (event.target.src === el.image.replace('.', window.location.origin)) {
+          navigate(el.url);
+        }
+      });
     }
-  }, []);
+    if (event.target.className === 'carousel-caption-bottom') {
+      sliderData.forEach((el) => {
+        if (event.target.innerText === el.caption) {
+          navigate(el.url);
+        }
+      });
+    }
+  }
 
   return (
-    <div
-      className={isLoading || !isError ? styles.noSlider : styles.slider}
-      onClick={(event) => {
-        if (event.target.tagName === 'IMG') {
-          products.forEach((el) => {
-            if (event.target.src === el.image.replace('.', window.location.origin)) {
-              navigate(el.url);
-            }
-          });
-        }
-        if (event.target.className === 'carousel-caption-bottom') {
-          products.forEach((el) => {
-            if (event.target.innerText === el.caption) {
-              navigate(el.url);
-            }
-          });
-        }
-      }}>
-      {isLoading && <Preloader />}
-      {isError && <SomethingWentWrong />}
-      {products.length > 0 && (
+    <div className={styles.slider} onClick={(event) => PicturesNavigate(event)}>
+      {sliderData.length > 0 && (
         <Carousel
-          data={products}
+          data={sliderData}
           time={3500}
           width="100%"
           height="400px"
@@ -84,5 +63,9 @@ function MainSlider() {
     </div>
   );
 }
+
+MainSlider.propTypes = {
+  sliderProducts: PropTypes.array,
+};
 
 export default MainSlider;
