@@ -4,11 +4,13 @@ import styles from './UserPage.module.scss';
 import * as yup from 'yup';
 import Button from '../../components/Button/Button';
 import {useEffect, useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {switchTab, updateFields} from '../../store/reducers/checkoutReducer';
 import store from '../../store/store';
 import {useRef} from 'react';
 import instance from '../../api/instance';
+import {logout} from '../../store/reducers/userReducer';
+import {useLocation, useNavigate} from 'react-router-dom';
 
 const yupValidationSchema = yup.object().shape({
   firstName: yup
@@ -82,6 +84,8 @@ function AutoSaver() {
 function UserPage() {
   const formikRef = useRef();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {isAuthorized} = useSelector((state) => state.user);
 
   useEffect(() => {
     const {
@@ -103,6 +107,10 @@ function UserPage() {
       console.log(res.data);
     })();
   }, []);
+
+  useEffect(() => {
+    !isAuthorized && navigate('/');
+  }, [isAuthorized]);
 
   let initialValues = null;
 
@@ -130,6 +138,10 @@ function UserPage() {
   const handleSubmit = () => {
     dispatch(switchTab(1));
   };
+
+  function LogOut() {
+    dispatch(logout());
+  }
 
   return (
     <div className={styles.user}>
@@ -185,7 +197,9 @@ function UserPage() {
         </Formik>
       </div>
       <div className={styles.btnOut}>
-        <Button type="submit">log out</Button>
+        <Button onClick={LogOut} type="submit">
+          log out
+        </Button>
       </div>
     </div>
   );

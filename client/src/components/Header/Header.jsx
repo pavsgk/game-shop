@@ -13,15 +13,12 @@ import {saveToLS} from '../../utils/localStorage';
 import SearchBar from '../SearchBar/SearchBar';
 import OutsideTracker from '../OutsideTracker/OutsideTracker';
 import NavButton from '../NavButton/NavButton';
+import {ReactComponent as User} from '../Footer/img/user.svg';
 
 function Header() {
   const dispatch = useDispatch();
 
   const handleAuthorization = () => {
-    if (isAuthorized) {
-      dispatch(logout());
-      return;
-    }
     dispatch(openSignModal());
   };
 
@@ -113,13 +110,19 @@ function Header() {
             <CartImg className={styles.cartImg} />
             {cartQuantity > 0 && <div className={styles.cartQuantity}>{cartQuantity}</div>}
           </Link>
-          <div className={styles.navLine}> </div>
-          <p onClick={() => handleAuthorization()} className={styles.logIn}>
-            {isAuthorized ? 'Log out' : 'Log in'}
-          </p>
+          <div className={styles.navLine} />
+          {isAuthorized ? (
+            <Link exact="true" className={styles.userPic} to="/user">
+              <User />
+            </Link>
+          ) : (
+            <div onClick={() => handleAuthorization()} className={styles.logIn}>
+              Log in
+            </div>
+          )}
         </div>
       </header>
-      <div className={styles.dummy}></div>
+      <div className={styles.dummy} />
     </>
   );
 }
