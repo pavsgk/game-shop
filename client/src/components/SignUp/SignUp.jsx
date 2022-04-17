@@ -63,7 +63,7 @@ const SignUp = ({closeModal}) => {
       .string()
       .required('Field is required')
       .min(2, 'min. 2 characters required')
-      .matches(/[A-Za-z/s]/),
+      .matches(/^[a-zA-Z0-9]+$/),
     password: yup
       .string()
       .required('Field is required ')
