@@ -9,9 +9,9 @@ import {
   addProductToTheCart,
   decreaseProductQuantity,
   deleteProductFromTheCart,
-  removeItemFromTheCartForNotLog,
-  makeLessItemForNotLog,
-  makeMoreItemForNotLog,
+  removeItemFromTheCartNotLog,
+  makeLessItemNotLog,
+  makeMoreItemNotLog,
 } from '../../store/reducers/cartReducer';
 
 const CartItem = ({product, cartQuantity, setIsError, setIsLoading}) => {
@@ -35,7 +35,7 @@ const CartItem = ({product, cartQuantity, setIsError, setIsLoading}) => {
       })();
       return;
     }
-    dispatch(removeItemFromTheCartForNotLog(itemNo));
+    dispatch(removeItemFromTheCartNotLog(itemNo));
   };
 
   const makeMore = () => {
@@ -54,7 +54,7 @@ const CartItem = ({product, cartQuantity, setIsError, setIsLoading}) => {
       return;
     }
     if (cartQuantity < quantity) {
-      dispatch(makeMoreItemForNotLog(itemNo));
+      dispatch(makeMoreItemNotLog(itemNo));
     }
   };
 
@@ -73,7 +73,7 @@ const CartItem = ({product, cartQuantity, setIsError, setIsLoading}) => {
       })();
       return;
     }
-    dispatch(makeLessItemForNotLog(itemNo));
+    dispatch(makeLessItemNotLog(itemNo));
   };
 
   return (

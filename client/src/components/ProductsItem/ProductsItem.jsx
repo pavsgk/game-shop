@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import styles from './ProductsItem.module.scss';
 import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {addItemToTheCartForNotLog, addProductToTheCart} from '../../store/reducers/cartReducer';
+import {addItemToTheCartNotLog, addProductToTheCart} from '../../store/reducers/cartReducer';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
@@ -48,7 +48,7 @@ function ProductsItem(props) {
       return;
     }
     const cartItem = {product: item, cartQuantity: 1};
-    dispatch(addItemToTheCartForNotLog(cartItem));
+    dispatch(addItemToTheCartNotLog(cartItem));
     actionMessage('successful', 'Successfully added to the cart', 1000);
   };
 
