@@ -8,7 +8,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {switchTab, updateFields} from '../../store/reducers/checkoutReducer';
 import store from '../../store/store';
 import {useRef} from 'react';
-import Preloader from '../Preloader/Preloader';
 
 const yupValidationSchema = yup.object().shape({
   firstName: yup
@@ -40,14 +39,13 @@ const yupValidationSchema = yup.object().shape({
     .string()
     .required('Enter adress')
     .min(5, 'min. 5 characters required')
-    .matches(/^[a-zA-Z0-9\s,'-]*$/),
+    .matches(/^[a-zA-Z0-9\s,'-./]*$/),
   telephone: yup
     .string()
     .required('Enter phone')
     .min(7, 'min. 7 characters required')
     .matches(/\d/g),
   email: yup.string().email('Incorrect email').required('Enter email'),
-  syncProfile: yup.boolean(),
 });
 
 function AutoSaver() {
@@ -98,7 +96,6 @@ function ShippingForm() {
     address: '',
     telephone: '',
     email: '',
-    syncProfile: false,
   };
 
   const handleSubmit = () => {

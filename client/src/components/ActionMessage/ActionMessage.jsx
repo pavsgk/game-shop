@@ -2,18 +2,14 @@ import {useSelector} from 'react-redux';
 import styles from './ActionMessage.module.scss';
 
 function ActionMessage() {
-  const [modalState, type, text] = useSelector((state) => [
-    state.actionMessage.modalState,
-    state.actionMessage.type,
-    state.actionMessage.text,
-  ]);
+  const {isActive, type, text} = useSelector(({message}) => message);
 
-  if (!modalState) {
+  if (!isActive) {
     return null;
   }
 
   return (
-    <div className={type === 'successful' ? styles.successful : styles.error}>
+    <div className={type === 'success' ? styles.successful : styles.error}>
       <span>{text}</span>
     </div>
   );

@@ -10,11 +10,7 @@ import Preloader from '../Preloader/Preloader';
 import Button from '../Button/Button';
 import {useDispatch} from 'react-redux';
 import {newLogin} from '../../store/reducers/userReducer';
-import {
-  addTextActionMessage,
-  addTypeActionMessage,
-  switchActionMessage,
-} from '../../store/reducers/actionMessageReducer';
+import {showMessage} from '../../store/reducers/messageReducer';
 
 const SignUp = ({closeModal}) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -28,22 +24,13 @@ const SignUp = ({closeModal}) => {
     password: '',
   };
 
-  const actionMessage = (type, text, time) => {
-    dispatch(addTypeActionMessage(type));
-    dispatch(addTextActionMessage(text));
-    dispatch(switchActionMessage());
-    setTimeout(() => {
-      dispatch(switchActionMessage());
-    }, time);
-  };
-
   const handleSubmit = (values, actions) => {
     (async () => {
       try {
         setIsLoading(true);
         await createNewUser(values);
         setIsLoading(false);
-        actionMessage('successful', 'you have been successfully registered!', 3000);
+        dispatch(showMessage({text: 'you have been successfully registered!'}));
         actions.resetForm();
 
         const loginOrEmail = values.login;
@@ -55,7 +42,9 @@ const SignUp = ({closeModal}) => {
         }
       } catch (e) {
         setIsLoading(false);
-        actionMessage('error', 'Something went wrong, please try to reload page', 1500);
+        dispatch(
+          showMessage({text: 'Something went wrong, please try to reload page', type: 'error'}),
+        );
       }
     })();
   };

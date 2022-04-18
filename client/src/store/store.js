@@ -6,7 +6,7 @@ import checkoutReducer from './reducers/checkoutReducer';
 import imagesModalReducer from './reducers/imagesModalReducer';
 import wishlistReducer from './reducers/wishlistReducer';
 import searchReducer from './reducers/searchReducer';
-import actionMessageReducer from './reducers/actionMessageReducer';
+import messageReducer from './reducers/messageReducer';
 
 export default configureStore({
   reducer: {
@@ -17,6 +17,6 @@ export default configureStore({
     imagesModal: imagesModalReducer,
     wishlist: wishlistReducer,
     search: searchReducer,
-    actionMessage: actionMessageReducer,
+    message: messageReducer,
   },
 });

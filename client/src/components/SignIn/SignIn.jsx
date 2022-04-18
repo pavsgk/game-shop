@@ -9,11 +9,7 @@ import {useDispatch} from 'react-redux';
 import {useEffect, useState} from 'react';
 import Preloader from '../Preloader/Preloader';
 import Button from '../Button/Button';
-import {
-  addTextActionMessage,
-  addTypeActionMessage,
-  switchActionMessage,
-} from '../../store/reducers/actionMessageReducer';
+import {showMessage} from '../../store/reducers/messageReducer';
 
 const SignIn = ({closeModal}) => {
   const dispatch = useDispatch();
@@ -24,15 +20,6 @@ const SignIn = ({closeModal}) => {
   const initialValues = {
     loginOrEmail: '',
     password: '',
-  };
-
-  const actionMessage = (type, text, time) => {
-    dispatch(addTypeActionMessage(type));
-    dispatch(addTextActionMessage(text));
-    dispatch(switchActionMessage());
-    setTimeout(() => {
-      dispatch(switchActionMessage());
-    }, time);
   };
 
   const handleSubmit = (values) => {
@@ -49,7 +36,9 @@ const SignIn = ({closeModal}) => {
         setIsCorrect(false);
       } catch (e) {
         setIsLoading(false);
-        actionMessage('error', 'Something went wrong, please try to reload page', 1500);
+        dispatch(
+          showMessage({text: 'Something went wrong, please try to reload page', type: 'error'}),
+        );
       }
     })();
   };

@@ -7,10 +7,10 @@ import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useRef} from 'react';
 import {logout, updateUserData} from '../../store/reducers/userReducer';
-import {useNavigate, useLocation} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {updateUser} from '../../api/user';
 import Preloader from '../../components/Preloader/Preloader';
-import {addTextActionMessage, switchActionMessage} from '../../store/reducers/actionMessageReducer';
+import {showMessage} from '../../store/reducers/messageReducer';
 
 const yupValidationSchema = yup.object().shape({
   firstName: yup
@@ -44,7 +44,7 @@ const yupValidationSchema = yup.object().shape({
   address: yup
     .string()
     .min(5, 'min. 5 characters required')
-    .matches(/^[a-zA-Z0-9\s,'-]*$/),
+    .matches(/^[a-zA-Z0-9\s,'-./]*$/),
   telephone: yup.string().min(7, 'min. 7 characters required').matches(/\d/g),
 });
 
@@ -85,19 +85,12 @@ function UserPage() {
     setIsSubmiting(true);
     try {
       await updateUser(values);
-      dispatch(switchActionMessage());
-      dispatch(addTextActionMessage('Customer data updated successfully'));
+      dispatch(showMessage({text: 'Customer data updated successfully'}));
       dispatch(updateUserData(values));
-      setTimeout(() => {
-        dispatch(switchActionMessage());
-      }, 3000);
       navigate('/');
     } catch (e) {
-      dispatch(switchActionMessage());
-      dispatch(addTextActionMessage('Unable to update customer data'));
-      setTimeout(() => {
-        dispatch(switchActionMessage());
-      }, 3000);
+      dispatch(showMessage({text: 'Unable to update customer data', type: 'error'}));
+      setIsSubmiting(false);
     }
   };
 
