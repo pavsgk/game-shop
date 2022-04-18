@@ -1,14 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import styles from './MainPage.module.scss';
-import MainSlider from '../../components/MainSlider/MainSlider';
-import Genres from '../../components/Genres/Genres';
-import MainNew from '../../components/MainNew/MainNew';
-import MainSale from '../../components/MainSale/MainSale';
 import Preloader from '../../components/Preloader/Preloader';
 import SomethingWentWrong from '../../components/SomethingWentWrong/SomethingWentWrong';
 import {getSliderItems} from '../../api/mainSlider';
 import {getAllFilters} from '../../api/filters';
 import {getFilteredProducts} from '../../api/products';
+import MainContent from '../../components/MainContent/MainContent';
 
 function MainPage() {
   const [isLoading, setIsLoading] = useState(true);
@@ -17,6 +14,7 @@ function MainPage() {
   const [genres, setGenres] = useState([]);
   const [newProducts, setNewProducts] = useState([]);
   const [saleProducts, setSaleProducts] = useState([]);
+  const contentExist = !isLoading && !isError;
 
   useEffect(() => {
     (async () => {
@@ -46,13 +44,13 @@ function MainPage() {
 
   return (
     <div className={styles.main}>
-      {!isLoading && !isError && (
-        <>
-          <MainSlider sliderProducts={sliderProducts} />
-          <Genres genres={genres} />
-          <MainNew newProducts={newProducts} />
-          <MainSale saleProducts={saleProducts} />
-        </>
+      {contentExist && (
+        <MainContent
+          sliderProducts={sliderProducts}
+          genres={genres}
+          newProducts={newProducts}
+          saleProducts={saleProducts}
+        />
       )}
       {isLoading && <Preloader />}
       {isError && <SomethingWentWrong />}

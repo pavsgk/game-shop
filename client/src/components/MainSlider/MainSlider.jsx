@@ -38,28 +38,26 @@ function MainSlider({sliderProducts}) {
 
   return (
     <div className={styles.slider} onClick={(event) => PicturesNavigate(event)}>
-      {sliderData.length > 0 && (
-        <Carousel
-          data={sliderData}
-          time={3500}
-          width="100%"
-          height="400px"
-          captionStyle={captionStyle}
-          captionPosition="bottom"
-          automatic={true}
-          dots={true}
-          pauseIconColor="white"
-          pauseIconSize="40px"
-          slideBackgroundColor="darkgrey"
-          slideImageFit="cover"
-          style={{
-            textAlign: 'center',
-            width: '100%',
-            maxHeight: '500px',
-            cursor: 'pointer',
-          }}
-        />
-      )}
+      <Carousel
+        data={sliderData}
+        time={3500}
+        width="100%"
+        height="400px"
+        captionStyle={captionStyle}
+        captionPosition="bottom"
+        automatic={true}
+        dots={true}
+        pauseIconColor="white"
+        pauseIconSize="40px"
+        slideBackgroundColor="darkgrey"
+        slideImageFit="cover"
+        style={{
+          textAlign: 'center',
+          width: '100%',
+          maxHeight: '500px',
+          cursor: 'pointer',
+        }}
+      />
     </div>
   );
 }

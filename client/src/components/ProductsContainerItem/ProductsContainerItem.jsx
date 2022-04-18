@@ -12,6 +12,12 @@ function ProductsContainerItem({isCatalog, isSale, products, isLoading}) {
   const {wishlist} = useSelector((state) => state.wishlist);
   const idItemsInWishlist = wishlist.map((e) => e._id);
   const emptyRequest = products.length < 1 && !isLoading;
+  const RenderItems = products.map((item) => {
+    if (idItemsInWishlist.includes(item._id)) {
+      return <ProductsItem key={item.itemNo} item={item} isFavorite={true} />;
+    }
+    return <ProductsItem key={item.itemNo} item={item} />;
+  });
 
   const openFilters = () => {
     setIsOpen(true);
@@ -27,20 +33,8 @@ function ProductsContainerItem({isCatalog, isSale, products, isLoading}) {
         <div className={styles.container}>
           {isCatalog && <FilterMenu isOpen={isOpen} closeFilters={closeFilters} />}
           {isSale && <FilterMenu isSale={true} isOpen={isOpen} closeFilters={closeFilters} />}
-          <div
-            className={
-              emptyRequest ? styles.productsContainerWithOutItems : styles.productsContainer
-            }>
-            {emptyRequest ? (
-              <h3>There are no products to your request</h3>
-            ) : (
-              products.map((item) => {
-                if (idItemsInWishlist.includes(item._id)) {
-                  return <ProductsItem key={item.itemNo} item={item} isFavorite={true} />;
-                }
-                return <ProductsItem key={item.itemNo} item={item} />;
-              })
-            )}
+          <div className={emptyRequest ? styles.noItemsContainer : styles.productsContainer}>
+            {emptyRequest ? <h3>There are no products to your request</h3> : RenderItems}
             {isLoading && <ProductsPlaceholder />}
           </div>
         </div>

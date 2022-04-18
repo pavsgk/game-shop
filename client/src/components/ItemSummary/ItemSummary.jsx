@@ -10,6 +10,19 @@ function ItemSummary({products, title, emptyText, perPage}) {
   const maxPage = Math.ceil(items.length / perPage) - 1;
   const minHeight = {minHeight: 105 * (perPage + 1) + 'px'};
 
+  const itemSummaryContent = items
+    .slice(page * perPage, page * perPage + perPage)
+    .map(({title, imageUrls, currentPrice, itemNo, cartQuantity}) => (
+      <ItemSummarySku
+        key={itemNo}
+        title={title}
+        img={imageUrls[0]}
+        price={currentPrice}
+        quantity={cartQuantity}
+        itemNo={itemNo}
+      />
+    ));
+
   const controls = (
     <div className={styles.controls}>
       <button className={styles.pageButton} onClick={() => setPage(page - 1)} disabled={page <= 0}>
@@ -30,22 +43,10 @@ function ItemSummary({products, title, emptyText, perPage}) {
   return (
     <div className={styles.itemSummary} style={minHeight}>
       <p className={styles.title}>{title}</p>
-      <div className={styles.elem}></div>
+      <div className={styles.elem} />
       {items.length === 0 && <p className={styles.empty}>{emptyText}</p>}
       {maxPage > 0 && controls}
-
-      {items
-        .slice(page * perPage, page * perPage + perPage)
-        .map(({title, imageUrls, currentPrice, itemNo, cartQuantity}) => (
-          <ItemSummarySku
-            key={itemNo}
-            title={title}
-            img={imageUrls[0]}
-            price={currentPrice}
-            quantity={cartQuantity}
-            itemNo={itemNo}
-          />
-        ))}
+      {itemSummaryContent}
     </div>
   );
 }

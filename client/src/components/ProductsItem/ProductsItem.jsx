@@ -21,6 +21,7 @@ function ProductsItem(props) {
   const isAuthorized = useSelector((state) => state.user.isAuthorized);
   const dispatch = useDispatch();
   const imgErr = useRef(false);
+  const isSale = previousPrice !== 0 && previousPrice !== currentPrice;
 
   const openModal = () => {
     dispatch(openSignModal());
@@ -82,6 +83,16 @@ function ProductsItem(props) {
     target.src = '';
   };
 
+  const bookmarkStyle = {
+    color: '#f7d131',
+    fontSize: 'xxx-l',
+    cursor: 'pointer',
+    position: 'absolute',
+    top: '-3px',
+    right: '10px',
+    '&:hover': {transform: 'scale(1.2)'},
+  };
+
   return (
     <>
       <div className={styles.cardContainer}>
@@ -91,30 +102,14 @@ function ProductsItem(props) {
               onClick={() => {
                 isAuthorized ? removeFromWishlist() : openModal();
               }}
-              sx={{
-                color: '#f7d131',
-                fontSize: 'xxx-l',
-                cursor: 'pointer',
-                position: 'absolute',
-                top: '-3px',
-                right: '10px',
-                '&:hover': {transform: 'scale(1.2)'},
-              }}
+              sx={bookmarkStyle}
             />
           ) : (
             <BookmarkBorderIcon
               onClick={() => {
                 isAuthorized ? addToWishlist() : openModal();
               }}
-              sx={{
-                color: '#f7d131',
-                fontSize: 'xxx-l',
-                cursor: 'pointer',
-                position: 'absolute',
-                top: '-3px',
-                right: '10px',
-                '&:hover': {transform: 'scale(1.2)'},
-              }}
+              sx={bookmarkStyle}
             />
           )}
           <Link to={`/details?${itemNo}`}>
@@ -128,7 +123,7 @@ function ProductsItem(props) {
           </p>
         </div>
         <div className={styles.priceWrapper}>
-          {previousPrice !== 0 && previousPrice !== currentPrice ? (
+          {isSale ? (
             <div className={styles.priceBox}>
               <Sale className={styles.saleSvg} />
               <span className={styles.price}>{currentPrice} &#8372;</span>
