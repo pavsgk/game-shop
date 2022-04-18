@@ -6,7 +6,7 @@ import styles from './SignIn.module.scss';
 import AltAuthorization from '../AltAuthorization/AltAuthorization';
 import {newLogin} from '../../store/reducers/userReducer';
 import {useDispatch} from 'react-redux';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Preloader from '../Preloader/Preloader';
 import Button from '../Button/Button';
 import {
@@ -25,6 +25,13 @@ const SignIn = ({closeModal}) => {
     loginOrEmail: '',
     password: '',
   };
+
+  useEffect(() => {
+    return () => {
+      setIsCorrect(false);
+      setIsLoading(false);
+    };
+  }, []);
 
   const actionMessage = (type, text, time) => {
     dispatch(addTypeActionMessage(type));
