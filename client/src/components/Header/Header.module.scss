@@ -175,12 +175,19 @@
     top: 87px;
   }
 
-  .menu {
-    min-width: 86px;
+  .logIn {
+    min-width: 91px;
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
   }
 
   .authorization {
-    min-width: 86px;
+    min-width: 91px;
+  }
+
+  .menu {
+    padding: 10px 5px 10px 20px;
   }
 
   .menuImg {
@@ -201,8 +208,6 @@
     font-size: 18px;
     line-height: 20px;
     padding-left: 10px;
-    padding-right: 10px;
-    margin: 5px;
   }
 
   .dummy {
@@ -234,10 +239,15 @@
 
   .menu {
     display: none;
+    margin-right: 20px;
+  }
+
+  .logIn {
+    width: 91px;
   }
 
   .authorization {
-    min-width: 86px;
+    margin-right: 20px;
   }
 
   .menuBox {
