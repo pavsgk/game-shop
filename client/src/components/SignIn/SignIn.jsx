@@ -26,13 +26,6 @@ const SignIn = ({closeModal}) => {
     password: '',
   };
 
-  useEffect(() => {
-    return () => {
-      setIsCorrect(false);
-      setIsLoading(false);
-    };
-  }, []);
-
   const actionMessage = (type, text, time) => {
     dispatch(addTypeActionMessage(type));
     dispatch(addTextActionMessage(text));
@@ -68,6 +61,13 @@ const SignIn = ({closeModal}) => {
       .required('Field is required ')
       .matches(/[0-9A-Za-z]/, 'Wrong password format'),
   });
+
+  useEffect(() => {
+    return () => {
+      setIsCorrect(false);
+      setIsLoading(false);
+    };
+  }, []);
 
   return (
     <Formik
