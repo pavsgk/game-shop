@@ -9,6 +9,7 @@ import {useRef} from 'react';
 import {logout, updateUserData} from '../../store/reducers/userReducer';
 import {useNavigate, useLocation} from 'react-router-dom';
 import {updateUser} from '../../api/user';
+import Preloader from '../../components/Preloader/Preloader';
 import {addTextActionMessage, switchActionMessage} from '../../store/reducers/actionMessageReducer';
 
 const yupValidationSchema = yup.object().shape({
@@ -48,22 +49,25 @@ const yupValidationSchema = yup.object().shape({
 });
 
 function UserPage() {
-  const formikRef = useRef();
+  const formikRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
-  const {isAuthorized, userData} = useSelector((state) => state.user);
+
+  const {isAuthorized, userData, isReady} = useSelector((state) => state.user);
   const [isSubmiting, setIsSubmiting] = useState(false);
 
   useEffect(() => {
     for (const [key, val] of Object.entries(userData)) {
-      if (key in formikRef.current.values) formikRef.current.setFieldValue(key, val);
+      if (formikRef.current !== null && key in formikRef.current.values)
+        formikRef.current.setFieldValue(key, val);
     }
-  }, []);
+  }, [isReady]);
 
   useEffect(() => {
-    if (!isAuthorized) navigate('/');
-  }, [isAuthorized]);
+    if (!isAuthorized && isReady) navigate('/');
+  }, [isAuthorized, isReady]);
+
+  if (!isReady) return <Preloader />;
 
   const initialValues = {
     firstName: '',
@@ -142,18 +146,6 @@ function UserPage() {
             </Form>
           )}
         </Formik>
-        {/* <Formik initialValues={initialValues} onSubmit={handleSubmit}>
-          <Form>
-            <div className={styles.section}>
-              <p className={styles.text}>change password</p>
-              <CustomField name="password" label="password" type="text" />
-              <CustomField name="newPassword" label="newPassword" type="text" />
-              <div className={styles.btnBox}>
-                <Button type="submit">save password</Button>
-              </div>
-            </div>
-          </Form>
-        </Formik> */}
       </div>
       <div className={styles.btnOut}>
         <Button onClick={LogOut}>log out</Button>

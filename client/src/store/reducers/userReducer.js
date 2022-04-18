@@ -13,6 +13,7 @@ const initialState = {
     isAdmin: false,
   },
   isAuthorized: false,
+  isReady: false,
 };
 
 export const newLogin = createAsyncThunk('user/newLogin', async ({loginOrEmail, password}) => {
@@ -30,7 +31,7 @@ export const newLoginByToken = createAsyncThunk('user/newLoginByToken', async (t
 
 export const init = createAsyncThunk('user/init', async (_, {dispatch}) => {
   const token = localStorage.getItem('game-shop-token');
-  if (token) dispatch(newLoginByToken(token));
+  if (token) await dispatch(newLoginByToken(token));
   return;
 });
 
@@ -43,10 +44,7 @@ const unauthorize = (state) => {
 
 const userSlice = createSlice({
   name: 'user',
-  initialState: {
-    userData: {...initialState.userData},
-    isAuthorized: false,
-  },
+  initialState,
   reducers: {
     updateUserData(state, {payload}) {
       state.userData = {...state.userData, ...payload};
@@ -56,6 +54,12 @@ const userSlice = createSlice({
     },
   },
   extraReducers: {
+    [init.fulfilled]: (state) => {
+      state.isReady = true;
+    },
+    [init.rejected]: (state) => {
+      state.isReady = true;
+    },
     [newLogin.fulfilled]: (state, {payload}) => {
       state.userData = payload;
       state.isAuthorized = true;
