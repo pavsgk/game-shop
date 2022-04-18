@@ -30,9 +30,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
         query += `${key}=${values[key]}&`;
       }
     }
-    if (minPrice !== 250 || maxPrice !== 2250) {
-      query += `minPrice=${minPrice}&maxPrice=${maxPrice}&`;
-    }
+    query += `minPrice=${minPrice}&maxPrice=${maxPrice}&`;
     isSale ? navigate(`/sale/filters${query}`) : navigate(`/catalog/filters${query}`);
   };
 
@@ -71,7 +69,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="publisher"
-                    value="HelloGames"
+                    value="Hello Games"
                   />
                   <label htmlFor="Hello Games">Hello Games</label>
 
@@ -80,7 +78,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="publisher"
-                    value="NinjaTheory"
+                    value="Ninja Theory"
                   />
                   <label htmlFor="Ninja Theory">Ninja Theory</label>
 
@@ -89,7 +87,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="publisher"
-                    value="EAGames"
+                    value="EA Games"
                   />
                   <label htmlFor="EA Games">EA Games</label>
 
@@ -98,7 +96,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="publisher"
-                    value="ModusGames"
+                    value="Modus Games"
                   />
                   <label htmlFor="Modus Games">Modus Games</label>
 
@@ -107,7 +105,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="publisher"
-                    value="CDProjektRED"
+                    value="CD Projekt RED"
                   />
                   <label htmlFor="CD Projekt RED">CD Projekt RED</label>
 
@@ -116,7 +114,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="publisher"
-                    value="UbisoftEntertainment"
+                    value="Ubisoft Entertainment"
                   />
                   <label htmlFor="Ubisoft Entertainment">Ubisoft Entertainment</label>
 
@@ -125,7 +123,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="publisher"
-                    value="GSCGameWorld"
+                    value="GSC Game World"
                   />
                   <label htmlFor="GSC Game World">GSC Game World</label>
 
@@ -143,7 +141,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="publisher"
-                    value="RockstarGames"
+                    value="Rockstar Games"
                   />
                   <label htmlFor="Rockstar Games">Rockstar Games</label>
 
@@ -152,7 +150,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="publisher"
-                    value="505Games"
+                    value="505 Games"
                   />
                   <label htmlFor="505 Games">505 Games</label>
 
@@ -161,7 +159,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="publisher"
-                    value="Team17DigitalLtd"
+                    value="Team17 Digital Ltd"
                   />
                   <label htmlFor="Team17 Digital Ltd">Team17 Digital Ltd</label>
 
@@ -170,7 +168,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="publisher"
-                    value="THQNordic"
+                    value="THQ Nordic"
                   />
                   <label htmlFor="THQ Nordic">THQ Nordic</label>
 
@@ -179,7 +177,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="publisher"
-                    value="ElectronicArts"
+                    value="Electronic Arts"
                   />
                   <label htmlFor="Electronic Arts">Electronic Arts</label>
 
@@ -188,7 +186,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="publisher"
-                    value="DeepSilver"
+                    value="Deep Silver"
                   />
                   <label htmlFor="Deep Silver">Deep Silver</label>
 
@@ -197,7 +195,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="publisher"
-                    value="WarnerBrosInteractiveEntertainment"
+                    value="Warner Bros. Interactive Entertainment"
                   />
                   <label htmlFor="Warner Bros. Interactive Entertainment">
                     Warner Bros. Interactive Entertainment
@@ -215,7 +213,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="platform"
-                    value="XboxSeriesX|S"
+                    value="Xbox Series X|S|S"
                   />
                   <label htmlFor="Xbox Series X|S">Xbox Series X|S</label>
 
@@ -224,7 +222,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="platform"
-                    value="XboxOne"
+                    value="Xbox One"
                   />
                   <label htmlFor="Xbox One">Xbox One</label>
 
@@ -233,7 +231,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="platform"
-                    value="Windows7"
+                    value="Windows 7"
                   />
                   <label htmlFor="Windows 7">Windows 7</label>
 
@@ -242,7 +240,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="platform"
-                    value="Windows8"
+                    value="Windows 8"
                   />
                   <label htmlFor="Windows 8">Windows 8</label>
 
@@ -251,7 +249,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="platform"
-                    value="Windows10"
+                    value="Windows 10"
                   />
                   <label htmlFor="Windows 10">Windows 10</label>
 
@@ -260,7 +258,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="platform"
-                    value="Windows11"
+                    value="Windows 11"
                   />
                   <label htmlFor="Windows 11">Windows 11</label>
 
@@ -278,7 +276,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="platform"
-                    value="PlayStation3"
+                    value="PlayStation 3"
                   />
                   <label htmlFor="PlayStation 3">PlayStation 3</label>
 
@@ -287,7 +285,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="platform"
-                    value="PlayStation4"
+                    value="PlayStation 4"
                   />
                   <label htmlFor="PlayStation 4">PlayStation 4</label>
 
@@ -296,7 +294,7 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     className={styles.checkbox}
                     type="checkbox"
                     name="platform"
-                    value="PlayStation5"
+                    value="PlayStation 5"
                   />
                   <label htmlFor="PlayStation 5">PlayStation 5</label>
                 </>
@@ -328,15 +326,6 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                   <label htmlFor="RPG">RPG</label>
 
                   <Field
-                    id="Action role-playing"
-                    className={styles.checkbox}
-                    type="checkbox"
-                    name="genre"
-                    value="Actionrole-playing"
-                  />
-                  <label htmlFor="Action role-playing">Action role-playing</label>
-
-                  <Field
                     id="Indie"
                     className={styles.checkbox}
                     type="checkbox"
@@ -353,24 +342,6 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                     value="Action"
                   />
                   <label htmlFor="Action">Action</label>
-
-                  <Field
-                    id="For Two"
-                    className={styles.checkbox}
-                    type="checkbox"
-                    name="genre"
-                    value="ForTwo"
-                  />
-                  <label htmlFor="For Two">For two</label>
-
-                  <Field
-                    id="Turn-based"
-                    className={styles.checkbox}
-                    type="checkbox"
-                    name="genre"
-                    value="Turn-based"
-                  />
-                  <label htmlFor="Turn-based">Turn-based</label>
 
                   <Field
                     id="Shooters"
@@ -495,9 +466,10 @@ function FilterMenu({isOpen, closeFilters, isSale}) {
                   <Slider
                     getAriaLabel={() => 'Price'}
                     value={[minPrice, maxPrice]}
+                    sx={{marginBottom: '16px', color: '#ffc500'}}
                     valueLabelDisplay="auto"
                     onChange={({target}) => sliderPriceChangeHandler(target)}
-                    min={250}
+                    min={200}
                     max={2250}
                   />
                   <div className={styles.priceInputsWrapper}>

@@ -43,8 +43,6 @@ function CatalogFilterTools({openFilters, isSale}) {
       <Select
         defaultValue="default"
         sx={{color: '#ffc500', outline: 'none'}}
-        filter-menu-fix
-        classes={'.MuiSelect-icon {color: red}'}
         onChange={({target}) => handleChange(target)}>
         <MenuItem value="default" children="Recommended" />
         <MenuItem value="+currentPrice" children="Price: lowest first" />
