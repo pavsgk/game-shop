@@ -12,11 +12,7 @@ import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 import ProductDetailsAbout from '../ProductDetailsAbout/ProductDetailsAbout';
 import ProductDetailsButtons from '../ProductDetailsButtons/ProductDetailsButtons';
 import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
-import {
-  switchActionMessage,
-  addTypeActionMessage,
-  addTextActionMessage,
-} from '../../store/reducers/actionMessageReducer';
+import {showMessage} from '../../store/reducers/messageReducer';
 
 const ProductDetails = (props) => {
   const {
@@ -40,15 +36,6 @@ const ProductDetails = (props) => {
   const {wishlist} = useSelector((state) => state.wishlist);
   const [isFavourite, setIsFavourite] = useState(false);
   const [countInputValue, setCountInputValue] = useState(1);
-
-  const actionMessage = (type, text, time) => {
-    dispatch(addTypeActionMessage(type));
-    dispatch(addTextActionMessage(text));
-    dispatch(switchActionMessage());
-    setTimeout(() => {
-      dispatch(switchActionMessage());
-    }, time);
-  };
 
   useEffect(() => {
     const openModalImages = (currentImg) => {
@@ -106,15 +93,17 @@ const ProductDetails = (props) => {
       (async () => {
         try {
           await dispatch(addProductsToTheCart(cartItem));
-          actionMessage('successful', 'Successfully added to the cart', 1000);
+          dispatch(showMessage({text: 'Successfully added to the cart'}));
         } catch (e) {
-          actionMessage('error', 'Something went wrong, please try to reload page', 1500);
+          dispatch(
+            showMessage({text: 'Something went wrong, please try to reload page', type: 'error'}),
+          );
         }
       })();
       return;
     }
     dispatch(addItemToTheCartNotLog(cartItem));
-    actionMessage('successful', 'Successfully added to the cart', 1000);
+    dispatch(showMessage({text: 'Successfully added to the cart'}));
   };
 
   const openModal = () => {
@@ -130,9 +119,11 @@ const ProductDetails = (props) => {
       (async () => {
         try {
           await dispatch(addWishedProduct(_id));
-          actionMessage('successful', 'Successfully added to the wishlist', 1000);
+          dispatch(showMessage({text: 'Successfully added to the wishlist'}));
         } catch (e) {
-          actionMessage('error', 'Something went wrong, please try to reload page', 1500);
+          dispatch(
+            showMessage({text: 'Something went wrong, please try to reload page', type: 'error'}),
+          );
         }
       })();
       return;

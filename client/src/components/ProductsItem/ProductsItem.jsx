@@ -6,11 +6,7 @@ import {addItemToTheCartNotLog, addProductToTheCart} from '../../store/reducers/
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import {addWishedProduct, removeWishedProduct} from '../../store/reducers/wishlistReducer';
-import {
-  switchActionMessage,
-  addTypeActionMessage,
-  addTextActionMessage,
-} from '../../store/reducers/actionMessageReducer';
+import {showMessage} from '../../store/reducers/messageReducer';
 import {ReactComponent as Sale} from './img/sale.svg';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
 import {useRef} from 'react';
@@ -27,39 +23,34 @@ function ProductsItem(props) {
     dispatch(openSignModal());
   };
 
-  const actionMessage = (type, text, time) => {
-    dispatch(addTypeActionMessage(type));
-    dispatch(addTextActionMessage(text));
-    dispatch(switchActionMessage());
-    setTimeout(() => {
-      dispatch(switchActionMessage());
-    }, time);
-  };
-
   const addToCart = () => {
     if (isAuthorized) {
       (async () => {
         try {
           await dispatch(addProductToTheCart(_id));
-          actionMessage('successful', 'Successfully added to the cart', 1000);
+          dispatch(showMessage({text: 'Successfully added to the cart'}));
         } catch (e) {
-          actionMessage('error', 'Something went wrong, please try to reload page', 1500);
+          dispatch(
+            showMessage({text: 'Something went wrong, please try to reload page', type: 'error'}),
+          );
         }
       })();
       return;
     }
     const cartItem = {product: item, cartQuantity: 1};
     dispatch(addItemToTheCartNotLog(cartItem));
-    actionMessage('successful', 'Successfully added to the cart', 1000);
+    dispatch(showMessage({text: 'Successfully added to the cart'}));
   };
 
   const addToWishlist = () => {
     (async () => {
       try {
         await dispatch(addWishedProduct(_id));
-        actionMessage('successful', 'Successfully added to the wishlist', 1000);
+        dispatch(showMessage({text: 'Successfully added to the wishlist'}));
       } catch (e) {
-        actionMessage('error', 'Something went wrong, please try to reload page', 1500);
+        dispatch(
+          showMessage({text: 'Something went wrong, please try to reload page', type: 'error'}),
+        );
       }
     })();
   };
@@ -69,7 +60,9 @@ function ProductsItem(props) {
       try {
         await dispatch(removeWishedProduct(_id));
       } catch (e) {
-        actionMessage('error', 'Something went wrong, please try to reload page', 1500);
+        dispatch(
+          showMessage({text: 'Something went wrong, please try to reload page', type: 'error'}),
+        );
       }
     })();
   };

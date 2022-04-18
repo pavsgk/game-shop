@@ -11,7 +11,7 @@ import ProductsPage from './pages/ProductsPage/ProductsPage';
 import SalePage from './pages/SalePage/SalePage';
 import TestPage from './api/test';
 import UserPage from './pages/UserPage/UserPage';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {useEffect} from 'react';
 import {init} from './store/reducers/userReducer';
 import {AdminPage} from './pages/AdminPage/AdminPage';
@@ -19,8 +19,6 @@ import SignModalContainer from './components/SignModalContainer/SignModalContain
 import ImagesModal from './components/ImagesModal/ImagesModal';
 import OrderConfirmed from './components/OrderConfirmed/OrderConfirmed';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage';
-import {getCartFromServer, getCartFromLS, updateCartFromLs} from './store/reducers/cartReducer';
-import {getFromLS} from './utils/localStorage';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import SearchResults from './components/SearchResults/SearchResults';
 import RouteTracker from './components/RouteTracker/RouteTracker';
