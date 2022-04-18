@@ -69,9 +69,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: flex-end;
   padding: 10px 5px 10px 10px;
   position: relative;
   cursor: pointer;
+  min-width: 60px;
 }
 
 .navLine {
@@ -79,6 +81,10 @@
   height: 28px;
   border-radius: 1px;
   background: $base-yellow;
+}
+
+.authorization {
+  min-width: 60px;
 }
 
 .menuImg {
@@ -166,11 +172,15 @@
 @media (min-width: $tablet) {
   .nav {
     position: absolute;
-    top: 90px;
+    top: 87px;
   }
 
-  .additionalNav {
-    margin-right: 15px;
+  .menu {
+    min-width: 86px;
+  }
+
+  .authorization {
+    min-width: 86px;
   }
 
   .menuImg {
@@ -226,6 +236,10 @@
     display: none;
   }
 
+  .authorization {
+    min-width: 86px;
+  }
+
   .menuBox {
     display: none;
   }
@@ -238,6 +252,10 @@
 
   .navItem {
     border: 0;
+  }
+
+  .navLink {
+    padding: 22px 40px 22px 15px;
   }
 
   .searchWrapper {

@@ -115,15 +115,17 @@ function Header() {
             {cartQuantity > 0 && <div className={styles.cartQuantity}>{cartQuantity}</div>}
           </Link>
           <div className={styles.navLine} />
-          {isAuthorized ? (
-            <Link exact="true" className={styles.userPic} to="/user">
-              <User />
-            </Link>
-          ) : (
-            <div onClick={() => handleAuthorization()} className={styles.logIn}>
-              Log in
-            </div>
-          )}
+          <div className={styles.authorization}>
+            {isAuthorized ? (
+              <Link exact="true" className={styles.userPic} to="/user">
+                <User />
+              </Link>
+            ) : (
+              <div onClick={() => handleAuthorization()} className={styles.logIn}>
+                Log in
+              </div>
+            )}
+          </div>
         </div>
       </header>
       <div className={styles.dummy} />
