@@ -31,7 +31,7 @@
     width: 220px;
   }
 
-  .productsContainerWithOutItems {
+  .noItemsContainer {
     color: $text;
     text-align: center;
     width: 190px;
@@ -55,7 +55,7 @@
     width: 220px;
   }
 
-  .productsContainerWithOutItems {
+  .noItemsContainer {
     width: 650px;
   }
 }
@@ -65,7 +65,7 @@
     grid-template-columns: repeat(4, 1fr);
   }
 
-  .productsContainerWithOutItems {
+  .noItemsContainer {
     width: 880px;
   }
 }

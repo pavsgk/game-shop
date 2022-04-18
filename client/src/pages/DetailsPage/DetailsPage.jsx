@@ -10,6 +10,7 @@ function DetailsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
   const location = useLocation();
+  const contentExist = !isError && !isLoading;
 
   useEffect(() => {
     (async () => {
@@ -29,7 +30,7 @@ function DetailsPage() {
     <>
       {isLoading && <Preloader />}
       {isError && <SomethingWentWrong />}
-      {!isError && !isLoading && <ProductDetails {...item} />}
+      {contentExist && <ProductDetails {...item} />}
     </>
   );
 }

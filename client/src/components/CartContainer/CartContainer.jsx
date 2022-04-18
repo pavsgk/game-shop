@@ -18,6 +18,14 @@ const CartContainer = () => {
   const isAuthorized = useSelector((state) => state.user.isAuthorized);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const cartItemContent = cart.map((item) => (
+    <CartItem
+      key={item.product.itemNo}
+      {...item}
+      setIsError={setIsError}
+      setIsLoading={setIsLoading}
+    />
+  ));
 
   useEffect(() => {
     if (isAuthorized) {
@@ -59,17 +67,7 @@ const CartContainer = () => {
         </Link>
       </div>
       <div className={styles.contentWrapper}>
-        <div className={styles.itemsBox}>
-          {cart.length > 0 &&
-            cart.map((item) => (
-              <CartItem
-                key={item.product.itemNo}
-                {...item}
-                setIsError={setIsError}
-                setIsLoading={setIsLoading}
-              />
-            ))}
-        </div>
+        <div className={styles.itemsBox}>{cartItemContent}</div>
         <div className={styles.priceWrapper}>
           <div className={styles.summaSection}>
             <p className={styles.summaText}>Total:</p>

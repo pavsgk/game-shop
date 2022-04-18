@@ -89,7 +89,6 @@ function UserPage() {
       }, 3000);
       navigate('/');
     } catch (e) {
-      console.warn(e);
       dispatch(switchActionMessage());
       dispatch(addTextActionMessage('Unable to update customer data'));
       setTimeout(() => {

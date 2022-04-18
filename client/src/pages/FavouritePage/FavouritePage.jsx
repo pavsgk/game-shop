@@ -12,7 +12,15 @@ function FavouritePage() {
   const [isError, setIsError] = useState(false);
   const {wishlist} = useSelector((state) => state.wishlist);
   const {isAuthorized} = useSelector((state) => state.user);
+  const noItems = wishlist.length < 1 && !isLoading && isAuthorized;
   const dispatch = useDispatch();
+  const noItemsContent = <h3 className={styles.noItems}>You dont have any wishlist items</h3>;
+  const noAuthContent = (
+    <h3 className={styles.noAuth}>
+      {' '}
+      If you want to use wishlist you must <span onClick={() => openModal()}>sign in</span>{' '}
+    </h3>
+  );
 
   const openModal = () => {
     dispatch(openSignModal());
@@ -44,15 +52,8 @@ function FavouritePage() {
     <>
       {isLoading && <Preloader />}
       {isError && <SomethingWentWrong />}
-      {wishlist.length < 1 && !isLoading && isAuthorized && (
-        <h3 className={styles.noItems}>You dont have any wishlist items</h3>
-      )}
-      {!isAuthorized && (
-        <h3 className={styles.noAuth}>
-          {' '}
-          If you want to use wishlist you must <span onClick={() => openModal()}>sign in</span>{' '}
-        </h3>
-      )}
+      {noItems && noItemsContent}
+      {!isAuthorized && noAuthContent}
       {isAuthorized && <WishlistContainer />}
     </>
   );
