@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 function PaymentSuccess() {
   return (
     <div className={styles.OrderConfirmed}>
-      <img src={successIcon} alt="Order confirmed" />
+      <img className={styles.img} src={successIcon} alt="Order confirmed" />
       <h2>
         Thank you!
         <br />

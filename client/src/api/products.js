@@ -14,6 +14,12 @@ export async function getProduct(itemNo) {
   return data;
 }
 
+export async function searchProducts(query) {
+  if (query.trim() === '' || typeof query !== 'string') return [];
+  const {data} = await instance.post('products/search', {query});
+  return data;
+}
+
 export async function getFilteredProducts(querystring) {
   let query = '';
   if (typeof querystring === 'object') {
@@ -30,7 +36,5 @@ export async function getFilteredProducts(querystring) {
   }
 
   if (query[query.length - 1] === '&') query = query.slice(0, -1);
-
-  const {data} = await instance.get(`products/filter?${query}`);
-  return data.products;
+  return await instance.get(`products/filter?${query}`);
 }

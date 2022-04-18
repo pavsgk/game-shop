@@ -1,0 +1,42 @@
+@import '../../styles/variables.scss';
+
+.successful {
+  position: fixed;
+  top: -30%;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  & > span {
+    background-color: black;
+    padding: 15px;
+    border: 1px solid lightskyblue;
+    color: lightskyblue;
+    margin: 0 auto;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.error {
+  @extend .successful;
+  & > span {
+    border: 1px solid $sale;
+    color: $sale;
+  }
+}
+
+@media (min-width: $tablet) {
+  .successful {
+    top: -30%;
+    right: -30%;
+  }
+}
+@media (min-width: $tablet-max) {
+  .successful {
+    right: -35%;
+  }
+}

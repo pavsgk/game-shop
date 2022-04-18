@@ -4,7 +4,7 @@ import styles from './ShippingForm.module.scss';
 import * as yup from 'yup';
 import Button from '../Button/Button';
 import {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {switchTab, updateFields} from '../../store/reducers/checkoutReducer';
 import store from '../../store/store';
 import {useRef} from 'react';
@@ -39,10 +39,13 @@ const yupValidationSchema = yup.object().shape({
     .string()
     .required('Enter adress')
     .min(5, 'min. 5 characters required')
-    .matches(/^[a-zA-Z0-9\s,'-]*$/),
-  mobile: yup.string().required('Enter phone').min(7, 'min. 7 characters required').matches(/\d/g),
+    .matches(/^[a-zA-Z0-9\s,'-./]*$/),
+  telephone: yup
+    .string()
+    .required('Enter phone')
+    .min(7, 'min. 7 characters required')
+    .matches(/\d/g),
   email: yup.string().email('Incorrect email').required('Enter email'),
-  syncProfile: yup.boolean(),
 });
 
 function AutoSaver() {
@@ -71,6 +74,7 @@ function AutoSaver() {
 function ShippingForm() {
   const formikRef = useRef();
   const dispatch = useDispatch();
+  const {isReady, isAuthorized} = useSelector((state) => state.user);
 
   useEffect(() => {
     const {
@@ -81,7 +85,7 @@ function ShippingForm() {
         formikRef.current.setFieldValue(key, val);
       }
     }
-  }, []);
+  }, [isReady, isAuthorized]);
 
   const initialValues = {
     firstName: '',
@@ -90,9 +94,8 @@ function ShippingForm() {
     postal: '',
     city: '',
     address: '',
-    mobile: '',
+    telephone: '',
     email: '',
-    syncProfile: false,
   };
 
   const handleSubmit = () => {
@@ -115,19 +118,8 @@ function ShippingForm() {
           <div className={styles.address}>
             <CustomField name="address" label="Address" type="text" />
           </div>
-          <CustomField name="mobile" label="Phone" type="text" />
+          <CustomField name="telephone" label="Phone" type="text" />
           <CustomField name="email" label="Email" type="text" />
-
-          {/* <div className={styles.checkbox}>
-            <input id="one" type="checkbox" />
-            <label htmlFor="one">
-              <span> </span>
-              Save Information to my profile
-              <ins>
-                <i>Save Information to my profile</i>
-              </ins>
-            </label>
-          </div> */}
         </div>
 
         <div className={styles.btnNext}>

@@ -6,28 +6,41 @@ import styles from './SignIn.module.scss';
 import AltAuthorization from '../AltAuthorization/AltAuthorization';
 import {newLogin} from '../../store/reducers/userReducer';
 import {useDispatch} from 'react-redux';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import Preloader from '../Preloader/Preloader';
 import Button from '../Button/Button';
+import {showMessage} from '../../store/reducers/messageReducer';
 
 const SignIn = ({closeModal}) => {
   const dispatch = useDispatch();
 
   const [isCorrect, setIsCorrect] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const initialValues = {
     loginOrEmail: '',
     password: '',
   };
 
-  const handleSubmit = async (values) => {
-    const result = await dispatch(newLogin(values));
-    if (result.payload) {
-      setIsCorrect(true);
-      closeModal();
-      return;
-    }
-    setIsCorrect(false);
+  const handleSubmit = (values) => {
+    (async () => {
+      try {
+        setIsLoading(true);
+        const {payload} = await dispatch(newLogin(values));
+        if (payload) {
+          setIsCorrect(true);
+          setIsLoading(false);
+          closeModal();
+        }
+        setIsLoading(false);
+        setIsCorrect(false);
+      } catch (e) {
+        setIsLoading(false);
+        dispatch(
+          showMessage({text: 'Something went wrong, please try to reload page', type: 'error'}),
+        );
+      }
+    })();
   };
 
   const yupValidationSchema = yup.object().shape({
@@ -38,15 +51,22 @@ const SignIn = ({closeModal}) => {
       .matches(/[0-9A-Za-z]/, 'Wrong password format'),
   });
 
+  useEffect(() => {
+    return () => {
+      setIsCorrect(false);
+      setIsLoading(false);
+    };
+  }, []);
+
   return (
     <Formik
       initialValues={initialValues}
       onSubmit={handleSubmit}
       validationSchema={yupValidationSchema}>
-      {({isSubmitting}) => {
+      {() => {
         return (
           <>
-            {isSubmitting && <Preloader />}
+            {isLoading && <Preloader />}
             <Form className={styles.form}>
               <CustomField name="loginOrEmail" label="Email / Username" type="text" />
               <CustomField name="password" label="Password" type="password" />

@@ -1,0 +1,29 @@
+@import '../../styles/variables.scss';
+
+.breadCrumbs {
+  margin: 3px auto;
+  max-width: $tablet;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.link {
+  text-transform: capitalize;
+  color: $text;
+  &:hover {
+    text-decoration: underline;
+    color: $base-yellow;
+  }
+}
+
+.separator {
+  color: $base-yellow;
+}
+
+@media (max-width: $tablet-max) {
+  .breadCrumbs {
+    display: none;
+  }
+}

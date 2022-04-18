@@ -1,8 +1,8 @@
 @import '../../styles/variables.scss';
 
 .mainWrapper {
-  margin-bottom: 30px;
-  padding-bottom: 30px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
   border-bottom: 1px solid $details;
   display: flex;
   justify-content: space-between;
@@ -13,10 +13,13 @@
 
 .imgWrapper {
   display: flex;
-  max-width: 15%;
+  max-width: 80px;
+  max-height: 100px;
+  min-height: 100px;
   & > * {
     width: 100%;
     border: 1px solid #ffffff;
+    object-fit: cover;
   }
 }
 
@@ -25,7 +28,7 @@
   justify-content: space-between;
   flex-direction: column;
   align-items: flex-start;
-  width: 100%;
+  width: 85%;
 }
 
 .infoWrapperTitle {
@@ -35,14 +38,14 @@
 }
 
 .infoWrapperTitleText {
-  font-size: 15px;
-  line-height: 23px;
+  font-size: 14px;
+  line-height: 18px;
   color: $text;
 }
 
 .infoWrapperTitleCode {
   color: $details;
-  align-self: flex-end;
+  align-self: flex-start;
   font-size: 10px;
   margin: 5px 0 10px 0;
 }
@@ -93,8 +96,7 @@
 
 .infoWrapperQuantityBlockValue {
   color: $text;
-  margin: 0 9px;
-  font-size: 20px;
+  font-size: 16px;
   min-width: 30px;
   text-align: center;
 }
@@ -112,6 +114,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  text-align: end;
   margin-left: 20px;
 }
 
@@ -126,18 +129,32 @@
 
 .priceValue {
   display: flex;
-  font-size: 20px;
+  font-size: 14px;
+  color: $base-yellow;
+}
+
+.priceValueOneItem {
+  display: flex;
+  font-size: 14px;
   color: $base-yellow;
   & span {
-    margin-right: 5px;
     white-space: nowrap;
   }
 }
 
 @media (min-width: $tablet) {
-  .imgWrapper {
-    max-width: 25%;
+  .mainWrapper {
+    margin-bottom: 30px;
+    padding-bottom: 30px;
   }
+
+  .imgWrapper {
+    max-width: 120px;
+    min-width: 120px;
+    max-height: 170px;
+    min-height: 170px;
+  }
+
   .infoWrapperTitleText {
     font-size: 20px;
   }
@@ -145,8 +162,22 @@
     font-size: 14px;
   }
 
+  .infoWrapperQuantityBlockValue {
+    font-size: 20px;
+  }
+
+  .infoWrapperQuantityBlockValue {
+    margin: 0 9px;
+  }
+
   .priceValue {
-    font-size: 24px;
+    font-size: 18px;
+    & span {
+      white-space: nowrap;
+    }
+  }
+  .priceValueOneItem {
+    font-size: 18px;
   }
 }
 

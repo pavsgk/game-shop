@@ -5,12 +5,15 @@ import Payment from '../../components/Payment/Payment';
 import ItemSummary from '../../components/ItemSummary/ItemSummary';
 import OrderSummary from '../../components/OrderSummary/OrderSummary';
 import CheckoutSelector from '../../components/CheckoutSelector/CheckoutSelector';
+import {useSelector} from 'react-redux';
 
 function CheckoutPage() {
+  const products = useSelector(({cart}) => cart.products);
+
   return (
     <div className={styles.checkoutPage}>
       <div className={styles.summary}>
-        <ItemSummary />
+        <ItemSummary products={products} />
         <OrderSummary />
       </div>
       <section className={styles.tabs}>

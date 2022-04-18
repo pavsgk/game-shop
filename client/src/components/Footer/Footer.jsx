@@ -4,13 +4,14 @@ import {ReactComponent as Phone} from './img/call.svg';
 import {ReactComponent as Mail} from './img/mail.svg';
 import {ReactComponent as Inst} from './img/instagram.svg';
 import {ReactComponent as Location} from './img/location.svg';
+import {Link} from 'react-router-dom';
 
 function Footer() {
   const [isAbsolute, setIsAbsolute] = useState(false);
 
   useEffect(() => {
     const observer = new MutationObserver(() => {
-      if (document.body.clientHeight < 1000) {
+      if (document.body.clientHeight < 500) {
         setIsAbsolute(true);
       } else {
         if (isAbsolute) setIsAbsolute(false);
@@ -25,6 +26,9 @@ function Footer() {
 
   return (
     <div className={isAbsolute ? styles.absFooter : styles.footer}>
+      <Link exact="true" className={styles.navLink} to="/admin">
+        ~
+      </Link>
       <div className={styles.section}>
         <div className={styles.info}>
           <Phone className={styles.svg} />

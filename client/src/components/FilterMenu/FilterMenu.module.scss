@@ -3,10 +3,10 @@
   .filter {
     position: absolute;
     z-index: 1;
-    top: 70px;
     background: $background;
     height: 100%;
     left: 0;
+    top: 20px;
     width: 60vw;
     display: none;
     margin-top: 149px;
@@ -54,7 +54,9 @@
     z-index: -1;
     background: #000;
     opacity: 0.5;
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
   }
 
   .closeFilter {
@@ -76,8 +78,16 @@
     background: none;
     color: $base-yellow;
     text-transform: uppercase;
-    margin-top: 16px;
-    margin-left: 16px;
+    margin: 10px;
+  }
+
+  .priceInputsWrapper {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .priceInput {
+    width: 40%;
   }
 }
 

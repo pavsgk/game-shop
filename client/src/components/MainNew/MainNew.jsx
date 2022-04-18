@@ -1,25 +1,19 @@
 import styles from './MainNew.module.scss';
 import MainComponent from '../MainComponent/MainComponent';
-import React, {useEffect, useState} from 'react';
-import instance from '../../api/instance';
+import React from 'react';
 import {ReactComponent as New} from './img/new.svg';
+import {Link} from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-function MainNew() {
-  const [newProd, setNewProd] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      const res = await instance.get('products/filter?perPage=12&sort=-date');
-      setNewProd(res.data.products);
-    })();
-  }, []);
-
+function MainNew({newProducts}) {
   return (
     <>
-      <p className={styles.title}>new</p>
+      <Link exact="true" to="/catalog/filters?sort=-date/" className={styles.title}>
+        new
+      </Link>
       <div className={styles.wrapper}>
-        {newProd.length > 0
-          ? newProd.map((el) => {
+        {newProducts.length > 0
+          ? newProducts.map((el) => {
               return (
                 <React.Fragment key={el.itemNo}>
                   <div className={styles.componentWrapper}>
@@ -39,5 +33,9 @@ function MainNew() {
     </>
   );
 }
+
+MainNew.propTypes = {
+  newProducts: PropTypes.array,
+};
 
 export default MainNew;

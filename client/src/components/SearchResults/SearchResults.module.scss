@@ -1,0 +1,40 @@
+@import '../../styles/variables.scss';
+
+.container {
+  position: fixed;
+  background-color: $background;
+  top: 80px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  filter: opacity(0.95);
+}
+
+.closeButton {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 20px;
+  top: 20px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  border: 1px solid $base-yellow;
+  padding: 5px;
+  color: $base-yellow;
+  background-color: transparent;
+}
+
+.errorMessage {
+  margin-top: 15%;
+}
+
+@media (min-width: $tablet-max) {
+  .container {
+    top: 90px;
+  }
+}

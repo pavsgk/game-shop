@@ -16,8 +16,8 @@
 
 .svg {
   position: absolute;
-  bottom: 55px;
-  left: 2px;
+  bottom: 50px;
+  left: 0;
   min-width: 60px;
   height: 60px;
 }
@@ -46,11 +46,16 @@
 @media (min-width: $tablet) {
   .wrapper {
     display: grid;
-    gap: 10px;
+    gap: 20px;
     grid-template-columns: repeat(2, 1fr);
     justify-items: center;
     align-items: center;
   }
+
+  .svg {
+    bottom: 64px;
+  }
+
   .img {
     width: 150px;
   }

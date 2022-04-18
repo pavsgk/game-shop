@@ -1,4 +1,4 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
   isValid: false,
@@ -9,7 +9,7 @@ const initialState = {
     country: '',
     postal: '',
     address: '',
-    mobile: '',
+    telephone: '',
     city: '',
     email: '',
   },
@@ -18,12 +18,24 @@ const initialState = {
   paymentInfo: 'Cash on delivery',
 };
 
+export const getUserFields = createAsyncThunk('checkout/getUserData', async (_, thunkApi) => {
+  const {
+    user: {userData},
+    checkout: {checkoutFields},
+  } = thunkApi.getState();
+  const fields = {};
+  for (const [key, val] of Object.entries(userData)) {
+    if (key in checkoutFields) fields[key] = val;
+  }
+  return fields;
+});
+
 const checkoutSlice = createSlice({
   name: 'checkout',
   initialState,
   reducers: {
     switchTab(state, {payload}) {
-      if (payload !== state.checkoutActiveTab) {
+      if (payload !== state.checkoutActiveTab && state.isValid) {
         state.checkoutActiveTab = payload;
       }
     },
@@ -39,6 +51,12 @@ const checkoutSlice = createSlice({
     },
     updatePaymentInfo(state, {payload}) {
       state.paymentInfo = payload;
+    },
+  },
+  extraReducers: {
+    [getUserFields.fulfilled]: (state, {payload}) => {
+      state.checkoutFields = {...state.checkoutFields, ...payload};
+      return state;
     },
   },
 });

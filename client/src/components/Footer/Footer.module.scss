@@ -9,15 +9,20 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 15px;
+  padding: 10px;
   margin-top: 20px;
-  background: black;
+  background: $background;
+  border-top: 1px solid olive;
+}
+
+.navLink {
+  padding: 10px;
 }
 
 .absFooter {
   @extend .footer;
   position: absolute;
-  bottom: 0px;
+  bottom: 0;
   width: 100%;
 }
 
@@ -26,14 +31,20 @@
   color: $text;
   font-size: 12px;
   align-items: center;
-  margin-bottom: 7px;
+  margin: 5px;
 }
 
 .details {
   margin-left: 6px;
 }
 
+.details > svg {
+  @extend .svg;
+}
+
 .section {
+  display: flex;
+  flex-direction: column;
   margin-left: 20px;
   margin-right: 20px;
 }
@@ -44,24 +55,12 @@
     justify-content: center;
   }
 
-  .svg {
-    width: 30px;
-    height: 30px;
-  }
-
   .info {
     font-size: 14px;
-    margin-bottom: 10px;
   }
 }
 
 @media (min-width: $tablet-max) {
-  .section {
-    display: flex;
-    margin-left: 0;
-    margin-right: 0;
-  }
-
   .footer {
     justify-content: space-around;
   }
@@ -69,6 +68,5 @@
   .info {
     padding-left: 20px;
     padding-right: 20px;
-    margin-bottom: 10px;
   }
 }

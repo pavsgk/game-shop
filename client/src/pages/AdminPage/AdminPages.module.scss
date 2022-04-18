@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .page {
   display: flex;
   flex-wrap: wrap;
@@ -6,8 +8,9 @@
 }
 
 .container {
-  background-color: #fff;
   display: flex;
+  border: 1px solid $base-yellow;
+  padding: 5px;
   flex-direction: column;
   flex-basis: 200px;
   margin-top: 20px;

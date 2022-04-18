@@ -7,21 +7,20 @@ import {useDispatch} from 'react-redux';
 function CheckoutSelector({children, tabs}) {
   const checkoutActiveTab = useSelector((store) => store.checkout.checkoutActiveTab);
   const dispatch = useDispatch();
+  const tabsItems = tabs.map((tab, index) => (
+    <button
+      className={checkoutActiveTab === index ? styles.btnCheckoutActive : styles.btnCheckout}
+      key={tab}
+      onClick={() => {
+        dispatch(switchTab(index));
+      }}>
+      {tab}
+    </button>
+  ));
 
   return (
     <>
-      <div className={styles.checkoutSelector}>
-        {tabs.map((tab, index) => (
-          <button
-            className={checkoutActiveTab === index ? styles.btnCheckoutActive : styles.btnCheckout}
-            key={tab}
-            onClick={() => {
-              dispatch(switchTab(index));
-            }}>
-            {tab}
-          </button>
-        ))}
-      </div>
+      <div className={styles.checkoutSelector}>{tabsItems}</div>
       {children[checkoutActiveTab]}
     </>
   );

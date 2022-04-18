@@ -1,23 +1,18 @@
-import ProductsContainer from '../../components/ProductsContainer/ProductsContainer';
-import styles from './ProductsPage.module.scss';
 import {useState} from 'react';
-import CatalogFilterTools from '../../components/CatalogFilterTools/CatalogFilterTools';
+import SomethingWentWrong from '../../components/SomethingWentWrong/SomethingWentWrong';
+import ProductsContainer from '../../components/ProductsContainer/ProductsContainer';
 
 function ProductsPage() {
-  const [isOpen, setIsOpen] = useState(false);
-  const openFilters = () => {
-    setIsOpen(true);
-  };
-  const closeFilters = () => {
-    setIsOpen(false);
-  };
+  const [isError, setIsError] = useState(false);
+
   return (
-    <div className={styles.productsPage}>
-      <div className={styles.filterToolsWrapper}>
-        <CatalogFilterTools openFilters={openFilters} />
-      </div>
-      <ProductsContainer isOpen={isOpen} closeFilters={closeFilters} openFilters={openFilters} />
-    </div>
+    <>
+      {isError ? (
+        <SomethingWentWrong />
+      ) : (
+        <ProductsContainer setIsError={setIsError} isCatalog={true} />
+      )}
+    </>
   );
 }
 

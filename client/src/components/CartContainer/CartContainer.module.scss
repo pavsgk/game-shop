@@ -1,12 +1,11 @@
 @import '../../styles/variables.scss';
-@import '../../styles/reset';
 
-.mainWrapper {
-  padding: 0 30px;
-  margin-top: 50px;
+.wrapper {
+  padding: 0 20px;
+  margin-top: 30px;
 }
 
-.cartTitleWrapper {
+.info {
   display: flex;
   justify-content: space-between;
   color: $text;
@@ -14,13 +13,13 @@
   padding-bottom: 5px;
 }
 
-.cartTitleWrapperName {
-  font-size: 20px;
-  line-height: 23px;
+.title {
+  font-size: 18px;
+  line-height: 20px;
 }
 
-.cartTitleWrapperLink {
-  font-size: 13px;
+.link {
+  font-size: 14px;
   border: none;
   background: none;
   color: $base-yellow;
@@ -31,32 +30,33 @@
   margin-top: 30px;
 }
 
-.contentItems {
+.itemsBox {
   display: flex;
   flex-direction: column;
+  min-width: 60%;
 }
 
-.totalPriceWrapperItem {
+.summaSection {
   display: flex;
   justify-content: space-between;
-  font-size: 26px;
+  font-size: 20px;
   color: $base-yellow;
 }
 
-.totalPriceWrapperItemPrice {
+.summa {
   display: flex;
   & span {
     margin-right: 5px;
   }
 }
 
-.totalPriceWrapperButton {
+.btnBox {
   display: flex;
   justify-content: flex-end;
-  margin: 30px 0 60px 0;
+  margin: 40px 0 60px 0;
 }
 
-.totalPriceWrapperButtonItem {
+.btn {
   text-transform: uppercase;
   border: 1px solid $base-yellow;
   background: none;
@@ -69,83 +69,64 @@
     color: $text !important;
     background: $base-yellow;
   }
-  .emptySvgWrapper {
-    margin-right: 15px;
-  }
-
-  .emptyMainWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 15px;
-  }
 }
 
 @media (min-width: $tablet) {
-  .mainWrapper {
-    padding: 0 90px;
+  .wrapper {
+    padding: 0 50px;
+    margin-top: 50px;
+  }
+
+  .title {
+    font-size: 20px;
+    line-height: 23px;
   }
 
   .contentWrapper {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
   }
 
-  .totalPriceWrapper {
+  .priceWrapper {
     margin-left: 45px;
     display: flex;
     flex-direction: column;
     height: 30%;
-    padding: 25px;
+    padding: 22px;
     border: 1px solid $details;
-    min-width: 35%;
+    min-width: 30%;
   }
-  .totalPriceWrapperItemText {
+
+  .summaSection {
+    font-size: 20px;
+  }
+
+  .summaText {
     margin-right: 10px;
   }
-  .totalPriceWrapperButton {
+
+  .btnBox {
     margin: 20px 0 0 0;
     justify-content: center;
   }
 }
 
-.emptyMainWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.emptySvgWrapper {
-  margin-top: 60px;
-  margin-right: 30px;
-}
-
-.emptySvgWrapperItem {
-  fill: $base-yellow;
-  width: 200px;
-}
-.emptyTitle {
-  color: $base-yellow;
-  margin-top: 60px;
-}
-.emptyLink {
-  color: $text;
-  text-decoration: underline;
-  margin-top: 10px;
-}
-
 @media (min-width: $tablet-max) {
-  .mainWrapper {
+  .wrapper {
     padding: 0 120px;
   }
 
-  .totalPriceWrapper {
-    min-width: 30%;
+  .priceWrapper {
+    min-width: 25%;
+  }
+
+  .itemsBox {
+    min-width: 70%;
   }
 }
 
 @media (min-width: $desktop) {
-  .totalPriceWrapper {
+  .priceWrapper {
     min-width: 20%;
   }
 }

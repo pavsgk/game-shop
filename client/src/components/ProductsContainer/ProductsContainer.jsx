@@ -1,101 +1,126 @@
-import PropTypes from 'prop-types';
-import {useState, useEffect} from 'react';
-import ProductCard from '../../components/ProductCard/ProductCard';
 import styles from './ProductsContainer.module.scss';
-import {getFilteredProducts, getAllProducts} from '../../api/products';
-import ProductsPlaceholder from '../ProductsPlaceholder/ProductsPlaceholder';
+import {useEffect, useRef, useState} from 'react';
 import {useLocation} from 'react-router-dom';
-import {useDispatch, useSelector} from 'react-redux';
-import FilterMenu from '../FilterMenu/FilterMenu';
-import {openSignModal} from '../../store/reducers/signInUpReducer';
+import {getFilteredProducts} from '../../api/products';
+import ProductsContainerItem from '../ProductsContainerItem/ProductsContainerItem';
+import PropTypes from 'prop-types';
 
-function ProductsContainer({isWishlist, isOpen, closeFilters}) {
+function ProductsContainer({setIsError, isCatalog, isSale}) {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isError, setIsError] = useState(false);
-  let location = useLocation();
-  const {wishlist} = useSelector((state) => state.wishlist);
-  const {isAuthorized} = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  const location = useLocation();
+
+  const [lastLocationSearch, setLastLocationSearch] = useState('');
+  const productsQuantity = useRef(0);
+  const productsLength = useRef(0);
+
+  const isFilter = useRef(false);
+
+  const presentMainPage = useRef(1);
+  const presentFilterPage = useRef(1);
+
+  const [isMainFetch, setIsMainFetch] = useState(false);
+  const [isFilterFetch, setIsFilterFetch] = useState(false);
+
+  const scrollHandler = ({target}) => {
+    const scrollHeight = target.documentElement.scrollHeight;
+    const scrollTop = target.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+
+    if (
+      scrollHeight - (scrollTop + windowHeight) < 100 &&
+      productsLength.current < productsQuantity.current
+    ) {
+      isFilter.current ? setIsFilterFetch(true) : setIsMainFetch(true);
+    }
+  };
 
   useEffect(() => {
-    {
-      !isAuthorized && isWishlist && dispatch(openSignModal());
-    }
+    document.addEventListener('scroll', scrollHandler);
+    return function () {
+      document.removeEventListener('scroll', scrollHandler);
+    };
   }, []);
 
   useEffect(() => {
+    productsLength.current = products.length;
+  }, [products]);
+
+  function ProcessingOfEnquiries(isNotFilter, isFirstFilter) {
+    let data = [];
+    const baseUrl =
+      (isCatalog && `&perPage=12&startPage=`) ||
+      (isSale && `&minPreviousPrice=1&maxPreviousPrice=3000&perPage=12&startPage=`);
+
+    const queryString = isNotFilter
+      ? `${baseUrl}` + `${presentMainPage.current}`
+      : location.search.slice(1, -1) + `${baseUrl}` + `${presentFilterPage.current}`;
+
     (async () => {
       try {
-        let data = [];
-        if (location.search) {
-          data = await getFilteredProducts(location.search.slice(1, -1));
-        } else if (isWishlist) {
-          data = wishlist;
-        } else {
-          data = await getAllProducts();
-        }
-        setProducts(data);
+        setIsLoading(true);
+        data = await getFilteredProducts(queryString);
+
+        isNotFilter ? (presentMainPage.current += 1) : (presentFilterPage.current += 1);
+        productsQuantity.current = data.data.productsQuantity;
+
+        isNotFilter &&
+          isFilter.current === false &&
+          setProducts([...products, ...data.data.products]);
+        isNotFilter && isFilter.current === true && setProducts(data.data.products);
+
+        isFirstFilter && setProducts(data.data.products);
+        !isFirstFilter && !isNotFilter && setProducts([...products, ...data.data.products]);
+
+        isNotFilter ? setIsMainFetch(false) : setIsFilterFetch(false);
+        isNotFilter ? (isFilter.current = false) : (isFilter.current = true);
+
+        setLastLocationSearch(location.search);
         setIsLoading(false);
+        setIsError(false);
       } catch (e) {
-        console.warn(e);
         setIsLoading(false);
         setIsError(true);
       }
     })();
-  }, [location.search, isAuthorized]);
+  }
 
-  const idItemsInWishlist = wishlist.map((e) => e._id);
+  useEffect(() => {
+    presentFilterPage.current = 1;
+
+    if (location.search.length > 0 && lastLocationSearch !== location.search) {
+      ProcessingOfEnquiries(false, true);
+    }
+    if (location.search.length === 0) {
+      setIsMainFetch(true);
+      presentMainPage.current = 1;
+    }
+  }, [location.search]);
+
+  useEffect(() => {
+    isFilterFetch && ProcessingOfEnquiries(false, false);
+  }, [isFilterFetch]);
+
+  useEffect(() => {
+    isMainFetch && ProcessingOfEnquiries(true, false);
+  }, [isMainFetch]);
 
   return (
-    <div className={styles.contentProductsWrapper}>
-      <div className={isWishlist ? styles.containerWishlist : styles.container}>
-        {!isWishlist && <FilterMenu isOpen={isOpen} closeFilters={closeFilters} />}
-        {!isWishlist && (
-          <div
-            className={
-              products.length > 0 ? styles.productsContainer : styles.productsContainerWithOutItems
-            }>
-            {isLoading && <ProductsPlaceholder />}
-            {isError && <h3>Something went wrong. Please, try again later</h3>}
-            {products.length > 0 ? (
-              products.map((item) => {
-                if (idItemsInWishlist.includes(item._id) && isAuthorized) {
-                  return <ProductCard key={item.itemNo} item={item} isFavorite={true} />;
-                } else return <ProductCard key={item.itemNo} item={item} />;
-              })
-            ) : (
-              <h2>There are no products to your request</h2>
-            )}
-          </div>
-        )}
-        {isWishlist && (
-          <div
-            className={
-              wishlist.length > 0 && isAuthorized
-                ? styles.productsContainer
-                : styles.productsContainerWithOutItems
-            }>
-            {isLoading && <ProductsPlaceholder />}
-            {isError && <h3>Something went wrong. Please, try again later</h3>}
-            {isAuthorized && wishlist.length > 0 ? (
-              wishlist.map((item) => (
-                <ProductCard key={item.itemNo} item={item} isFavorite={true} />
-              ))
-            ) : (
-              <h2>There are no products to your request</h2>
-            )}
-          </div>
-        )}
-      </div>
+    <div className={styles.productsPage}>
+      <ProductsContainerItem
+        isCatalog={isCatalog}
+        products={products}
+        isLoading={isLoading}
+        isSale={isSale}
+      />
     </div>
   );
 }
 
 ProductsContainer.propTypes = {
-  closeFilters: PropTypes.func,
-  isOpen: PropTypes.bool,
-  isWishlist: PropTypes.bool,
+  isCatalog: PropTypes.bool,
+  isSale: PropTypes.bool,
+  setIsError: PropTypes.func,
 };
 
 export default ProductsContainer;

@@ -1,0 +1,150 @@
+@import '../../styles/variables.scss';
+
+.mainWrapper {
+  padding: 0 15px;
+  margin-top: 90px;
+}
+
+.mobileProductTitle {
+  margin-top: 45px;
+  margin-bottom: 30px;
+  &_Text {
+    color: $text;
+    font-size: 18px;
+  }
+  &_Code {
+    color: #8f8f89;
+    font-size: 12px;
+    margin-top: 10px;
+    align-self: end;
+    margin-bottom: 15px;
+  }
+}
+
+.productIMGWrapper {
+  justify-content: center;
+  cursor: pointer;
+}
+
+.priceBox {
+  display: flex;
+  flex-direction: column;
+}
+
+.previousPrice {
+  line-height: 23px;
+  text-align: center;
+  text-decoration: line-through;
+  color: $sale;
+  font-size: 16px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+
+  &_Title {
+    display: none;
+    flex-direction: column;
+    max-width: 70%;
+    align-self: flex-start;
+  }
+  &_Title_Text {
+    font-size: 20px;
+    color: $text;
+  }
+  &_Title_Code {
+    color: #8f8f89;
+    font-size: 12px;
+    margin-top: 20px;
+    align-self: end;
+    margin-bottom: 50px;
+  }
+  &_Price {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 60px;
+    align-items: end;
+    &_Item {
+      font-size: 20px;
+      color: $base-yellow;
+    }
+  }
+}
+
+@media (min-width: $tablet) {
+  .mainWrapper {
+    padding: 0 50px;
+  }
+
+  .mobileProductTitle_Text {
+    font-size: 25px;
+  }
+
+  .mobileProductTitle_Code {
+    font-size: 16px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+
+  .content_Price_Item {
+    font-size: 24px;
+  }
+
+  .content_Price {
+    margin-top: 60px;
+    &_ButtonsWrapper {
+      flex-direction: row;
+    }
+  }
+}
+
+@media (min-width: $tablet-max) {
+  .mainWrapper {
+    padding: 0 80px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .mobileProductTitle {
+    display: none;
+  }
+
+  .productIMGWrapper {
+    width: 35%;
+    margin-bottom: 80px;
+  }
+
+  .content {
+    width: 55%;
+  }
+
+  .content_Title {
+    display: block;
+    margin-bottom: 64px;
+  }
+
+  .content_Title_Text {
+    font-size: 25px;
+  }
+
+  .content_Price {
+    max-width: 85%;
+    justify-content: space-between;
+    margin-top: 0;
+  }
+}
+
+@media (min-width: $desktop) {
+  .mainWrapper {
+    padding: 0 110px;
+  }
+
+  .content_Title_Text {
+    font-size: 30px;
+  }
+
+  .content_Price_Item {
+    font-size: 30px;
+  }
+}

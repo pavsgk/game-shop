@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import styles from './Genres.module.scss';
-import React, {useEffect, useState} from 'react';
-import {getAllFilters} from '../../api/filters';
+import React from 'react';
 import {Link} from 'react-router-dom';
 
 function GenreComponent(props) {
@@ -24,23 +23,17 @@ GenreComponent.propTypes = {
   genre: PropTypes.string,
 };
 
-function Genres() {
-  const [genres, setGenres] = useState([]);
-
-  useEffect(() => {
-    (async () => {
-      const data = await getAllFilters();
-      const genres = data.slice(0, 10);
-      setGenres(genres);
-    })();
-  }, []);
+function Genres({genres}) {
+  const slicedGenre = genres.slice(0, 10);
 
   return (
     <>
-      <p className={styles.title}>genres</p>
+      <Link exact="true" to="catalog" className={styles.title}>
+        genres
+      </Link>
       <div className={styles.wrapper}>
-        {genres.length > 0
-          ? genres.map((el) => {
+        {slicedGenre.length > 0
+          ? slicedGenre.map((el) => {
               return <GenreComponent key={el._id} genre={el.name} />;
             })
           : null}
@@ -48,5 +41,9 @@ function Genres() {
     </>
   );
 }
+
+Genres.propTypes = {
+  genres: PropTypes.array,
+};
 
 export default Genres;

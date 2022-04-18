@@ -1,0 +1,29 @@
+@import '../../styles/variables.scss';
+
+.searchBar {
+  border: 1px solid $base-yellow;
+  color: $base-yellow;
+  background-color: $background;
+  border-radius: 15px;
+}
+
+.searchBox > input {
+  padding: 7px 10px;
+}
+.searchBox > input::placeholder {
+  padding-left: 20px;
+  background: url(img/search.svg) no-repeat;
+}
+
+@media (min-width: $tablet-max) {
+  .searchBar {
+    border: 1px solid $details;
+    color: $base-yellow;
+    background-color: transparent;
+    border-radius: 15px;
+  }
+
+  .searchBar:hover {
+    border: 1px solid $base-yellow;
+  }
+}

@@ -1,7 +1,7 @@
-import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {
-  getWishedProducts,
   addProductToWishlist,
+  getWishedProducts,
   removeProductFromWishlist,
 } from '../../api/wishlist';
 
@@ -10,20 +10,17 @@ const initialState = {
 };
 
 export const getWishlist = createAsyncThunk('wishlist/getWishlist', async (productId) => {
-  const wishlist = await getWishedProducts(productId);
-  return wishlist;
+  return await getWishedProducts();
 });
 
 export const addWishedProduct = createAsyncThunk('wishlist/addWishedProduct', async (productId) => {
-  const wishlist = await addProductToWishlist(productId);
-  return wishlist;
+  return await addProductToWishlist(productId);
 });
 
 export const removeWishedProduct = createAsyncThunk(
   'wishlist/removeWishedProduct',
   async (productId) => {
-    const wishlist = await removeProductFromWishlist(productId);
-    return wishlist;
+    return await removeProductFromWishlist(productId);
   },
 );
 
