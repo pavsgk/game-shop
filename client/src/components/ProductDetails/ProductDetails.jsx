@@ -6,10 +6,7 @@ import {
   addContentForImagesModal,
 } from '../../store/reducers/imagesModalReducer';
 import ProductDetailsSlider from '../ProductDetailsSlider/ProductDetailsSlider';
-import {
-  addItemToTheCartForNotLog,
-  addMoreThanOneProductsToTheCart,
-} from '../../store/reducers/cartReducer';
+import {addItemToTheCartNotLog, addProductsToTheCart} from '../../store/reducers/cartReducer';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
 import ProductDetailsAbout from '../ProductDetailsAbout/ProductDetailsAbout';
@@ -20,7 +17,6 @@ import {
   addTypeActionMessage,
   addTextActionMessage,
 } from '../../store/reducers/actionMessageReducer';
-import instance from '../../api/instance';
 
 const ProductDetails = (props) => {
   const {
@@ -109,7 +105,7 @@ const ProductDetails = (props) => {
     if (isAuthorized) {
       (async () => {
         try {
-          await dispatch(addMoreThanOneProductsToTheCart(cartItem));
+          await dispatch(addProductsToTheCart(cartItem));
           actionMessage('successful', 'Successfully added to the cart', 1000);
         } catch (e) {
           actionMessage('error', 'Something went wrong, please try to reload page', 1500);
@@ -117,7 +113,7 @@ const ProductDetails = (props) => {
       })();
       return;
     }
-    dispatch(addItemToTheCartForNotLog(cartItem));
+    dispatch(addItemToTheCartNotLog(cartItem));
     actionMessage('successful', 'Successfully added to the cart', 1000);
   };
 

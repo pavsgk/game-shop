@@ -1,12 +1,12 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {
   requestAddProductToTheCart,
-  requestThePresenceOfTheCartOnTheServer,
-  requestToAddMoreThanOneProductsToTheCart,
+  requestToGetCart,
+  requestAddProductsToTheCart,
   requestToDecreaseProductQuantity,
   requestToDeleteCart,
   requestToDeleteProductFromTheCart,
-  requestToUpdateCartFromLs,
+  requestToUpdateCart,
 } from '../../api/cart';
 import {getFromLS, saveToLS} from '../../utils/localStorage';
 
@@ -17,17 +17,17 @@ const initialState = {
 };
 
 export const getCartFromServer = createAsyncThunk('cart/get', async () => {
-  const result = await requestThePresenceOfTheCartOnTheServer();
+  const result = await requestToGetCart();
   return result.products;
 });
 
-export const updateCartFromLs = createAsyncThunk('cart/put', async () => {
-  const result = await requestToUpdateCartFromLs();
+export const updateCartFromLs = createAsyncThunk('cart/put', async (cartFromLS) => {
+  const result = await requestToUpdateCart(cartFromLS);
   return result.products;
 });
 
-export const addMoreThanOneProductsToTheCart = createAsyncThunk('cart/put', async (cartItem) => {
-  const result = await requestToAddMoreThanOneProductsToTheCart(cartItem);
+export const addProductsToTheCart = createAsyncThunk('cart/put', async (cartItem) => {
+  const result = await requestAddProductsToTheCart(cartItem);
   return result.products;
 });
 
@@ -55,7 +55,7 @@ const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addItemToTheCartForNotLog(state, action) {
+    addItemToTheCartNotLog(state, action) {
       const index = state.products.findIndex(
         (elem) => elem.product.itemNo === action.payload.product.itemNo,
       );
@@ -67,7 +67,7 @@ const cartSlice = createSlice({
       state.products[index].cartQuantity += action.payload.cartQuantity;
       saveToLS('cart', state.products);
     },
-    removeItemFromTheCartForNotLog(state, action) {
+    removeItemFromTheCartNotLog(state, action) {
       const index = state.products.findIndex((elem) => elem.product.itemNo === action.payload);
       if (index === -1) {
         return;
@@ -75,7 +75,7 @@ const cartSlice = createSlice({
       state.products.splice(index, 1);
       saveToLS('cart', state.products);
     },
-    makeLessItemForNotLog(state, action) {
+    makeLessItemNotLog(state, action) {
       const index = state.products.findIndex((elem) => elem.product.itemNo === action.payload);
       if (state.products[index].cartQuantity === 1) {
         return;
@@ -83,7 +83,7 @@ const cartSlice = createSlice({
       state.products[index].cartQuantity -= 1;
       saveToLS('cart', state.products);
     },
-    makeMoreItemForNotLog(state, action) {
+    makeMoreItemNotLog(state, action) {
       const index = state.products.findIndex((elem) => {
         return elem.product.itemNo === action.payload;
       });
@@ -133,10 +133,10 @@ const cartSlice = createSlice({
 export const {
   countCartSum,
   getCartFromLS,
-  addItemToTheCartForNotLog,
-  makeLessItemForNotLog,
-  makeMoreItemForNotLog,
-  removeItemFromTheCartForNotLog,
+  addItemToTheCartNotLog,
+  makeLessItemNotLog,
+  makeMoreItemNotLog,
+  removeItemFromTheCartNotLog,
   countCartQuantity,
 } = cartSlice.actions;
 export default cartSlice.reducer;

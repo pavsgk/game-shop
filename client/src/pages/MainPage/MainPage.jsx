@@ -37,6 +37,11 @@ function MainPage() {
         setIsError(true);
       }
     })();
+
+    return () => {
+      setIsLoading(false);
+      setIsError(false);
+    };
   }, []);
 
   return (

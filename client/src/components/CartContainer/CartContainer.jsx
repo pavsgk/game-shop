@@ -25,7 +25,9 @@ const CartContainer = () => {
       (async () => {
         try {
           setIsLoading(true);
-          cartFromLS ? await dispatch(updateCartFromLs()) : await dispatch(getCartFromServer());
+          cartFromLS
+            ? await dispatch(updateCartFromLs(cartFromLS))
+            : await dispatch(getCartFromServer());
           setIsLoading(false);
           setIsError(false);
         } catch (e) {
