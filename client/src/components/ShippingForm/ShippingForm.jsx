@@ -4,10 +4,11 @@ import styles from './ShippingForm.module.scss';
 import * as yup from 'yup';
 import Button from '../Button/Button';
 import {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {switchTab, updateFields} from '../../store/reducers/checkoutReducer';
 import store from '../../store/store';
 import {useRef} from 'react';
+import Preloader from '../Preloader/Preloader';
 
 const yupValidationSchema = yup.object().shape({
   firstName: yup
@@ -75,6 +76,7 @@ function AutoSaver() {
 function ShippingForm() {
   const formikRef = useRef();
   const dispatch = useDispatch();
+  const {isReady, isAuthorized} = useSelector((state) => state.user);
 
   useEffect(() => {
     const {
@@ -85,7 +87,7 @@ function ShippingForm() {
         formikRef.current.setFieldValue(key, val);
       }
     }
-  }, []);
+  }, [isReady, isAuthorized]);
 
   const initialValues = {
     firstName: '',
@@ -121,17 +123,6 @@ function ShippingForm() {
           </div>
           <CustomField name="telephone" label="Phone" type="text" />
           <CustomField name="email" label="Email" type="text" />
-
-          {/* <div className={styles.checkbox}>
-            <input id="one" type="checkbox" />
-            <label htmlFor="one">
-              <span> </span>
-              Save Information to my profile
-              <ins>
-                <i>Save Information to my profile</i>
-              </ins>
-            </label>
-          </div> */}
         </div>
 
         <div className={styles.btnNext}>
