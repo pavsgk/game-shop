@@ -70,12 +70,6 @@ function ProductDetailsAbout(props) {
           </>
         }
       />
-
-      <CustomAccordion
-        title="Reviews"
-        isProductPage={true}
-        content={<p className={styles.reviews}>Reviews</p>}
-      />
     </div>
   );
 }

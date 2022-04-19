@@ -74,11 +74,9 @@ const SignIn = ({closeModal}) => {
                 <span className={styles.incorrect}>
                   {!isCorrect && 'Incorrect login or password'}
                 </span>
-                <div className={styles.remindPassword}>Remind password</div>
               </div>
               <Button type={'submit'}>Sign In</Button>
             </Form>
-            <AltAuthorization />
           </>
         );
       }}

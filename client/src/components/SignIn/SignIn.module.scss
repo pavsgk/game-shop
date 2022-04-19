@@ -9,31 +9,7 @@
 .wrapper {
   display: flex;
   justify-content: space-between;
-  padding: 2px 0;
-  margin: 7px 0 10px 0;
-}
-
-.remindPassword {
-  color: $details;
-  font-size: 11px;
-  border-bottom: 1px solid $details;
-  cursor: pointer;
-}
-
-.submitButton {
-  margin-top: 14px;
-  border: 1px solid $base-yellow;
-  background-color: transparent;
-  color: $base-yellow;
-  padding: 11px;
-  text-transform: uppercase;
-
-  &:hover {
-    border: 1px solid $text;
-    color: $text;
-    background: $base-yellow;
-    cursor: pointer;
-  }
+  height: 20px;
 }
 
 .incorrect {
