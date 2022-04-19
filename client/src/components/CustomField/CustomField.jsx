@@ -14,7 +14,6 @@ function CustomField(props) {
         {...field}
         className={isError ? styles.err : undefined}
         placeholder={label}
-        // onChange={(event) => field.onChange(event)}
         label={label}
         type={type}
       />

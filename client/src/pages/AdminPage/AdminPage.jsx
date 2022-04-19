@@ -3,12 +3,8 @@ import styles from './AdminPages.module.scss';
 import CartInspector from './CartInspector';
 import instance from '../../api/instance';
 import {useState} from 'react';
-import {searchProducts} from '../../api/products';
-import SearchBar from '../../components/SearchBar/SearchBar';
-import inputThrottle from '../../utils/decorators';
-import SearchResults from '../../components/SearchResults/SearchResults';
 import {useDispatch} from 'react-redux';
-import {getUserFields} from '../../store/reducers/checkoutReducer';
+import {showMessage} from '../../store/reducers/messageReducer';
 
 export function AdminPage() {
   const dispatch = useDispatch();
@@ -40,11 +36,14 @@ export function AdminPage() {
           <button onClick={() => switchSource()}>
             Switch source ({isLocal ? 'local' : 'remote'})
           </button>
-          <SearchBar />
-          <button onClick={() => dispatch(getUserFields())}>test</button>
+          <button
+            onClick={() => {
+              dispatch(showMessage({text: 'Test message'}));
+            }}>
+            test
+          </button>
         </div>
       </div>
-      <SearchResults />
     </>
   );
 }
