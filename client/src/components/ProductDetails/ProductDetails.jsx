@@ -1,10 +1,6 @@
 import styles from './ProductDetails.module.scss';
 import {useDispatch, useSelector} from 'react-redux';
-import {useEffect, useRef, useState} from 'react';
-import {
-  switchImagesModalState,
-  addContentForImagesModal,
-} from '../../store/reducers/imagesModalReducer';
+import {useEffect, useState} from 'react';
 import ProductDetailsSlider from '../ProductDetailsSlider/ProductDetailsSlider';
 import {addItemToTheCartNotLog, addProductsToTheCart} from '../../store/reducers/cartReducer';
 import {openSignModal} from '../../store/reducers/signInUpReducer';
@@ -32,44 +28,10 @@ const ProductDetails = (props) => {
 
   const dispatch = useDispatch();
   const isAuthorized = useSelector((state) => state.user.isAuthorized);
-  const sliderRef = useRef(null);
+
   const {wishlist} = useSelector((state) => state.wishlist);
   const [isFavourite, setIsFavourite] = useState(false);
   const [countInputValue, setCountInputValue] = useState(1);
-
-  useEffect(() => {
-    const openModalImages = (currentImg) => {
-      const currentUrls = imageUrls.slice();
-      const index = currentUrls.findIndex((item) => item === currentImg);
-      currentUrls.splice(index, 1);
-      currentUrls.unshift(currentImg);
-      dispatch(addContentForImagesModal(currentUrls));
-      dispatch(switchImagesModalState());
-    };
-
-    const slider = sliderRef.current;
-    if (slider) {
-      slider.querySelector('#thumbnail-div').style.justifyContent = 'space-evenly';
-      slider.querySelector('#thumbnail-div').style.marginTop = '40px';
-      slider.querySelectorAll('.thumbnail').forEach((item) => (item.style.height = `70px`));
-
-      slider.addEventListener('click', (event) => {
-        if (event.target.tagName === 'IMG') {
-          openModalImages(event.target.src);
-        }
-      });
-    }
-
-    return () => {
-      if (slider) {
-        slider.removeEventListener('click', (event) => {
-          if (event.target.tagName === 'IMG') {
-            openModalImages(event.target.src);
-          }
-        });
-      }
-    };
-  }, []);
 
   useEffect(() => {
     if (wishlist.length === 0) {
@@ -138,7 +100,7 @@ const ProductDetails = (props) => {
         <h2 className={styles.mobileProductTitle_Text}>{title}</h2>
         <span className={styles.mobileProductTitle_Code}>{itemNo}</span>
       </div>
-      <div ref={sliderRef} className={styles.productIMGWrapper}>
+      <div className={styles.productIMGWrapper}>
         <ProductDetailsSlider imageUrls={imageUrls} />
       </div>
       <div className={styles.content}>
