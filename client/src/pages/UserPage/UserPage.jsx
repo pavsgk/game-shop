@@ -45,7 +45,7 @@ const yupValidationSchema = yup.object().shape({
     .string()
     .min(5, 'min. 5 characters required')
     .matches(/^[a-zA-Z0-9\s,'-./]*$/),
-  telephone: yup.string().min(7, 'min. 7 characters required').matches(/\d/g),
+  mobile: yup.string().min(7, 'min. 7 characters required').matches(/\d/g),
 });
 
 function UserPage() {
@@ -78,7 +78,7 @@ function UserPage() {
     postal: '',
     city: '',
     address: '',
-    telephone: '',
+    mobile: '',
   };
 
   const handleFormSubmit = async (values) => {
@@ -129,7 +129,7 @@ function UserPage() {
                 <CustomField name="city" label="City" type="text" />
                 <CustomField name="postal" label="Zip code" type="text" />
                 <CustomField name="address" label="Address" type="text" />
-                <CustomField name="telephone" label="Phone" type="text" />
+                <CustomField name="mobile" label="Phone" type="text" />
                 <div className={styles.btnBox}>
                   <Button type="submit" disabled={isSubmiting}>
                     save changes

@@ -9,7 +9,7 @@ const initialState = {
     country: '',
     postal: '',
     address: '',
-    telephone: '',
+    mobile: '',
     city: '',
     email: '',
   },

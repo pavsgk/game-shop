@@ -97,10 +97,14 @@ const cartSlice = createSlice({
       }
     },
     countCartSum(state) {
-      state.cartSum = state.products.reduce(
-        (prev, {product: {currentPrice}, cartQuantity}) => prev + currentPrice * cartQuantity,
-        0,
-      );
+      if (state.products) {
+        state.cartSum = state.products.reduce(
+          (prev, {product: {currentPrice}, cartQuantity}) => prev + currentPrice * cartQuantity,
+          0,
+        );
+      } else {
+        state.cartSum = 0;
+      }
     },
     countCartQuantity(state) {
       let quantity = 0;
@@ -126,6 +130,10 @@ const cartSlice = createSlice({
     },
     [cleanCart.fulfilled]: (state, action) => {
       state.products = action.payload;
+    },
+    [cleanCart.rejected]: (state) => {
+      localStorage.removeItem('cart');
+      state.products = [];
     },
   },
 });
