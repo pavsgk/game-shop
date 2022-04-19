@@ -93,7 +93,6 @@ const SignUp = ({closeModal}) => {
               <CustomField name="password" label="Password" type="password" />
               <Button type={'submit'}>Register</Button>
             </Form>
-            <AltAuthorization />
           </>
         );
       }}
