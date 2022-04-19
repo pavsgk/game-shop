@@ -43,7 +43,6 @@ const searchSlice = createSlice({
       return {...state, isError: false, isPending: true, isVisible: true};
     },
     [newSearchRequest.rejected]: (state, {error}) => {
-      console.warn('search rejected', error);
       return {...state, isError: true, isPending: false};
     },
 
