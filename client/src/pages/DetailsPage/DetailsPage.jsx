@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react';
 import {useLocation} from 'react-router-dom';
 import Preloader from '../../components/Preloader/Preloader';
 import SomethingWentWrong from '../../components/SomethingWentWrong/SomethingWentWrong';
+import axios from 'axios';
 
 function DetailsPage() {
   const [item, setItem] = useState({});

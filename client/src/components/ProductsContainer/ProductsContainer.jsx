@@ -57,31 +57,31 @@ function ProductsContainer({setIsError, isCatalog, isSale}) {
       : location.search.slice(1, -1) + `${baseUrl}` + `${presentFilterPage.current}`;
 
     (async () => {
-      try {
-        setIsLoading(true);
-        data = await getFilteredProducts(queryString);
+      // try {
+      setIsLoading(true);
+      data = await getFilteredProducts(queryString);
 
-        isNotFilter ? (presentMainPage.current += 1) : (presentFilterPage.current += 1);
-        productsQuantity.current = data.data.productsQuantity;
+      isNotFilter ? (presentMainPage.current += 1) : (presentFilterPage.current += 1);
+      productsQuantity.current = data.data.productsQuantity;
 
-        isNotFilter &&
-          isFilter.current === false &&
-          setProducts([...products, ...data.data.products]);
-        isNotFilter && isFilter.current === true && setProducts(data.data.products);
+      isNotFilter &&
+        isFilter.current === false &&
+        setProducts([...products, ...data.data.products]);
+      isNotFilter && isFilter.current === true && setProducts(data.data.products);
 
-        isFirstFilter && setProducts(data.data.products);
-        !isFirstFilter && !isNotFilter && setProducts([...products, ...data.data.products]);
+      isFirstFilter && setProducts(data.data.products);
+      !isFirstFilter && !isNotFilter && setProducts([...products, ...data.data.products]);
 
-        isNotFilter ? setIsMainFetch(false) : setIsFilterFetch(false);
-        isNotFilter ? (isFilter.current = false) : (isFilter.current = true);
+      isNotFilter ? setIsMainFetch(false) : setIsFilterFetch(false);
+      isNotFilter ? (isFilter.current = false) : (isFilter.current = true);
 
-        setLastLocationSearch(location.search);
-        setIsLoading(false);
-        setIsError(false);
-      } catch (e) {
-        setIsLoading(false);
-        setIsError(true);
-      }
+      setLastLocationSearch(location.search);
+      setIsLoading(false);
+      // setIsError(false);
+      // } catch (e) {
+      // setIsLoading(false);
+      // setIsError(true);
+      // }
     })();
   }
 
