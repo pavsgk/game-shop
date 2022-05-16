@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 function GenreComponent(props) {
   const {genre} = props;
   const genreImg = './genres_img/' + genre + '.svg';
-  const srcGenre = '/catalog/filters?genre=' + genre + '/';
+  const srcGenre = '/catalog/filters?genre=' + genre + '&';
   return (
     <>
       <Link exact="true" to={srcGenre}>
