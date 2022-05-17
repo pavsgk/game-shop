@@ -118,7 +118,9 @@ function ProductsItem(props) {
         <div className={styles.priceWrapper}>
           {isSale ? (
             <div className={styles.priceBox}>
-              <Sale className={styles.saleSvg} />
+              <Link to={`/details?${itemNo}`}>
+                <Sale className={styles.saleSvg} />
+              </Link>
               <span className={styles.price}>{currentPrice} &#8372;</span>
               <span className={styles.previousPrice}>{previousPrice} &#8372;</span>
             </div>

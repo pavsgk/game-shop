@@ -1,9 +1,11 @@
 import styles from './MainComponent.module.scss';
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {ReactComponent as New} from './img/new.svg';
+import {ReactComponent as Sale} from './img/sale.svg';
 
 function MainComponent(props) {
-  const {name, img, price, item, previousPrice} = props;
+  const {name, img, price, item, previousPrice, isSale} = props;
   return (
     <>
       <Link to={`/details?${item}`}>
@@ -20,6 +22,8 @@ function MainComponent(props) {
             </div>
           </div>
         </div>
+        <New className={styles.svgNew} />
+        {isSale && <Sale className={styles.svgSale} />}
       </Link>
     </>
   );

@@ -41,6 +41,22 @@
   display: flex;
 }
 
+.svgNew {
+  position: absolute;
+  top: 0;
+  right: -10px;
+  min-width: 100px;
+  height: 70px;
+}
+
+.svgSale {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+  min-width: 60px;
+  height: 60px;
+}
+
 .price {
   @extend .name;
   font-size: 22px;
