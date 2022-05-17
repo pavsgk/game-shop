@@ -1,6 +1,7 @@
 import styles from './MainComponent.module.scss';
 import React from 'react';
 import {Link} from 'react-router-dom';
+import {ReactComponent as New} from './img/new.svg';
 
 function MainComponent(props) {
   const {name, img, price, item, previousPrice} = props;
@@ -20,6 +21,7 @@ function MainComponent(props) {
             </div>
           </div>
         </div>
+        <New className={styles.svg} />
       </Link>
     </>
   );
