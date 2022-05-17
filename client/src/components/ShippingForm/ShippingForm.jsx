@@ -40,11 +40,7 @@ const yupValidationSchema = yup.object().shape({
     .required('Enter adress')
     .min(5, 'min. 5 characters required')
     .matches(/^[a-zA-Z0-9\s,'-./]*$/),
-  telephone: yup
-    .string()
-    .required('Enter phone')
-    .min(7, 'min. 7 characters required')
-    .matches(/\d/g),
+  mobile: yup.string().required('Enter phone').min(7, 'min. 7 characters required').matches(/\d/g),
   email: yup.string().email('Incorrect email').required('Enter email'),
 });
 
@@ -72,7 +68,7 @@ function AutoSaver() {
 }
 
 function ShippingForm() {
-  const formikRef = useRef();
+  const formikRef = useRef(null);
   const dispatch = useDispatch();
   const {isReady, isAuthorized} = useSelector((state) => state.user);
 
@@ -80,7 +76,7 @@ function ShippingForm() {
     const {
       checkout: {checkoutFields},
     } = store.getState();
-    if (formikRef) {
+    if (formikRef.current) {
       for (const [key, val] of Object.entries(checkoutFields)) {
         formikRef.current.setFieldValue(key, val);
       }
@@ -94,7 +90,7 @@ function ShippingForm() {
     postal: '',
     city: '',
     address: '',
-    telephone: '',
+    mobile: '',
     email: '',
   };
 
@@ -118,7 +114,7 @@ function ShippingForm() {
           <div className={styles.address}>
             <CustomField name="address" label="Address" type="text" />
           </div>
-          <CustomField name="telephone" label="Phone" type="text" />
+          <CustomField name="mobile" label="Phone" type="text" />
           <CustomField name="email" label="Email" type="text" />
         </div>
 

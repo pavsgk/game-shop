@@ -10,7 +10,7 @@ function ActionMessage() {
 
   return (
     <div className={type === 'success' ? styles.successful : styles.error}>
-      <span>{text}</span>
+      <p>{text}</p>
     </div>
   );
 }

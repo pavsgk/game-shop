@@ -4,7 +4,6 @@ import {ReactComponent as Phone} from './img/call.svg';
 import {ReactComponent as Mail} from './img/mail.svg';
 import {ReactComponent as Inst} from './img/instagram.svg';
 import {ReactComponent as Location} from './img/location.svg';
-import {Link} from 'react-router-dom';
 
 function Footer() {
   const [isAbsolute, setIsAbsolute] = useState(false);
@@ -26,28 +25,33 @@ function Footer() {
 
   return (
     <div className={isAbsolute ? styles.absFooter : styles.footer}>
-      <Link exact="true" className={styles.navLink} to="/admin">
-        ~
-      </Link>
       <div className={styles.section}>
-        <div className={styles.info}>
+        <a href="tel:0800-600-609" target="_blank" className={styles.info} rel="noreferrer">
           <Phone className={styles.svg} />
-          <div className={styles.details}>0800-600-609</div>
-        </div>
-        <div className={styles.info}>
+          <div className={styles.details}>800-600-609</div>
+        </a>
+        <a href="https://instagram.com" target="_blank" className={styles.info} rel="noreferrer">
           <Inst className={styles.svg} />
           <div className={styles.details}>@StarWars_videoGames</div>
-        </div>
+        </a>
       </div>
       <div className={styles.section}>
-        <div className={styles.info}>
+        <a
+          href="https://www.google.com/maps/place/ул.+Крещатик,+30,+Киев"
+          target="_blank"
+          className={styles.info}
+          rel="noreferrer">
           <Location className={styles.svg} />
-          <p className={styles.details}>Kiev, Kreshchatik Str., 30</p>
-        </div>
-        <div className={styles.info}>
+          <p className={styles.details}>Kiev, Khreschatyk Str., 30</p>
+        </a>
+        <a
+          href="mailto:StarWars.games@gmail.com"
+          target="_blank"
+          className={styles.info}
+          rel="noreferrer">
           <Mail className={styles.svg} />
           <p className={styles.details}>StarWars.games@gmail.com</p>
-        </div>
+        </a>
       </div>
     </div>
   );

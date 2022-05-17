@@ -7,6 +7,7 @@ import {updatePaymentInfo} from '../../store/reducers/checkoutReducer';
 import {useNavigate} from 'react-router-dom';
 import store from '../../store/store';
 import {placeOrder} from '../../api/order';
+import {cleanCart} from '../../store/reducers/cartReducer';
 
 const methods = [
   {
@@ -68,7 +69,8 @@ function Payment() {
     if (user.isAuthorized) orderBody.customerId = user.userData.customerId;
 
     try {
-      await placeOrder(orderBody);
+      // await placeOrder(orderBody);
+      dispatch(cleanCart());
       navigate('/orderConfirmed');
     } catch {
       navigate('/error');

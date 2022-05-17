@@ -1,7 +1,6 @@
 import styles from './MainNew.module.scss';
 import MainComponent from '../MainComponent/MainComponent';
 import React from 'react';
-import {ReactComponent as New} from './img/new.svg';
 import {Link} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
@@ -23,7 +22,6 @@ function MainNew({newProducts}) {
                       img={el.imageUrls.slice(0, 1)}
                       item={el.itemNo}
                     />
-                    <New className={styles.svg} />
                   </div>
                 </React.Fragment>
               );

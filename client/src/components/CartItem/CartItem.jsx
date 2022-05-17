@@ -13,8 +13,9 @@ import {
   makeLessItemNotLog,
   makeMoreItemNotLog,
 } from '../../store/reducers/cartReducer';
+import {showMessage} from '../../store/reducers/messageReducer';
 
-const CartItem = ({product, cartQuantity, setIsError, setIsLoading}) => {
+const CartItem = ({product, cartQuantity}) => {
   const {imageUrls, title, itemNo, currentPrice, _id, quantity} = product;
   const isAuthorized = useSelector((state) => state.user.isAuthorized);
 
@@ -24,13 +25,11 @@ const CartItem = ({product, cartQuantity, setIsError, setIsLoading}) => {
     if (isAuthorized) {
       (async () => {
         try {
-          setIsLoading(true);
           await dispatch(deleteProductFromTheCart(_id));
-          setIsLoading(false);
-          setIsError(false);
         } catch (e) {
-          setIsLoading(false);
-          setIsError(true);
+          dispatch(
+            showMessage({text: 'Something went wrong, please try to reload page', type: 'error'}),
+          );
         }
       })();
       return;
@@ -42,13 +41,11 @@ const CartItem = ({product, cartQuantity, setIsError, setIsLoading}) => {
     if (isAuthorized && cartQuantity < quantity) {
       (async () => {
         try {
-          setIsLoading(true);
           await dispatch(addProductToTheCart(_id));
-          setIsLoading(false);
-          setIsError(false);
         } catch (e) {
-          setIsLoading(false);
-          setIsError(true);
+          dispatch(
+            showMessage({text: 'Something went wrong, please try to reload page', type: 'error'}),
+          );
         }
       })();
       return;
@@ -62,13 +59,11 @@ const CartItem = ({product, cartQuantity, setIsError, setIsLoading}) => {
     if (isAuthorized && cartQuantity > 1) {
       (async () => {
         try {
-          setIsLoading(true);
           await dispatch(decreaseProductQuantity(_id));
-          setIsLoading(false);
-          setIsError(false);
         } catch (e) {
-          setIsLoading(false);
-          setIsError(true);
+          dispatch(
+            showMessage({text: 'Something went wrong, please try to reload page', type: 'error'}),
+          );
         }
       })();
       return;
@@ -129,8 +124,6 @@ const CartItem = ({product, cartQuantity, setIsError, setIsLoading}) => {
 
 CartItem.propTypes = {
   cartQuantity: PropTypes.number,
-  setIsError: PropTypes.func,
-  setIsLoading: PropTypes.func,
   product: PropTypes.shape({
     _id: PropTypes.string,
     currentPrice: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),

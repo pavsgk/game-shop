@@ -8,7 +8,7 @@ const initialState = {
     lastName: '',
     login: '',
     email: '',
-    telephone: '',
+    mobile: '',
     avaratUrl: '',
     isAdmin: false,
   },

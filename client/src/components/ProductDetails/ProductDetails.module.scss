@@ -16,7 +16,7 @@
     color: #8f8f89;
     font-size: 12px;
     margin-top: 10px;
-    align-self: end;
+    align-self: flex-end;
     margin-bottom: 15px;
   }
 }
@@ -57,14 +57,14 @@
     color: #8f8f89;
     font-size: 12px;
     margin-top: 20px;
-    align-self: end;
+    align-self: flex-end;
     margin-bottom: 50px;
   }
   &_Price {
     display: flex;
     justify-content: space-around;
     margin-top: 60px;
-    align-items: end;
+    align-items: flex-end;
     &_Item {
       font-size: 20px;
       color: $base-yellow;

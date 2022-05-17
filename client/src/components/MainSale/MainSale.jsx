@@ -2,7 +2,7 @@ import styles from './MainSale.module.scss';
 import MainComponent from '../MainComponent/MainComponent';
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {ReactComponent as Sale} from './img/sale.svg';
+import {ReactComponent as Sale} from '../MainComponent/img/sale.svg';
 import PropTypes from 'prop-types';
 
 function MainSale({saleProducts}) {
@@ -23,8 +23,8 @@ function MainSale({saleProducts}) {
                   img={el.imageUrls.slice(0, 1)}
                   item={el.itemNo}
                   previousPrice={el.previousPrice}
+                  isSale={true}
                 />
-                <Sale className={styles.svg} />
               </div>
             </React.Fragment>
           );

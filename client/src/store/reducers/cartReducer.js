@@ -97,15 +97,23 @@ const cartSlice = createSlice({
       }
     },
     countCartSum(state) {
-      state.cartSum = state.products.reduce(
-        (prev, {product: {currentPrice}, cartQuantity}) => prev + currentPrice * cartQuantity,
-        0,
-      );
+      if (Array.isArray(state.products)) {
+        state.cartSum = state.products.reduce(
+          (prev, {product: {currentPrice}, cartQuantity}) => prev + currentPrice * cartQuantity,
+          0,
+        );
+      } else {
+        state.cartSum = 0;
+      }
     },
     countCartQuantity(state) {
-      let quantity = 0;
-      state.products.forEach((element) => (quantity += element.cartQuantity));
-      state.cartQuantity = quantity;
+      if (Array.isArray(state.products)) {
+        let quantity = 0;
+        state.products.forEach((element) => (quantity += element.cartQuantity));
+        state.cartQuantity = quantity;
+      } else {
+        state.cartQuantity = 0;
+      }
     },
   },
   extraReducers: {
@@ -125,7 +133,12 @@ const cartSlice = createSlice({
       state.products = action.payload;
     },
     [cleanCart.fulfilled]: (state, action) => {
-      state.products = action.payload;
+      localStorage.removeItem('cart');
+      state.products = [];
+    },
+    [cleanCart.rejected]: (state) => {
+      localStorage.removeItem('cart');
+      state.products = [];
     },
   },
 });
