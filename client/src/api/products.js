@@ -1,5 +1,10 @@
 import instance from './instance.js';
 
+export async function updateProduct(id, body) {
+  const {data} = await instance.put(`products/${id}`, body);
+  return data;
+}
+
 export async function getAllProducts() {
   const response = await instance.get('products');
   return response.data;

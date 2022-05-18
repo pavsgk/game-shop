@@ -5,6 +5,20 @@ import instance from '../../api/instance';
 import {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import {showMessage} from '../../store/reducers/messageReducer';
+import {getProduct, updateProduct} from '../../api/products';
+
+const dataArr = [];
+
+const replaceUrls = async () => {
+  for (const prod of dataArr) {
+    const {itemNo, imageUrls} = prod;
+    const oldProduct = await getProduct(itemNo);
+    const updatedProduct = {...oldProduct, imageUrls};
+    const result = await updateProduct(oldProduct._id, updatedProduct);
+    console.log(result);
+  }
+  console.log('Mass update done');
+};
 
 export function AdminPage() {
   const dispatch = useDispatch();
@@ -42,6 +56,7 @@ export function AdminPage() {
             }}>
             test
           </button>
+          <button onClick={() => replaceUrls()}>replace urls</button>
         </div>
       </div>
     </>
